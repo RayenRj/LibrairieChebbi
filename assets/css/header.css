@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --yellow: #FFDD57;
+    --yellow-light: #FFF6C2;
+    --yellow-dark: #F0C800;
+    --yellow-deep: #D4A800;
+    --white: #FFFFFF;
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-300: #D4D4D4;
+    --gray-400: #A3A3A3;
+    --gray-500: #737373;
+    --gray-600: #525252;
+    --gray-700: #404040;
+    --gray-800: #262626;
+    --gray-900: #171717;
+    --dark: #1A1A2E;
+    --accent: #FF6B35;
+    --green: #22C55E;
+    --red: #EF4444;
+    --blue: #3B82F6;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.18);
+
+}
+
+/* reglage generale */
+
+
+/*
+
+.roboto-<uniquifier> {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+*/
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+
+
+
+/* start the header part */
+
+header{
+    background-color: var(--white);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* max-height: 100px; */
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.223);
+    position: fixed;
+    padding: 1em 3em;
+}
+header .left-part{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: red;
+    align-items: center;
+}
+header img{
+    width: 100px;
+}
+
+header .left-part .categories button{
+    font-size: 17px;
+    font-weight: bold;
+    border: 2px solid var(--gray-300);
+    border-radius: 15px;
+    padding: 0.2em 0.8em ;
+    background-color: white;
+}
+header .left-part .categories{
+    position: relative;
+}
+header .left-part .categories ul{
+    list-style: none;
+}
+header .left-part .categories ul{
+    position: absolute;
+    background-color: #eee;
+    border: 2px solid var(--gray-300);
+    width: 100%;
+    border-radius: 12px;
+    padding: 0.5em;
+    /* display: none; */
+    /* hedhi tetna7a ba3d  */
+} 
+
+header .left-part .categories ul li a{
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin: 10px auto;
+
+}
