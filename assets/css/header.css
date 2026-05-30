@@ -5,6 +5,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Poppins", sans-serif;
 }
 
 :root{
@@ -38,125 +39,6 @@
 /* reglage generale */
 
 
-/*
-
-.roboto-<uniquifier> {
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-
-*/
-.poppins-thin {
-  font-family: "Poppins", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-}
-
-.poppins-extralight {
-  font-family: "Poppins", sans-serif;
-  font-weight: 200;
-  font-style: normal;
-}
-
-.poppins-light {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.poppins-regular {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.poppins-medium {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.poppins-semibold {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.poppins-bold {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.poppins-extrabold {
-  font-family: "Poppins", sans-serif;
-  font-weight: 800;
-  font-style: normal;
-}
-
-.poppins-black {
-  font-family: "Poppins", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-}
-
-.poppins-thin-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 100;
-  font-style: italic;
-}
-
-.poppins-extralight-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 200;
-  font-style: italic;
-}
-
-.poppins-light-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.poppins-regular-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.poppins-medium-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: italic;
-}
-
-.poppins-semibold-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  font-style: italic;
-}
-
-.poppins-bold-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-.poppins-extrabold-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 800;
-  font-style: italic;
-}
-
-.poppins-black-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 900;
-  font-style: italic;
-}
 
 
 
@@ -170,28 +52,37 @@ header{
     flex-direction: row;
     flex-wrap: nowrap;
     /* max-height: 100px; */
-    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.223);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
     position: fixed;
-    padding: 1em 3em;
+    padding: 0.5em 3em;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    user-select: none;
 }
 header .left-part{
     display: flex;
     justify-content: space-evenly;
-    background-color: red;
+    /* background-color: red; */
     align-items: center;
+    width: 50%;
+  
 }
 header img{
-    width: 100px;
+    height: 80px;
+    cursor: pointer;
 }
 
 header .left-part .categories button{
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
-    border: 2px solid var(--gray-300);
+    border: 1px solid var(--gray-300);
     border-radius: 15px;
-    padding: 0.2em 0.8em ;
+    padding: 0.5em 1.5em ;
     background-color: white;
+    cursor: pointer;
 }
+
 header .left-part .categories{
     position: relative;
 }
@@ -200,21 +91,133 @@ header .left-part .categories ul{
 }
 header .left-part .categories ul{
     position: absolute;
-    background-color: #eee;
-    border: 2px solid var(--gray-300);
+    background-color: #ffffff;
+    border: 1px solid var(--gray-300);
     width: 100%;
     border-radius: 12px;
     padding: 0.5em;
-    /* display: none; */
+    display: none;
     /* hedhi tetna7a ba3d  */
 } 
 
 header .left-part .categories ul li a{
     color: black;
     text-decoration: none;
-    text-align: center;
+    text-align: left;
     width: 100%;
     display: block;
     margin: 10px auto;
+    padding-left: 1em;
 
+
+}
+
+
+header .left-part .categories button:hover{
+  border: #D4A800 1px solid;
+  background-color: #d4aa003d;
+}
+header .left-part .categories button:hover + ul{
+  display: block;
+}
+
+
+header .left-part .search .input-container{
+  width: 500px;
+  height: 40px;
+  border-radius: 2em;
+  position: relative;
+}
+
+
+
+header .left-part .search .input-container input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 2em;
+  border: 1.5px solid var(--gray-200);
+  padding: 1em;
+  position: relative;
+  padding-left: 45px;
+  padding-right: 1em;
+  background-color: var(--gray-100);
+  position: relative;
+  width: 100%;
+
+}
+
+header .left-part .search .input-container input:focus{
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  outline: var(--blue) 1px solid;
+  background-color: var(--white);
+}
+
+header .left-part .search .input-container span{
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+}
+
+
+
+
+
+
+/* part two */
+
+.part-two{
+
+  width: 25%;
+}
+.part-two ul{
+  list-style-type: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+
+}
+.part-two ul li a{
+  list-style: none;
+  font-size: 15px;
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+  padding: 0.5em 1em;
+  width: 100px;
+  text-align: center;
+  
+}
+
+#sign-in{
+  border-radius: 10px;
+  transition: 0.5s ease all;
+}
+#sign-in:hover{
+  background-color: var(--gray-200);
+  color: var(--blue);
+}
+#sign-up{
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 10px;
+  transition: 0.5s ease all;
+}
+
+#sign-up:hover{
+  background-color: #1e4481;
+}
+
+#cart{
+  border-radius: 10px;
+  background-color: var(--yellow-dark);
+  transition: 0.5s ease all;
+}
+#cart:hover{
+  background-color: var(--yellow-deep);
 }

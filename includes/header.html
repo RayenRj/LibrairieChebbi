@@ -10,11 +10,11 @@
     <header>
         <div class="left-part">
             <div class="logo">
-                <img src="../assets/images/logo/logo1.png"  alt="logo">
+                <img src="../assets/images/logo/logo2.png"  alt="logo">
             </div>
             <div class="categories">
                 <button>📦 Categories ▾ </button>
-                <ul>
+                <ul class="dropdown-menu">
                     <li><a href="">📚 Books</a></li>
                     <li><a href="">🎒 School Bags</a></li>
                     <li><a href="">✏️ Writing Tools</a></li>
@@ -26,7 +26,11 @@
             </div>
             <div class="search">
                 <form action="" method="GET">
-                    <input type="search" id="search">
+                    
+                    <div class="input-container">
+                        <span>🔍︎</span>
+                        <input type="search" placeholder="Search school supplies..." id="search">
+                    </div>
                 </form>
             </div>
         </div>
@@ -34,9 +38,9 @@
 
         <div class="part-two">
             <ul>
-                <li><a href="">Sign in</a></li>
-                <li><a href="">Sign up</a></li>
-                <li><a href="">cart</a></li>
+                <li><a href="" id="sign-in">Sign in</a></li>
+                <li><a href="" id="sign-up">Sign up</a></li>
+                <li><a href="" id="cart">🛒 cart</a></li>
             </ul>
         </div>
     </header>
