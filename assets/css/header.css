@@ -65,7 +65,7 @@ header .left-part{
     justify-content: space-evenly;
     /* background-color: red; */
     align-items: center;
-    width: 50%;
+    width: 60%;
   
 }
 header img{
@@ -74,11 +74,11 @@ header img{
 }
 
 header .left-part .categories button{
-    font-size: 16px;
-    font-weight: bold;
+    font-size: clamp(13px,5vw , 15px);
+    
     border: 1px solid var(--gray-300);
-    border-radius: 15px;
-    padding: 0.5em 1.5em ;
+    border-radius: 10px;
+    padding: 0.5em 1.2em ;
     background-color: white;
     cursor: pointer;
 }
@@ -117,13 +117,15 @@ header .left-part .categories button:hover{
   border: #D4A800 1px solid;
   background-color: #d4aa003d;
 }
-header .left-part .categories button:hover + ul{
+
+
+header .left-part .categories:hover > ul{
   display: block;
 }
 
 
 header .left-part .search .input-container{
-  width: 500px;
+  width: 450px;
   height: 40px;
   border-radius: 2em;
   position: relative;
@@ -145,8 +147,6 @@ header .left-part .search .input-container input{
   padding-right: 1em;
   background-color: var(--gray-100);
   position: relative;
-  width: 100%;
-
 }
 
 header .left-part .search .input-container input:focus{
@@ -194,6 +194,7 @@ header .left-part .search .input-container span{
   
 }
 
+
 #sign-in{
   border-radius: 10px;
   transition: 0.5s ease all;
@@ -217,7 +218,98 @@ header .left-part .search .input-container span{
   border-radius: 10px;
   background-color: var(--yellow-dark);
   transition: 0.5s ease all;
+  position: relative;
 }
 #cart:hover{
   background-color: var(--yellow-deep);
+}
+#cart span{
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(+30%,-30%);
+  width: 25px;
+  height: 25px;
+  background-color: var(--dark);
+  border-radius: 100%;
+  color: var(--yellow-dark);
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.responsive{
+  width: fit-content;
+  background-color: var(--white);
+  background-color: var(--gray-300);
+  border-radius: 10px;
+  position: relative;
+  top: 500px;
+}
+.responsive i{
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 18px !important;
+  color: rgb(134, 10, 10) ;
+}
+.responsive div ul{
+  display: flex;
+  flex-flow: column nowrap;
+  list-style-type: none;
+  text-align: center;
+  padding: 2em;
+}
+.responsive div ul li{
+  margin-top: 0.5em;
+}
+.responsive div ul li a{
+  text-decoration: none;
+  color: var(--dark);
+  margin-top: 2em;
+}
+hr{
+  border: 0.5px solid var(--gray-400);
+  height: 0px;
+  width: 100%;
+} 
+.fa-bars{
+  color: black;
+  font-size: 25px;
+}
+
+/* responsive part */
+
+.fa-bars,.responsive{
+  display: none;
+}
+
+/* Mobile S */
+@media (max-width: 320px) { }
+
+/* Mobile M */
+@media (max-width: 375px) { }
+
+/* Mobile L */
+@media (max-width: 425px) { }
+
+/* Tablet */
+@media (max-width: 768px) { }
+
+/* Laptop */
+@media (max-width: 1300px) { 
+
+
+}
+
+/* Desktop */
+@media (max-width: 1440px) { 
+    header .left-part .search .input-container{
+      width: 350px;
+    }
 }
