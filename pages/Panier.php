@@ -8,21 +8,22 @@
     <link rel="stylesheet" href="../assets/css/panier.css">
 </head>
 <body>
-    <?php include "../includes/header.html" ?>
+    <?php include "../includes/header.php" ?>
 
     <aside>
         <div>
             <h1>Shopping <span>Cart</span></h1>
 
             <!-- From Uiverse.io by alexmaracinaru --> 
-            <button class="cta">
+             <a href="../pages/Product.php">
+            <button class="cta" >
                 <svg width="15px" height="10px" viewBox="0 0 13 10">
                     <path d="M1,5 L11,5"></path>
                     <polyline points="5 1 1 5 5 9"></polyline>
                 </svg>
                 <span> Go back to shopping</span>
             </button>
-
+            </a>
         </div>
         <hr>
     </aside>

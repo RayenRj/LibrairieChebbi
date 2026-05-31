@@ -41,7 +41,7 @@
             <ul>
                 <li><a href="" id="sign-in">Sign in</a></li>
                 <li><a href="" id="sign-up">Sign up</a></li>
-                <li><a href="" id="cart">🛒 cart<span class="cartCount">0</span></a></li>
+                <li><a href="../pages/Panier.php" id="cart">🛒 cart<span class="cartCount">0</span></a></li>
             </ul>
         </div>
 

@@ -1,12 +1,25 @@
 {
-  "dependencies": {
-    "@tailwindcss/cli": "^4.3.0",
-    "tailwindcss": "^4.3.0"
-  } ,
-
+  "name": "librairiechebbi",
+  "version": "1.0.0",
+  "description": "c'est une application web qui permet au utilisateur d'acheter des fournitures scholaire en ligne",
+  "homepage": "https://github.com/RayenRj/LibrairieChebbi#readme",
+  "bugs": {
+    "url": "https://github.com/RayenRj/LibrairieChebbi/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RayenRj/LibrairieChebbi.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
   "scripts": {
     "dev": "npx @tailwindcss/cli -i ./assets/css/input.css -o ./assets/css/output.css --watch",
     "build": "npx @tailwindcss/cli -i ./assets/css/input.css -o ./assets/css/output.css --minify"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "tailwindcss": "^4.3.0"
   }
-
 }
