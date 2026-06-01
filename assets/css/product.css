@@ -44,10 +44,10 @@ aside{
     height: calc(100dvh - 2em );
     /* background-color: #777; */
     border-radius: 10px;
-    margin: calc(80px + 1em) 0em 1em 1em;
+    margin: calc(80px + 1em) 1em 1em 1em;
     width: 20%;
     min-width: 300px;
-    position: fixed;
+
 }
 
 .heading div:first-child{
@@ -158,12 +158,11 @@ main{
     width: calc(80% - 1em);
     /* height: calc(100% - 4em); */
     background-color: var(--gray-100);
-    margin: calc(80px + 1em) 1em 5em 1em;
+    margin: calc(80px + 1em) 1em 1em 0em;
     padding: 2em ;
     border-radius: 10px;
     user-select: none;
     height: fit-content;
-    margin-left: calc(20% + 2em);
     
 }
 
