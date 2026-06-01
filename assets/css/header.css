@@ -59,7 +59,7 @@ header{
     align-items: center;
     height: 80px;
     user-select: none;
-    z-index: 9999;
+    z-index: 500;
 }
 header .left-part{
     display: flex;
@@ -94,7 +94,7 @@ header .left-part .categories ul{
     position: absolute;
     background-color: #ffffff;
     border: 1px solid var(--gray-300);
-    width: 100%;
+    width: 120%;
     border-radius: 12px;
     padding: 0.5em;
     display: none;
@@ -109,8 +109,18 @@ header .left-part .categories ul li a{
     display: block;
     margin: 10px auto;
     padding-left: 1em;
+    font-size: 14px;
 
 
+}
+header .left-part .categories ul li a span{
+  display: inline-block;
+  transition: transform 0.5s ease;
+  background-color: red;
+}
+
+header .left-part .categories ul li:hover a span{
+  margin-left: 1em;
 }
 
 
