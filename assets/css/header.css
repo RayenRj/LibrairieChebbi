@@ -180,11 +180,11 @@ header .left-part .search .input-container span{
 
 /* part two */
 
-.part-two{
+header .part-two{
 
   width: 25%;
 }
-.part-two ul{
+header .part-two ul{
   list-style-type: none;
   width: 100%;
   display: flex;
@@ -192,7 +192,7 @@ header .left-part .search .input-container span{
   gap: 1em;
 
 }
-.part-two ul li a{
+header .part-two ul li a{
   list-style: none;
   font-size: 15px;
   text-decoration: none;

@@ -59,7 +59,7 @@ ul{
 
 
 /* start of image part  */
-div.image-container{
+body.pack div.image-container{
     min-height: 65vh;
     height: fit-content;
     margin: 0 auto 2em auto;
@@ -71,7 +71,7 @@ div.image-container{
 .regulateur-header-imageContainer-espace{
     padding-top: calc(2em + 80px);
 }
-.image-container img{
+body.pack .image-container img{
     position: absolute;
     top: 0;
     left: 0;
@@ -81,27 +81,27 @@ div.image-container{
     z-index: -1;
 }
 
-.text{
+body.pack .text{
     max-width: 45%;
     height: 100%;
 }
 
-.text h1{
+body.pack .text h1{
     font-size: clamp(1em,5vw,4em);
     line-height: 1.2;
     font-weight: bold;
     margin-top: 1em;
 }
-.text p{
+body.pack .text p{
     margin-top: 4em;
     width: 80%;
     font-weight: bold;
 }
-.text p span{
+body.pack .text p span{
     color: var(--blue);
 }
 
-.text .button{
+body.pack .text .button{
     width: 60%;
     margin-top: 3em;
     display: flex;
@@ -109,7 +109,7 @@ div.image-container{
     gap: 1em;
 }
 
-.button a{
+body.pack .button a{
    padding: 0.8em 1.5em; 
    border-radius: 10px; 
    font-weight: bold;
