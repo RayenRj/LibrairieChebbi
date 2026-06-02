@@ -51,8 +51,8 @@
             </ul>
         </div>
 
-        <i class="fa-solid fa-bars"></i>
-        <div class="responsive">
+        <div class="responsive" hidden>
+            <i class="fa-solid fa-bars"></i>
             
             <i class="fa-solid fa-x"></i>
             <div class="list">
@@ -161,7 +161,6 @@
         
     </div>
     <!--end of sign in part-->
-
     <script src="../assets/js/header_script.js"></script>
 </body>
 </html>

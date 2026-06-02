@@ -11,7 +11,7 @@
     />
     <link rel="stylesheet" href="../assets/css/pack.css">
 </head>
-<body>
+<body class="pack">
     
     <!-- include ll header -->
     <?php include("../includes/header.php");?>
@@ -457,6 +457,7 @@
 
 
      </section>
-     end of all packs
+     
+    <?php include("../includes/footer.php"); ?>
 </body>
 </html>
