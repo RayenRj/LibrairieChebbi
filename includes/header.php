@@ -21,13 +21,14 @@
             <div class="categories">
                 <button>📦 Categories ▾ </button>
                 <ul class="dropdown-menu">
-                    <li><a href="">📚 Books</a></li>
-                    <li><a href="">🎒 School Bags</a></li>
-                    <li><a href="">✏️ Writing Tools</a></li>
-                    <li><a href="">📐 Geometry Tools</a></li>
-                    <li><a href="">🔮 Accessories</a></li>
-                    <li><a href="">🛍️ All Products</a></li>
-                    <li><a href="">🛍️ jouets</a></li>
+                    <li><a href="../pages/Product.php">🛍️ <span>All Products</span></a></li>
+                    <li><a href="../pages/Pack.php">🛍️ <span>Nos Packs</span></a></li>
+                    <li><a href="">📚 <span>Books</span></a></li>
+                    <li><a href="">🎒 <span>School Bags</span></a></li>
+                    <li><a href="">✏️ <span>Writing Tools</span></a></li>
+                    <li><a href="">📐 <span>Geometry Tools</span></a></li>
+                    <li><a href="">🔮 <span>Accessories</span></a></li>
+                    <li><a href="">🛍️ <span>jouets</span></a></li>
                 </ul>
             </div>
             <div class="search">
@@ -61,7 +62,7 @@
                     <li><a href="">✏️ <span>Writing Tools</span></a></li>
                     <li><a href="">📐 <span>Geometry Tools</span></a></li>
                     <li><a href="">🔮 <span>Accessories</span></a></li>
-                    <li><a href="">🛍️ <span>All Products</span></a></li>
+                    <li><a href="">🛍️ <span>All products</span></a></li>
                     <li><a href="">🛍️ <span>jouets</span></a></li>
                 </ul>
             </div>

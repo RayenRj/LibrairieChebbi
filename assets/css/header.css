@@ -115,12 +115,11 @@ header .left-part .categories ul li a{
 }
 header .left-part .categories ul li a span{
   display: inline-block;
-  transition: transform 0.5s ease;
-  background-color: red;
+  transition: all 0.3s ease;
 }
 
 header .left-part .categories ul li:hover a span{
-  margin-left: 1em;
+  margin-left: 5px;
 }
 
 
