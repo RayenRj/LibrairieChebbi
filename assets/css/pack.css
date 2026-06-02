@@ -60,7 +60,8 @@ ul{
 
 /* start of image part  */
 div.image-container{
-    height: 65vh;
+    min-height: 65vh;
+    height: fit-content;
     margin: 0 auto 2em auto;
     position: relative;
     user-select: none;
@@ -278,7 +279,8 @@ div.image-container{
 .packs-container main article{
     padding: 2em;
     border-radius: 15px;
-    height: 550px;
+    min-height: 550px;
+    height: fit-content;
     background-color: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: 0.3s ease;
