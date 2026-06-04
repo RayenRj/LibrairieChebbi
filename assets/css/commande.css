@@ -402,3 +402,46 @@ fieldset .bottom-part .with-label select{
 .part-commande-resume .aide-text a:hover i{
     margin-left: 0.25em;
 }
+
+
+/* ======================================================== */
+/* ===============Reglage bouton confirmation============== */
+/* ======================================================== */
+
+.button-confirmation {
+  display: inline-block;
+}
+
+.btn-confirmation {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.5rem;
+
+  border: 1px solid #2563eb; /* blue-600 */
+  border-bottom-width: 4px;
+
+  transition: all 0.05s ease;
+}
+
+/* hover effect */
+.btn-confirmation:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  border-bottom-width: 6px;
+}
+
+/* active (click effect) */
+.btn-confirmation:active {
+  filter: brightness(0.9);
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}

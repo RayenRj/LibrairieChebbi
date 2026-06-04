@@ -223,7 +223,7 @@
 
 
 
-
+    <!-- el pop up eli tatla3 ki tenzel 3al bouton confirmer la commande -->
     <div class="popup" hidden>
             <span class="overlay-order"></span>
             <main class="order">
