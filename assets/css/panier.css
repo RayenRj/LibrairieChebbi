@@ -198,24 +198,85 @@ th, td {
     color: black;
     font-size: 14px;
 }
-.delete{
-    background-color: red;
-    color: var(--white);
-    font-size: 14px;
-    padding: 0.5em;
-    font-weight: 500;
-    border-radius: 100%;
-    height: 25px;
-    width: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+
+
+
+
+
+
+
+
+/* delete button */
+/* From Uiverse.io by vinodjangid07 */ 
+.delete {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
+  position: relative;
 }
 
-.delete:hover{
-    background-color: rgb(200, 1, 1);
+.svgIcon {
+  width: 11px;
+  transition-duration: .3s;
 }
+
+.svgIcon path {
+  fill: white;
+}
+
+.delete:hover {
+  width: 70px;
+  border-radius: 50px;
+  transition-duration: .3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.delete:hover .svgIcon {
+  width: 25px;
+  transition-duration: .3s;
+  transform: translateY(60%);
+}
+
+.delete::before {
+  position: absolute;
+  top: -20px;
+  content: "Delete";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.delete:hover::before {
+  font-size: 10px;
+  opacity: 1;
+  transform: translateY(25px);
+  transition-duration: .3s;
+}
+
+/* end of delete button */
+
+
+
+
+
+
+
+
+
+
+
+
 #quantite{
     width: 60px;
     height: 40px;
@@ -263,4 +324,9 @@ th, td {
 
 .total-payer{
     text-align: end;
+}
+
+
+.td-delete{
+    width: 150px;
 }
