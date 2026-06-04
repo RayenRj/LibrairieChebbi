@@ -14,7 +14,7 @@
         <div>
             <h1>Shopping <span>Cart</span></h1>
 
-             <a href="../pages/Product.php">
+             <a href="../pages/AllProduct.php">
             <button class="cta" >
                 <svg width="15px" height="10px" viewBox="0 0 13 10">
                     <path d="M1,5 L11,5"></path>
@@ -184,12 +184,8 @@
                         <td>1,750dt</td>
                         <td></td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="3">
+                    <tr class="last-tr">
+                        <td colspan="7" >
                             <div class="button">
                         <!-- From Uiverse.io by carlosepcc --> 
                                     <a href="Commande.php" class="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
@@ -198,7 +194,6 @@
                                     active:border-b-[2px] active:brightness-90 active:translate-y-[2px] button-commande">
                                     passer la commande >>
                                     </a>
-                                
                             </div>
                         </td>
                     </tr>
@@ -214,5 +209,6 @@
             </div>
         </section>
     </main>
+    <?php include("../includes/footer.php"); ?>
 </body>
 </html>
