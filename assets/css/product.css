@@ -56,3 +56,192 @@ p{font-size: 13px;}
 /* ========================================================================================== */
 
 
+main.product{
+    min-height: 100vh;
+    width: 100%;
+    padding: 2em 6vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.product .path {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    font-size: 13px;
+    color: var(--gray-600);
+}
+.product .path a:hover{
+    text-decoration: underline;
+}
+
+.product .top{
+    display: flex;
+    align-items: center;
+    gap: 1%;
+}
+
+.product .top .image-part{
+    width: 49%;
+    padding: 5em;
+}
+
+.product .top .image-part img{
+    width: 100%;
+    height: 100%;
+}
+
+.product .top .text-part{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: var(--gray-100);
+    padding: 3em 2em ;
+    border-radius: 1.25em;
+    min-height: fit-content;
+}
+
+#in-stock,#out-stock{
+
+    width: fit-content;
+    padding: 0.25em 1em;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 2em;
+    text-align: center;
+    align-content: center;
+
+}
+
+#in-stock{
+    background-color: #22c55e71;
+    color: rgb(0, 82, 0);
+}
+#out-stock{
+    background-color: #c5222248;
+    color: rgb(183, 3, 3);
+}
+
+.product .top .review{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5em;
+}
+.product .top .n-review{
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 600;
+}
+.product .top .prix{
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+}
+.product .top .prix p{
+    margin-top: 5px;
+    font-weight: 700;
+    font-size: 14px;
+}
+.product .top .description,
+.product .top .list-info li{
+    font-size: 14px;
+    padding-right: 2em;
+    color: var(--gray-700);
+}
+
+.product .top .list-info li{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+    margin-bottom: 0.2em;
+}
+
+.product .top .article-buttons{
+    display: block;
+    width: 100%;
+    margin-top: 1.5em;
+
+}
+
+.product .article-buttons .numbers{
+    display: flex;
+    /* width: 35%; */
+}
+
+.product .article-buttons .numbers input{
+    border: 1px solid var(--border-gray);
+    width: 100px;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    outline: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    caret-color: var(--gray-600);
+    appearance: textfield;
+    -moz-appearance: textfield;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+.product .article-buttons .numbers input::-webkit-outer-spin-button,
+.product .article-buttons .numbers input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+.product .article-buttons .numbers button{
+    height: 40px;
+    width: 40px;
+    border: 1px solid var(--border-gray);
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+.product .article-buttons .numbers button:first-child{border-radius: 5px 0px 0px 5px;}
+.product .article-buttons .numbers button:last-child{border-radius: 0px 5px 5px 0px;}
+
+
+.product .top .article-buttons form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5em;
+}
+
+
+.product .top .article-buttons form a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    background-color: var(--yellow-dark);
+    height: 40px;
+    border-radius: 5px;
+    flex-grow: 1;
+    font-size: 15px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    transition: 0.3s;
+}
+
+.product .top .wishlist{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid var(--border-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 15px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    transition: 0.3s;
+}
+
+
+.product .top .article-buttons form a:hover,
+.product .top .wishlist:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+}
