@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+*{
+    font-family: "Inter", sans-serif;
+}
+
+.bottom .slider{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-list .card-item {
+    list-style-type: none;
+}
+.container-slider{
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+}
+.card-wrapper{
+    overflow: hidden;
+    margin: 0 60px 30px 60px;
+    padding: 20px 10px;
+}
+
+.card-list .card-item .card-link{
+    user-select: none;
+    display: block;
+    background-color: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+    transition: 0.2s ease;
+}
+
+.card-list .card-link .card-image{
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card-list .card-link .badge{
+    color: #5372F0;
+    padding: 8px 16px;
+    margin: 16px 0 18px;
+    background-color: #DDE4FF;
+    font-size: 0.95rem;
+    border-radius: 50px;
+    width: fit-content;
+}
+
+.card-list .card-link .card-title{
+    font-size: 1.19rem;
+    color: black;
+    font-weight: 600;
+}
+
+.card-list .card-link .card-button{
+    height: 35px;
+    width: 35px;
+    color: #5372F0;
+    border-radius: 50%;
+    margin: 30px 0 5px;
+    background: none;
+    cursor: pointer;
+    border: 2px solid #5372F0;
+    transform: rotate(-45deg);
+    transition: 0.4s ease;
+}
+
+
+.card-list .card-link:hover{
+    border: 2px solid #5372F0;
+}
+
+.card-list .card-link:hover .card-button{
+    background-color: #5372F0;
+    color: white;
+}
+
+
+
+.card-wrapper .swiper-pagination-bullet{
+    height: 13px;
+    width: 13px;
+    opacity: 0.5;
+    background-color: #5372F0;
+}
+.card-wrapper .swiper-pagination-bullet-active{
+    opacity: 1;
+}
+
+.card-wrapper .swiper-slide-button{
+    color: #5372F0;
+    margin-top: -35px;
+    
+}
+
+.card-list .card-item .card-link:active{
+    cursor: grabbing;
+}
+
+@media screen and (max-width:768px){
+    .card-wrapper{
+        margin: 0px 10px 25px;
+    }
+    .card-wrapper .swiper-slide-button{
+        display: none;
+    }
+}
