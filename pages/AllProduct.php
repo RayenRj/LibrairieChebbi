@@ -196,6 +196,7 @@
 
             <!--phase des articles-->
             <div class="articles">
+                <a href="Product.php">
                 <article>
                     <div class="image">
                         <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
@@ -209,6 +210,7 @@
                     </p>
                     <button><span>🛒</span> Ajouter au panier</button>
                 </article>
+                </a>
                 <article>
                     <div class="image">
                         <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
