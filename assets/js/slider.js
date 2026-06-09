@@ -1,7 +1,7 @@
 new Swiper('.card-wrapper', {
   // Optional parameters
   loop: true,
-  spaceBetween : 30,
+  spaceBetween : 20,
   centeredSlides: false ,
   watchOverflow: true,
 
@@ -33,9 +33,12 @@ new Swiper('.card-wrapper', {
   },
   breakpoints:{
     0 : {slidesPerView:1},
-    768 : {slidesPerView:3},
-    1024: {slidesPerView:4}
+    550 : {slidesPerView:2},
+    950 : {slidesPerView:3},
+    1150 : {slidesPerView:4},
+    1550:{slidesPerView:5}
   },
+
    autoplay: {
    delay: 3000,
   }, 

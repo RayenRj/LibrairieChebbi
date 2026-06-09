@@ -1,7 +1,48 @@
+/* ========================================================================================== */
+/* ========================== Pour copier dans chaque fishier css =========================== */
+/* ========================================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 *{
     font-family: "Inter", sans-serif;
 }
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+
+:root{
+    --yellow: #FFDD57;
+    --yellow-light: #FFF6C2;
+    --yellow-dark: #F0C800;
+    --yellow-deep: #D4A800;
+    --white: #FFFFFF;
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-300: #D4D4D4;
+    --gray-400: #A3A3A3;
+    --gray-500: #737373;
+    --gray-600: #525252;
+    --gray-700: #404040;
+    --gray-800: #262626;
+    --gray-900: #171717;
+    --dark: #1A1A2E;
+    --accent: #FF6B35;
+    --green: #22C55E;
+    --red: #EF4444;
+    --blue: #3B82F6;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.18);
+    --border-gray:rgba(128, 128, 128, 0.242);
+}
+
 
 .bottom .slider{
     display: flex;
@@ -13,7 +54,6 @@
     list-style-type: none;
 }
 .container-slider{
-    max-width: 1200px;
     width: 100%;
     margin: auto;
 }
@@ -67,32 +107,48 @@
 /* =================================== */
 /* ========reglage d'un article======= */
 /* =================================== */
+
+
+
+
+
+
 .card-list .card-item .card-link{
     user-select: none;
     display: block;
-    background-color: #fff;
+    background-color: var(--white);
     padding: 18px;
     border-radius: 12px;
     text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--border-gray);
     box-shadow: 0 10px 10px rgba(0,0,0,0.05);
     transition: 0.2s ease;
+    min-height: 350px;
+    max-height: fit-content;
+    width: auto;
+}
+
+.card-list .card-item .card-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
 }
 
 .card-list .card-link .card-image{
     width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
 }
 
 .card-list .card-link .badge{
-    color: #5372F0;
-    padding: 8px 16px;
+    color: black;
+    font-weight: 600;
     margin: 16px 0 18px;
-    background-color: #DDE4FF;
-    font-size: 0.95rem;
-    border-radius: 50px;
     width: fit-content;
+    font-size: 0.95rem;
+    /* padding: 8px 16px; */
+    /* background-color: #DDE4FF; */
+    /* border-radius: 50px; */
 }
 
 .card-list .card-link .card-title{
@@ -100,7 +156,14 @@
     color: black;
     font-weight: 600;
 }
-
+.card-list .card-link .card-title span{
+    font-size: 0.75em;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    top: 1px;
+    left: 2px;
+}
 .card-list .card-link .card-button{
     height: 35px;
     width: 35px;
@@ -123,3 +186,12 @@
     background-color: #5372F0;
     color: white;
 } */
+
+.rating-container{
+    margin-top: 1em;
+}
+
+.card-list .card-link .rating-container .img-rating{
+    width: 45%;
+
+}

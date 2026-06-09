@@ -16,6 +16,7 @@
     href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
     />
     <!-- les lien lezmin css : wa7ed ll slider des articles w wa7ed ll page product b sifa 3amma -->
+    <link rel="stylesheet" href="../assets/css/rating.css">
     <link rel="stylesheet" href="../assets/css/slider.css">
     <link rel="stylesheet" href="../assets/css/product.css">
 </head>
@@ -38,11 +39,11 @@
             </div>
             <div class="text-part">
                 <!-- en cas de stock -->
-                <p class="stock-info " id="in-stock">
+                <p class="stock-info " id="in-stock" hidden>
                     <i class="fa-regular fa-circle-check"></i>
                     In Stock
                 </p>
-                <p class="stock-info" id="out-stock" hidden>
+                <p class="stock-info" id="out-stock">
                     <i class="fa-solid fa-ban"></i>
                     Repture de stock
                 </p>
@@ -95,8 +96,9 @@
                 <a href="" class="wishlist"><i class="fa-regular fa-heart"></i>Add to Wishlist</a>
             </div>
         </section>
+    </main>
 
-
+    
         <section class="bottom">
             <h3>You may also like</h3>
             <div class="slider">
@@ -106,68 +108,83 @@
                         <ul class="card-list swiper-wrapper">
                             <li class="card-item swiper-slide">
                                 <a href="" class="card-link ">
-                                    <img class="card-image" src="https://etudestech.com/wp-content/uploads/2022/12/adobestock_310133736-1536x864.jpeg" alt="">
-                                    <p class="badge">Developer</p>
-                                    <h2 class="card-title">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque</h2>
-                                    <button class="material-symbols-outlined card-button">arrow_forward</button>
+                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
+                                    <p class="badge">Smooth Ball Pen Blue</p>
+                                    <h2 class="card-title">2,900 <span>dt</span></h2>
+                                    <div class="rating-container">
+                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
+                                        <div class="number">(18)</div>
+                                    </div>
                                 </a>
                             </li>
                             <li class="card-item swiper-slide">
                                 <a href="" class="card-link ">
-                                    <img class="card-image" src="https://etudestech.com/wp-content/uploads/2022/12/adobestock_310133736-1536x864.jpeg" alt="">
-                                    <p class="badge">Developer</p>
-                                    <h2 class="card-title">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque</h2>
-                                    <button class="material-symbols-outlined card-button">arrow_forward</button>
+                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
+                                    <p class="badge">Smooth Ball Pen Blue</p>
+                                    <h2 class="card-title">2,900 <span>dt</span></h2>
+                                    <div class="rating-container">
+                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
+                                        <div class="number">(18)</div>
+                                    </div>
                                 </a>
                             </li>
                             <li class="card-item swiper-slide">
                                 <a href="" class="card-link ">
-                                    <img class="card-image" src="https://etudestech.com/wp-content/uploads/2022/12/adobestock_310133736-1536x864.jpeg" alt="">
-                                    <p class="badge">Developer</p>
-                                    <h2 class="card-title">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque</h2>
-                                    <button class="material-symbols-outlined card-button">arrow_forward</button>
+                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
+                                    <p class="badge">Smooth Ball Pen Blue</p>
+                                    <h2 class="card-title">2,900 <span>dt</span></h2>
+                                    <div class="rating-container">
+                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
+                                        <div class="number">(18)</div>
+                                    </div>
                                 </a>
                             </li>
                             <li class="card-item swiper-slide">
                                 <a href="" class="card-link ">
-                                    <img class="card-image" src="https://etudestech.com/wp-content/uploads/2022/12/adobestock_310133736-1536x864.jpeg" alt="">
-                                    <p class="badge">Developer</p>
-                                    <h2 class="card-title">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque</h2>
-                                    <button class="material-symbols-outlined card-button">arrow_forward</button>
+                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
+                                    <p class="badge">Smooth Ball Pen Blue</p>
+                                    <h2 class="card-title">2,900 <span>dt</span></h2>
+                                    <div class="rating-container">
+                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
+                                        <div class="number">(18)</div>
+                                    </div>
                                 </a>
                             </li>
                             <li class="card-item swiper-slide">
                                 <a href="" class="card-link ">
-                                    <img class="card-image" src="https://etudestech.com/wp-content/uploads/2022/12/adobestock_310133736-1536x864.jpeg" alt="">
-                                    <p class="badge">Developer</p>
-                                    <h2 class="card-title">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque</h2>
-                                    <button class="material-symbols-outlined card-button">arrow_forward</button>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link " >
-                                    <img class="card-image" src="https://etudestech.com/wp-content/uploads/2022/12/adobestock_310133736-1536x864.jpeg" alt="">
-                                    <p class="badge">Developer</p>
-                                    <h2 class="card-title">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque</h2>
-                                    <button class="material-symbols-outlined card-button">arrow_forward</button>
+                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
+                                    <p class="badge">Smooth Ball Pen Blue</p>
+                                    <h2 class="card-title">2,900 <span>dt</span></h2>
+                                    <div class="rating-container">
+                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
+                                        <div class="number">(18)</div>
+                                    </div>
                                 </a>
                             </li>
                             <li class="card-item swiper-slide">
                                 <a href="" class="card-link ">
-                                    <img class="card-image" src="https://etudestech.com/wp-content/uploads/2022/12/adobestock_310133736-1536x864.jpeg" alt="">
-                                    <p class="badge">Developer</p>
-                                    <h2 class="card-title">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque</h2>
-                                    <button class="material-symbols-outlined card-button">arrow_forward</button>
+                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
+                                    <p class="badge">Smooth Ball Pen Blue</p>
+                                    <h2 class="card-title">2,900 <span>dt</span></h2>
+                                    <div class="rating-container">
+                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
+                                        <div class="number">(18)</div>
+                                    </div>
                                 </a>
                             </li>
                             <li class="card-item swiper-slide">
                                 <a href="" class="card-link ">
-                                    <img class="card-image" src="https://etudestech.com/wp-content/uploads/2022/12/adobestock_310133736-1536x864.jpeg" alt="">
-                                    <p class="badge">Developer</p>
-                                    <h2 class="card-title">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque</h2>
-                                    <button class="material-symbols-outlined card-button">arrow_forward</button>
+                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
+                                    <p class="badge">Smooth Ball Pen Blue</p>
+                                    <h2 class="card-title">2,900 <span>dt</span></h2>
+                                    <div class="rating-container">
+                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
+                                        <div class="number">(18)</div>
+                                    </div>
                                 </a>
                             </li>
+ 
+                            
                         </ul>
 
                         <!-- If we need pagination -->
@@ -186,8 +203,6 @@
 
             </div>
         </section>
-    </main>
-
 
 
 
