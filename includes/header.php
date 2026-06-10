@@ -21,6 +21,7 @@
             <div class="categories">
                 <button>📦 Categories ▾ </button>
                 <ul class="dropdown-menu">
+                    <li><a href="../pages/main.php">🛍️ <span>main</span></a></li>
                     <li><a href="../pages/AllProduct.php">🛍️ <span>All Products</span></a></li>
                     <li><a href="../pages/Pack.php">🛍️ <span>Nos Packs</span></a></li>
                     <li><a href="">📚 <span>Books</span></a></li>

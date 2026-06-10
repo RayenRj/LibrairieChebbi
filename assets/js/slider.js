@@ -4,8 +4,6 @@ new Swiper('.card-wrapper', {
   spaceBetween : 20,
   centeredSlides: false ,
   watchOverflow: true,
-
-
   observer: true,
   observeParents: true,
 
