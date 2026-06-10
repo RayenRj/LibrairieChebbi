@@ -178,14 +178,6 @@
 }
 
 
-/* .card-list .card-link:hover{
-    border: 2px solid #5372F0;
-}
-
-.card-list .card-link:hover .card-button{
-    background-color: #5372F0;
-    color: white;
-} */
 
 .rating-container{
     margin-top: 1em;
@@ -194,4 +186,38 @@
 .card-list .card-link .rating-container .img-rating{
     width: 45%;
 
+}
+
+section.bottom{
+    width: 100%;
+    height: fit-content;
+    background-color: var(--gray-100);
+    padding: 2em;
+}
+
+/* reglage partie el slider fl main page */
+.article-slide .swiper-slide-button svg{
+    display: none;
+}
+
+.article-slide .swiper-slide-button{
+    font-size: x-large;
+    color: black;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border: 1px solid var(--gray-400);
+}
+.article-slide section.bottom{
+    background-color:transparent;
+    padding: 1em;
+}
+.article-slide .swiper-pagination-bullet{
+    display: none;
+}
+
+.article-slide .card-list .card-item .card-link{
+    /* background-color: var(--gray-100); */
+    border-width: 1px;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
 }
