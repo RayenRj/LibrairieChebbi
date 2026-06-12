@@ -50,10 +50,10 @@
                 <div class="colonne">
                     <h2>Lien Rapides</h2>
                     <ul>
-                        <li><i class="fa-solid fa-angle-right"></i><a href="#">Acueil</a></li>
+                        <li><i class="fa-solid fa-angle-right"></i><a href="../pages/main.php">Acueil</a></li>
                         <li><i class="fa-solid fa-angle-right"></i><a href="#">A propos de nous</a></li>
-                        <li><i class="fa-solid fa-angle-right"></i><a href="#">Nos produits</a></li>
-                        <li><i class="fa-solid fa-angle-right"></i><a href="#">Contactez-nous</a></li>
+                        <li><i class="fa-solid fa-angle-right"></i><a href="../pages/AllProduct.php">Nos produits</a></li>
+                        <li><i class="fa-solid fa-angle-right"></i><a href="../pages/ContactUs.php">Contactez-nous</a></li>
                     </ul>
                 </div>
 
