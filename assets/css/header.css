@@ -60,6 +60,7 @@ header{
     height: 80px;
     user-select: none;
     z-index: 500;
+    top: 0;
 }
 header .left-part{
     display: flex;
