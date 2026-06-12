@@ -138,6 +138,7 @@
     width: 100%;
     object-fit: contain;
     border-radius: 10px;
+    margin: auto;
 }
 
 .card-list .card-link .badge{
@@ -181,11 +182,13 @@
 
 .rating-container{
     margin-top: 1em;
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
 }
 
 .card-list .card-link .rating-container .img-rating{
-    width: 45%;
-
+    width: 40%;
 }
 
 section.bottom{

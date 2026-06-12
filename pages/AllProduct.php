@@ -446,6 +446,19 @@
                     <button><span>🛒</span> Ajouter au panier</button>
                 </article>
             </div>
+
+
+
+            <div class="pagination">
+                <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                <a href="#" class="pagination-selected">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#" id="three-dots">...</a>
+                <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+            </div>
         </main>
     </section>
 

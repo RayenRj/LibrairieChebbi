@@ -29,7 +29,7 @@
                     <li><a href="">✏️ <span>Writing Tools</span></a></li>
                     <li><a href="">📐 <span>Geometry Tools</span></a></li>
                     <li><a href="">🔮 <span>Accessories</span></a></li>
-                    <li><a href="">🛍️ <span>jouets</span></a></li>
+                    <li><a href="../pages/games.php">🔮 <span>jouets</span></a></li>
                 </ul>
             </div>
             <div class="search">

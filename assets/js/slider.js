@@ -31,10 +31,10 @@ new Swiper('.card-wrapper', {
   },
   breakpoints:{
     0 : {slidesPerView:1},
-    550 : {slidesPerView:2},
-    950 : {slidesPerView:3},
-    1150 : {slidesPerView:4},
-    1550:{slidesPerView:5}
+    550 : {slidesPerView:3},
+    950 : {slidesPerView:4},
+    1150 : {slidesPerView:5},
+    1550:{slidesPerView:7}
   },
 
    autoplay: {
