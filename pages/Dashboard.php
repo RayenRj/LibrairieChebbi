@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+<body>
+    <?php include("../includes/header.php"); ?>
+    <?php include("../includes/sidebar.php"); ?>
+
+    <div class="dashboard">
+        <section>
+            <!-- Partie elli feha el text wl input ta3 el date -->
+            <div class="top-part">
+                <div class="text">
+                    <h2>Bonjour Admin 👋🏼</h2>
+                    <p>Voici un apercu de votre Boutique aujourd'hui</p>
+                </div>
+                <div class="input">
+                    <input type="date" name="" id="">
+                    <!-- <i class="fa-regular fa-calendar"></i>
+                    <i class="fa-solid fa-caret-down"></i> -->
+                </div>
+            </div>  
+
+            <!-- 4 cards  -->
+            <div class="four-cards">
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div class="text">
+                        <p>Total Commandes</p>
+                        <h3>1,248</h3>
+                        <p>
+                            <span class="gain-effect">
+                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
+                                <i class="fa-solid fa-arrow-up" hidden></i>
+                                12.5%
+                            </span>
+                            vs le mois dernier
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="fa-solid fa-money-bills"></i>
+                    </div>
+                    <div class="text">
+                        <p>Chiffre d'affaires</p>
+                        <h3>45,890 DT</h3>
+                        <p>
+                            <span class="gain-effect">
+                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
+                                <i class="fa-solid fa-arrow-up"  hidden></i>
+                                12.5%
+                            </span>
+                            vs le mois dernier
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="fa-solid fa-box-open"></i>
+                        
+                    </div>
+                    <div class="text">
+                        <p>Packs Vendus</p>
+                        <h3>2,356</h3>
+                        <p>
+                            <span class="gain-effect"> 
+                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
+                                <i class="fa-solid fa-arrow-up" ></i>
+                                12.5%
+                            </span>
+                            vs le mois dernier
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">
+                        <i class="fa-solid fa-user-group"></i>
+                    </div>
+                    <div class="text">
+                        <p>Utilisateurs</p>
+                        <h3>3,892</h3>
+                        <p>
+                            <span class="gain-effect">
+                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
+                                <i class="fa-solid fa-arrow-up" ></i>
+                                12.5%
+                            </span>
+                            vs le mois dernier
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  Evolution de vente -->
+            <div class="top-chart">
+                <div class="left">
+                    <h3>évolution des ventes</h3>
+                    <canvas id="evolution_vente"></canvas>
+                </div>
+
+                <div class="right">
+                    <div class="top-part">
+                        <h3>Commandes récentes</h3>
+                        <a href="">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <table>
+                        <tr>
+                            <td >#CMD-1058</td>
+                            <td >Yassine Ben Ali</td>
+                            <td >Pack Secondaire</td>
+                            <td>
+                                <span class="livree">Livrée</span>
+                                <!-- <span class="en_cours">En cours</span> -->
+                                <!-- <span class="en_attente">En attente</span> -->
+                                <!-- <span class="annulee">Annulé</span> -->
+                            </td>
+                            <td>30/05/2024</td>
+                            <td>159Dt</td>
+                        </tr>
+                        <tr>
+                            <td >#CMD-1058</td>
+                            <td >Yassine Ben Ali</td>
+                            <td >Pack Secondaire</td>
+                            <td>
+                                <!-- <span class="livree">Livrée</span> -->
+                                <span class="en_cours">En cours</span>
+                                <!-- <span class="en_attente">En attente</span> -->
+                                <!-- <span class="annulee">Annulé</span> -->
+                            </td>
+                            <td>30/05/2024</td>
+                            <td>159Dt</td>
+                        </tr>
+                        <tr>
+                            <td >#CMD-1058</td>
+                            <td >Yassine Ben Ali</td>
+                            <td >Pack Secondaire</td>
+                            <td>
+                                <!-- <span class="livree">Livrée</span> -->
+                                <!-- <span class="en_cours">En cours</span> -->
+                                <span class="en_attente">En attente</span>
+                                <!-- <span class="annulee">Annulé</span> -->
+                            </td>
+                            <td>30/05/2024</td>
+                            <td>159Dt</td>
+                        </tr>
+                        <tr>
+                            <td >#CMD-1058</td>
+                            <td >Yassine Ben Ali</td>
+                            <td >Pack Secondaire</td>
+                            <td>
+                                <!-- <span class="livree">Livrée</span> -->
+                                <!-- <span class="en_cours">En cours</span> -->
+                                <!-- <span class="en_attente">En attente</span> -->
+                                <span class="annulee">Annulé</span>
+                            </td>
+                            <td>30/05/2024</td>
+                            <td>159Dt</td>
+                        </tr>
+                        <tr>
+                            <td >#CMD-1058</td>
+                            <td >Yassine Ben Ali</td>
+                            <td >Pack Secondaire</td>
+                            <td>
+                                <!-- <span class="livree">Livrée</span> -->
+                                <!-- <span class="en_cours">En cours</span> -->
+                                <span class="en_attente">En attente</span>
+                                <!-- <span class="annulee">Annulé</span> -->
+                            </td>
+                            <td>30/05/2024</td>
+                            <td>159Dt</td>
+                        </tr>
+                        <tr>
+                            <td >#CMD-1058</td>
+                            <td >Yassine Ben Ali</td>
+                            <td >Pack Secondaire</td>
+                            <td>
+                                <!-- <span class="livree">Livrée</span> -->
+                                <!-- <span class="en_cours">En cours</span> -->
+                                <span class="en_attente">En attente</span>
+                                <!-- <span class="annulee">Annulé</span> -->
+                            </td>
+                            <td>30/05/2024</td>
+                            <td>159Dt</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="bottom-chart">
+                <div class="pie">
+                    <h3>Ventes des packs</h3>
+                    <div>
+                        <div class="chart">
+                            <canvas id="pie-chart"></canvas>
+                            <div class="text">
+                                <h4>Total</h4>
+                                <h2 id="total_pack_vente">2,356</h2>
+                            </div>
+                        </div>
+                        <ul class="legend">
+                                <li>
+                                    <h5>Primaire</h5>
+                                    <p>52% (589)</p>
+                                </li>
+                                <li>
+                                    <h5>Collége</h5>
+                                    <p>52% (589)</p>
+                                </li>
+                                <li>
+                                    <h5>Secondaire</h5>
+                                    <p>52% (589)</p>
+                                </li>
+                                <li>
+                                    <h5>Bac</h5>
+                                    <p>52% (589)</p>
+                                </li>
+                        </ul>
+
+                        
+                    </div>
+                </div>
+
+
+
+                <div class="top-article">
+                    <div class="top-part">
+                        <h3>Top Articles Vendues</h3>
+                        <!-- <a href="">Voir toutes <i class="fa-solid fa-arrow-right"></i></a> -->
+                    </div>
+                    <ul class="articles">
+                        <li>
+                            <div>
+                                <img src="https://www.fournipro.ma/media/catalog/product/cache/a413661d9c1655056f3fcf1a8f852d13/f/i/file_100_28.jpg" alt="">
+                                <div class="text">
+                                    <h5>Stylo bic</h5>
+                                    <p class="nbre-vente">432 ventes</p>
+                                </div>
+                            </div>
+                            <p class="prix">149 Dt</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://www.fournipro.ma/media/catalog/product/cache/a413661d9c1655056f3fcf1a8f852d13/f/i/file_100_28.jpg" alt="">
+                                <div class="text">
+                                    <h5>Stylo bic</h5>
+                                    <p class="nbre-vente">432 ventes</p>
+                                </div>
+                            </div>
+                            <p class="prix">149 Dt</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://www.fournipro.ma/media/catalog/product/cache/a413661d9c1655056f3fcf1a8f852d13/f/i/file_100_28.jpg" alt="">
+                                <div class="text">
+                                    <h5>Stylo bic</h5>
+                                    <p class="nbre-vente">432 ventes</p>
+                                </div>
+                            </div>
+                            <p class="prix">149 Dt</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://www.fournipro.ma/media/catalog/product/cache/a413661d9c1655056f3fcf1a8f852d13/f/i/file_100_28.jpg" alt="">
+                                <div class="text">
+                                    <h5>Stylo bic</h5>
+                                    <p class="nbre-vente">432 ventes</p>
+                                </div>
+                            </div>
+                            <p class="prix">149 Dt</p>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+
+                <div class="article-repture">
+                    <div class="top-part">
+                        <div>
+                            <h3>Articles en repture de stock</h3>
+                            <span>12 Produits</span>
+                        </div>
+                        <a href="">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+
+                    <ul>
+                        <li>
+                            <div>
+                            <img src="https://spacenet.tn/302029-large_default/sac-a-dos-scolaire-gris.jpg" alt="">
+                            <h5>Sac à dos avengers</h5>
+                            </div>
+                            <div>
+                                <span class="zero">0</span>
+                                <span class="presque-zero" hidden>5</span>
+                            </div>
+                            <div class="buttons">
+                                <a href="">Reapprovisionner</a>
+                                <a href="">Supprimer</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                            <img src="https://spacenet.tn/302029-large_default/sac-a-dos-scolaire-gris.jpg" alt="">
+                            <h5>Sac à dos avengers</h5>
+                            </div>
+                            <div>
+                                <span class="zero" hidden>0</span>
+                                <span class="presque-zero" >5</span>
+                            </div>
+                            <div class="buttons">
+                                <a href="">Reapprovisionner</a>
+                                <a href="">Supprimer</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                            <img src="https://spacenet.tn/302029-large_default/sac-a-dos-scolaire-gris.jpg" alt="">
+                            <h5>Sac à dos avengers</h5>
+                            </div>
+                            <div>
+                                <span class="zero">0</span>
+                                <span class="presque-zero" hidden>5</span>
+                            </div>
+                            <div class="buttons">
+                                <a href="">Reapprovisionner</a>
+                                <a href="">Supprimer</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                            <img src="https://spacenet.tn/302029-large_default/sac-a-dos-scolaire-gris.jpg" alt="">
+                            <h5>Sac à dos avengers</h5>
+                            </div>
+                            <div>
+                                <span class="zero">0</span>
+                                <span class="presque-zero" hidden>5</span>
+                            </div>
+                            <div class="buttons">
+                                <a href="">Reapprovisionner</a>
+                                <a href="">Supprimer</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>

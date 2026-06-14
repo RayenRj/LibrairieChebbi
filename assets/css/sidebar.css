@@ -68,7 +68,9 @@ aside{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 80px;
+    top: 80px;
+    position: fixed;
+    z-index: 400;
 }
 aside h2{
     display: flex;
