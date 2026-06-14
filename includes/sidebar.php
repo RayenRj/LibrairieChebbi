@@ -19,7 +19,7 @@
             </h2>
 
             <ul>
-                <a href="#">
+                <a href="../pages/Dashboard.php">
                     <li>
                         <i class="fa-solid fa-chart-column"></i>
                         <p>Dashboard</p>
@@ -55,7 +55,7 @@
                         <p>Clients</p>
                     </li>
                 </a>
-                <a href="" id="deconnexion">
+                <a href="../pages/main.php" id="deconnexion">
                     <li>
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         <p>Déconnexion</p>
