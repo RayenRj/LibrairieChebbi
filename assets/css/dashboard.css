@@ -146,14 +146,14 @@ img{
     text-align: center;
     align-content: center;
 }
-.four-cards .card .icon{font-size: 20px;}
+.four-cards .card .icon{font-size: 23px;}
 
 
 /* reglage couleur  */
 
 .four-cards .card:nth-child(1) .icon{background-color: #3b83f63a;color: rgb(0, 119, 255);}
 .four-cards .card:nth-child(2) .icon{background-color: #3bf66a2f;color: rgb(83, 151, 38);}
-.four-cards .card:nth-child(3) .icon{background-color: #3e3bf625;color: rgb(0, 17, 255);}
+.four-cards .card:nth-child(3) .icon{background-color: #7d3bf625;color: rgb(98, 0, 255);}
 .four-cards .card:nth-child(4) .icon{background-color: rgba(255, 166, 0, 0.171);color: orange;}
 
 
@@ -174,6 +174,8 @@ img{
 }
 
 .gain-effect{color: green;}
+.loss-effect{color: var(--red);}
+
 .four-cards .card .text span{
     font-size: 13px;
     display: inline-flex;
@@ -522,5 +524,5 @@ img{
 
 
 /* =============================================== */
-/* =============NE9SA PARTIE DASHBOARD============ */
+/* =============NE9SA PARTIE DASHBOARD============== */
 /* =============================================== */
