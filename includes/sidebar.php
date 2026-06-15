@@ -31,7 +31,7 @@
                         <p>Commandes</p>
                     </li>
                 </a>
-                <a href="#">
+                <a href="../pages/dashboardCommande.php">
                     <li>
                         <i class="fa-solid fa-box-open"></i>
                         <p>Packs Manager</p>
@@ -52,7 +52,7 @@
                 <a href="#">
                     <li>
                         <i class="fa-solid fa-user-shield"></i>
-                        <p>Clients</p>
+                        <p>Admins</p>
                     </li>
                 </a>
                 <a href="../pages/main.php" id="deconnexion">
