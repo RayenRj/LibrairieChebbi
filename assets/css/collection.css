@@ -1,0 +1,429 @@
+/* ========================================================================================== */
+/* ========================== Pour copier dans chaque fishier css =========================== */
+/* ========================================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+
+:root{
+    --yellow: #FFDD57;
+    --yellow-light: #FFF6C2;
+    --yellow-dark: #F0C800;
+    --yellow-deep: #D4A800;
+    --dark: #1A1A2E;
+    --accent: #FF6B35;
+    --green: rgb(8, 161, 8);
+    --red: #EF4444;
+    --blue: #3B82F6;
+    --white: #FFFFFF;
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-300: #D4D4D4;
+    --gray-400: #A3A3A3;
+    --gray-500: #737373;
+    --gray-600: #525252;
+    --gray-700: #404040;
+    --gray-800: #262626;
+    --gray-900: #171717;
+
+
+    /* Glass Colors */
+    --yellow-glass: rgba(255, 221, 87, 0.15);
+    --yellow-light-glass: rgba(255, 246, 194, 0.15);
+    --yellow-dark-glass: rgba(240, 200, 0, 0.15);
+    --yellow-deep-glass: rgba(212, 168, 0, 0.15);
+
+    --dark-glass: rgba(26, 26, 46, 0.25);
+
+    --accent-glass: rgba(255, 107, 53, 0.15);
+
+    --green-glass: rgba(34, 197, 94, 0.15);
+
+    --red-glass: rgba(239, 68, 68, 0.15);
+
+    --blue-glass: rgba(59, 130, 246, 0.15);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.18);
+    /* --border-gray:rgba(128, 128, 128, 0.242); */
+    --border-gray : #eee;
+}
+
+
+/* reglage generale  */
+ul{list-style-type: none;}
+a{color: black;text-decoration: none;}
+p{font-size: 13.5px;}
+.container{
+    width: 90%;
+    margin: auto;
+    padding-top: calc(3em + 80px);
+}
+
+img{
+    width: 100%;
+}
+
+/* ========================================================================================== */
+/* ========================== Pour copier dans chaque fishier css =========================== */
+/* ========================================================================================== */
+
+.collection{
+    width: 90%;
+    margin: 2em auto;
+    margin-top: calc(80px + 2em);
+}
+
+.collection main{
+    margin: 2em auto;
+    background-color: rgba(59, 131, 246, 0.1);
+    position: relative;
+    height: 60dvh;
+    min-height: fit-content;
+    overflow: hidden;
+    border-radius: 2em;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    gap: 1em;
+    scale: 1.2;
+
+}
+.text > h5{
+    background-color: var(--blue-glass);
+    color: var(--blue);
+    width: fit-content;
+    padding: 0.2em 1em;
+    border-radius: 1em;
+}
+.text > h1{
+    font-size: clamp(1.5em ,5vw , 3em);
+    line-height: 1.2;
+}
+.text > h1 span{
+    color: var(--blue);
+}
+
+.text > p{
+    color: var(--gray-600);
+    font-size: 18px;
+    width: 60%;
+    line-height: 1.3;
+}
+
+.text > button{
+    all: unset;
+    background-color: var(--blue);
+    color: white;
+    font-size: 15px;
+    outline: none;
+    border: none;
+    width: fit-content;
+    padding: 0.5em 2em;
+    border-radius: 2em;
+    margin-top: 0.5em;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.1 all ease;
+}
+.text > button:hover{
+    background-color: #3172db;
+    box-shadow: 0px 5px 20px var(--shadow-sm);
+}
+.text > button:active{
+    background-color: #5392f8;
+    padding: 0.6em 1.75em 0.4em 2.25em;
+}
+
+main > img{
+    position: absolute;
+}
+
+main > img:first-of-type{
+    height: 95%;   
+    width: 50%; 
+    bottom: 0 !important;
+    right: 0;
+    aspect-ratio: 1/1;
+    max-width: 750px;
+    right: 5%;
+}
+main > img:nth-of-type(2){
+    width: 100px;
+    left: 45%;
+    top: 30px;
+    opacity: 0.3;
+}
+main > img:nth-of-type(3){
+    width: 100px;
+    right: 20px;
+    top: 25%;
+    opacity: 0.2;
+}
+main > img:nth-of-type(4){
+    width: 70px;
+    left: 40%;
+    bottom: 20%;
+    opacity: 0.3;
+}
+
+/* partie filtrage */
+
+.partie-articles{
+    margin-top: 4em;
+    
+}
+.partie-articles div.top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.75em;
+}
+
+.partie-articles div.top ul{
+    display: flex;
+    gap: 0.75em;
+}
+.partie-articles div.top ul li a{
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #eee;
+}
+
+.partie-articles div.top ul li a.selected{
+    background-color: var(--blue);
+    border-color: var(--blue);
+    color: white;
+}
+
+.partie-articles div.top > div:last-child span{
+    font-size: 14px;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.partie-articles div.top > div:last-child select{
+    height: 35px;
+    width: 150px;
+    padding: 0.5em;
+    font-weight: 500;
+    border-radius: 0.5em;
+    outline: none;
+    border: 1.5px solid var(--gray-400);
+}
+
+
+
+section.article-container{
+    width: 100%;
+    height: fit-content;
+}
+
+.partie-articles .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5em;
+}
+
+.partie-articles .header p{
+    font-size: 15px;
+    font-weight: 500;
+    padding-left:5px;
+}
+
+.partie-articles .header > div:last-child{position: relative;}
+
+.partie-articles .header select{
+   padding: 0.4em 3em 0.4em 1em;
+   border-radius: 0.65em;
+   border: 2px solid;
+   border-color: #E8E8E8;
+   color: var(--gray-600);
+   font-weight:600;
+   cursor: pointer;
+   font-size: 14px;
+   outline: none;
+   appearance: none;
+}
+
+.partie-articles .header > div:last-child i{
+    position: absolute;
+    top: 9px;
+    right: 12px;
+}
+
+
+.partie-articles .article-container{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(275px , 1fr));
+    gap: 2em;
+    width: 100%;
+    margin: auto;
+}
+
+.article-container article{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border-radius: 0.5em;
+    background-color: var(--gray-100);
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    border: 2px solid ;
+    border-color: #e8e8e8b4;
+    position: relative;
+}
+
+.article-container article:hover{
+    transform: translateY(-5px);
+box-shadow:
+  0 1px 3px rgba(0, 0, 0, 0.08),
+  0 12px 24px rgba(0, 0, 0, 0.10),
+  0 24px 48px rgba(0, 0, 0, 0.06);
+}
+
+
+.article-container article img{
+    width: 100%;
+    border-radius: 1em;
+    margin-bottom: 1em;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+
+}
+
+.article-container article .rating{
+    display: flex;
+    gap: 0.4em;
+    width: 100%;
+    margin: 0.6em auto;
+}
+
+.article-container article .rating i{
+    color: orange;
+}
+.article-container article .rating p:first-of-type{
+    color: orange;
+    font-weight: bold;
+}
+
+.article-container article .rating p:last-of-type{
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.article-container article a.button{
+    border: 2px solid var(--blue);
+    padding: 0.55em 1em;
+    width: 100%;
+    margin-top: 1.25em;
+    border-radius: 0.5em;
+    text-align: center;
+    color: var(--blue);
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.2s all ease;
+    margin-bottom: 1em;
+    
+}
+
+.article-container article a.button:hover{
+    color: white;
+    background-color: var(--blue);
+}
+
+.article-container article .wishlist{
+    font-weight: bold;
+    font-size: 19px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: white;
+    box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    align-content: center;
+    border-radius: 50%;
+
+}
+.article-container article > .new ,
+.article-container article > .best-seller,
+.article-container article > .repture
+{
+    position: absolute;
+    top: 27px;
+    left: 25px;
+    background-color: rgb(230, 84, 84);
+    padding: 0.25em 1em;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 1em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+.article-container article > .repture{
+    background-color: var(--yellow-deep);
+}
+.article-container article > .best-seller{
+    background-color: var(--green);
+}
+
+
+/* pagination  */
+
+.partie-articles .pagination{
+    width: fit-content;
+    margin: 5em auto;
+    display: flex;
+    gap: 0.75em;
+
+}
+
+.partie-articles .pagination > a{
+    background-color: var(--gray-100);
+    padding: 0.5em 1em;
+    border-radius: 0.25em;
+    border: 2px solid #d3d3d35d;;
+    text-align: center;
+    align-content: center;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+#prev,#post{
+    background-color: white;
+    font-size: 16px;
+}
+
+#three-dots{
+    background-color: white;
+}
+.pagination-selected{
+    background-color: var(--blue) !important;
+    border-color: var(--blue) !important;
+    color: white;
+}
