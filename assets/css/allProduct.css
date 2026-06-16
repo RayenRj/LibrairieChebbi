@@ -13,6 +13,11 @@
     --yellow-light: #FFF6C2;
     --yellow-dark: #F0C800;
     --yellow-deep: #D4A800;
+    --dark: #1A1A2E;
+    --accent: #FF6B35;
+    --green: rgb(8, 161, 8);
+    --red: #EF4444;
+    --blue: #3B82F6;
     --white: #FFFFFF;
     --gray-50: #FAFAFA;
     --gray-100: #F5F5F5;
@@ -24,38 +29,63 @@
     --gray-700: #404040;
     --gray-800: #262626;
     --gray-900: #171717;
-    --dark: #1A1A2E;
-    --accent: #FF6B35;
-    --green: #22C55E;
-    --red: #EF4444;
-    --blue: #3B82F6;
+
+
+    /* Glass Colors */
+    --yellow-glass: rgba(255, 221, 87, 0.15);
+    --yellow-light-glass: rgba(255, 246, 194, 0.15);
+    --yellow-dark-glass: rgba(240, 200, 0, 0.15);
+    --yellow-deep-glass: rgba(212, 168, 0, 0.15);
+
+    --dark-glass: rgba(26, 26, 46, 0.25);
+
+    --accent-glass: rgba(255, 107, 53, 0.15);
+
+    --green-glass: rgba(34, 197, 94, 0.15);
+
+    --red-glass: rgba(239, 68, 68, 0.15);
+
+    --blue-glass: rgba(59, 130, 246, 0.15);
+
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
     --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
     --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
     --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.18);
-
+    /* --border-gray:rgba(128, 128, 128, 0.242); */
+    --border-gray : #eee;
 }
 
+
+
+/* End of generals */
+
+/* start of editing side bars */
 body{
     background-color: var(--gray-200);
 }
 aside{
-    /* background-color: white; */
     height: calc(100dvh - 2em );
-    /* background-color: #777; */
     border-radius: 10px;
     margin: calc(80px + 1em) 1em 1em 1em;
-    width: 20%;
-    min-width: 300px;
-
+    width: 19%;
+    min-width: 325px;
+    position: relative;
+    z-index: 20;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
+/* reglage ll heading mta3 kol categorie de filtrage */
 .heading div:first-child{
     display: flex;
     flex-direction: row;
     gap: 10px;
     align-items: center;
+    font-weight: bold;
 }
+
+.heading > i{margin-right: 0.5em;}
+
 .heading{
     display: flex;
     flex-direction: row;
@@ -67,41 +97,47 @@ aside{
     align-self: center;
     display: inline-block;
     padding: 0.5em;
-    font-weight: bold;
 }
 
 
 .filter,.category , .prix, .marque , .disponibility{
     border: 1px solid var(--gray-200);
     border-radius: 5px;
-    padding: 1em;
+    padding: 1em 1.25em;
     background-color: white;
     user-select: none;
 }
 
 
-ul{
-    list-style-type: none;
-}
+ul{list-style-type: none;}
 .list ul li span{
-    background-color: var(--gray-300);
+    /* background-color: var(--gray-200); */
+    background-color: var(--gray-200);
     font-size: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 3px 7px;
     border-radius: 50%;
+    font-weight: 600;
 }
 
 .list ul li{
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 7px;
 }
-.list ul li div{
+.list ul li div,
+.disponibility div:last-child{
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
+    margin-left: 20px;
+}
+.list ul li > div ,
+.disponibility div:last-child{
+    font-size: 13.5px;
+    font-weight: 500;
 }
 
 
@@ -121,7 +157,7 @@ ul{
     align-items: center;
 }
 .prix > div:last-child > div:last-child div{
-    background-color: var(--gray-300);
+    background-color: var(--gray-200);
     border-radius: 10px;
     width: 70px;
     height: 30px;
@@ -130,6 +166,7 @@ ul{
     justify-content: center;
     font-size: 13px;
     font-weight: bold;
+    padding: 0.5em 1em;
 }
 
 .filter .heading input[type="reset"]{
@@ -138,11 +175,22 @@ ul{
     cursor: pointer;
     width: 120px;
     height: 27px;
+    font-weight: 500;
     border-radius: 10px;
+    margin-right: -0.75em;
 }
 .filter .heading input[type="reset"]:hover{
     background-color: var(--gray-100);
 }
+
+.disponibility .heading{
+    margin-bottom: 0.5em;
+}
+
+.disponibility{
+    padding-bottom: 1.5em;
+}
+
 
 
 /* partie main */
@@ -151,19 +199,18 @@ section{
     width: 100%;
     height: fit-content;
     flex-direction: row;
-    margin-bottom: 1em;
-    
+    margin-bottom: 1em; 
 
 }
 main{
     width: calc(80% - 1em);
-    /* height: calc(100% - 4em); */
     background-color: var(--gray-100);
     margin: calc(80px + 1em) 1em 1em 0em;
     padding: 2em ;
     border-radius: 10px;
     user-select: none;
     height: fit-content;
+    
     
 }
 
@@ -298,4 +345,54 @@ main .pagination > a{
     background-color: var(--blue) !important;
     border-color: var(--blue) !important;
     color: white;
+}
+
+
+
+
+
+
+/* check box design */
+
+
+.clear {
+  clear: both;
+}
+
+.checkBox {
+  display: block;
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0px 0px 0px 2px var(--blue);
+}
+
+.checkBox div {
+  width: 60px;
+  height: 60px;
+  background-color: var(--blue);
+  top: -52px;
+  left: -52px;
+  position: absolute;
+  transform: rotateZ(45deg);
+  z-index: 100;
+}
+
+.checkBox input[type=checkbox]:checked + div {
+  left: -10px;
+  top: -10px;
+}
+
+.checkBox input[type=checkbox] {
+  position: absolute;
+  left: 50px;
+  visibility: hidden;
+}
+
+.transition {
+  transition: 300ms ease;
 }

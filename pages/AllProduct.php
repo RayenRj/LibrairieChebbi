@@ -34,48 +34,78 @@
                             <i class="fa-solid fa-layer-group"></i>
                             <h3>Catégories</h3>
                         </div>
-                        <p>^</p>
+                        <i class="fa-solid fa-angle-down"></i>
                     </div>
                     <div class="list-categorie list">
                         <ul>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
@@ -91,11 +121,11 @@
                             <i class="fa-solid fa-dollar-sign"></i>
                             <h3>Prix</h3>
                         </div>
-                        <p>^</p>
+                        <i class="fa-solid fa-angle-down"></i>
                     </div>
                     <div>
                         <div>
-                            <input type="range" name="" id="range1">
+                            <input type="range" name="" id="range1" value="0" step="10">
 
                         </div>
                         <div>
@@ -111,48 +141,78 @@
                             <i class="fa-solid fa-tag"></i>
                             <h3>Marque</h3>
                         </div>
-                        <p>^</p>
+                        <i class="fa-solid fa-angle-down"></i>
                     </div>
                     <div class="list-marque list">
                         <ul>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
                             <li>
                                 <div>
-                                    <input type="checkbox" name="" id="">
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
                                     Cahiers
                                 </div>
                                 <span class="number-product">35</span>
@@ -167,11 +227,17 @@
                             <i class="fa-brands fa-font-awesome"></i>
                             <h3>Disponibilité</h3>
                         </div>
-                        <p>^</p>
+                        <i class="fa-solid fa-angle-down"></i>
                     </div>
                     <div>
-                        <input type="checkbox" name="" id=""> 
-                        <label for=""> En stock uniquement</label>
+                        <div class="content">
+                            <label class="checkBox">
+                                <input id="ch1" type="checkbox" checked>
+                                <div class="transition"></div>
+                            </label>
+                        </div>
+                        en stock uniquement
+                        <!-- <label for="ch1"> En stock uniquement</label> -->
                     </div>
                 </div>
             </form>

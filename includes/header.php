@@ -21,15 +21,15 @@
             <div class="categories">
                 <button>📦 Categories ▾ </button>
                 <ul class="dropdown-menu">
-                    <li><a href="../pages/main.php">🛍️ <span>main</span></a></li>
+                    <li><a href="../pages/main.php">⭐ <span>main</span></a></li>
                     <li><a href="../pages/AllProduct.php">🛍️ <span>All Products</span></a></li>
-                    <li><a href="../pages/Pack.php">🛍️ <span>Nos Packs</span></a></li>
-                    <li><a href="">📚 <span>Books</span></a></li>
-                    <li><a href="">🎒 <span>School Bags</span></a></li>
-                    <li><a href="">✏️ <span>Writing Tools</span></a></li>
-                    <li><a href="">📐 <span>Geometry Tools</span></a></li>
-                    <li><a href="">🔮 <span>Accessories</span></a></li>
-                    <li><a href="../pages/games.php">🔮 <span>jouets</span></a></li>
+                    <li><a href="../pages/Pack.php">📦 <span>Nos Packs</span></a></li>
+                    <li><a href="../pages/AllProduct.php">📚 <span>Books</span></a></li>
+                    <li><a href="../pages/Collection.php">🎒 <span>School Bags</span></a></li>
+                    <li><a href="../pages/AllProduct.php">✏️ <span>Writing Tools</span></a></li>
+                    <li><a href="../pages/AllProduct.php">📐 <span>Geometry Tools</span></a></li>
+                    <li><a href="../pages/games.php">🧸 <span>jouets</span></a></li>
+                    <li><a href="../pages/AllProduct.php">🔮 <span>Autres Accessories</span></a></li>
                 </ul>
             </div>
             <div class="search">
