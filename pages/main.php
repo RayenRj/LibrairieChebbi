@@ -248,7 +248,7 @@
     <div class="article-slide">
         <div class="top-part">
             <h2>Nos produits vedettes</h2>
-            <a href="">Voir tous les produits <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="AllProduct.php">Voir tous les produits <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <section class="bottom">
             <div class="slider">
