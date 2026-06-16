@@ -31,7 +31,7 @@
                         <p>Commandes</p>
                     </li>
                 </a>
-                <a href="../pages/dashboardCommande.php">
+                <a href="../pages/packManager.php">
                     <li>
                         <i class="fa-solid fa-box-open"></i>
                         <p>Packs Manager</p>
@@ -43,13 +43,13 @@
                         <p>Articles Manager</p>
                     </li>
                 </a>
-                <a href="#">
+                <a href="Utilisateur.php">
                     <li>
-                        <i class="fa-solid fa-user-shield"></i>
-                        <p>Clients</p>
+                        <i class="fa-solid fa-user"></i>
+                        <p>Utilisateurs</p>
                     </li>
                 </a>
-                <a href="#">
+                <a href="Admin.php">
                     <li>
                         <i class="fa-solid fa-user-shield"></i>
                         <p>Admins</p>
