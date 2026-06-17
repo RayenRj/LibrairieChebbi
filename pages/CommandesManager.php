@@ -119,7 +119,7 @@
                 </div>
             </div>
 
-
+            
             <div class="commandeManagerBottomPart">
                 <div class="top">
                     <div>
