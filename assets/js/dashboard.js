@@ -27,15 +27,21 @@ new Chart(chart1, {
       }]
     },
     options: {
+      animation: {
+      duration: 1500,        // animation speed
+      easing: 'easeOutQuart' // smooth effect
+    },
       scales: {
         y: {
           beginAtZero: true
         }
       },
-      animation: true,
       plugins : {
         legend : {display:false,},
         tooltip : {enabled:true}
+      },
+      animations : {
+        y: {from:1000}
       }
 
     }
@@ -58,7 +64,12 @@ new Chart(document.querySelector("#pie-chart"),{
 
   options: {
     responsive:true,
-    animation:true,
+    animation:{
+      animateRotate: true,
+      animateScale:true,
+      duration : 2000 , 
+      easing : 'easeOutBounce'
+    },
     cutout: '65%',
     plugins:{
       legend:{

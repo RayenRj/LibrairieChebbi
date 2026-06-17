@@ -37,7 +37,7 @@
                         <p>Packs Manager</p>
                     </li>
                 </a>
-                <a href="#">
+                <a href="../pages/articleManager.php">
                     <li>
                         <i class="fa-solid fa-cart-flatbed"></i>
                         <p>Articles Manager</p>
