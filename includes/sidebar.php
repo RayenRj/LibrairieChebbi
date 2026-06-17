@@ -25,7 +25,7 @@
                         <p>Dashboard</p>
                     </li>
                 </a>
-                <a href="#">
+                <a href="../pages/CommandesManager.php">
                     <li>
                         <i class="fa-solid fa-cart-flatbed"></i>
                         <p>Commandes</p>

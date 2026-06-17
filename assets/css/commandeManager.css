@@ -78,21 +78,24 @@ img{
 /* ========================== Pour copier dans chaque fishier css =========================== */
 /* ========================================================================================== */
 
-.pack-manager{
+
+.commande-manager{
     width: calc(100% - 300px);
     margin: 80px 287.5px 0em 287.5px;
     display: block;
     padding: 0em 2em;
 }
-.pack-manager .top-part{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.commande-manager .top-part{
+    display: block;
     padding: 1.5em 2em 0.5em 2em;
     margin-bottom: 2em;
 }
 
-.pack-manager .top-part button{
+
+
+/* pour supprimer ==============================<<<<<<<<<<<<<<< */
+/* 
+.commande-manager .top-part button{
     padding: 0.65em 1.25em;
     border-radius: 0.5em;
     outline: none;
@@ -102,44 +105,41 @@ img{
     font-weight: 500;
     cursor: pointer;
 }
-.pack-manager .top-part button span{
+.commande-manager .top-part button span{
     margin-right: 8px;
 }
 
-.pack-manager .top-part button:hover{
+.commande-manager .top-part button:hover{
     background-color: #3272da;
 }
-.pack-manager .top-part button:active{
+.commande-manager .top-part button:active{
     background-color: #568feb;
     padding: 0.75em 1em  0.55em  1.5em;
 }
-
+ */
 
 
 
 
 /* partie el 4 cards */
-.four-cards{
+.five-cards{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px , 1fr));
-    gap: 2em;
+    grid-template-columns: repeat(auto-fit, minmax(200px , 1fr));
+    gap: 1em;
     margin-bottom: 2.5em;
 }
-.four-cards .card{
-    padding: 1.5em 2em;
+.five-cards .card{
+    padding: 1em 0.75em;
     /* border: 2px solid var(--border-gray); */
-    box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) , 0 1px 3px rgba(0, 0, 0, 0.08);
     display: flex;
-    gap: 1.5em;
+    gap: 1em;
     align-items: center;    
     border: 1px solid rgba(255,255,255,0.05);
     border-radius: 16px;
-
 }
 
-.four-cards .card .icon{
+.five-cards .card .icon{
     height: 60px;
     width: 60px;
     aspect-ratio: 1/1;
@@ -148,37 +148,39 @@ img{
     text-align: center;
     align-content: center;
 }
-.four-cards .card .icon{font-size: 23px;}
+.five-cards .card .icon{font-size: 22px;}
 
 
 /* reglage couleur  */
 
-.four-cards .card:nth-child(1) .icon{background-color: #3b83f63a;color: rgb(0, 119, 255);}
-.four-cards .card:nth-child(2) .icon{background-color: #3bf66a2f;color: rgb(83, 151, 38);}
-.four-cards .card:nth-child(3) .icon{background-color: rgba(255, 166, 0, 0.171);color: orange;}
-.four-cards .card:nth-child(4) .icon{background-color: #7d3bf625;color: rgb(98, 0, 255);}
+.five-cards .card:nth-child(1) .icon{background-color: #3b83f63a;color: rgb(0, 119, 255);}
+.five-cards .card:nth-child(2) .icon{background-color: #3bf66a2f;color: rgb(83, 151, 38);}
+.five-cards .card:nth-child(3) .icon{background-color: rgba(255, 166, 0, 0.171);color: orange;}
+.five-cards .card:nth-child(4) .icon{background-color: var(--red-glass);color: var(--red);}
+.five-cards .card:nth-child(5) .icon{background-color: #7d3bf625;color: rgb(98, 0, 255);}
 
 
-.four-cards .card .text{
+.five-cards .card .text{
     display: flex;
     flex-direction: column;
-    gap: 0.35em;
+    gap: 0.2em;
 }
 
-.four-cards .card .text > p:first-child{
+.five-cards .card .text > p:first-child{
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     color: var(--gray-600);
 }
-.four-cards .card .text > p:last-child{
+.five-cards .card .text > p:last-child{
     color: var(--gray-500);
     font-weight: 500;
+    font-size: 10px;
 }
 
 .gain-effect{color: green;}
 .loss-effect{color: var(--red);}
-.four-cards .card .text span{
-    font-size: 13px;
+.five-cards .card .text span{
+    font-size: 11px;
     display: inline-flex;
     align-items: center;
     justify-content: left;
@@ -186,38 +188,36 @@ img{
     width: fit-content;
     font-weight: 500;
 }
-.four-cards .card .text span i{font-size: 12px;}
-
-
-
-
+.five-cards .card .text span i{font-size: 12px;}
  /* end of partie four cards */
 
 
 
 
+/* start of filter part  */
 
 
-
-.packManagerBottomPart{
+.commandeManagerBottomPart{
     border-radius: 1em;
     border: 2px solid #eee;
     padding: 1em 0em 0em;
     margin-bottom: 2em;
 }
 
-.packManagerBottomPart .top{
+.commandeManagerBottomPart .top{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.5em 2em;
     margin-bottom: 2em;
+    gap: 1em;
 }
-.packManagerBottomPart .top > div{position: relative;}
-.packManagerBottomPart .top > div:first-child input{
+
+.commandeManagerBottomPart .top > div{position: relative;}
+
+.commandeManagerBottomPart .top > div:first-child input{
     background-color: white;
-    width: 350px;
-    /* height: 40px; */
+    width: 300px;
     border-radius: 0.5em;
     border: 2px solid #eee;
     outline: none;
@@ -227,7 +227,7 @@ img{
 }
 
 
-.packManagerBottomPart .top > div:first-child > i{
+.commandeManagerBottomPart .top > div:first-child > i{
     font-size: 13px;
     position: absolute;
     top: 50%;
@@ -236,26 +236,40 @@ img{
     color: var(--gray-700);
 }
 
-.packManagerBottomPart .top > div > p{
+.commandeManagerBottomPart .top > div > p{
     font-size: 13px;
     font-weight: 500;
 }
 
-.packManagerBottomPart .top > div > div {
+.commandeManagerBottomPart .top > div > div {
     position: relative;
 }
-.packManagerBottomPart .top > div > div > i{
+
+
+.commandeManagerBottomPart .top > div > div > i{
     position: absolute;
     right: 15px;
-    top: 50%;
+    top: calc(50% + 2px);
     transform: translateY(-50%);
-    font-size: 12px;
+    font-size: 13px;
 }
 
-.packManagerBottomPart .top > div > div select{
+.commandeManagerBottomPart .top > div > div select{
     appearance: none;
     -webkit-appearance: none;
-    padding: 0.7em 4em 0.7em 1.25em; 
+    padding: 0.7em 3em 0.7em 1.25em; 
+    border: 2px solid #eee;
+    border-radius: 0.5em;
+    text-align: center;
+    align-content: center;
+    font-weight: 500;
+    margin-top: 0.5em;
+    font-size: 12px;
+    outline: none;
+}
+
+.commandeManagerBottomPart .top > div input[type="date"]{
+    padding: 0.6em 1.5em 0.5em 1.5em; 
     border: 2px solid #eee;
     border-radius: 0.5em;
     text-align: center;
@@ -267,7 +281,7 @@ img{
 }
 
 
-.packManagerBottomPart button[type="reset"]{
+.commandeManagerBottomPart button[type="reset"]{
     border: 2px solid #eee;
     outline: none;
     background-color: white;
@@ -283,31 +297,46 @@ img{
     cursor: pointer;
     transition: 0.1s all ease;
 }
-.packManagerBottomPart button[type="reset"]:hover{
+.commandeManagerBottomPart button[type="reset"]:hover{
     background-color: var(--gray-100);
     color: black;
 }
 
-.packManagerBottomPart .top > div:last-child >p{
+.commandeManagerBottomPart .top > div:last-child >p{
     opacity: 0;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* reglage partie tableau */
 
-.packManagerBottomPart .table-part table{
+.commandeManagerBottomPart .table-part table{
     border-collapse: collapse;
     width: 100%;
 }
 
-.packManagerBottomPart .table-part table thead{
+.commandeManagerBottomPart .table-part table thead{
     background-color: var(--gray-100);
     padding: 1em 0em;
 }
 
-.packManagerBottomPart .table-part th{font-size: 0.8em;}
+.commandeManagerBottomPart .table-part th{font-size: 0.8em;}
 
 
-.packManagerBottomPart .table-part th{
+.commandeManagerBottomPart .table-part th{
     padding: 1em; 
     text-align: center;
     border-top: 1px solid #eee;
@@ -315,149 +344,144 @@ img{
 }
 
 
-.packManagerBottomPart .table-part td{
+.commandeManagerBottomPart .table-part td{
     padding: 0.5em 1em;
     text-align: center;
 
 }
-.packManagerBottomPart .table-part tr{border-bottom: 1px solid #eee;}
+.commandeManagerBottomPart .table-part tr{border-bottom: 1px solid #eee;}
 
 
-.packManagerBottomPart .table-part td:first-child img{
-    aspect-ratio: 1/1;
-    width: 60px;
-    height: 60px;
-}
-
-.packManagerBottomPart .table-part td:nth-child(2) .text{
-    text-align: left;
-}
-
-.packManagerBottomPart .table-part td:nth-child(2) .text > p{
-    font-size: 12px;
-    color: var(--gray-600);
-}
 
 
-.packManagerBottomPart .table-part td:nth-child(3) > span{
+
+
+
+
+.commandeManagerBottomPart .table-part td.statut > span{
     background-color: red;
     padding: 0.35em 1em;
     border-radius: 0.5em;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
 }
 
-.packManagerBottomPart .table-part td:nth-child(3) > span.primaire{
-    background-color: var(--blue-glass);
-    color: var(--blue);
-}
-.packManagerBottomPart .table-part td:nth-child(3) > span.secondaire{
-    background-color: var(--yellow-dark-glass);
-    color: var(--yellow-dark);
-}
-.packManagerBottomPart .table-part td:nth-child(3) > span.collège{
+.commandeManagerBottomPart .table-part td.statut > span.confirmee{
     background-color: var(--green-glass);
     color: var(--green);
 }
-.packManagerBottomPart .table-part td:nth-child(3) > span.bac{
-    background-color: #7d3bf625;
-    color: rgb(98, 0, 255);
+.commandeManagerBottomPart .table-part td.statut > span.livree{
+    background-color: var(--blue-glass);
+    color: var(--blue);
+}
+.commandeManagerBottomPart .table-part td.statut > span.attente{
+    background-color: var(--yellow-dark-glass);
+    color: var(--yellow-deep);
+}
+.commandeManagerBottomPart .table-part td.statut > span.annulee{
+    /* background-color: #7d3bf625;
+    color: rgb(98, 0, 255); */
+    background-color: var(--red-glass);
+    color: var(--red);
 }
 
 
-.packManagerBottomPart .table-part td .prix{
+.commandeManagerBottomPart .table-part td .prix{
     font-size: 15px;
     font-weight: 700;
     color: var(--blue)
 }
 
-
-.packManagerBottomPart .table-part td:nth-child(5) {
+.commandeManagerBottomPart .table-part td:nth-child(5) {
     font-size: 13px;
     color: var(--gray-600);
 }
-.packManagerBottomPart .table-part td:nth-child(6){
-    text-align: center;
-}
-.packManagerBottomPart .table-part td:nth-child(6) span{
-    padding: 0.25em 1em;
-    border-radius: 0.5em;
-    font-size: 12px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    gap: 0.5em;
-    margin: auto;
-}
-.packManagerBottomPart .table-part td:nth-child(6) span > i {
-    font-size: 6px;
+.commandeManagerBottomPart .table-part td:nth-child(7) p {
+    text-align: left;
 }
 
-.packManagerBottomPart .table-part td:nth-child(6) span.actif{
+.commandeManagerBottomPart .table-part td:nth-child(6) span.actif{
     background-color: var(--green-glass);
     color: green;
 }
-.packManagerBottomPart .table-part td:nth-child(6) span.repture{
+.commandeManagerBottomPart .table-part td:nth-child(6) span.repture{
     background-color: var(--red-glass);
     color: var(--red);
 }
 
-.packManagerBottomPart .table-part td:last-child ul{
+.commandeManagerBottomPart .table-part td:last-child ul{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1em;
+    gap: 0.5em;
 }
 
-.packManagerBottomPart .table-part td:last-child ul li{
-    color: var(--blue);
+.commandeManagerBottomPart .table-part td:last-child ul li{
     border: 2px solid var(--border-gray);
     border-radius: 0.5em;
-    cursor: pointer;
-    padding: 0.5em 0.75em;
+    padding: 0.35em 0.65em;
     transition: 0.1s ease all;
 }
-.packManagerBottomPart .table-part td:last-child ul li a{
+.commandeManagerBottomPart .table-part td:last-child ul li:hover{background-color: var(--gray-100);}
+
+.commandeManagerBottomPart .table-part td:last-child ul li a{
     width: 100%;
     height: 100%;
     text-align:  center;
     
 }
-.packManagerBottomPart .table-part td:last-child ul li i{
+
+.commandeManagerBottomPart .table-part td:last-child ul a{border-radius: 0.5em;}
+.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(1){
+    background-color: var(--green-glass);
+    color: var(--green);
+}
+.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(2),
+.commandeManagerBottomPart .table-part td:last-child ul a:last-of-type{
+    background-color: var(--red-glass);
+    color: var(--red);  
+}
+.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(3){
+    background-color: var(--blue-glass);
     color: var(--blue);
 }
-.packManagerBottomPart .table-part td:last-child ul li:last-child i{
-    color: var(--red);
+.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(4){
+    background-color: #7d3bf625;
+    color: rgb(98, 0, 255);
+}
+.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(5){
+    background-color: rgba(255, 166, 0, 0.115);
+    color: orange;
 }
 
-.packManagerBottomPart .table-part td:last-child ul li:hover{
-    background-color: var(--gray-50);
-}
 
-.pack-manager .packManagerBottomPart .bottom{
+
+.commande-manager .commandeManagerBottomPart .bottom{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5em 2em;
 }
 
-.pack-manager .packManagerBottomPart .bottom > p {
+.commande-manager .commandeManagerBottomPart .bottom > p {
     font-size: 14.5px;
     font-weight: 400;
 }
 
 
+
+
 /* pagination part */
- .packManagerBottomPart .pagination{
+ .commandeManagerBottomPart .pagination{
     width: fit-content;
     display: flex;
     gap: 0.75em;
 
 }
 
-.packManagerBottomPart .pagination > a{
+.commandeManagerBottomPart .pagination > a{
     background-color: var(--gray-100);
     padding: 0.5em 1em;
     border-radius: 0.25em;
