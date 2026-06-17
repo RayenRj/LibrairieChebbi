@@ -230,7 +230,7 @@ p{font-size: 13px;}
 .categories-part .bottom-part{
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(400px , 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px , 1fr));
     gap: 2em;
 
     
@@ -253,13 +253,13 @@ p{font-size: 13px;}
 
 .categories-part .bottom-part .card .text p{
     font-size: 15px;
-    margin-top: 1em;
+    margin-top: 0.55em;
 }
 
 
 .categories-part .bottom-part .card img{
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
 }
 
 
@@ -414,6 +414,8 @@ p{font-size: 13px;}
 
 /* IMPORTANT : Yab9a ne9sk el img  f kol part*/
 
+
+
 /* articles part */
 .article-slide{
     width: 100%;
@@ -424,7 +426,9 @@ p{font-size: 13px;}
 }
 
 
-/*  Yellow part */
+/* ========================================================================================== */
+/* ==================================== partie Jaune ======================================== */
+/* ========================================================================================== */
 .yellow-part{
     width: 95%;
     margin: 2em auto 2em;
@@ -469,7 +473,11 @@ p{font-size: 13px;}
     opacity: 0.85;
     filter: saturate(0.75);
 }
-/* e5er partie */
+
+
+/* ========================================================================================== */
+/* ==================================== partie lekhra =================================== */
+/* ========================================================================================== */
 
 .dernier-part{
     width: 100%;

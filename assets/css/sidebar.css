@@ -81,8 +81,8 @@ aside h2{
 aside ul{
     display: flex;
     flex-direction: column;
-    gap: 1.2em;
-    margin-top: 3em;
+    gap: 0.75em;
+    margin-top: 2.5em;
 }
 
 aside ul a{
