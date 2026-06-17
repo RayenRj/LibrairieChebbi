@@ -1,0 +1,367 @@
+/* ========================================================================================== */
+/* ========================== Pour copier dans chaque fishier css =========================== */
+/* ========================================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+
+:root{
+    --yellow: #FFDD57;
+    --yellow-light: #FFF6C2;
+    --yellow-dark: #F0C800;
+    --yellow-deep: #D4A800;
+    --dark: #1A1A2E;
+    --accent: #FF6B35;
+    --green: rgb(8, 161, 8);
+    --red: #EF4444;
+    --blue: #3B82F6;
+    --white: #FFFFFF;
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-300: #D4D4D4;
+    --gray-400: #A3A3A3;
+    --gray-500: #737373;
+    --gray-600: #525252;
+    --gray-700: #404040;
+    --gray-800: #262626;
+    --gray-900: #171717;
+
+
+    /* Glass Colors */
+    --yellow-glass: rgba(255, 221, 87, 0.15);
+    --yellow-light-glass: rgba(255, 246, 194, 0.15);
+    --yellow-dark-glass: rgba(240, 200, 0, 0.15);
+    --yellow-deep-glass: rgba(212, 168, 0, 0.15);
+
+    --dark-glass: rgba(26, 26, 46, 0.25);
+
+    --accent-glass: rgba(255, 107, 53, 0.15);
+
+    --green-glass: rgba(34, 197, 94, 0.15);
+
+    --red-glass: rgba(239, 68, 68, 0.15);
+
+    --blue-glass: rgba(59, 130, 246, 0.15);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.18);
+    /* --border-gray:rgba(128, 128, 128, 0.242); */
+    --border-gray : #eee;
+}
+
+
+/* reglage generale  */
+ul{list-style-type: none;}
+a{color: black;text-decoration: none;}
+p{font-size: 13px;}
+.container{
+    width: 90%;
+    margin: auto;
+    padding-top: calc(3em + 80px);
+}
+
+img{
+    width: 100%;
+}
+
+/* ========================================================================================== */
+/* ========================== Pour copier dans chaque fishier css =========================== */
+/* ========================================================================================== */
+
+
+.promotion-manager{
+    width: calc(100% - 300px);
+    margin: 80px 287.5px 0em 287.5px;
+    display: block;
+    padding: 0em 2em;
+}
+.promotion-manager .top-part{
+    display: block;
+    padding: 1.5em 2em 0.5em 2em;
+    margin-bottom: 2em;
+}
+
+/* start of filter part  */
+
+
+.PromotionManagerBottomPart{
+    border-radius: 1em;
+    border: 2px solid #eee;
+    padding: 1em 0em 0em;
+    margin-bottom: 2em;
+}
+
+.PromotionManagerBottomPart .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 2em;
+    margin-bottom: 2em;
+    gap: 1em;
+}
+
+.PromotionManagerBottomPart .top > div{position: relative;}
+.PromotionManagerBottomPart .top > div:first-child > div{position: relative;}
+
+.PromotionManagerBottomPart .top > div:first-child input{
+    background-color: white;
+    width: 350px;
+    border-radius: 0.5em;
+    border: 2px solid #eee;
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    padding-right:32px;
+    padding-left: 15px;
+    height: 40px;
+}
+
+
+
+.PromotionManagerBottomPart .top > div:first-child > div i{
+    font-size: 13px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 13px;
+    color: var(--gray-700);
+    width: fit-content;
+
+}
+
+.PromotionManagerBottomPart .top > div > p{
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.PromotionManagerBottomPart .top > div > div {
+    position: relative;
+}
+.PromotionManagerBottomPart .top > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    position: relative;
+}
+
+.PromotionManagerBottomPart .top > div > div > i{
+    position: absolute;
+    right: 15px;
+    top: calc(50% + 2px);
+    transform: translateY(-50%);
+    font-size: 13px;
+}
+
+.PromotionManagerBottomPart .top > div > div select{
+    height: 40px;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0.7em 5em 0.7em 1.25em; 
+    border: 2px solid #eee;
+    border-radius: 0.5em;
+    text-align: center;
+    align-content: center;
+    font-weight: 500;
+    font-size: 13px;
+    outline: none;
+}
+
+input[type="number"]{
+    height: 40px;
+    width: 250px;
+    padding: 0.6em 35px 0.5em 1.5em; 
+    border: 2px solid #eee;
+    border-radius: 0.5em;
+    text-align: left;
+    align-content: center;
+    font-weight: 500;
+    font-size: 13px;
+    outline: none;
+    appearance: none;
+}
+
+
+.PromotionManagerBottomPart .top > div 
+.PromotionManagerBottomPart .top > div input[type="number"]::-webkit-outer-spin-button,
+.PromotionManagerBottomPart .top > div input[type="number"]::-webkit-inner-spin-button{
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+
+.nbr > div span{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.PromotionManagerBottomPart button[type="reset"]{
+    border: 2px solid #eee;
+    outline: none;
+    background-color: white;
+    padding: 0.5em 1.5em;
+    border-radius: 0.5em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap:0.5em;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 0.5em;
+    cursor: pointer;
+    transition: 0.1s all ease;
+    height: 40px;
+}
+.PromotionManagerBottomPart button[type="reset"]:hover{
+    background-color: var(--gray-100);
+    color: black;
+}
+
+.PromotionManagerBottomPart .top > div:last-child >p{
+    opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* reglage partie tableau */
+
+.PromotionManagerBottomPart .table-part table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.PromotionManagerBottomPart .table-part table thead{
+    background-color: var(--gray-100);
+    padding: 1em 0em;
+}
+
+.PromotionManagerBottomPart .table-part th{font-size: 0.8em;}
+
+
+.PromotionManagerBottomPart .table-part th{
+    padding: 1em; 
+    text-align: center;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+
+.PromotionManagerBottomPart .table-part td{
+    padding: 0.75em 1em;
+    text-align: center;
+}
+.PromotionManagerBottomPart .table-part tr{border-bottom: 1px solid #eee;}
+
+.PromotionManagerBottomPart .table-part td input[type="number"]::-webkit-inner-spin-button,
+.PromotionManagerBottomPart .table-part td input[type="number"]::-webkit-outer-spin-button{
+    appearance: none;
+    -webkit-appearance: none;
+}
+.PromotionManagerBottomPart .table-part td input[type="number"]{
+    height: 40px;
+    width: 150px;
+}
+.PromotionManagerBottomPart .table-part td input[type="number"]::placeholder{
+    opacity: 0.6;
+}
+
+
+.PromotionManagerBottomPart .table-part td:last-child a{
+    border: 2px solid var(--border-gray);
+    border-radius: 0.5em;
+    padding: 0.45em 1.25em;
+    transition: 0.1s ease all;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: auto;
+    gap: 0.5em;
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 400;
+    transition: 0.1s all ease;
+
+}
+.PromotionManagerBottomPart .table-part td:last-child a:hover{background-color: #2e6ed6;}
+.PromotionManagerBottomPart .table-part td:last-child a:active{padding: 0.55em 1em 0.35em 1.5em;}
+
+
+
+
+
+
+.promotion-manager .PromotionManagerBottomPart .bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5em 2em;
+}
+
+.promotion-manager .PromotionManagerBottomPart .bottom > p {
+    font-size: 14.5px;
+    font-weight: 400;
+}
+
+
+
+
+/* pagination part */
+ .PromotionManagerBottomPart .pagination{
+    width: fit-content;
+    display: flex;
+    gap: 0.75em;
+
+}
+
+.PromotionManagerBottomPart .pagination > a{
+    background-color: var(--gray-100);
+    padding: 0.5em 1em;
+    border-radius: 0.25em;
+    border: 2px solid #d3d3d35d;;
+    text-align: center;
+    align-content: center;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+#prev,#post{
+    background-color: white;
+    font-size: 12px;
+}
+
+#three-dots{
+    background-color: white;
+}
+.pagination-selected{
+    background-color: var(--blue) !important;
+    border-color: var(--blue) !important;
+    color: white;
+}
