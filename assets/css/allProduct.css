@@ -65,6 +65,7 @@ body{
 }
 aside{
     height: calc(100dvh - 2em );
+    min-height: fit-content;
     border-radius: 10px;
     margin: calc(80px + 1em) 1em 1em 1em;
     width: 19%;
