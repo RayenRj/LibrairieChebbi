@@ -93,34 +93,6 @@ img{
 
 
 
-/* pour supprimer ==============================<<<<<<<<<<<<<<< */
-/* 
-.commande-manager .top-part button{
-    padding: 0.65em 1.25em;
-    border-radius: 0.5em;
-    outline: none;
-    border: none;
-    background-color: var(--blue);
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-}
-.commande-manager .top-part button span{
-    margin-right: 8px;
-}
-
-.commande-manager .top-part button:hover{
-    background-color: #3272da;
-}
-.commande-manager .top-part button:active{
-    background-color: #568feb;
-    padding: 0.75em 1em  0.55em  1.5em;
-}
- */
-
-
-
-
 /* partie el 4 cards */
 .five-cards{
     display: grid;

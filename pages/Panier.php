@@ -57,7 +57,7 @@
                     <tr>
                         <th>Item</th>
                         <th>Description</th>
-                        <th>Quantité</th>
+                        <th id="th-quantite">Quantité</th>
                         <th>Prix unitaire</th>
                         <th>Prix total</th>
                         <th></th>
