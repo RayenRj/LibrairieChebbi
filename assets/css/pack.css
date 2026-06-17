@@ -102,7 +102,7 @@ body.pack .text p span{
 }
 
 body.pack .text .button{
-    width: 60%;
+    width: 70%;
     margin-top: 3em;
     display: flex;
     justify-content: flex-start;
@@ -110,7 +110,7 @@ body.pack .text .button{
 }
 
 body.pack .button a{
-   padding: 0.8em 1.5em; 
+   padding: 0.55em 1.25em; 
    border-radius: 10px; 
    font-weight: bold;
    transition: 0.25s ease all;
@@ -136,7 +136,7 @@ body.pack .button a{
 .button a:last-of-type:hover{
     background-color: var(--yellow-deep);
     color: white;
-    border: none;
+    border-color:var(--yellow-deeps);
 }
 /* endof big image part  */
 
@@ -277,9 +277,10 @@ body.pack .button a{
 
 /* article card reglage  */
 .packs-container main article{
-    padding: 2em;
+    padding: 2em 1em;
     border-radius: 15px;
-    min-height: 550px;
+    /* min-height: 550px; */
+    min-height: fit-content;
     height: fit-content;
     background-color: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

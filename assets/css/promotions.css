@@ -115,7 +115,8 @@ img{
 
 .PromotionManagerBottomPart .top > div:first-child input{
     background-color: white;
-    width: 350px;
+    min-width: 250px;
+    flex-grow: 1;
     border-radius: 0.5em;
     border: 2px solid #eee;
     outline: none;
@@ -178,7 +179,9 @@ img{
 
 input[type="number"]{
     height: 40px;
-    width: 250px;
+    width: 100%;
+    min-width: 150px;
+    flex-grow: 1;
     padding: 0.6em 35px 0.5em 1.5em; 
     border: 2px solid #eee;
     border-radius: 0.5em;
@@ -220,7 +223,6 @@ input[type="number"]{
     gap:0.5em;
     font-size: 12px;
     font-weight: 500;
-    margin-top: 0.5em;
     cursor: pointer;
     transition: 0.1s all ease;
     height: 40px;

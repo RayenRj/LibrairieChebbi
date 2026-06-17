@@ -43,6 +43,12 @@
                         <p>Articles Manager</p>
                     </li>
                 </a>
+                <a href="../pages/promotions.php">
+                    <li>
+                        <i class="fa-solid fa-tag"></i>
+                        <p>Promotions</p>
+                    </li>
+                </a>
                 <a href="Utilisateur.php">
                     <li>
                         <i class="fa-solid fa-user"></i>
