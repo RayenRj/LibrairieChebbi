@@ -72,18 +72,18 @@ new Chart(secondeChart ,{
                 'rgb(255, 159, 64)',
                 'rgb(255, 205, 86)',
                 'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'],
+                'rgb(153, 102, 255)',  ],
             hoverOffset: 10,
-            borderColor:'white',
+            borderColor: new Array(5).fill("white",0,5),
             borderWidth: 3,
         }]
     },
     options :{
-        responsive:true,
-        aniamation: {
-            duration : 2000,
-            easing : 'easeOutBounce'
+        // responsive:true,
+        
+        animation: {
+            duration: 1500,
+            easing: 'easeOutQuart'
         },
         cutout: '60%' ,
         plugins :{legend :{display:false}}

@@ -36,6 +36,7 @@ new Chart(chart1, {
           beginAtZero: true
         }
       },
+
       plugins : {
         legend : {display:false,},
         tooltip : {enabled:true}
