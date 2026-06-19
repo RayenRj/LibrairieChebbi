@@ -34,7 +34,7 @@ new Swiper('.card-wrapper', {
     550 : {slidesPerView:3},
     950 : {slidesPerView:4},
     1150 : {slidesPerView:5},
-    1550:{slidesPerView:7}
+    1550:{slidesPerView:6}
   },
 
    autoplay: {

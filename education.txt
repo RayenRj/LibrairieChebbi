@@ -1,0 +1,6 @@
+comment utiliser les variable du fishier .env 
+
+1/ tsob el module  : 
+compose require vlucas/phpdotenv
+fl fishier php te3ek testa3mel : $dotenv = Dotenv\Dotenv::createImmuatable("path ta3 el folder eli fih el fishier .env" , "tnajem t7ot esm el fishier test.env (fl 3ada yabda .env donc facultatif annek t7otha)")
+testa3me : $dotenv->load() ==> t loadilk tous les variables du fishier .env fl $_ENV supervariable , donc tu peux l'utiliser comme tu utilise un dictionnnaire

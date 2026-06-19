@@ -90,7 +90,11 @@ img{
     padding: 1.5em 2em 0.5em 2em;
     margin-bottom: 2em;
 }
-
+.promotion-manager .top-part p{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-500);
+}
 /* start of filter part  */
 
 

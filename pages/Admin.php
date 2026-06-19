@@ -20,7 +20,7 @@
 
 
             <div>
-                <H2>Admins <i class="fa-solid fa-user-group"></i></H2>
+                <H2>Admins 🧑‍💼</H2>
                 <p>Gérez les admins de votre platforme</p>
             </div>
 
