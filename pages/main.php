@@ -33,6 +33,8 @@
 
     </div>
 
+
+    
     <div class="proprietes">
         <div class="prop-card">
             <div class="icon">
@@ -75,10 +77,10 @@
     <div class="categories-part">
         <div class="top-part">
             <h2>Nos Categories</h2>
-            <a href="">Voir toutes les categories <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="AllProduct.php">Voir toutes les categories <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="bottom-part">
-            <a href="#" class="card-link">
+            <a href="AllProduct.php" class="card-link">
                 <div class="card">
                     <img src="../assets/images/mainPageImg/books.png" alt="">
                     <div class="text">
@@ -88,7 +90,7 @@
                     </div>
                 </div>
             </a>
-            <a href="#" class="card-link">
+            <a href="Collection.php" class="card-link">
                 <div class="card">
                     <img src="../assets/images/mainPageImg/sac.png" alt="">
                     <div class="text">
@@ -98,7 +100,7 @@
                     </div>
                 </div>
             </a>
-            <a href="#" class="card-link">
+            <a href="AllProduct.php" class="card-link">
                 <div class="card">
                     <img src="../assets/images/mainPageImg/pens.png" alt="">
                     <div class="text">
@@ -108,7 +110,7 @@
                     </div>
                 </div>
             </a>
-            <a href="#" class="card-link">
+            <a href="games.php" class="card-link">
                 <div class="card">
                     <img src="../assets/images/mainPageImg/gift.png" alt="">
                     <div class="text">
@@ -188,7 +190,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="" class="button">Voir les sacs</a>
+                <a href="Collection.php" class="button">Voir les sacs</a>
             </div>
         </div>
         <!-- 3rd part -->
@@ -216,7 +218,7 @@
                     </li>
 
                 </ul>
-                <a href="" class="button">Voir les packs</a>
+                <a href="Pack.php" class="button">Voir les packs</a>
             </div>
             <div class="card-type-2 card">
                 <img src="../assets/images/mainPageImg/img5.png" alt="">
@@ -239,7 +241,7 @@
                         <i class="fa-solid fa-circle-check"></i>Livres de Dessin
                     </li>
                 </ul>
-                <a href="" class="button">Explorer les cadeaux</a>
+                <a href="games.php" class="button">Explorer les cadeaux</a>
             </div>
         </div>
 

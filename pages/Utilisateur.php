@@ -20,7 +20,7 @@
 
 
             <div>
-                <H2>Utilisateurs <i class="fa-solid fa-user-group"></i></H2>
+                <H2>Utilisateurs 👤</H2>
                 <p>Gérez les utilisateurs de votre platforme</p>
             </div>
 

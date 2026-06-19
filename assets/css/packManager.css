@@ -92,6 +92,12 @@ img{
     margin-bottom: 2em;
 }
 
+.pack-manager .top-part p{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-500);
+}
+
 .pack-manager .top-part button{
     padding: 0.65em 1.25em;
     border-radius: 0.5em;
