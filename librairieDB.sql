@@ -138,12 +138,5 @@ begin
 end$$
 DELIMITER ;
 
-show tables;
-show columns from client;
-
-insert into commande(id_client,date_commande, statut,adresse , ville,code_postal,prix_totale) 
-values(2,curdate(), 'attente', "rue10" ,"tunis")
-select * from commande;
-select * from commande where month(date_commande) = month(current_date()) and year(date_commande) = year(curdate());
 
 
