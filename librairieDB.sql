@@ -27,7 +27,7 @@ create table commande(
 	id_commande int auto_increment primary key,
     id_client int,
     date_commande date not null,
-	statut varchar(50) check(statut in('attente','confirmée','annulée')),
+	statut varchar(50) check(statut in('attente','confirmée','annulée','livrée')),
     adresse varchar(255) not null,
     ville varchar(100),
     code_postal varchar(20),
