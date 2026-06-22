@@ -10,7 +10,9 @@
 
         // venteParMois = ta3tiha el mois wl year w ta3tik el nombre de commandes eli sarou
         public function venteParMois(int $mois , int $year){
-            $query = "select count(*) from {$this->tName} where month(date_commande) = ? and year(date_commande) = ? ;";
+            $query = "select count(*)
+                      from ligne_commande lc , commande c,
+                      where month(date_commande) = ? and year(date_commande) = ? and lc.id_commande = c.id_commande;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$mois,$year]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -33,19 +35,19 @@
         
         // partie stock 
         public function stockElevee(){
-            $query = "select count(*) from product where quantite_stock > 20 ;" ;
+            $query = "select count(*) from {$this->tName} where quantite_stock > 20 ;" ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         public function stockMoyen(){
-            $query = "select count(*) from product where quantite_stock <= 20 and quantite_stock > 5 ;" ;
+            $query = "select count(*) from {$this->tName} where quantite_stock <= 20 and quantite_stock > 5 ;" ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         public function stockFaible(){
-            $query = "select count(*) from product where quantite_stock > 1 and quantite_stock <= 5;" ;
+            $query = "select count(*) from {$this->tName} where quantite_stock > 1 and quantite_stock <= 5;" ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -121,7 +123,6 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        
     
     }
 ?>
