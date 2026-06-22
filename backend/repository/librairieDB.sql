@@ -3,7 +3,7 @@ use librairieDB;
 create table produit(
 	id_produit int primary key auto_increment,
     code_barre varchar(50) ,
-    libelle varchar(50),
+    nom varchar(50),
     prix decimal(6,3) not null check(prix>0),
     quantite_stock int not null check(quantite_stock >= 0),
     categorie varchar(50) not null,
@@ -27,7 +27,7 @@ create table commande(
 	id_commande int auto_increment primary key,
     id_client int,
     date_commande date not null,
-	statut varchar(50) check(statut in('attente','confirmée','annulée','livrée')),
+	statut varchar(50) check(statut in('attente','confirmée','annulée')),
     adresse varchar(255) not null,
     ville varchar(100),
     code_postal varchar(20),
@@ -112,7 +112,8 @@ VALUES
 
 -- alter 
 
-
+alter table produit
+Rename COLUMN nom to libelle;
 
 -- triggers
 DELIMITER $$
@@ -137,5 +138,17 @@ begin
 end$$
 DELIMITER ;
 
+show tables;
+show columns from client;
+
+insert into commande(id_client,date_commande, statut,adresse , ville,code_postal,prix_totale) 
+values(2,curdate(), 'attente', "rue10" ,"tunis" ,'2063',10.550);
+select * from commande;
+select * from commande where month(date_commande) = month(current_date()) and year(date_commande) = year(curdate());
+
+
+
+select count(*) from ligne_commande lc, commande c , produit p
+where lc.id_commande = c.id_commande and p.id_produit = lc.id_produit
 
 

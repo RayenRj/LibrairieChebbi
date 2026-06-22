@@ -351,7 +351,7 @@
 
             <div class="twoList">
                 <div class="ListOne">
-                    <h3>Top 10 des articles les plus vendus</h3>
+                    <h3>Top 10 des articles les plus vendus ce mois</h3>
                     <table>
                         <thead>
                             <th>Rang</th>
@@ -429,7 +429,7 @@
 
 
                 <div class="ListTwo">
-                    <h3>Articles à faible rotation</h3>
+                    <h3>Articles à faible rotation ce mois</h3>
                     <table>
                         <thead>
                             <th>Article</th>

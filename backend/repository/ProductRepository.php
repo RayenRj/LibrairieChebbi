@@ -1,5 +1,5 @@
 <?php 
-
+    // Product Repository : feha tous les methodes utilisée fl dashboard admin
 
     require_once(__DIR__ . "/Repository.php");
     require_once(__DIR__ . "../models/Product.php");
@@ -51,7 +51,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        // delete
+        // CRUD functions
         public function deleteProduct(int $id_prod){
             $query = "delete from {$this->tName} where id_produit = ?";
             $stmt = $this->db->prepare($query);
@@ -79,7 +79,48 @@
             $stmt = $this->db->prepare($query);
             return $stmt->execute([$produit->getCodeABarre(), $produit->getLibelle(), $produit->getPrix(),$produit->getStock(),$produit->getCategorie(),$produit->getMarque() , $produit->getImageUrl(), $produit->getRemise() , $produit->getDescription()]);    
         }
+        // end of CRUD function
 
+        public function nbreDeVentePourChaqueCategorieCeMois(){
+            $query = "select count(*) from ligne_commande lc, commande c , produit p
+                      where lc.id_commande = c.id_commande and p.id_produit = lc.id_produit and month(date_commande)= month(curdate()) and year(date_commande) = year(curdate()) 
+                      group by categorie;" ;
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function nbreDeVenteToutalCeMois(){
+            $query = "select count(*) from ligne_commande lc, commande c , produit p
+                      where lc.id_commande = c.id_commande and p.id_produit = lc.id_produit and month(date_commande)= month(curdate()) and year(date_commande) = year(curdate()) ;" ;
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_BOTH)[0];
+        }
+
+        // partie eli feha 2 tables
+        public function Top10Ventes(){
+            $query = "select p.libelle , p.categorie , sum(lc.quantite) as 'quantite_total'
+                      from produit p , commande c , ligne_commande lc
+                      where p.id_produit = lc.id_produit and c.id_commande = lc.id_commande and month(date_commande) = month(curdate()) and year(date_commande) = year(curdate())
+                      group by id_produit ? P.libelle , p.categorie
+                      order by quantite_total DESC
+                      limit 10";
+
+            $stmt= $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function ArticleAfaibleRotation(){
+            $query = "select p.libelle , p.categorie , sum(lc.quantite) as 'quantite_total'
+                      from produit p , commande c , ligne_commande lc
+                      where p.id_produit = lc.id_produit and c.id_commande = lc.id_commande and month(date_commande) = month(curdate()) and year(date_commande) = year(curdate())
+                      group by p.id_produit , P.libelle , p.categorie
+                      order by quantite_total ASC
+                      having quantite_total < 6;";
+            $stmt= $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
         
     
     }
