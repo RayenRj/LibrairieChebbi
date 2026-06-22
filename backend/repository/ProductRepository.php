@@ -25,7 +25,6 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-
         public function nbreArticleNonVendus(){
             $query = "select count(*) from produit p where not exist(select * from ligne_commande lc where p.id_produit = lc.id_produit );";
             $stmt = $this->db->prepare($query);
@@ -81,6 +80,12 @@
             $stmt = $this->db->prepare($query);
             return $stmt->execute([$produit->getCodeABarre(), $produit->getLibelle(), $produit->getPrix(),$produit->getStock(),$produit->getCategorie(),$produit->getMarque() , $produit->getImageUrl(), $produit->getRemise() , $produit->getDescription()]);    
         }
+        public function getProductById(string $id){
+            $query = "select * from produit where id_produit = ? ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$id]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
         // end of CRUD function
 
         public function nbreDeVentePourChaqueCategorieCeMois(){
@@ -123,6 +128,68 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-    
+
+        // #######################
+        // partie recherche : contient paginaation
+        // #######################
+        public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin=0 , string $stock , string $trie , int $limit = 10 , int $page = 0){
+            $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.description , COALESCE(sum(lc.quantite),0) as nombreVente from {$this->tName} p LEFT JOIN ligne_commande lc on lc.id_produit = p.id_produit where 1=1 ";
+            $categorie = mb_strtolower(trim($categorie));
+            $stock = mb_strtolower(trim($stock));
+            $trie = mb_strtolower(trim($trie));
+            $param = [];
+            $trie_list=["id article" => "p.id_produit", 
+                        "libellé" => "p.libelle" ,
+                        "prix unitaire" => "prix_unitaire" , 
+                        "stock" => "p.quantite_stock" , 
+                        "nombre de vente" => "nombreVente"];
+            if ($categorie !== "tous"){
+                $query .= "AND categorie = ? ";
+                $param[] = $categorie;
+            }
+            if(!empty($libelle)){
+                $query .= "AND libelle LIKE ? ";
+                $param[] = "%$libelle%";
+            }
+
+
+            if ($prixMax > 0 && $prixMin >0){
+                $min =  min($prixMax , $prixMin);
+                $max = max($prixMax , $prixMin);
+                $query .= "AND (p.prix - p.remise) between ? and ? ";
+                $param[] = $min;
+                $param[] = $max;
+            }else{
+                if($prixMin > 0){
+                    $query .= "AND (p.prix - p.remise) >= ? ";
+                    $param[] = $prixMin;
+                }
+                if($prixMax > 0){
+                    $query .= "AND (p.prix - p.remise) <= ? ";
+                    $param[] = $prixMax;
+                }
+            }
+            // stock 
+            if($stock == "stock eleve"){$query .= "AND p.quantite_stock >= 20 " ;}
+            else if($stock == "stock moyen"){$query .= "AND p.quantite_stock between 6 and 19 ";}
+            else if($stock == "stock faible"){$query .= "AND p.quantite_stock between 1 and 5 ";}
+            else if($stock == "repture de stock"){$query .= "AND p.quantite_stock = 0 ";}
+            
+            $trie= $trie_list[$trie] ?? "prix_unitaire";
+
+            $page = max($page , 1);
+            $limit = max($page , 1);
+            $param[] = $limit;
+            $param[] = ($page -1 ) * $limit;
+            
+            $query .= " GROUP BY p.id_produit ";
+            $query .= " ORDER BY {$trie} ";
+            $query .= " LIMIT ? OFFSET ? ;";
+            
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($param);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
     }
 ?>

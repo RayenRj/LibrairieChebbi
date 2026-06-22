@@ -13,6 +13,21 @@ create table produit(
     description varchar(255) default ''
 );
 
+create table pack(
+	id_pack int ,
+    type varchar(255),
+    primary key(id_pack),
+    foreign key (id_pack) references produit(id_produit) on delete cascade on update cascade
+);
+
+create table packArticle(
+	id_pack int,
+    id_produit int ,
+    quantite int default 1,
+    primary key(id_pack, id_produit),
+    foreign key(id_pack) references produit(id_produit) on delete cascade on update cascade,
+    foreign key(id_produit) references produit(id_produit) on delete cascade on update cascade
+);
 create table client(
 	id_client int auto_increment primary key,
     nom varchar(50),
@@ -46,6 +61,14 @@ create table ligne_commande(
     foreign key(id_commande) references commande(id_commande) on delete cascade on update cascade,
     foreign key(id_produit) references produit(id_produit) on delete cascade on update cascade
     
+);
+
+create table userLogin(
+    id int auto_increment,
+    id_client int not null,
+    loginAt date not null default current_timestamp,
+    primary key(id),
+    foreign key(id_client) references client(id_client)
 );
 
 
@@ -138,4 +161,8 @@ end$$
 DELIMITER ;
 
 
+
+show tables;
+
+select date_format(curdate() - INTERVAL 6 month , "%Y-%m-%d");
 

@@ -21,7 +21,7 @@
         }
 
         // ###############################################################        
-        // function Recherche : recherche des client dans la page User.php
+        // function Recherche : recherche des client dans la page User.php and admin.php
         // ###############################################################        
         public function searchClientsById(int $id){
             $query = "select * from client where id_client like '%?%'";
@@ -85,6 +85,14 @@
             return $stmt->execute([$id]); 
         }
 
+        // #########################
+        // Ajouter un admin
+        // #########################
+        public function addAdmin(string $id): bool{
+            $query = "update client set role = 'admin' where id_client = ? ;";
+            $stmt = $this->db->prepare($query);
+            return $stmt->execute([$id]);
+        }
         
     }
 
