@@ -64,14 +64,19 @@
             $stmt->execute($param);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        // CRUD Functions 
+        // CRUD Functions
+        public function findAllPacks(){
+            $stmt = $this->db->prepare("select pa.id_pack , pa.type , code_barre , libelle , prix , quantite_stock , categorie , image_url , remise ,  description  from produit p inner join pack pa on pa.id_pack = p.id_produit ;");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
+        }
         public function findPackById(int $id){
             $query =  " select p.id_produit , p.code_barre , p.libelle, p.prix , p.quantite_stock , p.categorie , p.marque , image_url , p.remise , p.description 
                         from produit p , pack pa
                         where pa.id_pack = ? and pa.id_pack = p.id_produit";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
         }
         public function deletePackById(int $id) : bool{
             $stmt = $this->db->prepare("delete from produit where p.id_produit = ? ;");
@@ -79,6 +84,8 @@
         }
         // ALERT !!!!!!!!! =====> el partie hedhi lezm nrodha transaction : akahw ekher khedma fl pack Repository
         public function modifyPackById(int $id , string $nom , string $niveau, float $prx , int $quantite , array $products) : bool {
+            $this->db->beginTransaction();
+            try{
             $query1 = " update produit set ";
             $params1=[];
             $success = true;
@@ -125,13 +132,44 @@
                 $stmt = $this->db->prepare($query);
                 $test = $stmt->execute($params);
                 $success = $success && $test;
+                $this->db->commit();
+                return true;
             }
             if(empty($params1)){return $success;}
             $query1 = substr($query1 , 0 , -2);
             $query1 .= " where id_produit = ? ;";
             $params1[]= $id;
             $stmt = $this->db->prepare($query1);
-            return $stmt->execute($params1) && $success;
+            }catch(Exception $e){
+                $this->db->rollBack();
+                return false;
+            }
+            
+        }
+
+
+        /**
+         * @param $data => should be sous la forme [Product => quantity]
+         */
+        public function insertPack(int $idProduit , string $type ,$data){
+            $this->db->beginTransaction();
+        }
+
+
+        // Get Pack Articles
+        public function getPackArticles(int $idPack){
+            $query = "select * from packArticle where id_pack = ? ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$idPack]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
+        }
+
+        // supprimé un article du pack
+        public function deleteArticleDuPack(int $idPack , int $idArticle) : bool{
+            $query = "delete from packArticle where id_pack = ? and id_produit = ? ;";
+            $stmt = $this->db->prepare($query);
+            return  $stmt->execute([$idPack, $idArticle]);
+        
         }
     }
     
