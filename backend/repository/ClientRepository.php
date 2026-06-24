@@ -17,7 +17,7 @@
             $query = "select from client where id_client = ?;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_BOTH)[0];
+            return $stmt->fetch(PDO::FETCH_BOTH)[0] ?: null;
         }
         public function deleteById(int $id) : bool{
             $query = "delete from client where id_client = ?;";
@@ -32,7 +32,12 @@
         public function findAllClient(){
             $stmt = $this->db->prepare("select * from client;");
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
+        }
+        public function findAllAdmins(){
+            $stmt = $this->db->prepare("select * from client where role = client ;");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
         public function findClientByEmail(string $email){
            $query = "select * from client where email = ? ;"; 
@@ -48,40 +53,68 @@
             $query = "select * from client where id_client like '%?%'";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
         public function searchClientsByNom(string $nom){
             $query = "select * from client where nom like '%?%' ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$nom]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
         public function searchClientsByPrenom(string $prenom){
             $query = "select * from client where prenom like '%?%' ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$prenom]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
         public function searchClientsByEmail(string $email){
             $query = "select * from client where email like '%?%' ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$email]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
         public function searchClientsByTel(string $tel){
             $query = "select * from client where tel like '%?%' ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$tel]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
 
         // ####################################
         // problemmee !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // ####################################
-        public function modifyClient(string $id) : bool{
-            $query = "update client set nom=? , prenom=? , tel=? , email=? , password=? where id_client=?;";
+        public function modifyClient(int $id, array $data) : bool{
+            $query = "update client set ";
+            $params=[];
+            if (isset($data["nom"])){
+                $query .= " nom = ? , ";
+                $params[] = $data["nom"];
+            }
+            if (isset($data["prenom"])){
+                $query .= " prenom = ? , ";
+                $params[] = $data["prenom"];
+            }
+            if (isset($data["tel"])){
+                $query .= " tel = ?  , ";
+                $params[] = $data["tel"];
+            }
+            if (isset($data["email"])){
+                $query .= " email = ? , ";
+                $params[] = $data["email"];
+            }
+            if (isset($data["password"])){
+                $query .= " password = ? , ";
+                $params[] = $data["password"];
+            }
+            if (isset($data["role"])){
+                $query .= " role = ? , ";
+                $params[] = $data["role"];
+            }
+            if(empty($params)){return false;}
+            $query = substr($query , 0 , -2) . " where id_client = ? ;";
+            $params[] = $id;
             $stmt = $this->db->prepare($query);
-            return $stmt->execute([$id]); 
+            return $stmt->execute($params); 
         }
         // #########################
         // Ajouter un admin
@@ -96,7 +129,14 @@
         public function isEmailExist(string $email) : ?array{
             $stmt = $this->db->prepare("select * from client where email = ? ;");
             $stmt->execute([$email]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
+        }
+
+        public function getCommandeByIdClient(int $idClient) : ?array{
+            $query = "select * from commande where id_client = ? ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$idClient]);
+            return $stmt->fetch(PDO::FETCH_BOTH) ?: null;
         }
         
     }

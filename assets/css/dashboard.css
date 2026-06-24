@@ -119,12 +119,12 @@ img{
 /* partie el 4 cards */
 .four-cards{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px , 1fr));
-    gap: 2em;
+    grid-template-columns: repeat(auto-fit, minmax(250px , 1fr));
+    gap: 1.5em;
     margin-bottom: 2.5em;
 }
 .four-cards .card{
-    padding: 1.5em 2em;
+    padding: 1em 1.5em;
     /* border: 2px solid var(--border-gray); */
     box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.15),
@@ -149,7 +149,7 @@ img{
 .four-cards .card .icon{font-size: 23px;}
 
 
-/* reglage couleur  */
+/* reglage couleur  */  
 
 .four-cards .card:nth-child(1) .icon{background-color: #3b83f63a;color: rgb(0, 119, 255);}
 .four-cards .card:nth-child(2) .icon{background-color: #3bf66a2f;color: rgb(83, 151, 38);}
@@ -160,12 +160,12 @@ img{
 .four-cards .card .text{
     display: flex;
     flex-direction: column;
-    gap: 0.35em;
+    gap: 0.25em;
 }
 
 .four-cards .card .text > p:first-child{
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--gray-600);
 }
 .four-cards .card .text > p:last-child{
@@ -177,7 +177,7 @@ img{
 .loss-effect{color: var(--red);}
 
 .four-cards .card .text span{
-    font-size: 13px;
+    font-size: 12px;
     display: inline-flex;
     align-items: center;
     justify-content: left;
