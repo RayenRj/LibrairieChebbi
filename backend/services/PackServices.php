@@ -70,7 +70,9 @@
         }
         public function ajouterUnArtileToPack(int $idPack , Article $article){}
 
-        public function calculerPrixRelleDuPack(int $idPack): float {}
+        public function calculerPrixRelleDuPack(int $idPack): float {
+            
+        }
         public function remisePack(int $idPack , float $amountRemise){}
         public function checkPackStock(int $idPack){}
     }
