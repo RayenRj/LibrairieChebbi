@@ -11,14 +11,35 @@
 
 
         // ################################
-        // trouver une seule personne by id
+        // Crud Operations
         // ################################
         public function findClientById(int $id){
             $query = "select from client where id_client = ?;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_BOTH)[0];
         }
+        public function deleteById(int $id) : bool{
+            $query = "delete from client where id_client = ?;";
+            $stmt = $this->db->prepare($query);
+            return $stmt->execute([$id]);
+        }
+        public function createClient(Client $client): bool{
+            $query = "insert into client(nom,prenom,tel,email,password,role) values(?,?,?,?,?,?)";
+            $stmt = $this->db->prepare($query);
+            return $stmt->execute([$client->getNom(), $client->getPrenom() , $client->getTel(), $client->getEmail(), $client->getPassword() , $client->getRole()]);
+        }   
+        public function findAllClient(){
+            $stmt = $this->db->prepare("select * from client;");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function findClientByEmail(string $email){
+           $query = "select * from client where email = ? ;"; 
+           $stmt = $this->db->prepare($query);
+           $stmt->execute([$email]);
+           return $stmt->fetch(PDO::FETCH_ASSOC) ?: null; // FETCH_CLASS , "className" => yraja3lk les donné sous formes d'un object client
+        }   
 
         // ###############################################################        
         // function Recherche : recherche des client dans la page User.php and admin.php
@@ -54,37 +75,14 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-
-        // #########################
-        // delete une seule personne
-        // #########################
-        public function deleteById(int $id) : bool{
-            $query = "delete from client where id_client = ?;";
-            $stmt = $this->db->prepare($query);
-            return $stmt->execute([$id]);
-        }
-
-
-
-        // #########################
-        // inserer un nouveau client
-        // #########################
-        public function createClient(Client $client){
-            $query = "insert into client values(?,?,?,?,?,?,?)";
-            $stmt = $this->db->prepare($query);
-            return $stmt->execute([$client->getIdClient(), $client->getNom(), $client->getPrenom() , $client->getTel(), $client->getEmail(), $client->getPassword() , $client->getRole()]);
-        }   
-
-        
         // ####################################
-        // modifier un client apartir de son id
+        // problemmee !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // ####################################
         public function modifyClient(string $id) : bool{
             $query = "update client set nom=? , prenom=? , tel=? , email=? , password=? where id_client=?;";
             $stmt = $this->db->prepare($query);
             return $stmt->execute([$id]); 
         }
-
         // #########################
         // Ajouter un admin
         // #########################
@@ -92,6 +90,13 @@
             $query = "update client set role = 'admin' where id_client = ? ;";
             $stmt = $this->db->prepare($query);
             return $stmt->execute([$id]);
+        }
+
+        //email existe
+        public function isEmailExist(string $email) : ?array{
+            $stmt = $this->db->prepare("select * from client where email = ? ;");
+            $stmt->execute([$email]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         
     }

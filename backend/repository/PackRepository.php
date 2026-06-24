@@ -12,8 +12,6 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_NUM)[0];
         }
-
-
         // pack actif
         public function NombreTotalePackActif() : int{
             $stmt = $this->db->prepare("select count(*) from pack p , produit pr
@@ -23,8 +21,6 @@
         }
         // pack en repture 
         public function packEnRepture(): int {return ($this->NombreTotalePack() - $this->NombreTotalePackActif());}
-
-
         // revvenue de pack ce mois
         public function revenuePackCeMois(){
             $query = "select sum(lc.quantite * p.prix) 
@@ -68,8 +64,6 @@
             $stmt->execute($param);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-
-
         // CRUD Functions 
         public function findPackById(int $id){
             $query =  " select p.id_produit , p.code_barre , p.libelle, p.prix , p.quantite_stock , p.categorie , p.marque , image_url , p.remise , p.description 
@@ -79,12 +73,10 @@
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
-
         public function deletePackById(int $id) : bool{
             $stmt = $this->db->prepare("delete from produit where p.id_produit = ? ;");
             return $stmt->execute([$id]);
         }
-
         // ALERT !!!!!!!!! =====> el partie hedhi lezm nrodha transaction : akahw ekher khedma fl pack Repository
         public function modifyPackById(int $id , string $nom , string $niveau, float $prx , int $quantite , array $products) : bool {
             $query1 = " update produit set ";
@@ -142,4 +134,6 @@
             return $stmt->execute($params1) && $success;
         }
     }
+    
+
 ?>

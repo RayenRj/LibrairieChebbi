@@ -9,8 +9,7 @@
         private string $password;
         private string $role;
 
-        public function __construct(int $id , string $nom, string $prenom , string $tel , string $email , string $pass , string $role){
-            $this->idClient = $id;
+        public function __construct(string $nom, string $prenom , string $tel , string $email , string $pass , string $role){
             $this->nom  = $nom;
             $this->prenom = $prenom;
             $this->tel = $tel;

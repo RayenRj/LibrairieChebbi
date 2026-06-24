@@ -191,5 +191,13 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+
+        // modifer la quantite d'un articles
+        public function decreaseQuantity(Product $product , int $quantityToDelete) : bool {
+            $query = "update produit set quantite_stock = quantite_stock - ? where id_produit = ? ;";
+            $stmt = $this->db->prepare($query);
+            return $stmt->execute([$quantityToDelete , $product]);
+        } 
+
     }
 ?>

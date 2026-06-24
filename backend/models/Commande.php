@@ -1,4 +1,6 @@
 <?php
+
+    require_once(__DIR__ . "/LigneCommande.php");
     class Commande {
     private int $id_commande;
     private int $id_client;
@@ -9,10 +11,10 @@
     private string $codePostal;
     private float $prix_totale;
     private string $comment;
+    private array $ligneCommandes = [];
 
     // Constructor
     public function __construct(
-        int $id_commande,
         int $id_client,
         string $dateCommande,
         string $statut,
@@ -20,9 +22,9 @@
         string $ville,
         string $codePostal,
         float $prix_totale,
-        string $comment
+        string $comment,
+        array $ligneCommandes
     ) {
-        $this->id_commande = $id_commande;
         $this->id_client = $id_client;
         $this->dateCommande = $dateCommande;
         $this->statut = $statut;
@@ -31,9 +33,13 @@
         $this->codePostal = $codePostal;
         $this->prix_totale = $prix_totale;
         $this->comment = $comment;
+        $this->ligneCommandes = $ligneCommandes;
     }
 
     // Getters
+    public function getCommandeLines(){
+        return $this->ligneCommandes;
+    }
     public function getIdCommande(): int {
         return $this->id_commande;
     }
@@ -105,6 +111,10 @@
 
     public function setComment(string $comment): void {
         $this->comment = $comment;
+    }
+
+    public function setArticles(array $ligneCommandes) {
+        $this->ligneCommandes = $ligneCommandes;
     }
 
     // ToString
