@@ -2,7 +2,7 @@
 
 include_once(__DIR__ . "/../repository/ProductRepository.php");
 include_once(__DIR__ . "/../models/Product.php");
-
+include_once(__DIR__ . "/../exception/IdentifiantInvalideException.php");
 
 class ProductServices{
     private ProductRepository $productRepo;

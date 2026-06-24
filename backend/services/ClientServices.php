@@ -37,9 +37,6 @@
             return $this->clientRepo->findAllClient();
         }
 
-
-
-
         //done
         public function deleteClient(int $id) : bool {
             if($id<1){throw new Exception("L'identifiant doit etre > 0");}
@@ -64,7 +61,6 @@
             if(!$result){throw new Exception("L'insertion du client echoue !!");}
             return true;
         }   
-
         // Teste Si l'email est taken
         public function isEmailTaken(string $email): bool{
             if(empty($email)){throw new Exception("Email est vide !");}
