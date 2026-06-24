@@ -81,8 +81,8 @@ aside h2{
 aside ul{
     display: flex;
     flex-direction: column;
-    gap: 0.75em;
-    margin-top: 2.5em;
+    gap: 0.35em;
+    margin-top: 2em;
 }
 
 aside ul a{
@@ -115,11 +115,11 @@ aside ul a li:hover > p{
 
 
 aside ul a li > i{
-    font-size: 18px;
+    font-size: 16px;
 }
 aside ul a li > p{
     font-weight: 500;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 

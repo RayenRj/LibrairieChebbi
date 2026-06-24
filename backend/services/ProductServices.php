@@ -9,7 +9,7 @@ class ProductServices{
     public function __construct(){
         $this->productRepo = new ProductRepository();
     }
-
+    
     public function createProduct($data){}
     public function getAllProduct() : array {}
     public function deleteProduct(int $idProduit){}

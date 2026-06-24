@@ -36,10 +36,6 @@
         public function getAllClients() : array{
             return $this->clientRepo->findAllClient();
         }
-
-
-
-
         //done
         public function deleteClient(int $id) : bool {
             if($id<1){throw new Exception("L'identifiant doit etre > 0");}
@@ -72,11 +68,30 @@
             return $this->clientRepo->isEmailExist($email) !== null;
         }
 
-        public function getAllAdmins() : array {}
-        public function updateClient(int $id , array $data) {} 
-        public function changePassword(){}
-        public function getClientOrders(int $idClient){
-
+        //done
+        public function getAllAdmins() : ?array {
+            return $this->clientRepo->findAllAdmins();
+        }
+        //done
+        public function updateClient(int $idClient , array $data) : bool{
+            if($idClient <1){throw new Exception("l'id ne peux pas etre <= 0");}
+            if(empty($data)){throw new Exception("le tableau de données est vide!");}
+            $result = $this->clientRepo->modifyClient($idClient, $data);
+            if(!$result){throw new Exception("Error lors de l'update du client row!");}
+            return $result;
+        }
+        //done
+        public function changePassword(int $idClient , string $newPassword){
+            if($idClient <1){throw new Exception("l'id ne peux pas etre <= 0");}
+            if(empty($newPassword)){throw new Exception("New password est vide!");}
+            $data = ["password"=>password_hash($newPassword, PASSWORD_DEFAULT)];
+            return $this->clientRepo->modifyClient($idClient,$data);
+        }
+        //done
+        public function getClientOrders(int $idClient) : ?array{
+            if($idClient <1){throw new Exception("l'id ne peux pas etre <= 0");}
+            if($this->clientRepo->findClientById($idClient) === false){throw new Exception("Le client avec cette ID n'existe pas!");}
+            return $this->clientRepo->getCommandeByIdClient($idClient) ?: null;
         }
 
     }
