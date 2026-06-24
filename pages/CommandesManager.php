@@ -144,11 +144,11 @@
                         <p>Statut</p>
                         <div>
                             <select name="" id="">
-                                <option value="all" selected>Tous les Niveau</option>
-                                <option value="all" >Primaire</option>
-                                <option value="all" >Collège</option>
-                                <option value="all" >Secondaire</option>
-                                <option value="all" >Bac</option>
+                                <option value="all" selected>Tous</option>
+                                <option value="all" >En attente</option>
+                                <option value="all" >Confirmée</option>
+                                <option value="all" >Livrée</option>
+                                <option value="all" >Annulée</option>
                             </select>
                             <i class="fa-solid fa-caret-down"></i>
                         </div>
@@ -221,12 +221,12 @@
                             <td><p>50559320</p></td>
                             <td><p class="prix">59 DT</p></td>
                             <td class="statut">
-                                <!--
-                                    <span class="attente">En attente</span>
-                                    <span class="annulee" >Annulé</span>
+                                
+                                    <!-- <span class="attente">En attente</span> -->
+                                    <!-- <span class="annulee" >Annulé</span> -->
                                     <span class="livree">Livrée</span>
-                                -->
-                                <span class="confirmee">Confirmée</span>
+                               
+                                <!-- <span class="confirmee">Confirmée</span> -->
                             </td>
                             <td><p>30/05/2024 <br>10:30</p></td>
                             <td>
@@ -247,12 +247,12 @@
                             <td><p>50559320</p></td>
                             <td><p class="prix">59 DT</p></td>
                             <td class="statut">
-                                <!--
+                                
                                     <span class="attente">En attente</span>
-                                    <span class="annulee" >Annulé</span>
-                                    <span class="livree">Livrée</span>
-                                -->
-                                <span class="confirmee">Confirmée</span>
+                                    <!-- <span class="annulee" >Annulé</span> -->
+                                    <!-- <span class="livree">Livrée</span> -->
+                               
+                                <!-- <span class="confirmee">Confirmée</span> -->
                             </td>
                             <td><p>30/05/2024 <br>10:30</p></td>
                             <td>
@@ -273,12 +273,12 @@
                             <td><p>50559320</p></td>
                             <td><p class="prix">59 DT</p></td>
                             <td class="statut">
-                                <!--
-                                    <span class="attente">En attente</span>
+                                
+                                    <!-- <span class="attente">En attente</span> -->
                                     <span class="annulee" >Annulé</span>
-                                    <span class="livree">Livrée</span>
-                                -->
-                                <span class="confirmee">Confirmée</span>
+                                    <!-- <span class="livree">Livrée</span> -->
+                               
+                                <!-- <span class="confirmee">Confirmée</span> -->
                             </td>
                             <td><p>30/05/2024 <br>10:30</p></td>
                             <td>
