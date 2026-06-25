@@ -86,9 +86,9 @@
                     <form action="">
 
                         <div class="numbers">
-                            <button>-</button>
-                            <input type="number">
-                            <button>+</button>
+                            <button id="minusButton" type="button">-</button>
+                            <input type="number" id="quantity" value="1">
+                            <button id="plusButton" type="button">+</button>
                         </div>
                         <a href="" class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</a>
                     </form>
@@ -205,7 +205,7 @@
         </section>
 
 
-
+    <script src="../assets/js/oneProduct.js"></script>
     <?php include("../includes/footer.php"); ?>
 </body>
 </html>

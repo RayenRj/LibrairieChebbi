@@ -84,7 +84,7 @@
             $query = "select * from produit where id_produit = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         // end of CRUD function
 
@@ -199,5 +199,12 @@
             return $stmt->execute([$quantityToDelete , $product]);
         } 
 
+
+
+        //ajouter un remise 
+        public function ajouterUnRemiseSurProduit(int $idProduit , float $amountRemise){
+            $stmt = $this->db->prepare("update produit set remise = ? where id_produit = ? ;");
+            return $stmt->execute([$amountRemise,$idProduit]);
+        }
     }
 ?>
