@@ -9,11 +9,14 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
 
+    
+    <link rel="stylesheet" href="../assets/css/articleManagerPopUp.css">
     <link rel="stylesheet" href="../assets/css/articleManager.css">
+    
 </head>
 <body>
     <?php include("../includes/header.php"); ?>
-    <?php include("../includes/sidebar.php"); ?>
+    <?php include("../includes/sidebar.php"); ?> 
 
     <div class="articleManager">
         <section>
@@ -23,7 +26,7 @@
                     <h2>Article Manager 📚</h2>
                     <p>Gérez vos articles : ajoutez , modifiez ou supprimez les articles disponibles</p>
                 </div>
-                <button>
+                <button id="addArticle">
                     <i class="fa-solid fa-plus"></i>Ajouter un article
                 </button>
             </div>  
@@ -546,6 +549,159 @@
             </div>
         </section>
     </div>
+
+
+    <form action="" class="popUpPart" hidden>
+        <div class="popUpContainer">
+            <div class="overlay"></div>
+            <div class="popUpCard">
+                <div class="popUpHead">
+                    <h2>Ajouer un article</h2>
+                    <a id="popUpClose">
+                        <i class="fa-solid fa-x"></i>
+                    </a>
+                </div>
+
+                <div class="double">
+                    <div>
+                        <label>Code à barre</label>
+                        <div>
+                            <input type="text" name="codeBarre" id="" placeholder="Entrer le code a barre" >
+                            <i class="fa-solid fa-barcode"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Libellé</label>
+                        <div>
+                            <input type="text" name="libelle" id="" placeholder="Entrer le libellé de l'article" required>
+                            <i class="fa-solid fa-tag"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="double">
+                    <div>
+                        <label>Prix Unitaire</label>
+                        <div>
+                            <input type="text" name="prix" id="" placeholder="Entrer le prix" required>
+                            <i class="fa-solid fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Quantité</label>
+                        <div>
+                            <input type="text" name="libelle" id="" placeholder="Entrer la quantité" required> 
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="double">
+                    <div>
+                        <label>Categorie</label>
+                        <div>
+                            <select id="categorie" name="categorie">
+                                <option value="">-- Sélectionnez une catégorie --</option>
+                                <option value="ecriture">Écriture</option>
+                                <option value="papeterie">Papeterie</option>
+                                <option value="classement">Classement</option>
+                                <option value="geometrie">Géométrie</option>
+                                <option value="coupe_collage">Coupe et collage</option>
+                                <option value="dessin_arts">Dessin et arts</option>
+                                <option value="sacs_accessoires">Sacs et accessoires</option>
+                                <option value="calcul_sciences">Calcul et sciences</option>
+                                <option value="numerique">Numérique</option>
+                                <option value="livres_pedagogiques">Livres pédagogiques</option>
+                                <option value="fournitures_bureau">Fournitures de bureau</option>
+                                <option value="others">Others</option>
+                            </select>
+                            <i class="fa-regular fa-folder-open"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Marque</label>
+                        <div>
+                            <select name="marque" id="marque">
+                                <option value="">-- Choisir une marque --</option>
+                                <option value="BIC">BIC</option>
+                                <option value="Maped">Maped</option>
+                                <option value="Stabilo">Stabilo</option>
+                                <option value="Faber-Castell">Faber-Castell</option>
+                                <option value="Staedtler">Staedtler</option>
+                                <option value="Pilot">Pilot</option>
+                                <option value="Pelikan">Pelikan</option>
+                                <option value="Carioca">Carioca</option>
+                                <option value="Schneider">Schneider</option>
+                                <option value="Milan">Milan</option>
+                                <option value="Jovi">Jovi</option>
+                                <option value="Canson">Canson</option>
+                                <option value="Oxford">Oxford</option>
+                                <option value="Clairefontaine">Clairefontaine</option>
+                                <option value="Exacompta">Exacompta</option>
+                                <option value="Rhodia">Rhodia</option>
+                                <option value="Paper Mate">Paper Mate</option>
+                                <option value="Sharpie">Sharpie</option>
+                                <option value="Uni-ball">Uni-ball</option>
+                                <option value="Edding">Edding</option>
+                                <option value="Linc">Linc</option>
+                                <option value="Royal Talens">Royal Talens</option>
+                                <option value="Folio">Folio</option>
+                                <option value="Canon">Canon</option>
+                                <option value="Dymo">Dymo</option>
+                                <option value="Costo">Costo</option>
+                                <option value="KO">KO</option>
+                                <option value="Ruspina">Ruspina</option>
+                                <option value="Sildar">Sildar</option>
+                                <option value="other">other</option>
+                            </select>
+                            <i class="fa-brands fa-mizuni"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="single">
+                    <label for="">Remise (%)</label>
+                    <div>
+                        <input type="number" name="remise" id="" placeholder="Entrer la remise en pourcentage">
+                        <i class="fa-solid fa-percent"></i>
+                        <span>DT</span>
+                    </div>
+                </div>
+                <div class="single description">
+                    <label for="">Description</label>
+                    <div>
+                        <textarea name="description" id="" placeholder="Entrez la description de l'article"></textarea>
+                        <i class="fa-regular fa-file-lines"></i>
+                    </div>
+                </div>
+                <!-- Partie image -->
+                <div class="single">
+                        <label for="">Image de l'article</label>
+                        <label class="custum-file-upload" for="file">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path> </g></svg>
+                        </div>
+                        <div class="text">
+                            <span>Click to upload image</span>
+                        </div>
+                        <input type="file" id="file">
+                    </label>
+
+                </div>
+
+                <!-- Buttonss -->
+                <div class="last">
+                    <input type="reset" id="resetButton" value="Reset">
+                    <input type="submit" value="Ajouter l'article">
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

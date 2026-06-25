@@ -89,5 +89,76 @@ new Chart(secondeChart ,{
         plugins :{legend :{display:false}}
     },
 
+})
 
+
+
+let resetButton = document.querySelector("#resetButton");
+let input = document.querySelector("#file");
+let container = document.querySelector(".custum-file-upload")
+// reglage ll partie popUp
+let articleContainer = document.querySelector(".articleManager");
+let addArticleButton = document.querySelector("#addArticle");
+let popUpForm= document.querySelector(".popUpPart");
+let popUpContainer = document.querySelector(".popUpCard");
+let closePopUp = document.querySelector("#popUpClose");
+let overlay = document.querySelector(".popUpContainer .overlay");
+addArticleButton.addEventListener("click",function(event){
+    event.preventDefault();
+    popUpForm.removeAttribute("hidden");
+    var height = popUpForm.getBoundingClientRect().height;
+    console.log(height.toString() + "px");
+    articleContainer.style.height = (height - 80).toString() + "px" ;
+    articleContainer.style.overflowY = "hidden";
+})
+closePopUp.addEventListener("click",function(event){
+    event.preventDefault();
+    popUpForm.setAttribute("hidden","");
+    articleContainer.style.height = "";
+    articleContainer.style.overflowY = "";
+    document.querySelector(".custum-file-upload .icon").style.opacity="1";
+    document.querySelector(".custum-file-upload .text").style.opacity="1";
+    container.style.backgroundImage= "";
+    container.style.backgroundSize= "";
+    container.style.backgroundRepeat = "";
+    container.style.backgroundPosition= "";
+})
+overlay.addEventListener("click",function(event){
+    popUpForm.setAttribute("hidden","");
+    articleContainer.style.height = "";
+    articleContainer.style.overflowY = "";
+    document.querySelector(".custum-file-upload .icon").style.opacity="1";
+    document.querySelector(".custum-file-upload .text").style.opacity="1";
+    container.style.backgroundImage= "";
+    container.style.backgroundSize= "";
+    container.style.backgroundRepeat = "";
+    container.style.backgroundPosition= "";
+})
+
+
+// partie el input de type image + adding back img to the container
+input.addEventListener("change",function(event){
+    let file = this.files[0];
+    if(file){
+        let reader = new FileReader();
+        reader.onload = function(e){
+            container.style.backgroundImage= `url(${e.target.result})`;
+            container.style.backgroundSize= "contain";
+            container.style.backgroundRepeat = "no-repeat";
+            container.style.backgroundPosition= "center";
+        };
+        reader.readAsDataURL(file);
+        document.querySelector(".custum-file-upload .icon").style.opacity="0";
+        document.querySelector(".custum-file-upload .text").style.opacity="0";
+    }
+})
+
+// removing the image when pressing the reset button
+resetButton.addEventListener("click",function(){
+    document.querySelector(".custum-file-upload .icon").style.opacity="1";
+    document.querySelector(".custum-file-upload .text").style.opacity="1";
+    container.style.backgroundImage= "";
+    container.style.backgroundSize= "";
+    container.style.backgroundRepeat = "";
+    container.style.backgroundPosition= "";
 })

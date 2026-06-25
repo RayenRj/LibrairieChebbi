@@ -78,98 +78,151 @@
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
         }
+
         public function deletePackById(int $id) : bool{
-            $stmt = $this->db->prepare("delete from produit where p.id_produit = ? ;");
-            return $stmt->execute([$id]);
+            $this->db->beginTransaction();
+            try{
+                // the pack is also a product 
+                // delete from packArticle table
+                $stmt= $this->db->prepare("delete from packArticle where id_pack = ?");
+                $result = $stmt->execute([$id]);
+                if(!$result){throw new Exception("Sql Error while deleting the pack");}
+                
+                // delete from pack table
+                $stmt2 = $this->db->prepare("delete from pack where id_pack = ?");
+                $result = $stmt2->execute([$id]);
+                if(!$result){throw new Exception("Sql Error while deleting the pack");}
+
+                // delete from product table
+                $stmt3 = $this->db->prepare("delete from produit where id_produit = ?");
+                $result = $stmt3->execute([$id]);
+                if(!$result){throw new Exception("Sql Error while deleting the pack");}
+                $this->db->commit();
+                return true;
+            }catch(Exception $e){
+                $this->db->rollBack();
+                return false;
+            }
+
         }
+        
         // ALERT !!!!!!!!! =====> el partie hedhi lezm nrodha transaction : akahw ekher khedma fl pack Repository
         public function modifyPackById(int $id , string $nom , string $niveau, float $prx , int $quantite , array $products) : bool {
             $this->db->beginTransaction();
             try{
-            $query1 = " update produit set ";
-            $params1=[];
-            $success = true;
-            if(!empty($nom)){
-                $query1 .= "libelle = ? ,";
-                $params1[] = $nom;
-            }
-            if($prx > 0){
-                $query1 .= " prix = ? ,";
-                $params1[] = $prx;
-            }
-            if($quantite >= 0){
-                $query1 .= " quantite_stock = ? , ";
-                $params1[] = $quantite;
-            } 
-
-
-
-            // update le type en niveau
-            if(!empty($niveau) && in_array(mb_strtolower($niveau) , ["primaire","college" , "secondaire","bac"])){
-                $query2 = "update pack set type = ? where id_pack = ? ;";
-                $stmt = $this->db->prepare($query2);
-                $test = $stmt->execute([$niveau,$id]);
-                $success = $success && $test;
-            }
-            // partie table pack article
-            // --> part 1 : dellete all articles
-            if(!empty($products)){
-
-                $query = "delete from packArticle where id_pack = ? ;";
-                $test = $this->db->prepare($query)->execute([$id]);
-                $success = $success && $test;
-                // --> part 2 : insert all arcticles
-                $query = "insert into packArticle(id_pack, id_produit, quantite) values";
-                $params = [];
-                foreach($products as $product_id => $qte){
-                    $query .= " (?, ?, ?) ,";
-                    $params[] = $id;
-                    $params[] = $product_id;
-                    $params[] = $qte;
+                $query1 = " update produit set ";
+                $params1=[];
+                if(!empty($nom)){
+                    $query1 .= "libelle = ? ,";
+                    $params1[] = $nom;
                 }
-                $query = rtrim($query , ",") . " ;";
-    
-                $stmt = $this->db->prepare($query);
-                $test = $stmt->execute($params);
-                $success = $success && $test;
+                if($prx > 0){
+                    $query1 .= " prix = ? ,";
+                    $params1[] = $prx;
+                }
+                if($quantite >= 0){
+                    $query1 .= " quantite_stock = ? ,";
+                    $params1[] = $quantite;
+                } 
+
+                // update le type en niveau
+                if(!empty($niveau) && in_array(mb_strtolower($niveau) , ["primaire","college" , "secondaire","bac"])){
+                    $query2 = "update pack set type = ? where id_pack = ? ;";
+                    $stmt2 = $this->db->prepare($query2);
+                    $test = $stmt2->execute([$niveau,$id]);
+                    if(!$test){throw new Exception("Sql Error !");}
+                }
+                // partie table pack article
+                // --> part 1 : dellete all articles
+                if(!empty($products)){
+
+                    $query3 = "delete from packArticle where id_pack = ? ;";
+                    $test = $this->db->prepare($query3)->execute([$id]);
+                    if(!$test){throw new Exception("Sql Error !");}
+                    // --> part 2 : insert all articles
+                    $query4 = "insert into packArticle(id_pack, id_produit, quantite) values";
+                    $params4 = [];
+                    foreach($products as $product_id => $qte){
+                        $query4 .= " (?, ?, ?) ,";
+                        $params4[] = $id;
+                        $params4[] = $product_id;
+                        $params4[] = $qte;
+                    }
+                    $query4 = rtrim($query4 , ",") . " ;";
+        
+                    $stmt4 = $this->db->prepare($query4);
+                    $test = $stmt4->execute($params4);
+                    if(!$test){throw new Exception("Sql Error !");}
+                }
+
+
+                if(empty($params1)){$this->db->commit();return true;}
+                $query1 = substr($query1 , 0 , -1);
+                $query1 .= " where id_produit = ? ;";
+                $params1[]= $id;
+                $stmt1 = $this->db->prepare($query1);
+                $test =$stmt1->execute($params1);
+                if(!$test){throw new Exception("Sql Error !");}
                 $this->db->commit();
                 return true;
-            }
-            if(empty($params1)){return $success;}
-            $query1 = substr($query1 , 0 , -2);
-            $query1 .= " where id_produit = ? ;";
-            $params1[]= $id;
-            $stmt = $this->db->prepare($query1);
             }catch(Exception $e){
                 $this->db->rollBack();
                 return false;
             }
             
         }
-
-
         /**
-         * @param $data => should be sous la forme [Product => quantity]
+         * @param $data => should be sous la forme [idProduct => quantity]
          */
-        public function insertPack(int $idProduit , string $type ,$data){
+        public function createNewPack($data, float $prix , $niveau ,string $libelle,int $quantite ,string $image_url ,float $remise ,string $description) : bool{
             $this->db->beginTransaction();
+            try{
+                // first query=> table product
+                $query = "insert into produit (libelle, prix, quantite_stock , categorie , image_url,remise,description ) values(?,?,?,?,?,?,?)";
+                $stmt = $this->db->prepare($query);
+                $result = $stmt->execute([$libelle , $prix,$quantite , "pack" , $image_url ,$remise , $description]);
+                if(!$result){throw new Exception("SQL Insertion Error");}
+
+                $packId = $this->db->lastInsertId();
+                $query2 = "insert into packArticle (id_pack ,id_produit , quantite) values ";
+                $param=[];
+                $str_array=[];
+                foreach($data as $productId => $quantity){
+                    $str_array[] = "(?,?,?)";
+                    $param[] = $packId;
+                    $param[] = $productId;
+                    $param[] = $quantity;
+                }
+                $query2 .= implode(",",$str_array) ;
+                $stmt2 = $this->db->prepare($query2);
+                $result = $stmt2->execute($param);
+                if(!$result){throw new Exception("SQL Insertion Error");}
+                $this->db->commit();
+                return true;
+            }catch(Exception $e){
+                $this->db->rollBack();
+                return false;
+            }
         }
-
-
         // Get Pack Articles
         public function getPackArticles(int $idPack){
-            $query = "select * from packArticle where id_pack = ? ;";
+            $query = "select id_produit , quantite from packArticle where id_pack = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$idPack]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
-
         // supprimé un article du pack
         public function deleteArticleDuPack(int $idPack , int $idArticle) : bool{
             $query = "delete from packArticle where id_pack = ? and id_produit = ? ;";
             $stmt = $this->db->prepare($query);
             return  $stmt->execute([$idPack, $idArticle]);
         
+        }
+        // ajouter un article du pack
+        public function ajouterArticleAuPack(int $idPack , int $idArticle , int $quantite){
+            $query = "insert into packArticle values(?,?,?) ;";
+            $stmt = $this->db->prepare($query);
+            return $stmt->execute([$idPack, $idArticle , $quantite]) ?: null;
         }
     }
     
