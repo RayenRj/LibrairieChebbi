@@ -90,15 +90,15 @@
                 <h1>Sign Up</h1>
                 <form action="">
                     <div class="name">
-                        <input type="text" name="name" id="name" class="input">
+                        <input type="text" name="name" class="input">
                         <label for="">Name</label>
                     </div>
                     <div class="email">
-                        <input type="email" name="email" class="input">
+                        <input type="email" name="email" id="EmailSignUp" class="input">
                         <label for="">Email</label>
                     </div>
                     <div class="password">
-                        <input type="password" name="password" id="" class="input">
+                        <input type="password" name="password" id="PasswordSignUp" class="input">
                         <label for="">Password</label>
                     </div>
                     <div class="button">

@@ -60,7 +60,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function ListeDesProduits(){
+        public function findAllProducts(){
             $stmt = $this->db->prepare("select * from {$this->tName} ;");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -70,7 +70,7 @@
             $query = "select * from {$this->tName} where id_produit = ?";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
         }
 
         public function ajouterProduit(Product $produit){
@@ -85,6 +85,12 @@
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre){
+            $query = "INSERT INTO produit (libelle , prix,quantite_stock,categorie, marque , remise, description, image_url , code_barre ) values (?,?,?,?,?,?,?,?,?) ;";
+            $stmt = $this->db->prepare($query);
+            return $stmt->execute([$libelle , $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre]);
         }
         // end of CRUD function
 
@@ -193,8 +199,14 @@
 
 
         // modifer la quantite d'un articles
-        public function decreaseQuantity(Product $product , int $quantityToDelete) : bool {
+        public function decreaseQuantity(int $product , int $quantityToDelete) : bool {
             $query = "update produit set quantite_stock = quantite_stock - ? where id_produit = ? ;";
+            $stmt = $this->db->prepare($query);
+            return $stmt->execute([$quantityToDelete , $product]);
+        } 
+        // modifer la quantite d'un articles
+        public function increaseQuantity(int $product , int $quantityToDelete) : bool {
+            $query = "update produit set quantite_stock = quantite_stock + ? where id_produit = ? ;";
             $stmt = $this->db->prepare($query);
             return $stmt->execute([$quantityToDelete , $product]);
         } 
@@ -202,7 +214,7 @@
 
 
         //ajouter un remise 
-        public function ajouterUnRemiseSurProduit(int $idProduit , float $amountRemise){
+        public function ajouterUnRemiseSurProduit(int $idProduit , float $amountRemise) :bool{
             $stmt = $this->db->prepare("update produit set remise = ? where id_produit = ? ;");
             return $stmt->execute([$amountRemise,$idProduit]);
         }

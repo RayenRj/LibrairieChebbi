@@ -24,4 +24,8 @@ beforeSignUp.addEventListener("click",()=>{
 })
 
 
+// les champ  
+let signUpEmail = document.querySelector("#EmailSignUp");
+let signUppassword = document.querySelector("#PasswordSignUp");
+
 
