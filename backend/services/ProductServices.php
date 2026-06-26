@@ -15,6 +15,7 @@ class ProductServices{
     public function modifierArticle(){
 
     }
+    
     //done
     public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin=0 , string $stock , string $trie , int $limit = 10 , int $page = 0){
         return $this->productRepo->rechercherArticle($categorie , $libelle, $prixMax,$prixMin , $stock , $trie , $limit,$page);
