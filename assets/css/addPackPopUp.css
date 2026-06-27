@@ -126,13 +126,20 @@ img{
 
 
 /* partie overlay */
+.addPackContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 8888;
+    height: fit-content;
 
-
+}
 .popUpContainer{
     width: 100%;
     height: fit-content;
     /* position: relative; */
-    height: 100dvh;
+    height: 100%;
 
 }
 
@@ -140,10 +147,11 @@ img{
     position: absolute;
     left: 0;
     top: 0;
-    /* background: rgba(0, 0, 0, 0.25); */
+    background: rgba(0, 0, 0, 0.25);
     height: 100%;
     width: 100%;
     z-index: 10;
+    backdrop-filter: blur(3px);
 }
 
 .popUpContainer .popUpCard{
@@ -153,7 +161,7 @@ img{
     width: fit-content;
     padding: 1.5em 2em;
     border-radius: 1em;
-    margin: 5em auto;
+    margin: 4em auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
     width: 50%;
 }
