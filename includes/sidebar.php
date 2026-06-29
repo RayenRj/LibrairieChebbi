@@ -19,49 +19,49 @@
             </h2>
 
             <ul>
-                <a href="../pages/Dashboard.php">
+                <a href="/dashboard">
                     <li>
                         <i class="fa-solid fa-chart-column"></i>
                         <p>Dashboard</p>
                     </li>
                 </a>
-                <a href="../pages/CommandesManager.php">
+                <a href="/dashboard/commandes">
                     <li>
                         <i class="fa-solid fa-cart-flatbed"></i>
                         <p>Commandes</p>
                     </li>
                 </a>
-                <a href="../pages/packManager.php">
+                <a href="/dashboard/packs">
                     <li>
                         <i class="fa-solid fa-box-open"></i>
                         <p>Packs Manager</p>
                     </li>
                 </a>
-                <a href="../pages/articleManager.php">
+                <a href="/dashboard/articles">
                     <li>
                         <i class="fa-solid fa-cart-flatbed"></i>
                         <p>Articles Manager</p>
                     </li>
                 </a>
-                <a href="../pages/promotions.php">
+                <a href="/dashboard/promotions">
                     <li>
                         <i class="fa-solid fa-tag"></i>
                         <p>Promotions</p>
                     </li>
                 </a>
-                <a href="Utilisateur.php">
+                <a href="/dashboard/clients">
                     <li>
                         <i class="fa-solid fa-user"></i>
                         <p>Utilisateurs</p>
                     </li>
                 </a>
-                <a href="Admin.php">
+                <a href="/dashboard/admins">
                     <li>
                         <i class="fa-solid fa-user-shield"></i>
                         <p>Admins</p>
                     </li>
                 </a>
-                <a href="../pages/main.php" id="deconnexion">
+                <a href="/main" id="deconnexion">
                     <li>
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         <p>Déconnexion</p>

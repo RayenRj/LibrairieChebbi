@@ -1,9 +1,7 @@
 <?php 
     // client Repository : fih kol chay relatif ll client
-
-    require_once(__DIR__ . "/IRepository.php");
     require_once(__DIR__ . "/Repository.php");
-    require_once(__DIR__ . "../models/Client.php");
+    require_once(__DIR__ . "/../models/Client.php");
     class ClientRepository extends Repository{ 
         // constructeur : on a une attribut db qui represent le pdo
         public function __construct(){parent::__construct();}
@@ -132,7 +130,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
 
-        public function getCommandeByIdClient(int $idClient) : ?array{
+        public function getCommandeByIdClient($idClient) : ?array{
             $query = "select * from commande where id_client = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$idClient]);
