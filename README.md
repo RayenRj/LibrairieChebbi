@@ -26,3 +26,11 @@ https://uiverse.io/vinodjangid07/clever-bird-35
 https://uiverse.io/felipesntr/strange-bobcat-47
 <!-- add file icon fl universe.io -->
 https://uiverse.io/SpatexDEV/blue-eagle-63
+
+
+<!-- Pour activer le routing -->
+
+<!-- 1/ $base_url = "/librairie/LibrairieChebbi/public" -->
+<!-- ici le localhost howa dossier el htdocs eli lezm nabda ne7seb 3lih el uri -->
+<!-- le seul dossier visible pour le navigateur c'est public -->
+<!-- donc les chemin de tous les assets doit etres relative au public pour ca on doit fixer une base_url -->

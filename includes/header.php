@@ -21,15 +21,15 @@
             <div class="categories">
                 <button>📦 Categories ▾ </button>
                 <ul class="dropdown-menu">
-                    <li><a href="../pages/main.php">⭐ <span>main</span></a></li>
-                    <li><a href="../pages/AllProduct.php">🛍️ <span>All Products</span></a></li>
-                    <li><a href="../pages/Pack.php">📦 <span>Nos Packs</span></a></li>
-                    <li><a href="../pages/AllProduct.php">📚 <span>Books</span></a></li>
-                    <li><a href="../pages/Collection.php">🎒 <span>School Bags</span></a></li>
-                    <li><a href="../pages/AllProduct.php">✏️ <span>Writing Tools</span></a></li>
-                    <li><a href="../pages/AllProduct.php">📐 <span>Geometry Tools</span></a></li>
-                    <li><a href="../pages/games.php">🧸 <span>jouets</span></a></li>
-                    <li><a href="../pages/AllProduct.php">🔮 <span>Autres Accessories</span></a></li>
+                    <li><a href="/main">⭐ <span>main</span></a></li>
+                    <li><a href="/products">🛍️ <span>All Products</span></a></li>
+                    <li><a href="/packs">📦 <span>Nos Packs</span></a></li>
+                    <li><a href="/products">📚 <span>Books</span></a></li>
+                    <li><a href="/collections">🎒 <span>School Bags</span></a></li>
+                    <li><a href="/products">✏️ <span>Writing Tools</span></a></li>
+                    <li><a href="/products">📐 <span>Geometry Tools</span></a></li>
+                    <li><a href="/games">🧸 <span>jouets</span></a></li>
+                    <li><a href="/products">🔮 <span>Autres Accessories</span></a></li>
                 </ul>
             </div>
             <div class="search">
@@ -48,7 +48,7 @@
             <ul>
                 <li><a href="#" id="sign-in">Sign in</a></li>
                 <li><a href="#" id="sign-up">Sign up</a></li>
-                <li><a href="../pages/Panier.php" id="cart">🛒 cart<span class="cartCount">0</span></a></li>
+                <li><a href="/panier" id="cart">🛒 cart<span class="cartCount">0</span></a></li>
             </ul>
         </div>
 
@@ -77,7 +77,7 @@
             </div>
         </div>
     </header>
-    <!--end of partie header- ->
+    <!--end of partie header-->
 
 
 
@@ -88,23 +88,31 @@
         <div class="signup">
             <div class="choose">
                 <h1>Sign Up</h1>
-                <form action="">
+                <form action="<?= __DIR__ ?>/" method="POST" id="signUpForm">
                     <div class="name">
-                        <input type="text" name="name" class="input">
-                        <label for="">Name</label>
+                        <input type="text" name="firstName" id="firstName" class="input" required>
+                        <label for="">Prénom</label>
+                    </div>
+                    <div class="name">
+                        <input type="text" name="lastName" id="lastName" class="input" required>
+                        <label for="">Nom</label>
                     </div>
                     <div class="email">
-                        <input type="email" name="email" id="EmailSignUp" class="input">
+                        <input type="email" name="email" id="EmailSignUp" class="input" required>
                         <label for="">Email</label>
                     </div>
                     <div class="password">
-                        <input type="password" name="password" id="PasswordSignUp" class="input">
+                        <input type="password" name="password" id="PasswordSignUp" class="input" required>
                         <label for="">Password</label>
                     </div>
-                    <div class="button">
-                        <input type="submit" value="Sign Up">
+                    <div class="password">
+                        <input type="text" name="tel" id="tel" class="input" required>
+                        <label for="">Telephone</label>
                     </div>
-                    <p>Already have an account ? <a href="">Sign in</a></p>
+                    <div class="button">
+                        <input type="submit" value="Sign Up" id="signUpButton">
+                    </div>
+                    <p>Already have an account ? <a href="#" id="switchSignIn">Sign in</a></p>
                     <div class="line">
                         <hr>
                         <span>or</span>
@@ -146,21 +154,21 @@
                 <h1 class="header">Sign in</h1>
                 <form action="">
                     <div class="email">
-                        <input type="email" name="email" class="input">
+                        <input type="email" name="email" class="input" required>
                         <label for="">Email</label>
                     </div>
                     <div class="password">
-                        <input type="password" name="password" id="" class="input">
+                        <input type="password" name="password" id="" class="input" required>
                         <label for="">Password</label>
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" name="keepLog" id="keepLog">
+                        <input type="checkbox" name="keepLog" id="keepLog" required>
                         <label for="keepLog">Keep me logged in</label>
                     </div>
                     <div class="button">
                         <input type="submit" value="Sign In">
                     </div>
-                    <p>don't have an account ? <a href="">Sign up</a></p>
+                    <p>don't have an account ? <a href="#" id="switchSignUp">Sign up</a></p>
                     <div class="line">
                         <hr>
                         <span>or</span>
@@ -189,5 +197,6 @@
     </div>
     <!--end of sign in part-->
     <script src="../assets/js/header_script.js"></script>
+    <script src="../assets/js/signUp.js"></script>
 </body>
 </html>

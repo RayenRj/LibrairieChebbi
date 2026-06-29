@@ -2,19 +2,24 @@
 
     // use Dotenv\Dotenv;
 
-    require "../vendor/autoload.php";
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+    require __DIR__ . "/../../vendor/autoload.php";
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../../");
     $dotenv->load();
     class ConnexionDB{
-        private string $dbName = $_ENV["DB_NAME"];
-        private string $user= $_ENV["DB_USERNAME"];
-        private string $password = $_ENV["DB_PASSWORD"]; 
-        private string $host = $_ENV["DB_HOST"];
+        private string $dbName;
+        private string $user;
+        private string $password ; 
+        private string $host;
         public static ?PDO $db=null;
 
         private function __construct(){
+            $this->dbName = $_ENV["DB_NAME"];
+            $this->user= $_ENV["DB_USERNAME"];
+            $this->password = $_ENV["DB_PASSWORD"];
+            $this->host = $_ENV["DB_HOST"];
             try{
                 self::$db = new PDO("mysql:host={$this->host};dbname={$this->dbName}" , $this->user,$this->password);
+       
             }catch(PDOException $e){
                 echo $e->getMessage();
             }

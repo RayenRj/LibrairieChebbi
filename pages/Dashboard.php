@@ -1,3 +1,19 @@
+<?php 
+    require_once __DIR__ . "/../backend/repository/StatisticsRepository.php";
+    $statRepo = new StatisticsRepository(); 
+    $currentMonth = intval(date("m"));
+    $currentYear = intval(date("Y"));
+    $lastMonth = intval(date("m" , strtotime("-1 month")));
+    $lastMonthYear = intval(date("m" , strtotime("-1 month")));
+    
+
+    function calculDePourcentage($currentMonthValue , $lastMonthValue){
+        $x = $currentMonthValue - $lastMonthValue;
+        if($lastMonthValue==0){return 100;} 
+        return ($x * 100)/$lastMonthValue;
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +36,15 @@
             <div class="top-part">
                 <div class="text">
                     <h2>Bonjour Admin 👋🏼</h2>
-                    <p>Voici un apercu de votre Boutique aujourd'hui</p>
+                    <p>Voici un apercu de votre Boutique aujourd'hui <?= $currentYear ?></p>
                 </div>
-                <div class="input">
+
+                <!--<div class="input">
                     <input type="date" name="" id="">
-                    <!-- <i class="fa-regular fa-calendar"></i>
-                    <i class="fa-solid fa-caret-down"></i> -->
-                </div>
+                        <i class="fa-regular fa-calendar"></i>
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>-->
+
             </div>  
 
             <!-- 4 cards  -->
@@ -38,12 +56,13 @@
                     </div>
                     <div class="text">
                         <p>Total Commandes</p>
-                        <h3>1,248</h3>
+                        <h3><?= $statRepo->TotaleCommande($currentMonth ,$currentYear); ?></h3>
                         <p>
+                            
                             <span class="gain-effect">
-                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
-                                <i class="fa-solid fa-arrow-up" hidden></i>
-                                12.5%
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <!-- <i class="fa-solid fa-arrow-up" hidden></i> -->
+                                <?= calculDePourcentage($statRepo->TotaleCommande($currentMonth ,$currentYear) , $statRepo->TotaleCommande($lastMonth ,$lastMonthYear)); ?>%
                             </span>
                             vs le mois dernier
                         </p>
@@ -56,12 +75,13 @@
                     </div>
                     <div class="text">
                         <p>Chiffre d'affaires</p>
-                        <h3>45,890 DT</h3>
+                        <h3><?= number_format($statRepo->ChiffreAffaire($currentMonth,$currentYear), 0 , ".") ?> DT</h3>
                         <p>
                             <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
                                 <i class="fa-solid fa-arrow-up"  hidden></i>
-                                12.5%
+                                <?= calculDePourcentage($statRepo->ChiffreAffaire($currentMonth, $currentYear) ,$statRepo->ChiffreAffaire($lastMonth, $lastMonthYear) );  ?>%
+                           
                             </span>
                             vs le mois dernier
                         </p>
@@ -76,12 +96,12 @@
                     </div>
                     <div class="text">
                         <p>Packs Vendus</p>
-                        <h3>2,356</h3>
+                        <h3><?= $statRepo->PackVendu($currentMonth , $currentYear) ?></h3>
                         <p>
                             <span class="gain-effect"> 
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
                                 <i class="fa-solid fa-arrow-up" ></i>
-                                12.5%
+                                <?= calculDePourcentage($statRepo->PackVendu($currentMonth, $currentYear) ,$statRepo->PackVendu($lastMonth, $lastMonthYear) );  ?>%
                             </span>
                             vs le mois dernier
                         </p>
@@ -95,7 +115,7 @@
                     </div>
                     <div class="text">
                         <p>Utilisateurs</p>
-                        <h3>3,892</h3>
+                        <h3><?= $statRepo->NbreOfUser(); ?></h3>
                         <p>
                             <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
@@ -119,7 +139,7 @@
                 <div class="right">
                     <div class="top-part">
                         <h3>Commandes récentes</h3>
-                        <a href="">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="CommandesManager.php">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                     <table>
                         <tr>
@@ -213,7 +233,7 @@
                             <canvas id="pie-chart"></canvas>
                             <div class="text">
                                 <h4>Total</h4>
-                                <h2 id="total_pack_vente">2,356</h2>
+                                <h2 id="total_pack_vente"><?= $statRepo->totaleVenteDePack() ?></h2>
                             </div>
                         </div>
                         <ul class="legend">

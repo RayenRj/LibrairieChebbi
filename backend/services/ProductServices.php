@@ -11,9 +11,12 @@ class ProductServices{
         $this->productRepo = new ProductRepository();
     }
     
-    // la seule restante
-    public function modifierArticle(){
-
+    // done
+    public function modifierArticle(int $idProduit,string $codeBarre, string $libelle = "" , float $prix = 0 , string $categorie ="", string $marque="" , float $remise =0 , string $description="" , string $image_url="" ){
+        if($idProduit<1){throw new IdentifiantInvalideException("l'id doit etre positif");}
+        if($prix < 0){throw new InvalidArgumentException("Le prix doit etre >=0 dt");}
+        if($remise < 0){throw new InvalidArgumentException("Le remise doit etre >=0 dt");}
+        $this->productRepo->modifierProduit($idProduit,$codeBarre,$libelle, $prix , $categorie , $marque , $remise , $description , $image_url);
     }
     
     //done

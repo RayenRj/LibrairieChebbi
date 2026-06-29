@@ -6,6 +6,7 @@ let beforeSignIn = document.querySelector(".before-signin");
 let beforeSignUp = document.querySelector(".before-signup");
 let body = document.body;
 console.log(body);
+
 SignInButton.addEventListener("click",()=>{
     SignInCard.removeAttribute("hidden");
     body.style.maxHeight= "100dh";
@@ -29,3 +30,19 @@ let signUpEmail = document.querySelector("#EmailSignUp");
 let signUppassword = document.querySelector("#PasswordSignUp");
 
 
+// changement entre sign in et sign up
+let switchSignUp = document.querySelector("#switchSignUp");
+let switchSignIn = document.querySelector("#switchSignIn");
+
+console.log(switchSignUp);
+switchSignUp.addEventListener("click", (event)=>{
+    SignInCard.setAttribute("hidden","");
+    SignUpCard.removeAttribute("hidden");
+    console.log("hola");
+})
+
+switchSignIn.addEventListener("click", (event)=>{
+    SignUpCard.setAttribute("hidden","");
+    SignInCard.removeAttribute("hidden");
+    console.log("hola");
+})

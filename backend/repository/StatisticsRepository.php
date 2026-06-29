@@ -1,8 +1,7 @@
 <?php 
     // StatisticsRepository : have all methods to use in the first dashboard page
 
-    include_once(__DIR__ . "/Repository.php");
-
+    require_once __DIR__ . "/Repository.php";
     class StatisticsRepository extends Repository{
         public function __construct(){parent::__construct();}
 
@@ -15,30 +14,30 @@
             $query = "select count(*) from commande where year(date_commande)= ? and month(date_commande) = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$year,$mois]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;
         }
         // Chiffre affaire selon mois
         public function ChiffreAffaire(int $mois, int $year){
             $query = "select sum(prix_totale) from commande where year(date_commande)= ? and month(date_commande) = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$year,$mois]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;
         }
         // Pack Vendu selon mois
         public function PackVendu(int $mois, int $year){
             $query = "select sum(lc.quantite) as 'nbrePackVendu'
-                      from commande c , ligne_commande lc , produit p
-                      where year(date_commande)= ? and month(date_commande) = ? and c.id_commande=lc.id_commande and p.id_produit=lc.id_produit and categorie = 'pack';";
+                      from commande c , ligne_commande lc , pack  p
+                      where year(date_commande)= ? and month(date_commande) = ? and c.id_commande=lc.id_commande and p.id_pack=lc.id_produit ";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$year,$mois]);
-            return $stmt->fetchAll(PDO::FETCH_NUM)[0];
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;
         }
         // nbre of user selon mois
         public function NbreOfUser(){
             $query = "select count(*) from userLogin where loginAt >= date_format(curdate() , '%Y-%m-01') ";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_BOTH)[0];
+            return $stmt->fetch(PDO::FETCH_BOTH)[0] ?? 0;
         }
         public function NbreOfUserLastMonth(){
             $query = "select count(*) from userLogin where loginAt >= date_format(curdate() - INTERVAL 1 month , '%Y-%m-01') and loginAt < date_format(curdate(), '%Y-%m-01')";
@@ -53,7 +52,6 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-
         // top artcle vendu 
         public function topArticlesVendues(){
             $query = "select p.* , sum(quantite) as quantite_total 
@@ -67,7 +65,6 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        
         // articles en repture de stock
         public function ArticleEnReptureStock(){
             $query = "select * from produit where quantite_stock = 0";

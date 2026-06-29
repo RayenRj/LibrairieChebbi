@@ -53,11 +53,10 @@
         }
 
         // CRUD functions
-        public function deleteProduct(int $id_prod){
+        public function deleteProduct(int $id_prod) : bool{
             $query = "delete from {$this->tName} where id_produit = ?";
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$id_prod]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->execute([$id_prod]);
         }
 
         public function findAllProducts(){
@@ -218,5 +217,59 @@
             $stmt = $this->db->prepare("update produit set remise = ? where id_produit = ? ;");
             return $stmt->execute([$amountRemise,$idProduit]);
         }
+
+
+        // modifier produit
+        public function modifierProduit(int $idProduit,string $codeBarre, string $libelle = "" , float $prix = 0 , string $categorie ="", string $marque="" , float $remise = 0 , string $description ="" , string $image_url=""):bool{
+            $codeBarre = trim(strtolower($codeBarre));
+            $libelle = trim(strtolower($libelle));
+            $categorie = trim(strtolower($categorie));
+            $description = trim(strtolower($description));
+            $marque = trim(strtolower($marque));
+            $image_url = trim(strtolower($image_url));
+            $query = "update produit SET ";
+            $queryList =[];
+            $params = [];
+            if(!empty($libelle)){
+                $queryList[] = " libelle = ? ";
+                $params[] = $libelle;
+            }
+            if(!empty($codeBarre)){
+                $queryList[] = " code_barre = ? ";
+                $params[] = $codeBarre;
+            }
+            if(!empty($categorie)){
+                $queryList[] = " categorie = ? ";
+                $params[] = $categorie;
+            }
+            if(!empty($marque)){
+                $queryList[] = " marque = ? ";
+                $params[] = $marque;
+            }
+            
+            if(!empty($description)){
+                $queryList[] = " description = ? ";
+                $params[] = $description;
+            }
+            if(!empty($image_url)){
+                $queryList[] = " image_url = ? ";
+                $params[] = $image_url;
+            }
+            if($prix > 0){
+                $queryList[] = " prix = ? ";
+                $params[] = $prix;
+            }
+            if($remise > 0){
+                $queryList[] = " remise = ? ";
+                $params[] = $remise;
+            }
+            if(empty($queryList)){return true;}
+            $query .= implode(", ",$queryList);
+            $query .= " WHERE id_produit = ? ";
+            $params[] = $idProduit;
+            $stmt = $this->db->prepare($query);
+            return  $stmt->execute($params);
+        }
+        
     }
 ?>

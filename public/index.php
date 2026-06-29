@@ -1,6 +1,13 @@
 <?php 
+session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
     include_once __DIR__ . "/../core/Router.php";
-    include_once __DIR__ . "/../backend/controllers/*.php";
+    include_once __DIR__ . "/../backend/controllers/ClientController.php";
+    // include_once __DIR__ . "/../backend/controllers/PackController.php";
+    // include_once __DIR__ . "/../backend/controllers/ProductController.php";
+    // include_once __DIR__ . "/../backend/controllers/StatistiqueController.php";
+    include_once __DIR__ . "/../backend/controllers/PageController.php";
 
     $route = new Router();
     
@@ -10,8 +17,40 @@
     
 
     // el forme : requet method | path patter | controller | action
-    $route->add();
+    // routes pour les page 
+    // $route->add("GET", "/api/");
 
+    //pages
+    $route->add("GET", "/products" , "PageController","allProductPage");
+    $route->add("GET", "/dashboard" , "PageController","dashboardPage");
+    $route->add("GET", "/dashboard/commandes" , "PageController","CommandeManagerPage");
+    $route->add("GET", "/contactus" , "PageController","contactUsPage");
+    $route->add("GET", "/games" , "PageController","gamesPage");
+    $route->add("GET", "/main" , "PageController","mainPage");
+    $route->add("GET", "/packs" , "PageController","packPage");
+    $route->add("GET", "/products/product" , "PageController","articlePage");
+    $route->add("GET", "/dashboard/promotions" , "PageController","promotionPage");
+    $route->add("GET", "/dashboard/admins" , "PageController","adminsPage");
+    $route->add("GET", "/dashboard/clients" , "PageController","clientsPage");
+    $route->add("GET", "/dashboard/articles" , "PageController","articleManagerPage");
+    $route->add("GET", "/dashboard/packs" , "PageController","packManagerPage");
+    $route->add("GET", "/panier" , "PageController","panierPage");
+    $route->add("GET", "/commande" , "PageController","commandePage");
+    $route->add("GET", "/collections" , "PageController","collectionPage");
+    //=========> Product Routes <=======
+    $route->add("POST","/api/articles","ProductController","addProduct");
+    $route->add("DELETE","/api/articles/{id}","ProductController","deleteProduct");
+    $route->add("PATCH","/api/articles/{id}","ProductController","modifyProduct");
+    // $route->add("GET","/librairie/LibrairieChebbi/public/api/products","ProductController","getAllProducts"); //  pagination independante ml uri
+    $route->add("GET","/api/products/{id}","ProductController","getProductById");
+    $route->add("PATCH","/api/products/addRemise/{id}","ProductController","addRemise");
+    //=========> End Product Routes <=======
+    //=========> User Routes <=======
+    $route->add("DELETE" , "/api/users/{id}", "ClientController","deleteUser");
+    $route->add("POST" , "/api/users/createUser" , "ClientController","SignUp");
+    $route->add("PATCH","/api/users/addAdmin/{id}","ClientController","addAdmin");
+    $route->add("PATCH","/api/users/deleteAdmin/{id}","ClientController","deleteAdmin");
+    $route->add("GET","/api/users", "ClientController" , "getAllUsers");
     $route->dispatch();
 
 

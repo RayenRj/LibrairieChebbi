@@ -2,7 +2,7 @@
     
     require_once(__DIR__ . "/../repository/ClientRepository.php");
     require_once(__DIR__ . "/../models/Client.php");
-    class AuthServices {
+    class ClientServices{
         private ClientRepository $clientRepo;
 
         public function __construct(){
@@ -94,5 +94,9 @@
             return $this->clientRepo->getCommandeByIdClient($idClient) ?: null;
         }
 
+
+        public function lastInsertedId(){
+            return $this->clientRepo->lastInsertedId();
+        }
     }
 ?>
