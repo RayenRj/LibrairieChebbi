@@ -155,7 +155,7 @@ img{
 }
 
 .gain-effect{color: green;}
-.loss-effect{color: var(--red);}
+.lost-effect{color: var(--red);}
 .five-cards .card .text span{
     font-size: 11px;
     display: inline-flex;
@@ -257,27 +257,27 @@ img{
     outline: none;
 }
 
-
-.commandeManagerBottomPart button[type="reset"]{
-    border: 2px solid #eee;
-    outline: none;
-    background-color: white;
-    padding: 0.5em 1.5em;
+/* reglage du boutton */
+.commandeManagerBottomPart .top button{
+    padding: 0.65em 2em;
     border-radius: 0.5em;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap:0.5em;
-    font-size: 12px;
+    outline: none;
+    border: 1px solid var(--gray-200);
+    font-size: 13px;
     font-weight: 500;
-    margin-top: 0.5em;
+    appearance:none;
+    text-align: center;
     cursor: pointer;
-    transition: 0.1s all ease;
+    background-color: var(--blue);
+    color: white;
+
 }
-.commandeManagerBottomPart button[type="reset"]:hover{
-    background-color: var(--gray-100);
-    color: black;
-}
+
+.commandeManagerBottomPart .top button:hover{background-color: #2f71db;}
+.commandeManagerBottomPart .top button:active{background-color: #4d8cf1;}
+
+.commandeManagerBottomPart .top button i{margin-right: 10px;}
+
 
 .commandeManagerBottomPart .top > div:last-child >p{
     opacity: 0;
@@ -374,9 +374,9 @@ img{
     font-size: 13px;
     color: var(--gray-600);
 }
-.commandeManagerBottomPart .table-part td:nth-child(7) p {
-    text-align: left;
-}
+/* .commandeManagerBottomPart .table-part td:nth-child(7) p {
+    text-align: center;
+} */
 
 .commandeManagerBottomPart .table-part td:nth-child(6) span.actif{
     background-color: var(--green-glass);
@@ -391,14 +391,14 @@ img{
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.5em;
 }
 
 .commandeManagerBottomPart .table-part td:last-child ul li{
     border: 2px solid var(--border-gray);
     border-radius: 0.5em;
-    padding: 0.35em 0.65em;
+    padding: 0.25em 0.5em;
     transition: 0.1s ease all;
 }
 .commandeManagerBottomPart .table-part td:last-child ul li:hover{background-color: var(--gray-100);}
@@ -411,24 +411,25 @@ img{
 }
 
 .commandeManagerBottomPart .table-part td:last-child ul a{border-radius: 0.5em;}
-.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(1){
+
+.commandeManagerBottomPart .table-part td:last-child ul a.check{
     background-color: var(--green-glass);
     color: var(--green);
 }
-.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(2),
-.commandeManagerBottomPart .table-part td:last-child ul a:last-of-type{
+
+.commandeManagerBottomPart .table-part td:last-child ul a.croit-rouge{
     background-color: var(--red-glass);
     color: var(--red);  
 }
-.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(3){
+.commandeManagerBottomPart .table-part td:last-child ul a.truck{
     background-color: var(--blue-glass);
     color: var(--blue);
 }
-.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(4){
+.commandeManagerBottomPart .table-part td:last-child ul a.eye{
     background-color: #7d3bf625;
     color: rgb(98, 0, 255);
 }
-.commandeManagerBottomPart .table-part td:last-child ul a:nth-of-type(5){
+.commandeManagerBottomPart .table-part td:last-child ul a.print{
     background-color: rgba(255, 166, 0, 0.115);
     color: orange;
 }

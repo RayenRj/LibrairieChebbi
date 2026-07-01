@@ -107,7 +107,6 @@ addArticleButton.addEventListener("click",function(event){
     event.preventDefault();
     popUpForm.removeAttribute("hidden");
     var height = popUpForm.getBoundingClientRect().height;
-    console.log(height.toString() + "px");
     articleContainer.style.height = (height - 80).toString() + "px" ;
     articleContainer.style.overflowY = "hidden";
 })
@@ -161,4 +160,30 @@ resetButton.addEventListener("click",function(){
     container.style.backgroundSize= "";
     container.style.backgroundRepeat = "";
     container.style.backgroundPosition= "";
+})
+
+// partie form
+
+let addArticleForm = document.querySelector("#addArticleForm");
+addArticleForm.addEventListener("submit",async function(event){
+    event.preventDefault();
+    const formData = new FormData(addArticleForm);
+    for(const [key,value] of formData.entries()){
+        console.log(key,value);
+    }
+
+    let response = await fetch("/api/articles",{
+        method: "POST", 
+        body: formData
+    });
+    let result = await response.json();
+    console.log(result)
+    if(result.success == true){
+        alert("Product added successfully!");
+        window.location.reload();
+    }else{
+        alert(result.message);
+    }
+    
+
 })

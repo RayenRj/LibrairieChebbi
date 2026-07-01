@@ -15,7 +15,7 @@
             $query = "select from client where id_client = ?;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_BOTH)[0] ?: null;
+            return $stmt->fetch(PDO::FETCH_BOTH)[0];
         }
         public function deleteById(int $id) : bool{
             $query = "delete from client where id_client = ?;";
