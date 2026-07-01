@@ -2,7 +2,7 @@
     // Product Repository : feha tous les methodes utilisée fl dashboard admin
 
     require_once(__DIR__ . "/Repository.php");
-    require_once(__DIR__ . "../models/Product.php");
+    require_once(__DIR__ . "/../models/Product.php");
     class ProductRepository extends Repository{
         private string $tName = "produit";
         public function __construct(){parent::__construct();}
@@ -59,8 +59,8 @@
             return $stmt->execute([$id_prod]);
         }
 
-        public function findAllProducts(){
-            $stmt = $this->db->prepare("select * from {$this->tName} ;");
+        public function findAllProducts(int $limit,int $offset){
+            $stmt = $this->db->prepare("select * from {$this->tName} limit $limit offset $offset ;");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -137,7 +137,7 @@
         // #######################
         // partie recherche : contient paginaation
         // #######################
-        public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin=0 , string $stock , string $trie , int $limit = 10 , int $page = 0){
+        public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit = 10 , int $page = 0){
             $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.description , COALESCE(sum(lc.quantite),0) as nombreVente from {$this->tName} p LEFT JOIN ligne_commande lc on lc.id_produit = p.id_produit where 1=1 ";
             $categorie = mb_strtolower(trim($categorie));
             $stock = mb_strtolower(trim($stock));

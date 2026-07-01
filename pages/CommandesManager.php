@@ -1,3 +1,23 @@
+<?php
+    require_once(__DIR__ . "/../backend/services/CommandeServices.php");
+    $commandeService = new CommandeServices();
+    $limit = 10;
+    $page = $_GET["page"] ?? 1;
+    $nbreDeligneFirstListOfCommandes = $commandeService->nbreDeLigneDeRecherche("" , "" , "","","");
+    $firstListOfcommands = $commandeService->getCommandeFiltred("" , "" , "","","",$limit,$page);
+
+    
+    $nbreTotalePage = intval(ceil($nbreDeligneFirstListOfCommandes / $limit));
+    
+
+    function calculDePourcentage($currentMonthValue , $lastMonthValue){
+        $x = $currentMonthValue - $lastMonthValue;
+        if($lastMonthValue==0){return 100;} 
+        return ($x * 100)/$lastMonthValue;
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,13 +52,21 @@
                     </div>
                     <div class="text">
                         <p>Total Commandes</p>
-                        <h3>18</h3>
+                        <h3><?= $commandeService->nombreTotaleCommandeCeMois(""); ?></h3>
                         <p>
+                            <?php if(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("") ,$commandeService->nombreTotaleCommandeDernierMois("") ) >= 0): ?>
                             <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
-                                <i class="fa-solid fa-arrow-up" hidden></i>
-                                12.5%
+                                <i class="fa-solid fa-arrow-up" ></i>
+                                <?= number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("") ,$commandeService->nombreTotaleCommandeDernierMois("") ),1) ?> %
                             </span>
+                            <?php else: ?>
+                            <span class="lost-effect">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <!-- <i class="fa-solid fa-arrow-up" hidden></i> -->
+                                <?= number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("") ,$commandeService->nombreTotaleCommandeDernierMois("") ),1) ?> %
+                            </span>
+                            <?php endif; ?>
                             vs le mois dernier
                         </p>
                     </div>
@@ -49,13 +77,21 @@
                     </div>
                     <div class="text">
                         <p>Confirmée</p>
-                        <h3>18</h3>
+                        <h3><?= $commandeService->nombreTotaleCommandeCeMois("confirmée"); ?></h3>
                         <p>
+                            <?php if(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("confirmée") ,$commandeService->nombreTotaleCommandeDernierMois("confirmée") ) >= 0): ?>
                             <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
-                                <i class="fa-solid fa-arrow-up" hidden></i>
-                                12.5%
+                                <i class="fa-solid fa-arrow-up" ></i>
+                                <?= number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("confirmée") ,$commandeService->nombreTotaleCommandeDernierMois("confirmée") ) , 1) ?> %
                             </span>
+                            <?php else: ?>
+                            <span class="lost-effect">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <!-- <i class="fa-solid fa-arrow-up" hidden></i> -->
+                                <?= number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("confirmée") ,$commandeService->nombreTotaleCommandeDernierMois("confirmée") ) , 1) ?> %
+                            </span>
+                            <?php endif; ?>
                             vs le mois dernier
                         </p>
                     </div>
@@ -67,13 +103,21 @@
                     </div>
                     <div class="text">
                         <p>En attente</p>
-                        <h3>95</h3>
+                        <h3><?= $commandeService->nombreTotaleCommandeCeMois("attente"); ?></h3>
                         <p>
+                            <?php if(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("attente") ,$commandeService->nombreTotaleCommandeDernierMois("attente") ) >= 0): ?>
                             <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
-                                <i class="fa-solid fa-arrow-up"  hidden></i>
-                                12.5%
+                                <i class="fa-solid fa-arrow-up" ></i>
+                                <?=  number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("attente") ,$commandeService->nombreTotaleCommandeDernierMois("attente") ) , 1) ?> %
                             </span>
+                            <?php else: ?>
+                            <span class="lost-effect">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <!-- <i class="fa-solid fa-arrow-up" hidden></i> -->
+                                <?=  number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("attente") ,$commandeService->nombreTotaleCommandeDernierMois("attente") ) , 1) ?> %
+                            </span>
+                            <?php endif; ?>
                             vs le mois dernier
                         </p>
                     </div>
@@ -87,13 +131,21 @@
                     </div>
                     <div class="text">
                         <p>Annulées</p>
-                        <h3>12</h3>
+                        <h3><?= $commandeService->nombreTotaleCommandeCeMois("annulée"); ?></h3>
                         <p>
-                            <span class="gain-effect"> 
+                            <?php if(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("annulée") ,$commandeService->nombreTotaleCommandeDernierMois("annulée") ) >= 0): ?>
+                            <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
                                 <i class="fa-solid fa-arrow-up" ></i>
-                                12.5%
+                                <?= number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("annulée") ,$commandeService->nombreTotaleCommandeDernierMois("annulée") ) , 1)  ?> %
                             </span>
+                            <?php else: ?>
+                            <span class="lost-effect">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <!-- <i class="fa-solid fa-arrow-up" hidden></i> -->
+                                <?= number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("annulée") ,$commandeService->nombreTotaleCommandeDernierMois("annulée") ) , 1)  ?> %
+                            </span>
+                            <?php endif; ?>
                             vs le mois dernier
                         </p>
                     </div>
@@ -106,13 +158,21 @@
                     </div>
                     <div class="text">
                         <p>Livrées</p>
-                        <h3>312</h3>
+                        <h3><?= $commandeService->nombreTotaleCommandeCeMois("livrée"); ?></h3>
                         <p>
+                            <?php if(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("livrée") ,$commandeService->nombreTotaleCommandeDernierMois("livrée") ) >= 0): ?>
                             <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
                                 <i class="fa-solid fa-arrow-up" ></i>
-                                12.5%
+                                <?= number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("livrée") ,$commandeService->nombreTotaleCommandeDernierMois("livrée") ) , 1)  ?> %
                             </span>
+                            <?php else: ?>
+                            <span class="lost-effect">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <!-- <i class="fa-solid fa-arrow-up" hidden></i> -->
+                                <?=number_format(calculDePourcentage($commandeService->nombreTotaleCommandeCeMois("livrée") ,$commandeService->nombreTotaleCommandeDernierMois("livrée") ) , 1)  ?> %
+                            </span>
+                            <?php endif; ?>
                             vs le mois dernier
                         </p>
                     </div>
@@ -120,7 +180,7 @@
             </div>
 
             
-            <div class="commandeManagerBottomPart">
+            <div class="commandeManagerBottomPart" id="commandeTable">
                 <div class="top">
                     <div>
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -165,12 +225,11 @@
 
                     <div>
                         <p>reglage</p>
-                        <button type="reset">
-                            <i class="fa-solid fa-filter"></i>
-                            Filtrer
+                        <button type="sumbit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            Rechercher
                         </button>
                     </div>
-                    
                 </div>
 
 
@@ -188,188 +247,56 @@
                             <th>Actions</th>
                         </thead>
                         <!--el <p> hne just reglage ll font size -->
+                        <?php 
+                            foreach($firstListOfcommands as $key => $row):
+                                $statut = $row["statut"];
+                        ?>
                         <tr>
-                            <td><p>#CMD_1058</p></td>
-                            <td><p>Rayen Rjibi</p></td>
-                            <td><p>rjibi.rayen01@gmail.com</p></td>
-                            <td><p>50559320</p></td>
-                            <td><p class="prix">59 DT</p></td>
+                            <td><p><?= $row["id_commande"]?></p></td>
+                            <td><p><?= $row["nom"]?></p></td>
+                            <td><p><?= $row["email"]?></p></td>
+                            <td><p><?= $row["tel"]?></p></td>
+                            <td><p class="prix"><?= $row["prix_totale"]?> DT</p></td>
                             <td class="statut">
-                                <!--
+                                <?php if($statut == "attente"): ?>
                                     <span class="attente">En attente</span>
+                                <?php elseif($statut == "confirmée"): ?>
+                                    <span class="confirmee">Confirmée</span>
+                                <?php elseif($statut== "annulée"): ?>
                                     <span class="annulee" >Annulé</span>
+                                <?php elseif($statut == "livrée"): ?>
                                     <span class="livree">Livrée</span>
-                                -->
-                                <span class="confirmee">Confirmée</span>
-                            </td>
-                            <td><p>30/05/2024 <br>10:30</p></td>
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-check"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-x"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-truck"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-print"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#CMD_1058</p></td>
-                            <td><p>Rayen Rjibi</p></td>
-                            <td><p>rjibi.rayen01@gmail.com</p></td>
-                            <td><p>50559320</p></td>
-                            <td><p class="prix">59 DT</p></td>
-                            <td class="statut">
+                                <?php endif; ?>
                                 
-                                    <!-- <span class="attente">En attente</span> -->
-                                    <!-- <span class="annulee" >Annulé</span> -->
-                                    <span class="livree">Livrée</span>
-                               
-                                <!-- <span class="confirmee">Confirmée</span> -->
                             </td>
-                            <td><p>30/05/2024 <br>10:30</p></td>
+                            <td><p><?= $row["date_commande"]?></p></td>
                             <td>
                                 <ul>
-                                    <a href=""><li><i class="fa-solid fa-check"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-x"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-truck"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-print"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
+                                    <?php if($statut == "attente" ): ?>
+                                        <a href="#" class="check"><li><i class="fa-solid fa-check"></i></li></a>
+                                        <a href="#" class="croit-rouge"><li><i class="fa-solid fa-x"></i></li></a>
+                                        <a href="#" class="eye"><li><i class="fa-solid fa-eye"></i></li></a> 
+                                    <?php endif; ?>
+                                    <?php if($statut == "livrée"): ?>
+                                        <a href="#" class="print"><li><i class="fa-solid fa-print"></i></li></a>
+                                        <a href="#" class="eye"><li><i class="fa-solid fa-eye"></i></li></a>
+                                        <a href="#" class="croit-rouge commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
+                                    <?php endif; ?>
+                                    <?php if($statut == "annulée"): ?>
+                                        <a href="#" class="eye"><li><i class="fa-solid fa-eye"></i></li></a> 
+                                        <a href="#" class="croit-rouge commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
+                                    <?php endif; ?>
+                                    <?php if($statut == "confirmée"): ?>
+                                        <a href="#" class="truck"><li><i class="fa-solid fa-truck"></i></li></a>
+                                        <a href="#" class="print"><li><i class="fa-solid fa-print"></i></li></a>
+                                        <a href="#" class="eye"><li><i class="fa-solid fa-eye"></i></li></a> 
+                                        <a href="#" class="croit-rouge commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
+                                    <?php endif; ?>
+                                    
                                 </ul>
                             </td>
                         </tr>
-                        <tr>
-                            <td><p>#CMD_1058</p></td>
-                            <td><p>Rayen Rjibi</p></td>
-                            <td><p>rjibi.rayen01@gmail.com</p></td>
-                            <td><p>50559320</p></td>
-                            <td><p class="prix">59 DT</p></td>
-                            <td class="statut">
-                                
-                                    <span class="attente">En attente</span>
-                                    <!-- <span class="annulee" >Annulé</span> -->
-                                    <!-- <span class="livree">Livrée</span> -->
-                               
-                                <!-- <span class="confirmee">Confirmée</span> -->
-                            </td>
-                            <td><p>30/05/2024 <br>10:30</p></td>
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-check"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-x"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-truck"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-print"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#CMD_1058</p></td>
-                            <td><p>Rayen Rjibi</p></td>
-                            <td><p>rjibi.rayen01@gmail.com</p></td>
-                            <td><p>50559320</p></td>
-                            <td><p class="prix">59 DT</p></td>
-                            <td class="statut">
-                                
-                                    <!-- <span class="attente">En attente</span> -->
-                                    <span class="annulee" >Annulé</span>
-                                    <!-- <span class="livree">Livrée</span> -->
-                               
-                                <!-- <span class="confirmee">Confirmée</span> -->
-                            </td>
-                            <td><p>30/05/2024 <br>10:30</p></td>
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-check"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-x"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-truck"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-print"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#CMD_1058</p></td>
-                            <td><p>Rayen Rjibi</p></td>
-                            <td><p>rjibi.rayen01@gmail.com</p></td>
-                            <td><p>50559320</p></td>
-                            <td><p class="prix">59 DT</p></td>
-                            <td class="statut">
-                                <!--
-                                    <span class="attente">En attente</span>
-                                    <span class="annulee" >Annulé</span>
-                                    <span class="livree">Livrée</span>
-                                -->
-                                <span class="confirmee">Confirmée</span>
-                            </td>
-                            <td><p>30/05/2024 <br>10:30</p></td>
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-check"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-x"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-truck"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-print"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#CMD_1058</p></td>
-                            <td><p>Rayen Rjibi</p></td>
-                            <td><p>rjibi.rayen01@gmail.com</p></td>
-                            <td><p>50559320</p></td>
-                            <td><p class="prix">59 DT</p></td>
-                            <td class="statut">
-                                <!--
-                                    <span class="attente">En attente</span>
-                                    <span class="annulee" >Annulé</span>
-                                    <span class="livree">Livrée</span>
-                                -->
-                                <span class="confirmee">Confirmée</span>
-                            </td>
-                            <td><p>30/05/2024 <br>10:30</p></td>
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-check"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-x"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-truck"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-print"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#CMD_1058</p></td>
-                            <td><p>Rayen Rjibi</p></td>
-                            <td><p>rjibi.rayen01@gmail.com</p></td>
-                            <td><p>50559320</p></td>
-                            <td><p class="prix">59 DT</p></td>
-                            <td class="statut">
-                                <!--
-                                    <span class="attente">En attente</span>
-                                    <span class="annulee" >Annulé</span>
-                                    <span class="livree">Livrée</span>
-                                -->
-                                <span class="confirmee">Confirmée</span>
-                            </td>
-                            <td><p>30/05/2024 <br>10:30</p></td>
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-check"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-x"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-truck"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-print"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
+                        <?php endforeach; ?>
 
                     </table>
 
@@ -377,15 +304,31 @@
 
 
                 <div class="bottom">
-                    <p>Affichage de 1 à 6 sur 125 packs</p>
+                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min((($page + 1) * $limit )  , $nbreDeligneFirstListOfCommandes) ?> sur <?= $nbreDeligneFirstListOfCommandes ?> commandes</p>
                     <div class="pagination">
+                        <!-- before -->
                         <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
-                        <a href="#" class="pagination-selected">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#" id="three-dots">...</a>
+                        <?php if($page> 3):?>
+                            <a href="#" id="three-dots">...</a>
+                        <?php endif; ?>
+
+
+                        <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
+                            <a href="/dashboard/commandes?page=<?= $i ?>#commandeTable"><?= $i ?></a>
+                        <?php endfor; ?>
+
+                        <!-- current page -->
+                        <a href="#" class="pagination-selected"><?= $page ?></a>
+                        <?php for($i=$page +1  ; $i <= min($page + 2 , $nbreTotalePage) ; $i++):?>
+                            <a href="/dashboard/commandes?page=<?= $i ?>#commandeTable"><?= $i ?></a>
+                        <?php endfor; ?> 
+                                    
+                            
+                        <?php if(($nbreTotalePage - $page)> 2): ?>
+                            <a href="#" id="three-dots" data-value = <?= $i ?>>...</a>
+                        <?php endif; ?>
+
+                        <!-- after -->
                         <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
                     </div>
                 </div>
@@ -405,6 +348,6 @@
             </div>
         </section>
     </div>
-
+    <script src="/assets/js/commandeManager.js"></script>
 </body>
 </html>

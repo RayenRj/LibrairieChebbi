@@ -34,7 +34,6 @@
             </div>
             <div class="search">
                 <form action="" method="GET">
-                    
                     <div class="input-container">
                         <span>🔍︎</span>
                         <input type="search" placeholder="Search school supplies..." id="search">
@@ -152,7 +151,7 @@
         <div class="signin">
             <div class="choose">
                 <h1 class="header">Sign in</h1>
-                <form action="">
+                <form method="POST" id="signInForm">
                     <div class="email">
                         <input type="email" name="email" class="input" required>
                         <label for="">Email</label>
@@ -162,7 +161,7 @@
                         <label for="">Password</label>
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" name="keepLog" id="keepLog" required>
+                        <input type="checkbox" name="keepLog" id="keepLog">
                         <label for="keepLog">Keep me logged in</label>
                     </div>
                     <div class="button">
@@ -198,5 +197,6 @@
     <!--end of sign in part-->
     <script src="../assets/js/header_script.js"></script>
     <script src="../assets/js/signUp.js"></script>
+    <script src="/assets/js/signIn.js"></script>
 </body>
 </html>

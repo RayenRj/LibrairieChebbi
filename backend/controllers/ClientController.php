@@ -13,6 +13,12 @@
             try{
                 $body = $request["body"];
                 $result = $this->clientServices->authenticate($body["email"], $body["password"]);
+                if($result == true){
+                    $_SESSION["userId"]= $this->clientServices->lastInsertedId();
+                    $user = $this->clientServices->getClientById($_SESSION["userId"]);
+                    $_SESSION["firstName"]=$user["prenom"];
+                    $_SESSION["lastName"]=$user["nom"];
+                }
                 $response = [
                     "success" => true,
                     "message" => "Finding Client by Email",
@@ -20,6 +26,7 @@
                     "data" => $result,
                     "error" => null
                 ];
+
                 echo json_encode($response);
                 return;
 

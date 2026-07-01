@@ -3,7 +3,7 @@
     
     require_once(__DIR__ . "/ProductRepository.php");
     require_once(__DIR__ . "/Repository.php");
-    require_once(__DIR__ . "../models/Commande.php");
+    require_once(__DIR__ . "/../models/Commande.php");
     require_once(__DIR__ . "/../models/LigneCommande.php");
     class CommandeRepository extends Repository{
         //constructor
@@ -13,6 +13,23 @@
             parent::__construct();
             $this->productRepo = new ProductRepository();
         }
+
+
+
+        // ##################
+        // partie CRUD
+        // ##################
+
+
+
+
+
+
+
+
+
+
+
 
         // ##################
         // partie statistique
@@ -38,11 +55,28 @@
          * @return array liste feha les commandes filtrer selon la  critére
          */
         public function nombreTotaleCommandeCeMois(string $statut){
-            $query = "select count(*) from commande where statut = '?' and month(date_commande) = month(current_date()) and year(date_commande) = year(curdate());";
+            $query = "select count(*) from commande where month(date_commande) = month(current_date()) and year(date_commande) = year(curdate()) ";
+            $params = [];
+            if(!empty($statut)){
+                $query .= " AND statut = ? ";
+                $params[] = $statut;
+            }
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$statut]);
+            $stmt->execute($params);
             return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
+        public function nombreTotaleCommandeDernierMois(string $statut){
+            $query = "select count(*) from commande where month(date_commande) = month(current_date() - INTERVAL 1 month) and year(date_commande) = year(curdate() - INTERVAL 1 month) ";
+            $params = [];
+            if(!empty($statut)){
+                $query .= " AND statut = ? ";
+                $params[] = $statut;
+            }
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($params);
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
+
 
         // statistique en generales
         public function FiltreCommandesParStatut(string $statut){
@@ -102,8 +136,8 @@
         // ######## Filtrer Commandes ########
         // ###################################
 
-        public function rechercheCommandes(string $data , string $critere , string $statut , string $dateDebut , string $dateFin){
-            $query = "SELECT c.id_commande , c.id_client , c.date_commande , c.statut , c.prix_totale , cli.nom , cli.tel  
+        public function rechercheCommandes(string $data , string $critere , string $statut , string $dateDebut , string $dateFin , int $limit , int $offset){
+            $query = "SELECT c.id_commande , c.id_client , c.date_commande , c.statut , c.prix_totale , cli.nom , cli.tel , cli.email
                       from commande c , client cli where c.id_client=cli.id_client ";
             $params = [];
             $critere = mb_strtolower($critere);
@@ -147,9 +181,60 @@
                 $params[] = $dateFin;
             }
 
+
+            $query .= " ORDER BY date_commande DESC limit $limit offset $offset ;  ";
             $stmt = $this->db->prepare($query);
             $stmt->execute($params);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ;
+        }
+        public function nbreDeLigneDeRecherche(string $data , string $critere , string $statut , string $dateDebut , string $dateFin){
+            $query = "SELECT count(*) from commande c , client cli where c.id_client = cli.id_client ";
+            $params = [];
+            $critere = mb_strtolower($critere);
+            $statut = mb_strtolower($statut);
+            if (!empty($data)){
+                if($critere == "client"){
+                    $query .= " AND cli.nom like ? " ;
+                    $params[] = "%$data%";
+                }else if($critere == "telephone"){
+                    $query .= " AND cli.tel like ? ";
+                    $params[] = "%$data%";
+                }else if($critere == "prix"){
+                    $query .= " AND c.prix_totale <= ? " ; 
+                    $params[] = $data;
+                }else if($critere == "email"){
+                    $query .= " AND cli.email like ? ";
+                    $params[] = "%$data%";
+                }else if($critere == "id_commande"){
+                    $query .= " AND c.id_commande like ? ";
+                    $params[] = "%$data%";
+                }
+                
+                
+            }
+
+            if(!empty($statut)){
+                $query .= " AND c.statut = ? ";
+                $params[] = $statut;
+            }
+
+            if(!empty($dateDebut) && !empty($dateFin)){
+                $query .= " AND c.date_commande BETWEEN ? and ? ";
+                $params[] = $dateDebut;
+                $params[] = $dateFin;
+
+            }else if(!empty($dateDebut)){
+                $query .= " AND c.date_commande > ? ";
+                $params[] = $dateDebut;
+            }else if(!empty($dateFin)){
+                $query .= " AND c.date_commande < ? ";
+                $params[] = $dateFin;
+            }
+
+
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($params);
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ;
         }
 
         
@@ -157,7 +242,7 @@
         // ######## CRUD    Commandes ########
         // ###################################
         // save done
-        public function save(Commande $commande) : bool{
+        public function saveCommande(Commande $commande) : bool{
             $this->db->beginTransaction();
             try{
                 foreach($commande->getCommandeLines() as $ligne_commande){
@@ -204,15 +289,15 @@
 
         }
         // delete done 
-        public function delete(Commande $commande){
+        public function delete(int $idCommande){
             $this->db->beginTransaction();
             try{
                 $query2 = "delete from ligne_commande where id_commande=? ;";
                 $stmt2 = $this->db->prepare($query2);
-                if(!($stmt2->execute([$commande->getIdCommande()]))){throw new Exception("Can't delete lines from ligne_commande!");}
+                if(!($stmt2->execute([$idCommande]))){throw new Exception("Can't delete lines from ligne_commande!");}
                 $query = "delete from commande where id_commande = ? ;";
                 $stmt = $this->db->prepare($query);
-                if(!$stmt->execute([$commande->getIdCommande()])){throw new Exception("Can't delete form the commande table!");}
+                if(!$stmt->execute([$idCommande])){throw new Exception("Can't delete form the commande table!");}
                 $this->db->commit();
                 return true;
             }catch(Exception $e){
@@ -246,7 +331,7 @@
         //     $stmt = $this->db->prepare($query);
         //     return $stmt->execute([$id_commande]);
         // }
-        public function getCommandeById($id_commande) : ?Commande{
+        public function getCommandeById($id_commande){
             $query = "select * from commande where id_commande = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id_commande]);

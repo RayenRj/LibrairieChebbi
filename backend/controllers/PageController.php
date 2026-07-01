@@ -1,4 +1,5 @@
 <?php
+    // PageController : used to link the api to a rendred page
     define("PATH" , __DIR__ .  "/../../pages/");
     class PageController{
         public function dashboardPage(){require_once(PATH . "Dashboard.php");}

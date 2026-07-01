@@ -1,5 +1,6 @@
 create database if not exists librairieDB;
 use librairieDB;
+
 create table produit(
 	id_produit int primary key auto_increment,
     code_barre varchar(50) ,
@@ -84,7 +85,7 @@ after insert on ligne_commande
 for each row 
 begin 
 	-- tna9eslk el quantité ta3 el produit fl stock
-	if(select quantite_stock from produit where id_produit= new.id_produit > new.quantite) then
+	if(select quantite_stock from produit where id_produit= new.id_produit) > new.quantite then
 		update produit 
 		set quantite_stock = quantite_stock - new.quantite 
 		where id_produit = new.id_produit;
@@ -279,4 +280,38 @@ INSERT INTO userLogin VALUES
 (19,19,'2026-06-19'),
 (20,20,'2026-06-20');
 
+select * from produit;
+select sum(lc.quantite) as 'nbrePackVendu'
+from commande c , ligne_commande lc , pack  p
+where year(date_commande)= 2026 and month(date_commande) =6 and c.id_commande=lc.id_commande and p.id_pack=lc.id_produit ;
 select * from ligne_commande;
+
+
+select * from produit;
+
+select * from produit limit 10 offset 3 ;
+
+
+-- dernier mois commande 
+
+INSERT INTO commande
+(id_client, date_commande, statut, adresse, ville, code_postal, prix_totale, commentaire)
+VALUES
+(1, '2026-05-02', 'annulée', '12 Rue Habib Bourguiba', 'Tunis', '1001', 45.500, 'Client a changé d''avis'),
+(2, '2026-05-03', 'annulée', '25 Avenue de Paris', 'Sfax', '3000', 78.900, 'Paiement refusé'),
+(3, '2026-05-05', 'annulée', '8 Rue de Marseille', 'Sousse', '4000', 120.750, 'Commande annulée par le client'),
+(4, '2026-05-06', 'annulée', '15 Rue Ibn Khaldoun', 'Nabeul', '8000', 65.300, 'Produit indisponible'),
+(5, '2026-05-07', 'annulée', '33 Rue des Orangers', 'Monastir', '5000', 89.990, 'Erreur de commande'),
+(6, '2026-05-09', 'annulée', '7 Avenue Farhat Hached', 'Bizerte', '7000', 34.200, 'Client injoignable'),
+(7, '2026-05-10', 'annulée', '18 Rue des Jasmins', 'Gabès', '6000', 210.000, 'Adresse invalide'),
+(8, '2026-05-12', 'annulée', '40 Avenue Habib Thameur', 'Ariana', '2080', 56.700, 'Annulation avant expédition'),
+(9, '2026-05-14', 'annulée', '22 Rue El Fath', 'Kairouan', '3100', 98.450, 'Paiement annulé'),
+(10, '2026-05-15', 'annulée', '9 Rue de la Liberté', 'Mahdia', '5100', 142.000, 'Client a commandé en double'),
+(11, '2026-05-17', 'annulée', '55 Rue de Carthage', 'Tunis', '1000', 175.250, 'Produit non disponible'),
+(12, '2026-05-19', 'annulée', '4 Rue El Hana', 'Sfax', '3027', 83.600, 'Demande du client'),
+(13, '2026-05-20', 'annulée', '29 Avenue de l''Environnement', 'Sousse', '4054', 59.990, 'Problème de paiement'),
+(14, '2026-05-22', 'annulée', '13 Rue des Roses', 'Nabeul', '8050', 250.000, 'Erreur de stock'),
+(15, '2026-05-24', 'annulée', '61 Avenue de la République', 'Monastir', '5001', 39.500, 'Client ne répond plus'),
+(16, '2026-05-26', 'annulée', '17 Rue des Palmiers', 'Gabès', '6031', 112.300, 'Livraison impossible'),
+(17, '2026-05-28', 'annulée', '11 Rue El Amal', 'Bizerte', '7011', 67.800, 'Commande annulée après confirmation'),
+(18, '2026-05-30', 'annulée', '26 Rue des Oliviers', 'Ariana', '2037', 154.990, 'Client a demandé un remboursement');

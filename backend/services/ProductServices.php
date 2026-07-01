@@ -1,7 +1,11 @@
 <?php
 
 include_once(__DIR__ . "/../repository/ProductRepository.php");
-include_once(__DIR__ . "/../exception/*.php");
+include_once(__DIR__ . "/../exception/ArticleInexistantException.php");
+include_once(__DIR__ . "/../exception/EmptyDataArray.php");
+include_once(__DIR__ . "/../exception/IdentifiantInvalideException.php");
+include_once(__DIR__ . "/../exception/PackInexistantException.php");
+include_once(__DIR__ . "/../exception/QuantityException.php");
 include_once(__DIR__ . "/../models/Product.php");
 include_once(__DIR__ . "/../exception/IdentifiantInvalideException.php");
 
@@ -20,23 +24,37 @@ class ProductServices{
     }
     
     //done
-    public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin=0 , string $stock , string $trie , int $limit = 10 , int $page = 0){
+    public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit = 10 , int $page = 0){
         return $this->productRepo->rechercherArticle($categorie , $libelle, $prixMax,$prixMin , $stock , $trie , $limit,$page);
     }
     //done
-    public function createProduct(string $libelle,float $prixUnitaire,int $quantite ,string $categorie,string $marque,float $remise ,string $description,string $image_url ,?string $codeBarre =""): bool{
+    public function createProduct(string $libelle,float $prixUnitaire,int $quantite ,string $categorie,string $marque,float $remise ,string $description, $file ,?string $codeBarre =""): bool{
         if(empty($libelle)){throw new Exception("Libelle de produit ne doit pas etre vide!");}
         if($prixUnitaire<0){throw new Exception("prixUnitaire de produit ne doit pas etre negatif!");}
         if($quantite<0){throw new Exception("quantite de produit ne doit pas etre negatif!");}
         if(empty($categorie)){throw new Exception("categorie de produit ne doit pas etre vide!");}
         if(empty($marque)){throw new Exception("marque de produit ne doit pas etre vide!");}
-        if(empty($image_url)){throw new Exception("image_url de produit ne doit pas etre vide!");}
         if($remise < 0 || $remise > $prixUnitaire){throw new Exception("remise de produit invalide!");}
-        return $this->productRepo->createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre);
+        $name = $file["name"];
+        $tmp = $file["tmp_name"];
+        $type = $file["type"];
+        $allowedType = ["image/jpeg", "image/png", "image/webp"];
+        if(!in_array($type , $allowedType)){throw new Exception("This file Type in not supported!");}
+        if($file["size"] > 4 * 1024 * 1024 ){throw new Exception("the File uploaded is too large(>4mb)");}
+        $extension = pathinfo($name , PATHINFO_EXTENSION);
+        // generate unique name
+        $newName = bin2hex(random_bytes(16)) . "." . $extension;
+        $upload_dir = __DIR__ . "/../../public/assets/images/uploadedImg/";
+        if(!is_dir($upload_dir)){mkdir($upload_dir , 0077 , true);}
+        $dest = $upload_dir . $newName;
+        $destDB = "/assets/images/uploadedImg/" . $newName; 
+        if(!move_uploaded_file($tmp , $dest)){throw new Exception("Image Upload Failed!");}
+        return $this->productRepo->createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $destDB, $codeBarre);
     }
     //done
-    public function getAllProduct() : ?array {
-        return $this->productRepo->findAllProducts();
+    public function getAllProduct(int $limit , int $page) : array {
+        $offset = ($page - 1) * $limit;
+        return $this->productRepo->findAllProducts($limit , $offset);
     }
     //done
     public function deleteProduct(int $idProduit):bool{

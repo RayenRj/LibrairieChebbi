@@ -140,9 +140,9 @@
                     </div>
                     <div>
                         <p>reglage</p>
-                        <button type="reset">
-                            <i class="fa-solid fa-arrow-rotate-left"></i>
-                             Réinitialiser
+                        <button type="sumbit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            Rechercher
                         </button>
                     </div>
                     

@@ -215,6 +215,7 @@ img{
 .packManagerBottomPart .top{
     display: flex;
     justify-content: space-between;
+    gap: 1em;
     align-items: center;
     padding: 0.5em 2em;
     margin-bottom: 2em;
@@ -273,26 +274,26 @@ img{
 }
 
 
-.packManagerBottomPart button[type="reset"]{
-    border: 2px solid #eee;
-    outline: none;
-    background-color: white;
-    padding: 0.5em 1.5em;
+.packManagerBottomPart .top button{
+    padding: 0.65em 2em;
     border-radius: 0.5em;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap:0.5em;
-    font-size: 12px;
+    outline: none;
+    border: 1px solid var(--gray-200);
+    font-size: 13px;
     font-weight: 500;
-    margin-top: 0.5em;
+    appearance:none;
+    text-align: center;
     cursor: pointer;
-    transition: 0.1s all ease;
+    background-color: var(--blue);
+    color: white;
+
 }
-.packManagerBottomPart button[type="reset"]:hover{
-    background-color: var(--gray-100);
-    color: black;
-}
+
+.packManagerBottomPart .top button:hover{background-color: #2f71db;}
+.packManagerBottomPart .top button:active{background-color: #4d8cf1;}
+.packManagerBottomPart .top button i{margin-right: 10px;}
+
+
 
 .packManagerBottomPart .top > div:last-child >p{
     opacity: 0;

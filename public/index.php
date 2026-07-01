@@ -4,8 +4,9 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
     include_once __DIR__ . "/../core/Router.php";
     include_once __DIR__ . "/../backend/controllers/ClientController.php";
+    include_once __DIR__ . "/../backend/controllers/CommandeController.php";
     // include_once __DIR__ . "/../backend/controllers/PackController.php";
-    // include_once __DIR__ . "/../backend/controllers/ProductController.php";
+    include_once __DIR__ . "/../backend/controllers/ProductController.php";
     // include_once __DIR__ . "/../backend/controllers/StatistiqueController.php";
     include_once __DIR__ . "/../backend/controllers/PageController.php";
 
@@ -37,6 +38,7 @@ error_reporting(E_ALL);
     $route->add("GET", "/panier" , "PageController","panierPage");
     $route->add("GET", "/commande" , "PageController","commandePage");
     $route->add("GET", "/collections" , "PageController","collectionPage");
+
     //=========> Product Routes <=======
     $route->add("POST","/api/articles","ProductController","addProduct");
     $route->add("DELETE","/api/articles/{id}","ProductController","deleteProduct");
@@ -45,12 +47,25 @@ error_reporting(E_ALL);
     $route->add("GET","/api/products/{id}","ProductController","getProductById");
     $route->add("PATCH","/api/products/addRemise/{id}","ProductController","addRemise");
     //=========> End Product Routes <=======
-    //=========> User Routes <=======
+
+
+
+    //=========> User Routes <======
     $route->add("DELETE" , "/api/users/{id}", "ClientController","deleteUser");
     $route->add("POST" , "/api/users/createUser" , "ClientController","SignUp");
+    $route->add("POST" , "/api/users/signIn" , "ClientController","signIn");
     $route->add("PATCH","/api/users/addAdmin/{id}","ClientController","addAdmin");
     $route->add("PATCH","/api/users/deleteAdmin/{id}","ClientController","deleteAdmin");
     $route->add("GET","/api/users", "ClientController" , "getAllUsers");
+
+
+    //=========> commande Routes <=======
+    $route->add("DELETE" , "/api/commandes/{id}", "CommandeController","deleteCommande");
+
+
+
+
+
     $route->dispatch();
 
 

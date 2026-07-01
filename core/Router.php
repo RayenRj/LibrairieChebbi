@@ -40,10 +40,12 @@
                         $body = $_POST;
                     }
                     
+                    
                     $request = [
                         "params" => $matches,
                         "body" => $body,
-                        "query" =>$query
+                        "query" =>$query,
+                        "file" => $_FILES
                     ];
 
                     call_user_func_array([$controller_obj, $route["action"]] , [$request]);

@@ -6,18 +6,6 @@ let password = document.querySelector("#PasswordSignUp").value;
 let tel = document.querySelector("#tel").value;
 let form = document.querySelector("#signUpForm");
 
-// signUpButton.addEventListener("click",function(event){
-//     event.preventDefault();
-//     let text = "1234567890+"
-//     for(let i =0 ; i < tel.length; i++){
-//         if(text.indexOf(tel.charAt(i))!=-1){
-//             alert("Numero de telephone est invalide!!");
-//             return false;
-//         }  
-//     }
-//     formData = new FormData()
-
-// })
 
 
 form.addEventListener("submit",async function(event){

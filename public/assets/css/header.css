@@ -76,8 +76,7 @@ header img{
 }
 
 header .left-part .categories button{
-    font-size: clamp(13px,5vw , 15px);
-    
+    font-size: 14px;
     border: 1px solid var(--gray-300);
     border-radius: 10px;
     padding: 0.5em 1.2em ;
@@ -95,11 +94,10 @@ header .left-part .categories ul{
     position: absolute;
     background-color: #ffffff;
     border: 1px solid var(--gray-300);
-    width: 120%;
+    width: 130%;
     border-radius: 12px;
     padding: 0.5em;
     display: none;
-    /* hedhi tetna7a ba3d  */
 } 
 
 header .left-part .categories ul li a{
@@ -110,7 +108,7 @@ header .left-part .categories ul li a{
     display: block;
     margin: 10px auto;
     padding-left: 1em;
-    font-size: 14px;
+    font-size: clamp(11px , 50vw , 14px);
 
 
 }
@@ -153,11 +151,9 @@ header .left-part .search .input-container input{
   border-radius: 2em;
   border: 1.5px solid var(--gray-200);
   padding: 1em;
-  position: relative;
   padding-left: 45px;
   padding-right: 1em;
   background-color: var(--gray-100);
-  position: relative;
 }
 
 header .left-part .search .input-container input:focus{
@@ -182,7 +178,6 @@ header .left-part .search .input-container span{
 /* part two */
 
 header .part-two{
-
   width: 25%;
 }
 header .part-two ul{
@@ -311,21 +306,60 @@ hr{
 
 /* Tablet */
 @media (max-width: 768px) { }
+@media (max-width: 768px) { }
+
 
 /* Laptop */
-@media (max-width: 1300px) { 
-
-
-}
 
 /* Desktop */
 @media (max-width: 1440px) { 
-    header .left-part .search .input-container{
-      width: 350px;
-    }
+  header{
+    justify-content: space-around;
+  }
+  header .left-part .search .input-container{
+    width: 350px;
+  }
+  header .left-part .categories button{
+    padding: 0.5em 0.75em ;
+  }
 }
 
+@media (max-width: 1200px) { 
+  header{
+    justify-content: space-around;
+    padding: 0.5em 1em;
+  }
+    header .left-part .search .input-container{
+      width: 250px;
+    }
 
+
+}
+/* Laptop */
+@media (max-width: 1000px) { 
+  header .part-two ul{
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+  }
+
+  header{
+    justify-content: center;
+    gap: 2em;
+    padding: 0.5em 0em;
+  }
+  header .left-part{
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    /* background-color: red; */
+    align-items: center;
+    width: 55%;
+  
+  }
+}
 
 
 /* test button google*/
