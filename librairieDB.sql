@@ -16,7 +16,8 @@ create table produit(
 
 create table pack(
 	id_pack int ,
-    type varchar(255),
+    type varchar(255) check (type in ("primaire", "secondaire" , "bac", "college")),
+
     primary key(id_pack),
     foreign key (id_pack) references produit(id_produit) on delete cascade on update cascade
 );
@@ -315,3 +316,54 @@ VALUES
 (16, '2026-05-26', 'annulée', '17 Rue des Palmiers', 'Gabès', '6031', 112.300, 'Livraison impossible'),
 (17, '2026-05-28', 'annulée', '11 Rue El Amal', 'Bizerte', '7011', 67.800, 'Commande annulée après confirmation'),
 (18, '2026-05-30', 'annulée', '26 Rue des Oliviers', 'Ariana', '2037', 154.990, 'Client a demandé un remboursement');
+
+
+delete from pack;
+set SQL_SAFE_UPDATES = 0;
+
+INSERT INTO pack VALUES
+(11,'primaire'),
+(12,'secondaire'),
+(13,'bac'),
+(14,'college'),
+(15,'primaire'),
+(16,'secondaire'),
+(17,'bac'),
+(18,'college'),
+(19,'primaire'),
+(20,'bac');
+
+select p.* from produit p , pack pa where p.id_produit = id_pack;
+
+SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.description from produit p where 1=1;
+
+
+select * from pack;
+
+
+
+
+
+INSERT INTO produit VALUES
+(40,'PK040','pack pc office',0,10,'pack','n/a','pack40.jpg',0,'pack office'),
+(41,'PK041','pack accessoires',0,15,'pack','n/a','pack41.jpg',0,'pack accessoires'),
+(42,'PK042','pack gaming basic',0,5,'pack','n/a','pack42.jpg',0,'pack gaming basic'),
+(43,'PK043','pack multimedia',0,12,'pack','n/a','pack43.jpg',0,'pack multimedia'),
+(44,'PK044','pack printing',0,8,'pack','n/a','pack44.jpg',0,'pack printing'),
+(45,'PK045','pack mobile apple',0,20,'pack','n/a','pack45.jpg',0,'pack mobile apple'),
+(46,'PK046','pack mobile android',0,18,'pack','n/a','pack46.jpg',0,'pack mobile android'),
+(47,'PK047','pack charging',0,25,'pack','n/a','pack47.jpg',0,'pack charging'),
+(48,'PK048','pack audio',0,14,'pack','n/a','pack48.jpg',0,'pack audio'),
+(49,'PK049','pack gaming ultimate',0,3,'pack','n/a','pack49.jpg',0,'pack gaming ultimate');
+select * from produit;
+INSERT INTO pack VALUES
+(40,'primaire'),
+(41,'secondaire'),
+(42,'bac'),
+(43,'college'),
+(44,'primaire'),
+(45,'secondaire'),
+(46,'bac'),
+(47,'college'),
+(48,'primaire'),
+(49,'bac');

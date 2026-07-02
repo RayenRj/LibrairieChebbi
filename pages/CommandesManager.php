@@ -1,10 +1,18 @@
 <?php
     require_once(__DIR__ . "/../backend/services/CommandeServices.php");
     $commandeService = new CommandeServices();
-    $limit = 10;
+    $limit = $_GET["limit"] ?? 10;
     $page = $_GET["page"] ?? 1;
-    $nbreDeligneFirstListOfCommandes = $commandeService->nbreDeLigneDeRecherche("" , "" , "","","");
-    $firstListOfcommands = $commandeService->getCommandeFiltred("" , "" , "","","",$limit,$page);
+    $data = $_GET["data"] ?? "";
+    $critere = $_GET["critere"] ?? "";
+    $statut = $_GET["statut"] ?? "";
+    $dateDebut = $_GET["dateDebut"] ?? "";
+    $dateFin = $_GET["dateFin"] ?? "";
+
+    $pageLinkForPagination = "";
+
+    $nbreDeligneFirstListOfCommandes = $commandeService->nbreDeLigneDeRecherche($data  ,$critere ,$statut,$dateDebut,$dateFin);
+    $firstListOfcommands = $commandeService->getCommandeFiltred($data  ,$critere ,$statut,$dateDebut,$dateFin,$limit,$page);
 
     
     $nbreTotalePage = intval(ceil($nbreDeligneFirstListOfCommandes / $limit));
@@ -181,57 +189,58 @@
 
             
             <div class="commandeManagerBottomPart" id="commandeTable">
-                <div class="top">
-                    <div>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" name="packSearch" id="packSearch" placeholder="Rechercher un pack...">
-                    </div>
-
-                    <div>
-                        <p>Critere de recherche </p>
+                <form id="commandeSearch">
+                    <div class="top">
                         <div>
-                            <select name="" id="">
-                                <option value="all" selected>Client</option>
-                                <option value="all" >Telephone</option>
-                                <option value="all" >Prix</option>
-                                <option value="all" >Email</option>
-                                <option value="all" >Id Commande</option>
-                            </select>
-                            <i class="fa-solid fa-caret-down"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Statut</p>
-                        <div>
-                            <select name="" id="">
-                                <option value="all" selected>Tous</option>
-                                <option value="all" >En attente</option>
-                                <option value="all" >Confirmée</option>
-                                <option value="all" >Livrée</option>
-                                <option value="all" >Annulée</option>
-                            </select>
-                            <i class="fa-solid fa-caret-down"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Datte Début</p>
-                        <input type="date" name="" id="">
-                    </div>
-                    <div>
-                        <p>Datte Fin</p>
-                        <input type="date" name="" id="">
-                    </div>
-
-
-                    <div>
-                        <p>reglage</p>
-                        <button type="sumbit">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            Rechercher
-                        </button>
-                    </div>
-                </div>
+                            <input type="text" name="data" id="commandeSearch" placeholder="Rechercher une Commande...">
+                        </div>
 
+                        <div>
+                            <p>Critere de recherche </p>
+                            <div>
+                                <select name="critere" id="">
+                                    <option value="nom" selected>Client</option>
+                                    <option value="tel" >Telephone</option>
+                                    <option value="prix_totale" >Prix</option>
+                                    <option value="email" >Email</option>
+                                    <option value="id_commande" >Id Commande</option>
+                                </select>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Statut</p>
+                            <div>
+                                <select name="statut" id="">
+                                    <option value="" selected>Tous</option>
+                                    <option value="attente" >En attente</option>
+                                    <option value="confirmée" >Confirmée</option>
+                                    <option value="livrée" >Livrée</option>
+                                    <option value="annulée" >Annulée</option>
+                                </select>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Datte Début</p>
+                            <input type="date" name="dateDebut" id="" >
+                        </div>
+                        <div>
+                            <p>Datte Fin</p>
+                            <input type="date" name="dateFin" id="">
+                        </div>
+
+
+                        <div>
+                            <p>reglage</p>
+                            <button type="sumbit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
 
                 <div class="table-part">
@@ -273,23 +282,23 @@
                             <td>
                                 <ul>
                                     <?php if($statut == "attente" ): ?>
-                                        <a href="#" class="check"><li><i class="fa-solid fa-check"></i></li></a>
-                                        <a href="#" class="croit-rouge"><li><i class="fa-solid fa-x"></i></li></a>
-                                        <a href="#" class="eye"><li><i class="fa-solid fa-eye"></i></li></a> 
+                                        <a href="#" class="check" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-check"></i></li></a>
+                                        <a href="#" class="croit-rouge" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-x"></i></li></a>
+                                        <a href="#" class="eye" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-eye"></i></li></a> 
                                     <?php endif; ?>
                                     <?php if($statut == "livrée"): ?>
-                                        <a href="#" class="print"><li><i class="fa-solid fa-print"></i></li></a>
-                                        <a href="#" class="eye"><li><i class="fa-solid fa-eye"></i></li></a>
+                                        <a href="#" class="print" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-print"></i></li></a>
+                                        <a href="#" class="eye" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-eye"></i></li></a>
                                         <a href="#" class="croit-rouge commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
                                     <?php endif; ?>
                                     <?php if($statut == "annulée"): ?>
-                                        <a href="#" class="eye"><li><i class="fa-solid fa-eye"></i></li></a> 
+                                        <a href="#" class="eye" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-eye"></i></li></a> 
                                         <a href="#" class="croit-rouge commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
                                     <?php endif; ?>
                                     <?php if($statut == "confirmée"): ?>
-                                        <a href="#" class="truck"><li><i class="fa-solid fa-truck"></i></li></a>
-                                        <a href="#" class="print"><li><i class="fa-solid fa-print"></i></li></a>
-                                        <a href="#" class="eye"><li><i class="fa-solid fa-eye"></i></li></a> 
+                                        <a href="#" class="truck" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-truck"></i></li></a>
+                                        <a href="#" class="print" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-print"></i></li></a>
+                                        <a href="#" class="eye" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-eye"></i></li></a> 
                                         <a href="#" class="croit-rouge commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
                                     <?php endif; ?>
                                     

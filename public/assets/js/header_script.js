@@ -38,11 +38,9 @@ console.log(switchSignUp);
 switchSignUp.addEventListener("click", (event)=>{
     SignInCard.setAttribute("hidden","");
     SignUpCard.removeAttribute("hidden");
-    console.log("hola");
 })
 
 switchSignIn.addEventListener("click", (event)=>{
     SignUpCard.setAttribute("hidden","");
     SignInCard.removeAttribute("hidden");
-    console.log("hola");
 })

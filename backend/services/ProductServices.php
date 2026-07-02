@@ -25,7 +25,19 @@ class ProductServices{
     
     //done
     public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit = 10 , int $page = 0){
+        if(!in_array($stock ,["","stock eleve","stock moyen","stock faible","repture de stock"])){
+            throw new Exception("La valeur du stock est invalide");
+        }
+        if(!in_array($trie , ["id article","libellé","prix unitaire","stock","nombre de vente",""])){throw new Exception("Le critére de trie est invalide!");}
         return $this->productRepo->rechercherArticle($categorie , $libelle, $prixMax,$prixMin , $stock , $trie , $limit,$page);
+    }
+    //done
+    public function nombreLigneRechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit = 10 , int $page = 0){
+        if(!in_array($stock ,["","stock eleve","stock moyen","stock faible","repture de stock"])){
+            throw new Exception("La valeur du stock est invalide");
+        }
+        if(!in_array($trie , ["id article","libellé","prix unitaire","stock","nombre de vente",""])){throw new Exception("Le critére de trie est invalide!");}
+        return $this->productRepo->nombreLigneRechercherArticle($categorie , $libelle, $prixMax,$prixMin , $stock , $trie , $limit,$page);
     }
     //done
     public function createProduct(string $libelle,float $prixUnitaire,int $quantite ,string $categorie,string $marque,float $remise ,string $description, $file ,?string $codeBarre =""): bool{
@@ -99,6 +111,15 @@ class ProductServices{
         $product = $this->productRepo->findProduitById($idProduit);
         if($product == null){throw new Exception("Article not found!");}
         return ($product["prix"] - $product["remise"]) ;
+    }
+    //done
+    public function rechercherArticle2(string $data , string $critere , int $limit , int $page){
+        $data = trim(mb_strtolower($data));
+        $critere = trim(mb_strtolower($critere));
+        if($limit<1){throw new Exception("La limite doit etre > 1");}
+        if($page<1){throw new Exception("La page doit etre > 1");}
+        if(!in_array($critere,["" , "libelle","categorie", "marque" , "prix"])){throw new Exception("La critere est invalide!");}
+        return $this->productRepo->rechercherArticle2($data,$critere,$limit, ($page - 1) * $limit);
     }
 }
 

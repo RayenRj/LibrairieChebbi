@@ -137,18 +137,14 @@
         // #######################
         // partie recherche : contient paginaation
         // #######################
-        public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit = 10 , int $page = 0){
-            $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.description , COALESCE(sum(lc.quantite),0) as nombreVente from {$this->tName} p LEFT JOIN ligne_commande lc on lc.id_produit = p.id_produit where 1=1 ";
+        public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
+            $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.description from {$this->tName} p  where 1=1 ";
+            $param = [];
             $categorie = mb_strtolower(trim($categorie));
             $stock = mb_strtolower(trim($stock));
             $trie = mb_strtolower(trim($trie));
-            $param = [];
-            $trie_list=["id article" => "p.id_produit", 
-                        "libellé" => "p.libelle" ,
-                        "prix unitaire" => "prix_unitaire" , 
-                        "stock" => "p.quantite_stock" , 
-                        "nombre de vente" => "nombreVente"];
-            if ($categorie !== "tous"){
+            $trie_list=["id article" => "p.id_produit", "libellé" => "p.libelle" ,"prix unitaire" => "prix_unitaire" , "stock" => "p.quantite_stock" , "nombre de vente" => "nombreVente"];
+            if ($categorie !== ""){
                 $query .= "AND categorie = ? ";
                 $param[] = $categorie;
             }
@@ -182,20 +178,92 @@
             
             $trie= $trie_list[$trie] ?? "prix_unitaire";
 
-            $page = max($page , 1);
-            $limit = max($page , 1);
-            $param[] = $limit;
-            $param[] = ($page -1 ) * $limit;
-            
+            $offset = ($page - 1) * $limit;
+
             $query .= " GROUP BY p.id_produit ";
-            $query .= " ORDER BY {$trie} ";
-            $query .= " LIMIT ? OFFSET ? ;";
+            $query .= " ORDER BY {$trie} DESC";
+            $query .= " LIMIT $limit OFFSET $offset ;";
             
             $stmt = $this->db->prepare($query);
             $stmt->execute($param);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+        // retourne le nombre totale de ligne de la recherche d'article
+        public function nombreLigneRechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
+            $query = "SELECT count(*) from {$this->tName} p  where ";
+            $param = [];
+            $queryList = [];
+            $categorie = mb_strtolower(trim($categorie));
+            $stock = mb_strtolower(trim($stock));
+            $trie = mb_strtolower(trim($trie));
+            if ($categorie !== ""){
+                $queryList[] = "categorie = ?";
+                $param[] = $categorie;
+            }
+            if(!empty($libelle)){
+                $queryList[] = "libelle LIKE ?";
+                $param[] = "%$libelle%";
+            }
 
+
+            if ($prixMax > 0 && $prixMin >0){
+                $min =  min($prixMax , $prixMin);
+                $max = max($prixMax , $prixMin);
+                $queryList[] = "(p.prix - p.remise) between ? and ?";
+                $param[] = $min;
+                $param[] = $max;
+            }else{
+                if($prixMin > 0){
+                    $queryList[] = "(p.prix - p.remise) >= ?";
+                    $param[] = $prixMin;
+                }
+                if($prixMax > 0){
+                    $queryList[] ="(p.prix - p.remise) <= ?";
+                    $param[] = $prixMax;
+                }
+            }
+            // stock 
+            if($stock == "stock eleve"){$queryList[] ="p.quantite_stock >= 20" ;}
+            else if($stock == "stock moyen"){$queryList[] ="p.quantite_stock between 6 and 19";}
+            else if($stock == "stock faible"){$queryList[] ="p.quantite_stock between 1 and 5";}
+            else if($stock == "repture de stock"){$queryList[] = "p.quantite_stock = 0";}
+            
+           
+            if(empty($queryList)){
+                $query = "select count(*) from produit ;";
+                $param=[];
+            }else{
+                $query .= implode(" AND " , $queryList);
+            }
+            
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($param);
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;
+        }
+
+        /**
+         * @param data => c'est le donnée qu'on va tester avec.
+         * @param critere => ["libelle","categorie", "marque" , "prix"]
+         */
+        public function rechercherArticle2(string $data , string $critere , int $limit , int $offset){
+            if(empty(trim(mb_strtolower($data))) || empty(trim(mb_strtolower($critere)))){
+                $query = "select * from produit limit $limit offset $offset ;";
+                $stmt = $this->db->prepare($query);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }else{
+                if(empty(trim(mb_strtolower($critere))) == "prix"){
+                    $query = "select * from produit where prix < ? limit $limit offset $offset ;";
+                    $stmt = $this->db->prepare($query);
+                    $stmt->execute([floatval($data)]);
+                }else{
+                    $query = "select * from produit where ? like ? limit $limit offset $offset ;";
+                    $stmt = $this->db->prepare($query);
+                    $stmt->execute([$critere , "%$data%"]);
+                }
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+        }
 
         // modifer la quantite d'un articles
         public function decreaseQuantity(int $product , int $quantityToDelete) : bool {

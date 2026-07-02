@@ -13,7 +13,7 @@
         private CommandeRepository $commande_repo;
         private ProductRepository $product_repo;
         private ClientRepository $client_repo;
-
+        private Commande $commande;
         public function __construct(){
             $this->commande_repo = new CommandeRepository();
             $this->product_repo = new ProductRepository();
@@ -115,11 +115,9 @@
             return $this->commande_repo->getCommandeByIdClient($idClient);
     
         }
-
         //done
         public function getAllCommandes(int $id , int $limit , int $page){
         }
-
         //done
         public function nombreTotaleCommandeCeMois(string $statut){
             if(!in_array($statut, ["",'attente','confirmée','annulée','livrée'])){throw new Exception("Le status de la commande est invalide!");}
@@ -130,12 +128,22 @@
             if(!in_array($statut, ["",'attente','confirmée','annulée','livrée'])){throw new Exception("Le status de la commande est invalide!");}
             return $this->commande_repo->nombreTotaleCommandeDernierMois($statut);
         }
-
-        public function saveCommande($idClient , $dateCommande , $statut , $addresse , $ville , $codePostal , $prixTotale , $comment , $ligneCommandes){
-            
+        //done
+        public function saveCommande(int $idClient , string $dateCommande , string $statut , string $addresse , string $ville , int $codePostal , float $prixTotale , string $comment ,array $ligneCommandes){
+            if($idClient < 1 ){throw new Exception("La valeur de l'identifiatn de client qui passe la commande est invalide!");}
+            if(empty($dateCommande)){throw new Exception("La date de commande est vide!");}
+            if(empty($statut)){throw new Exception("La statut de commande est vide!");}
+            if(!in_array($statut,['attente','confirmée','annulée','livrée'])){throw new Exception("La statut de commande est invalide!");}
+            if(empty($addresse)){throw new Exception("L'addresse du client est vide!");}
+            if(empty($ville)){throw new Exception("L'ville du client est vide!");}
+            if($prixTotale < 0){throw new Exception("Prix totale de la commande est invalide!");}
+            if(empty($ligneCommandes)){throw new Exception("La Liste des articles de la commande est vide!");}
+            $this->commande = new Commande($idClient, $dateCommande , $statut , $addresse , $ville ,$codePostal , $prixTotale,$comment , $ligneCommandes);
+            return $this->commande_repo->saveCommande($this->commande);
         }
         
-    }
+    
+}
 
 
 
