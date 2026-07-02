@@ -343,19 +343,19 @@ select * from pack;
 
 
 
-
+select * from pack;
 INSERT INTO produit VALUES
-(40,'PK040','pack pc office',0,10,'pack','n/a','pack40.jpg',0,'pack office'),
-(41,'PK041','pack accessoires',0,15,'pack','n/a','pack41.jpg',0,'pack accessoires'),
-(42,'PK042','pack gaming basic',0,5,'pack','n/a','pack42.jpg',0,'pack gaming basic'),
-(43,'PK043','pack multimedia',0,12,'pack','n/a','pack43.jpg',0,'pack multimedia'),
-(44,'PK044','pack printing',0,8,'pack','n/a','pack44.jpg',0,'pack printing'),
-(45,'PK045','pack mobile apple',0,20,'pack','n/a','pack45.jpg',0,'pack mobile apple'),
-(46,'PK046','pack mobile android',0,18,'pack','n/a','pack46.jpg',0,'pack mobile android'),
-(47,'PK047','pack charging',0,25,'pack','n/a','pack47.jpg',0,'pack charging'),
-(48,'PK048','pack audio',0,14,'pack','n/a','pack48.jpg',0,'pack audio'),
-(49,'PK049','pack gaming ultimate',0,3,'pack','n/a','pack49.jpg',0,'pack gaming ultimate');
-select * from produit;
+(40,'CB040','pack pc office',100.000,10,'informatique','dell','img40.jpg',0,'pc office pack'),
+(41,'CB041','pack accessoires',25.000,50,'informatique','logitech','img41.jpg',0,'accessories pack'),
+(42,'CB042','pack gaming basic',80.000,20,'informatique','asus','img42.jpg',5,'basic gaming pack'),
+(43,'CB043','pack multimedia',120.000,15,'informatique','samsung','img43.jpg',10,'multimedia pack'),
+(44,'CB044','pack printing',60.000,12,'informatique','hp','img44.jpg',0,'printing pack'),
+(45,'CB045','pack mobile apple',900.000,8,'mobile','apple','img45.jpg',0,'apple mobile pack'),
+(46,'CB046','pack mobile android',700.000,18,'mobile','samsung','img46.jpg',5,'android mobile pack'),
+(47,'CB047','pack charging',30.000,40,'accessoire','anker','img47.jpg',0,'charging pack'),
+(48,'CB048','pack audio',90.000,25,'audio','sony','img48.jpg',0,'audio pack'),
+(49,'CB049','pack gaming ultimate',150.000,5,'informatique','asus','img49.jpg',10,'ultimate gaming pack');
+
 INSERT INTO pack VALUES
 (40,'primaire'),
 (41,'secondaire'),
