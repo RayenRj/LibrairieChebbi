@@ -97,7 +97,6 @@
                 return;
             }
         }
-
         //saveCommande => permet d'enregistrer une commande avec tous ces details
         public function saveCommande($request){
             try{
@@ -124,8 +123,84 @@
                 return;
             }
         }
-
-
+        //confirmeeCommande => permet de change la statut de la commande en confirmée
+        public function confirmeCommande($request){
+            try{
+                $param = $request["params"];
+                $result = $this->commande_services->confirmeCommande($param[0] , );
+                $response=[
+                    "success" => true,
+                    "numberOfLine" =>null,
+                    "message" => "get commande by ID",
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response=[
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" =>null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
+        //annuleeCommande => permet de change la statut de la commande en annulée
+        public function annuleeCommande($request){
+            try{
+                $param = $request["params"];
+                $result = $this->commande_services->annuleeCommande($param[0] , );
+                $response=[
+                    "success" => true,
+                    "numberOfLine" =>null,
+                    "message" => "get commande by ID",
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response=[
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" =>null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
+        //livreCommande => permet de change la statut de la commande en Livrée
+        public function livreeCommande($request){
+            try{
+                $param = $request["params"];
+                $result = $this->commande_services->livreeCommande($param[0] , );
+                $response=[
+                    "success" => true,
+                    "numberOfLine" =>null,
+                    "message" => "get commande by ID",
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response=[
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" =>null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
 
 
 

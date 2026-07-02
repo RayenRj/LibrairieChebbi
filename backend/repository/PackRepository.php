@@ -10,14 +10,14 @@
         public function NombreTotalePack() : int{
             $stmt = $this->db->prepare("select count(*) from pack ;");
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_NUM)[0];
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
         // pack actif
         public function NombreTotalePackActif() : int{
             $stmt = $this->db->prepare("select count(*) from pack p , produit pr
                                         where p.id_pack = pr.id_produit and pr.quantite_stock > 0;");
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_NUM)[0];
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
         // pack en repture 
         public function packEnRepture(): int {return ($this->NombreTotalePack() - $this->NombreTotalePackActif());}
@@ -28,12 +28,20 @@
                       where lc.id_produit = pa.id_pack and pa.id_pack = p.id_produit and c.id_commande = lc.id_commande and c.date_commande >= date_format(curdate() , '%Y-%m-01'); ";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_NUM)[0];
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;
+        }
+        public function revenuePackDernierMois(){
+            $query = "select sum(lc.quantite * p.prix) 
+                      from ligne_commande lc , produit p , pack pa , commande c
+                      where lc.id_produit = pa.id_pack and pa.id_pack = p.id_produit and c.id_commande = lc.id_commande and c.date_commande >= date_format(curdate() - INTERVAL 1 month, '%Y-%m-01'); ";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;
         }
 
         // recherche + pagination
         public function recherchePack(string $nom, string $niveau , string $statut , int $limit , int $pagination){
-            $query =    "select pr.id_produit , pr.libelle , p.type , pr.prix , (select count(*) from packArticle pa where pa.id_pack = p.id_pack) as nbreArticleTotal , pr.quantite_stock 
+            $query =    "select pr.id_produit , pr.libelle , p.type , pr.prix , (select count(*) from packArticle pa where pa.id_pack = p.id_pack) as nbreArticleTotal , pr.quantite_stock , pr.image_url , pr.description
                         from produit pr , pack p 
                         where pr.id_produit = p.id_pack ";
             $statut = mb_strtolower($statut);
@@ -48,7 +56,7 @@
                 $query .= " AND pr.libelle like ? ";
                 $param[] = "%$nom%";
             }
-            if(in_array($statut, ["actif", "en rupture"])){
+            if(in_array($statut, ["actif", "rupture"])){
                 if ($statut == "actif"){
                     $query .= " AND pr.quantite_stock > 0 ";
                 }else{
@@ -63,6 +71,36 @@
             $stmt = $this->db->prepare($query);
             $stmt->execute($param);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function nbreRowRecherchePack(string $nom, string $niveau , string $statut , int $limit , int $pagination){
+            $query =    "select count(*) from produit pr , pack p  where pr.id_produit = p.id_pack ";
+            $statut = mb_strtolower($statut);
+            $niveau = mb_strtolower($niveau);
+            $allNiveau = ["primaire", "college","secondaire","bac"];
+            $param=[];
+            if (in_array($niveau, $allNiveau)){
+                $query .= " AND p.type = ? ";
+                $param[] = $niveau;
+            }
+            if(!empty($nom)){
+                $query .= " AND pr.libelle like ? ";
+                $param[] = "%$nom%";
+            }
+            if(in_array($statut, ["actif", "rupture"])){
+                if ($statut == "actif"){
+                    $query .= " AND pr.quantite_stock > 0 ";
+                }else{
+                    $query .= " AND pr.quantite_stock = 0 " ;
+                }
+            }
+            $pagination = max($pagination , 1);
+            $limit = max($limit , 1);
+            $offset = ($pagination - 1) * $limit;
+            $query .= " LIMIT {$limit} OFFSET {$offset} ;";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($param);
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;
         }
         // CRUD Functions
         public function findAllPacks(){
@@ -182,26 +220,35 @@
                 $stmt = $this->db->prepare($query);
                 $result = $stmt->execute([$libelle , $prix,$quantite , "pack" , $image_url ,$remise , $description]);
                 if(!$result){throw new Exception("SQL Insertion Error");}
-
                 $packId = $this->db->lastInsertId();
+
+
+                $query3 = "insert into pack values(?,?)";
+                $stmt3 = $this->db->prepare($query3);
+                $result=$stmt3->execute([$packId , $niveau]);
+                if(!$result){throw new Exception("SQL Insertion Error");}
+
+
+
                 $query2 = "insert into packArticle (id_pack ,id_produit , quantite) values ";
                 $param=[];
                 $str_array=[];
-                foreach($data as $productId => $quantity){
-                    $str_array[] = "(?,?,?)";
-                    $param[] = $packId;
-                    $param[] = $productId;
-                    $param[] = $quantity;
+                foreach($data as $index => $product){
+                        $str_array[] = "(?,?,?)";
+                        $param[] = $packId;
+                    foreach($product as $key => $value){
+                        $param[] = $value;
+                    }
                 }
                 $query2 .= implode(",",$str_array) ;
                 $stmt2 = $this->db->prepare($query2);
-                $result = $stmt2->execute($param);
+                $result = $stmt2->execute($param); // line 236
                 if(!$result){throw new Exception("SQL Insertion Error");}
                 $this->db->commit();
                 return true;
             }catch(Exception $e){
                 $this->db->rollBack();
-                return false;
+                return $e->getMessage();
             }
         }
         // Get Pack Articles

@@ -143,7 +143,7 @@
             $critere = mb_strtolower($critere);
             $statut = mb_strtolower($statut);
             if (!empty($data)){
-                if($critere == "client"){
+                if($critere == "nom"){
                     $query .= " AND cli.nom like ? " ;
                     $params[] = "%$data%";
                 }else if($critere == "telephone"){
@@ -193,7 +193,7 @@
             $critere = mb_strtolower($critere);
             $statut = mb_strtolower($statut);
             if (!empty($data)){
-                if($critere == "client"){
+                if($critere == "nom"){
                     $query .= " AND cli.nom like ? " ;
                     $params[] = "%$data%";
                 }else if($critere == "telephone"){

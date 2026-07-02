@@ -1,3 +1,31 @@
+<?php
+    require_once(__DIR__ . "/../backend/services/PackServices.php");
+    require_once(__DIR__ . "/../backend/services/ProductServices.php");
+    $packService = new PackServices();
+    $prodService = new ProductServices();
+
+    $page = $_GET["page"] ?? 1;
+    $limit = $_GET["limit"] ?? 10;
+    $niveau = $_GET["niveau"] ?? "";
+    $statut = $_GET["statut"] ?? "";
+    $nom_pack = $_GET["nom"] ?? "" ;
+    $list_of_packs_filtred= $packService->recherchePack($nom_pack , $niveau , $statut , $limit , $page);
+
+    $nombre_row_totale= $packService->nbreRowRecherchePack($nom_pack , $niveau , $statut , $limit , $page);
+
+    $nombre_totale_page = ceil($nombre_row_totale / $limit);
+    function calculDePourcentage($currentMonthValue , $lastMonthValue){
+        $x = $currentMonthValue - $lastMonthValue;
+        if($lastMonthValue==0){return 100;} 
+        return ($x * 100)/$lastMonthValue;
+    }
+
+    // partie el add pack
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +63,7 @@
                     </div>
                     <div class="text">
                         <p>Total Packs</p>
-                        <h3>18</h3>
+                        <h3><?= $packService->totalPacks() ?></h3>
                         <p>
                             <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
@@ -53,7 +81,7 @@
                     </div>
                     <div class="text">
                         <p>Packs Actifs</p>
-                        <h3>95</h3>
+                        <h3><?= $packService->totalPacksActifs() ?></h3>
                         <p>
                             <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
@@ -73,7 +101,7 @@
                     </div>
                     <div class="text">
                         <p>Packs En Repture</p>
-                        <h3>12</h3>
+                        <h3><?= $packService->totalPacksRepture() ?></h3>
                         <p>
                             <span class="gain-effect"> 
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
@@ -92,12 +120,12 @@
                     </div>
                     <div class="text">
                         <p>Revenues Packs</p>
-                        <h3>3,892 DT</h3>
+                        <h3><?= $packService->revenuePackCeMois() ?> DT</h3>
                         <p>
                             <span class="gain-effect">
                                 <!-- <i class="fa-solid fa-arrow-down"></i> -->
                                 <i class="fa-solid fa-arrow-up" ></i>
-                                12.5%
+                                <?= number_format(calculDePourcentage($packService->revenuePackCeMois() , $packService->revenuePackDernierMois())) ?>h%
                             </span>
                             vs le mois dernier
                         </p>
@@ -106,47 +134,47 @@
             </div>
 
 
-            <div class="packManagerBottomPart">
-                <div class="top">
-                    <div>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" name="packSearch" id="packSearch" placeholder="Rechercher un pack...">
-                    </div>
-                    <div>
-                        <p>Niveau scolaire</p>
+            <div class="packManagerBottomPart" id="packs">
+                <form id="packManagerForm">
+                    <div class="top">
                         <div>
-                            <select name="" id="">
-                                <option value="all" selected>Tous les Niveau</option>
-                                <option value="all" >Primaire</option>
-                                <option value="all" >Collège</option>
-                                <option value="all" >Secondaire</option>
-                                <option value="all" >Bac</option>
-                            </select>
-                            <i class="fa-solid fa-caret-down"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Statut</p>
-                        <div>
-                            <select name="" id="">
-                                <option value="all" selected>Tous les Niveau</option>
-                                <option value="all" >Primaire</option>
-                                <option value="all" >Collège</option>
-                                <option value="all" >Secondaire</option>
-                                <option value="all" >Bac</option>
-                            </select>
-                            <i class="fa-solid fa-caret-down"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <p>reglage</p>
-                        <button type="sumbit">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            Rechercher
-                        </button>
+                            <input type="text" name="nom" id="packSearch" placeholder="Rechercher un pack...">
+                        </div>
+                        <div>
+                            <p>Niveau scolaire</p>
+                            <div>
+                                <select name="niveau" id="">
+                                    <option value="" selected>Tous les Niveau</option>
+                                    <option value="primaire" >Primaire</option>
+                                    <option value="college" >Collège</option>
+                                    <option value="secondaire" >Secondaire</option>
+                                    <option value="bac" >Bac</option>
+                                </select>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Statut</p>
+                            <div>
+                                <select name="statut" id="">
+                                    <option value="" selected>Tous</option>
+                                    <option value="actif" >Actif</option>
+                                    <option value="rupture" >En rupture</option>
+                                </select>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <p>reglage</p>
+                            <button type="sumbit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                Rechercher
+                            </button>
+                        </div>
+                        
                     </div>
-                    
-                </div>
+                </form>
 
 
 
@@ -161,254 +189,93 @@
                             <th>Status</th>
                             <th>Actions</th>
                         </thead>
-
+                        <?php foreach($list_of_packs_filtred as $index => $row): ?>
                         <tr>
                             <td>
                                 <img src="https://www.agrafe.tn/4242-large_default/pochette-de-12-stylo-feutre-kids-bic.jpg" alt="">
                             </td>
                             <td>
                                 <div class="text">
-                                    <h5>Pack Primaire Standard</h5>
-                                    <p class="description">Pack complet pour les éleves du primaire</p>
+                                    <h5><?= $row["libelle"]; ?></h5>
+                                    <p class="description"><?= $row["description"]; ?></p>
                                 </div>
                             </td>
 
                             <td>
-                                <span class="primaire" hidden>primaire</span>
-                                <span class="secondaire" hidden>Secondaire</span>
-                                <span class="collège" hidden>Collège</span>
-                                <span class="bac" >Bac</span>
+                                <?php switch($row["type"]){
+                                    case "primaire" : echo "<span class='primaire' >primaire</span>";break;
+                                    case "secondaire" : echo "<span class='secondaire' >Secondaire</span>";break;
+                                    case "bac" : echo "<span class='bac' >Bac</span>";break;
+                                    case "college" : echo " <span class='collège' >Collège</span>";break;
+                                    default : break;
+                                }?>
                             </td>
                             <td>
-                                <p class="prix">59 DT</p>
+                                <p class="prix"><?= number_format($row["prix"] , 1)?> DT</p>
                             </td>
-                            <td>12 produits</td>
+                            <td><?= $row["nbreArticleTotal"] ?> produits</td>
                             <td>
-                                <span class="actif">
-                                    <i class="fa-solid fa-circle"></i>Actif
-                                </span>
-                                <!-- <span class="repture">
-                                    <i class="fa-solid fa-circle"></i>En repture
-                                </span> -->
+                                <?php if(intval($row["quantite_stock"]) > 0): ?>
+                                    <span class="actif">
+                                        <i class="fa-solid fa-circle"></i>Actif
+                                    </span>
+                                <?php else:?>
+                                    <span class="repture">
+                                        <i class="fa-solid fa-circle"></i>En repture
+                                    </span>
+                                <?php endif; ?>
                             </td>
                             <td>
                                 <ul>
-                                    <li><a href=""><i class="fa-regular fa-eye"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-pen-to-square"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-trash-can"></i></a></li>
+                                    <li><a href="" data-idPack="<?= $row["id_produit"]?>"><i class="fa-regular fa-eye"></i></a></li>
+                                    <li><a href="" data-idPack="<?= $row["id_produit"]?>"><i class="fa-regular fa-pen-to-square"></i></a></li>
+                                    <li><a href="" data-idPack="<?= $row["id_produit"]?>"><i class="fa-regular fa-trash-can"></i></a></li>
                                 </ul>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <img src="https://www.agrafe.tn/4242-large_default/pochette-de-12-stylo-feutre-kids-bic.jpg" alt="">
-                            </td>
-                            <td>
-                                <div class="text">
-                                    <h5>Pack Primaire Standard</h5>
-                                    <p class="description">Pack complet pour les éleves du primaire</p>
-                                </div>
-                            </td>
+                        <?php endforeach; ?>
 
-                            <td>
-                                <span class="primaire" hidden>primaire</span>
-                                <span class="secondaire" hidden>Secondaire</span>
-                                <span class="collège" hidden>Collège</span>
-                                <span class="bac" >Bac</span>
-                            </td>
-                            <td>
-                                <p class="prix">59 DT</p>
-                            </td>
-                            <td>12 produits</td>
-                            <td>
-                                <span class="actif">
-                                    <i class="fa-solid fa-circle"></i>Actif
-                                </span>
-                                <!-- <span class="repture">
-                                    <i class="fa-solid fa-circle"></i>En repture
-                                </span> -->
-                            </td>
-                            <td>
-                                <ul>
-                                    <li><a href=""><i class="fa-regular fa-eye"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-pen-to-square"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-trash-can"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="https://www.agrafe.tn/4242-large_default/pochette-de-12-stylo-feutre-kids-bic.jpg" alt="">
-                            </td>
-                            <td>
-                                <div class="text">
-                                    <h5>Pack Primaire Standard</h5>
-                                    <p class="description">Pack complet pour les éleves du primaire</p>
-                                </div>
-                            </td>
 
-                            <td>
-                                <span class="primaire" hidden>primaire</span>
-                                <span class="secondaire" hidden>Secondaire</span>
-                                <span class="collège" >Collège</span>
-                                <span class="bac" hidden>Bac</span>
-                            </td>
-                            <td>
-                                <p class="prix">59 DT</p>
-                            </td>
-                            <td>12 produits</td>
-                            <td>
-                                <!-- <span class="actif">
-                                    <i class="fa-solid fa-circle"></i>Actif
-                                </span> -->
-                                <span class="repture">
-                                    <i class="fa-solid fa-circle"></i>En repture
-                                </span>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li><a href=""><i class="fa-regular fa-eye"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-pen-to-square"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-trash-can"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="https://www.agrafe.tn/4242-large_default/pochette-de-12-stylo-feutre-kids-bic.jpg" alt="">
-                            </td>
-                            <td>
-                                <div class="text">
-                                    <h5>Pack Primaire Standard</h5>
-                                    <p class="description">Pack complet pour les éleves du primaire</p>
-                                </div>
-                            </td>
-
-                            <td>
-                                <span class="primaire" hidden>primaire</span>
-                                <span class="secondaire" hidden>Secondaire</span>
-                                <span class="collège" hidden>Collège</span>
-                                <span class="bac" >Bac</span>
-                            </td>
-                            <td>
-                                <p class="prix">59 DT</p>
-                            </td>
-                            <td>12 produits</td>
-                            <td>
-                                <span class="actif">
-                                    <i class="fa-solid fa-circle"></i>Actif
-                                </span>
-                                <!-- <span class="repture">
-                                    <i class="fa-solid fa-circle"></i>En repture
-                                </span> -->
-                            </td>
-                            <td>
-                                <ul>
-                                    <li><a href=""><i class="fa-regular fa-eye"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-pen-to-square"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-trash-can"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="https://www.agrafe.tn/4242-large_default/pochette-de-12-stylo-feutre-kids-bic.jpg" alt="">
-                            </td>
-                            <td>
-                                <div class="text">
-                                    <h5>Pack Primaire Standard</h5>
-                                    <p class="description">Pack complet pour les éleves du primaire</p>
-                                </div>
-                            </td>
-
-                            <td>
-                                <span class="primaire" hidden>primaire</span>
-                                <span class="secondaire" hidden>Secondaire</span>
-                                <span class="collège" hidden>Collège</span>
-                                <span class="bac" >Bac</span>
-                            </td>
-                            <td>
-                                <p class="prix">59 DT</p>
-                            </td>
-                            <td>12 produits</td>
-                            <td>
-                                <span class="actif">
-                                    <i class="fa-solid fa-circle"></i>Actif
-                                </span>
-                                <!-- <span class="repture">
-                                    <i class="fa-solid fa-circle"></i>En repture
-                                </span> -->
-                            </td>
-                            <td>
-                                <ul>
-                                    <li><a href=""><i class="fa-regular fa-eye"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-pen-to-square"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-trash-can"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="https://www.agrafe.tn/4242-large_default/pochette-de-12-stylo-feutre-kids-bic.jpg" alt="">
-                            </td>
-                            <td>
-                                <div class="text">
-                                    <h5>Pack Primaire Standard</h5>
-                                    <p class="description">Pack complet pour les éleves du primaire</p>
-                                </div>
-                            </td>
-
-                            <td>
-                                <span class="primaire" hidden>primaire</span>
-                                <span class="secondaire" hidden>Secondaire</span>
-                                <span class="collège" hidden>Collège</span>
-                                <span class="bac" >Bac</span>
-                            </td>
-                            <td>
-                                <p class="prix">59 DT</p>
-                            </td>
-                            <td>12 produits</td>
-                            <td>
-                                <span class="actif">
-                                    <i class="fa-solid fa-circle"></i>Actif
-                                </span>
-                                <!-- <span class="repture">
-                                    <i class="fa-solid fa-circle"></i>En repture
-                                </span> -->
-                            </td>
-                            <td>
-                                <ul>
-                                    <li><a href=""><i class="fa-regular fa-eye"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-pen-to-square"></i></a></li>
-                                    <li><a href=""><i class="fa-regular fa-trash-can"></i></a></li>
-                                </ul>
-                            </td>
-                        </tr>
                     </table>
 
                 </div>
 
 
                 <div class="bottom">
-                    <p>Affichage de 1 à 6 sur 125 packs</p>
+                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min((($page + 1) * $limit )  , $nombre_row_totale) ?> sur <?= $nombre_row_totale ?> packs</p>
                     <div class="pagination">
+                        <!-- before -->
                         <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
-                        <a href="#" class="pagination-selected">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#" id="three-dots">...</a>
+                        <?php if($page> 3):?>
+                            <a href="#" id="three-dots">...</a>
+                        <?php endif; ?>
+
+
+                        <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
+                            <a href="/dashboard/packs?page=<?= $i ?>#packs"><?= $i ?></a>
+                        <?php endfor; ?>
+
+                        <!-- current page -->
+                        <a href="#" class="pagination-selected"><?= $page ?></a>
+                        <?php for($i=$page +1  ; $i <= min($page + 2 , $nombre_totale_page) ; $i++):?>
+                            <a href="/dashboard/packs?page=<?= $i ?>#packs"><?= $i ?></a>
+                        <?php endfor; ?> 
+                                    
+                            
+                        <?php if(($nombre_totale_page - $page)> 2): ?>
+                            <a href="#" id="three-dots" data-value = <?= $i ?>>...</a>
+                        <?php endif; ?>
+
+                        <!-- after -->
                         <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
                     </div>
                 </div>
-
 
             </div>
         </section>
 
 
-    <form action="" class="addPackContainer" hidden>
+    <form action="" class="addPackContainer" id="addPackForm" hidden enctype="multipart/form-data">
         <div class="popUpContainer">
             <div class="overlay"></div>
             <div class="popUpCard">
@@ -438,7 +305,7 @@
                     <div>
                         <label>Quantité en stock <span class="red">*</span></label>
                         <div>
-                            <input type="text" name="libelle" id="" placeholder="Entrer la quantité" required> 
+                            <input type="text" name="quantite_stock" id="" placeholder="Entrer la quantité" required> 
                             <i class="fa-solid fa-boxes-stacked"></i>
                         </div>
                     </div>
@@ -456,22 +323,15 @@
                         </div>
                     </div>
                     <div>
-                        <label>Categorie <span class="red">*</span></label>
+                        <label>Type <span class="red">*</span></label>
                         <div>
-                            <select id="categorie" name="categorie">
+                            <select id="categorie" name="type">
                                 <option value="">-- Sélectionnez une le type --</option>
-                                <option value="ecriture">Écriture</option>
-                                <option value="papeterie">Papeterie</option>
-                                <option value="classement">Classement</option>
-                                <option value="geometrie">Géométrie</option>
-                                <option value="coupe_collage">Coupe et collage</option>
-                                <option value="dessin_arts">Dessin et arts</option>
-                                <option value="sacs_accessoires">Sacs et accessoires</option>
-                                <option value="calcul_sciences">Calcul et sciences</option>
-                                <option value="numerique">Numérique</option>
-                                <option value="livres_pedagogiques">Livres pédagogiques</option>
-                                <option value="fournitures_bureau">Fournitures de bureau</option>
-                                <option value="others">Others</option>
+                                <option value="primaire">Primaire</option>
+                                <option value="college">Collége</option>
+                                <option value="secondaire">Secondaire</option>
+                                <option value="bac">Bac</option>
+
                             </select>
                             <i class="fa-regular fa-folder-open"></i>
                         </div>
@@ -496,7 +356,7 @@
                                 <div class="text">
                                     <span>Click to upload image</span>
                                 </div>
-                                <input type="file" id="file">
+                                <input type="file" name="packImage" id="file">
                         </label>
 
                     </div>
@@ -505,20 +365,83 @@
 
                 <fieldset>
                     <div class="heading">
-                        <h3>Ajouter des articles </h3>
+                        <h3>Les Articles Selectionnées</h3>
+                    </div>
+                    <div class="top">
                         <div>
-                            <div class="search">
-                                <input type="text" name="" id="" placeholder="Rechercher un article...">
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                            <p>Catégories </p>
+                            <div>
+                                <select name="" id="productCategorie">
+                                    <option value="">-- Sélectionnez une catégorie --</option>
+                                    <option value="ecriture">Écriture</option>
+                                    <option value="papeterie">Papeterie</option>
+                                    <option value="classement">Classement</option>
+                                    <option value="geometrie">Géométrie</option>
+                                    <option value="coupe_collage">Coupe et collage</option>
+                                    <option value="dessin_arts">Dessin et arts</option>
+                                    <option value="sacs_accessoires">Sacs et accessoires</option>
+                                    <option value="calcul_sciences">Calcul et sciences</option>
+                                    <option value="numerique">Numérique</option>
+                                    <option value="livres_pedagogiques">Livres pédagogiques</option>
+                                    <option value="fournitures_bureau">Fournitures de bureau</option>
+                                    <option value="others">Others</option>
+                                </select>
+                                </select>
+                                <i class="fa-solid fa-caret-down"></i>
                             </div>
-                            <select id="critereRecherche" name="critereRecherche">
-                                <option value="">Critére de Recherche </option>
-                                <option value="libelle">libellé</option>
-                                <option value="categorie">catégorie</option>
-                                <option value="marque">marque</option>
-                                <option value="prixUnitaire">prix unitaire</option>
-                            </select>
                         </div>
+                        <div>
+                            <p>Nom de l'article</p>
+                            <div class="inputDiv">
+                                <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                                <input type="text" name="" id="productLibelle" placeholder="Rechercher un article...">
+                            </div>
+                        </div>
+                        <div>
+                            <p>Prix Max (DT)</p>
+                            <div class="inputDiv">
+                                <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                                <input type="number" name="" id="productPrixMax" placeholder="Ex: 100.000">
+                            </div>
+                        </div>
+
+                        <div>
+                            <p>Stock </p>
+                            <div>
+                                <select name="" id="productStock">
+                                    <option value="" selected>-- Tous --</option>
+                                    <option value="stock eleve" >Stock élevé</option>
+                                    <option value="stock moyen" >Stock Moyen</option>
+                                    <option value="stock faible" >Stock Faible</option>
+                                    <option value="repture de stock" >Repture de stock</option>
+                                </select>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Trié par</p>
+                            <div>
+                                <select name="" id="productTrie">
+                                    <option value="" selected>-- None --</option>
+                                    <option value="id article" >ID Article</option>
+                                    <option value="libellé" >Libellé</option>
+                                    <option value="prix unitaire" >Prix Unitaire</option>
+                                    <option value="stock" >Stock</option>
+                                    <option value="nombre de vente" >Nombre de vente</option>
+                                </select>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <p>reglage</p>
+                            <button type="button" id="bouttonRechercher">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                Rechercher
+                            </button>
+                        </div>
+                        
                     </div>
                     <div class="tableContainer">
                         
@@ -532,8 +455,9 @@
                                 <th>Quantité a ajouter</th>
                                 <th>Action</th>
                             </thead>
-                            <tbody>
-                                <tr>
+                            <tbody id="firstTablePopUpCard">
+                                <!-- example of table row  -->
+                                <!-- <tr>
                                     <td>
                                         <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
                                         <div class="text">
@@ -546,98 +470,22 @@
                                     <td>1,250 DT</td>
                                     <td>450</td>
                                     <td><input type="number" name="" id="" value="1"></td>
-                                    <td><button>Confirmé</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
-                                        <div class="text">
-                                            <h4>Cahier 96 pages</h4>
-                                            <p>Cah_96</p>
-                                        </div>
-                                    </td>
-                                    <td>papeterie</td>
-                                    <td>Kimia </td>
-                                    <td>1,250 DT</td>
-                                    <td>450</td>
-                                    <td><input type="number" name="" id="" value="1"></td>
-                                    <td><button>Confirmé</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
-                                        <div class="text">
-                                            <h4>Cahier 96 pages</h4>
-                                            <p>Cah_96</p>
-                                        </div>
-                                    </td>
-                                    <td>papeterie</td>
-                                    <td>Kimia </td>
-                                    <td>1,250 DT</td>
-                                    <td>450</td>
-                                    <td><input type="number" name="" id="" value="1"></td>
-                                    <td><button>Confirmé</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
-                                        <div class="text">
-                                            <h4>Cahier 96 pages</h4>
-                                            <p>Cah_96</p>
-                                        </div>
-                                    </td>
-                                    <td>papeterie</td>
-                                    <td>Kimia </td>
-                                    <td>1,250 DT</td>
-                                    <td>450</td>
-                                    <td><input type="number" name="" id="" value="1"></td>
-                                    <td><button>Confirmé</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
-                                        <div class="text">
-                                            <h4>Cahier 96 pages</h4>
-                                            <p>Cah_96</p>
-                                        </div>
-                                    </td>
-                                    <td>papeterie</td>
-                                    <td>Kimia </td>
-                                    <td>1,250 DT</td>
-                                    <td>450</td>
-                                    <td><input type="number" name="" id="" value="1"></td>
-                                    <td><button>Confirmé</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
-                                        <div class="text">
-                                            <h4>Cahier 96 pages</h4>
-                                            <p>Cah_96</p>
-                                        </div>
-                                    </td>
-                                    <td>papeterie</td>
-                                    <td>Kimia </td>
-                                    <td>1,250 DT</td>
-                                    <td>450</td>
-                                    <td><input type="number" name="" id="" value="1"></td>
-                                    <td><button>Confirmé</button></td>
-                                </tr>
-
+                                    <td><button class="confirmProduct" data-idProduit="1">Confirmé</button></td>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
 
                     <div class="bottom">
                         <div class="pagination">
-                            <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
-                            <a href="#" class="pagination-selected">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#" id="three-dots">...</a>
-                            <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                            <a href="" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                            <a href="" class="pagination-selected">1</a>
+                            <a href="" >2</a>
+                            <a href="" >3</a>
+                            <a href="" >4</a>
+                            <a href="">5</a>
+                            <a href="" id="three-dots">...</a>
+                            <a href="" id="post"><i class="fa-solid fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -657,8 +505,9 @@
                                     <th>Quantité</th>
                                     <th>Action</th>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody id="articleSelectionnéeTBody">
+                                    <!-- exemple of table row -->
+                                    <!-- <tr data-idProduit="id" class="articleSelectionner" data-quantity=5>
                                         <td>
                                             <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
                                             <div class="text">
@@ -671,38 +520,8 @@
                                         <td>1,250 DT</td>
                                         <td>450</td>
                                         <td>5</td>
-                                        <td><button>Supprimée</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
-                                            <div class="text">
-                                                <h4>Cahier 96 pages</h4>
-                                                <p>Cah_96</p>
-                                            </div>
-                                        </td>
-                                        <td>papeterie</td>
-                                        <td>Kimia </td>
-                                        <td>1,250 DT</td>
-                                        <td>450</td>
-                                        <td>5</td>
-                                        <td><button>Supprimée</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
-                                            <div class="text">
-                                                <h4>Cahier 96 pages</h4>
-                                                <p>Cah_96</p>
-                                            </div>
-                                        </td>
-                                        <td>papeterie</td>
-                                        <td>Kimia </td>
-                                        <td>1,250 DT</td>
-                                        <td>450</td>
-                                        <td>5</td>
-                                        <td><button>Supprimée</button></td>
-                                    </tr>
+                                        <td><button class="deleteProduct" data-idProduit="1">Supprimée</button></td>
+                                    </tr> -->
 
                                 </tbody>
                             </table>

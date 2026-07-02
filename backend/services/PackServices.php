@@ -1,9 +1,10 @@
 <?php
     include_once(__DIR__ . "/../models/Pack.php");
-    include_once(__DIR__ . "/../models/Article.php");
     include_once(__DIR__ . "/../repository/PackRepository.php");
     include_once(__DIR__ . "/../repository/ProductRepository.php");
-    include_once(__DIR__ . "/../exception/*.php");
+    include_once(__DIR__ . "/../exception/IdentifiantInvalideException.php");
+    include_once(__DIR__ . "/../exception/EmptyDataArray.php");
+    include_once(__DIR__ . "/../exception/QuantityException.php");
     class PackServices{
         private PackRepository $packRepo;
         private ProductRepository $productRepo;
@@ -12,6 +13,30 @@
             $this->productRepo = new ProductRepository();
         }
 
+        // 4 card part : statistics
+        public function revenuePackCeMois(){return $this->packRepo->revenuePackCeMois();}
+        public function revenuePackDernierMois(){return $this->packRepo->revenuePackDernierMois();}
+        public function totalPacks(){return $this->packRepo->NombreTotalePack();}
+        public function totalPacksActifs(){return $this->packRepo->NombreTotalePackActif();}
+        public function totalPacksRepture(){return $this->packRepo->packEnRepture();}
+
+
+        // recher Article avec filtrage 
+
+        public function recherchePack(string $nom, string $niveau , string $statut , int $limit , int $pagination){
+            if(!in_array($niveau , ["primaire", "college","secondaire","bac" ,""])){throw new Exception("Le niveau scolaire de cette pack est invalide!");}
+            if(!in_array($statut,["actif", "rupture",""])){throw new Exception("La statut de cette pack est invalide");}
+            if($pagination < 1){throw new Exception("La page doit etre >= 1");}
+            if($limit < 1){throw new Exception("la limit doit etre > 1");}
+            return $this->packRepo->recherchePack($nom, $niveau , $statut , $limit, $pagination);
+        }
+        public function nbreRowRecherchePack(string $nom, string $niveau , string $statut , int $limit , int $pagination){
+            if(!in_array($niveau , ["primaire", "college","secondaire","bac" ,""])){throw new Exception("Le niveau scolaire de cette pack est invalide!");}
+            if(!in_array($statut,["actif", "rupture",""])){throw new Exception("La statut de cette pack est invalide");}
+            if($pagination < 1){throw new Exception("La page doit etre >= 1");}
+            if($limit < 1){throw new Exception("la limit doit etre > 1");}
+            return $this->packRepo->nbreRowRecherchePack($nom, $niveau , $statut , $limit, $pagination);
+        }
         //done
         public function getPackArticles(int $idPack){
             if($idPack < 1){throw new IdentifiantInvalideException("L'identifiant du pack est invalide !");}
@@ -101,11 +126,24 @@
          * @param niveau => in ["primaire", "college","secondaire","bac"]
          * @param prix => > 0
          */
-        public function createPack($data, float $prix , $niveau ,string $libelle,int $quantite ,string $image_url ,float $remise ,string $description){
+        public function createPack($data, float $prix , $niveau ,string $libelle,int $quantite , $file ,float $remise ,string $description){
             if(empty($data)){throw new EmptyDataArray("L'array du donnée est vide!");}
             if($prix < 0){throw new Exception("prix doit etre positif !");}
             $niveau = mb_strtolower($niveau);
-            if(!in_array( $niveau, ["primaire", "college","secondaire","bac"])){throw new Exception("le niveau est invalide");}
+            if(!in_array( $niveau, ["primaire", "college","secondaire","bac"])){throw new Exception("le niveau est invalide!!!");}
+            //file handling 
+            if(!isset($file["packImage"])){throw new Exception("La pack doit contenir une image");}
+            $image = $file["packImage"];
+            if(!in_array($image["type"], ["image/jpeg","image/png","image/webp"])){throw new Exception("Ce Type d'image ". $image["type"] ." n'est pas autorisee !");}
+            if($image["size"] > 5 * 1024 * 1024){throw new Exception("Image size too large > 5mb");}
+            $ext = pathinfo($image["name"] , PATHINFO_EXTENSION);
+            $newName = bin2hex(random_bytes(16)) . "." . $ext;
+            $uploadDir = __DIR__ . "/../../public/assets/images/uploadedImg/packImg/";
+            
+            if(!is_dir($uploadDir)){mkdir($uploadDir , 0777,true);}
+            $destination = $uploadDir . $newName;
+            if(!move_uploaded_file($image["tmp_name"],$destination)){throw new Exception("Failed to save the image!!");}
+            $image_url = "/assets/uploadedImg/packImg/" . $newName;
             return $this->packRepo->createNewPack($data , $prix , $niveau , $libelle, $quantite, $image_url , $remise , $description);
         }
     }

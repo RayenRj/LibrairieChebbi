@@ -487,6 +487,7 @@ fieldset .heading .search input:focus{
 #addPackTable tr:not(:last-child){
     border-bottom: 2px solid var(--border-gray);
 }
+
 #addPackTable tbody tr td{
     padding: 0.25em;
     font-size: 13px;
@@ -606,3 +607,124 @@ fieldset .heading .search input:focus{
     padding: 0.65em 1.3em 0.35em 1.7em;
     background-color: #f05858;
 }
+
+
+
+
+
+/* ################################ */
+/* Partie el filtrage fl pop up */
+/* ################################ */
+
+/* .articleManagerBottomPart{
+    border-radius: 1em;
+    border: 2px solid #eee;
+    padding: 1em 0em 0em;
+    margin-bottom: 2em;
+} */
+
+.popUpContainer fieldset:last-of-type .top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 2em;
+    margin-bottom: 2em;
+    gap: 1em;
+}
+
+.popUpContainer fieldset:last-of-type .top > div{position: relative;}
+
+div.inputDiv input{
+    background-color: white;
+    width: 100%;
+    min-width: 100px;
+    border-radius: 0.5em;
+    border: 2px solid #eee;
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    padding-right:32px;
+    padding-left: 10px;
+    height: 40px;
+    margin-top: 0.5em;
+    flex-grow: 1;
+}
+
+.popUpContainer fieldset:last-of-type .top  select{
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0.7em 3em 0.7em 1.25em; 
+    border: 2px solid #eee;
+    border-radius: 0.5em;
+    text-align: center;
+    align-content: center;
+    font-weight: 500;
+    margin-top: 0.5em;
+    font-size: 13px;
+    height: 40px;
+    outline: none;
+}
+
+.popUpContainer fieldset:last-of-type .top > div.inputDiv > i{
+    font-size: 13px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 13px;
+    color: var(--gray-700);
+}
+
+.popUpContainer fieldset:last-of-type .top > div > p{
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.popUpContainer fieldset:last-of-type .top > div > div {
+    position: relative;
+}
+
+
+.popUpContainer fieldset:last-of-type .top > div > div > i{
+    position: absolute;
+    right: 15px;
+    top: calc(50% + 2px);
+    transform: translateY(-50%);
+    font-size: 13px;
+}
+
+
+.popUpContainer fieldset:last-of-type .top button[type="button"]{
+    border: 2px solid var(--blue);
+    outline: none;
+    background-color: white;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap:0.5em;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 0.5em;
+    cursor: pointer;
+    transition: 0.1s all ease;
+    height: 40px;
+    width: 135px;
+    justify-content: center;
+    background-color: var(--blue);
+    color: white;
+}
+.popUpContainer fieldset:last-of-type  .top button[type="button"]:hover{
+    background-color:#2f71db;
+}
+
+.popUpContainer fieldset:last-of-type .top > div:last-child >p{
+    opacity: 0;
+}
+
+
+
+
+
+

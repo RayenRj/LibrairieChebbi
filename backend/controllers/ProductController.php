@@ -1,5 +1,5 @@
 <?php
-
+    // header('Content-Type: application/json');
     include __DIR__ . "/../services/ProductServices.php";
     class ProductController{
         private ProductServices $productServices;
@@ -11,8 +11,8 @@
         //done
         public function getProductById($request){
             try{
-                $body = $request["body"];
-                $result = $this->productServices->getProductById($body["idProduct"]);
+                $params = $request["params"];
+                $result = $this->productServices->getProductById(intval($params[0]));
                 $response = [
                     "success" => true,
                     "message" => "Finding Client by Email",
@@ -102,12 +102,11 @@
             }
 
         }
-
+        //done
         public function getAllProduct($request){
             
             try{
                 $query = $request["query"];
-
                 $result = $this->productServices->getAllProduct($query["limit"],$query["page"]);
                 $response = [
                     "success" => true,
@@ -129,6 +128,32 @@
                 echo json_encode($response);
                 return;
             }   
+        }
+        
+        public function rechercherArticle($request){
+            try{
+                $query = $request["query"];
+                $result = $this->productServices->rechercherArticle($query["categorie"] ?? "",$query["libelle"] ?? "",$query["prixMax"] ?? 0,$query["prixMin"] ?? 0,$query["stock"] ?? "",$query["trie"] ?? "" ,$query["limit"] ?? 1 ,$query["page"] ?? 1);
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => $this->productServices->nombreLigneRechercherArticle($query["categorie"] ?? "",$query["libelle"] ?? "",$query["prixMax"] ?? 999999,$query["prixMin"] ?? 0,$query["stock"] ?? "",$query["trie"] ?? "" ,$query["limit"] ?? 1 ,$query["page"] ?? 1),
+                    "message" => "getting all products successfully", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            } 
         }
 
 }
