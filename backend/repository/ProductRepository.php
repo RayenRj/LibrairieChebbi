@@ -10,12 +10,12 @@
 
         // venteParMois = ta3tiha el mois wl year w ta3tik el nombre de commandes eli sarou
         public function venteParMois(int $mois , int $year){
-            $query = "select count(*)
-                      from ligne_commande lc , commande c,
-                      where month(date_commande) = ? and year(date_commande) = ? and lc.id_commande = c.id_commande;";
+            $query = "SELECT count(*)
+                      from ligne_commande lc , commande c
+                      where lc.id_commande = c.id_commande and month(date_commande) = ? and year(date_commande) = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$mois,$year]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;
         }
         // el utilisation ba3d fl chart anni kol marra bch nesta3ml feha chhar different
 
@@ -23,13 +23,13 @@
             $query = "select count(*) from {$this->tName} where quantite_stock = 0";
             $stmt= $this->db->prepare($query);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
         public function nbreArticleNonVendus(){
-            $query = "select count(*) from produit p where not exist(select * from ligne_commande lc where p.id_produit = lc.id_produit );";
+            $query = "SELECT count(*) from produit p where NOT EXISTS(select * from ligne_commande lc where p.id_produit = lc.id_produit );";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
         
         // partie stock 
@@ -37,19 +37,19 @@
             $query = "select count(*) from {$this->tName} where quantite_stock > 20 ;" ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
         public function stockMoyen(){
             $query = "select count(*) from {$this->tName} where quantite_stock <= 20 and quantite_stock > 5 ;" ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
         public function stockFaible(){
             $query = "select count(*) from {$this->tName} where quantite_stock > 1 and quantite_stock <= 5;" ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
 
         // CRUD functions
@@ -94,9 +94,9 @@
         // end of CRUD function
 
         public function nbreDeVentePourChaqueCategorieCeMois(){
-            $query = "select count(*) from ligne_commande lc, commande c , produit p
-                      where lc.id_commande = c.id_commande and p.id_produit = lc.id_produit and month(date_commande)= month(curdate()) and year(date_commande) = year(curdate()) 
-                      group by categorie;" ;
+            $query = "select categorie , count(*) as `nombreVente` from ligne_commande lc, commande c , produit p
+                        where lc.id_commande = c.id_commande and p.id_produit = lc.id_produit
+                        group by categorie;" ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

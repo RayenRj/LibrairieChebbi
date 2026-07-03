@@ -129,7 +129,7 @@
                 return;
             }   
         }
-        
+        //done
         public function rechercherArticle($request){
             try{
                 $query = $request["query"];
@@ -137,6 +137,55 @@
                 $response = [
                     "success" => true,
                     "numberOfLine" => $this->productServices->nombreLigneRechercherArticle($query["categorie"] ?? "",$query["libelle"] ?? "",$query["prixMax"] ?? 999999,$query["prixMin"] ?? 0,$query["stock"] ?? "",$query["trie"] ?? "" ,$query["limit"] ?? 1 ,$query["page"] ?? 1),
+                    "message" => "getting all products successfully", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            } 
+        }
+        public function nbreDeVentePourChaqueCategorieCeMois($request){
+            try{
+                $result = $this->productServices->nbreDeVentePourChaqueCategorieCeMois();
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "getting all products successfully", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            } 
+        }
+        public function nombreDeVenteParMois($request){
+            try{
+                $body = $request["body"];
+                $result = $this->productServices->nombreDeVenteParMois(intval($body["month"]), intval($body["year"]));
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
                     "message" => "getting all products successfully", 
                     "data" => $result,
                     "error" => null

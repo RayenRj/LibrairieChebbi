@@ -236,15 +236,53 @@ input[type="number"]{
     color: black;
 }
 
-.PromotionManagerBottomPart .top > div:last-child >p{
+.PromotionManagerBottomPart .top > div:last-child p{
     opacity: 0;
 }
 
 
+.PromotionManagerBottomPart .top > div:last-child > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
 
 
 
+.PromotionManagerBottomPart button[type="submit"]{
+    padding: 0.65em 2em;
+    border-radius: 0.5em;
+    outline: none;
+    border: 1px solid var(--gray-200);
+    font-size: 13px;
+    font-weight: 500;
+    appearance:none;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--blue);
+    color: white;
+    height: 40px;
+    width: 100%;
+    min-width: 150px;
 
+}
+
+.PromotionManagerBottomPart .top button[type="submit"]:hover{background-color: #2f71db;}
+.PromotionManagerBottomPart .top button[type="submit"]:active{background-color: #4d8cf1;}
+
+.PromotionManagerBottomPart .top button[type="submit"] i{margin-right: 10px;}
+
+.PromotionManagerBottomPart .top .text p{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-500);
+}
+
+.PromotionManagerBottomPart .top > .lastDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 0.75em;
+}
 
 
 

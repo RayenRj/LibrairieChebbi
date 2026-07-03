@@ -45,6 +45,8 @@ error_reporting(E_ALL);
     $route->add("PATCH","/api/articles/{id}","ProductController","modifyProduct");
     $route->add("GET", "/api/articles" , "ProductController" , "getAllProduct");
     $route->add("GET", "/api/articles/search" , "ProductController" , "rechercherArticle");
+    $route->add("POST", "/api/articles/vente" , "ProductController" , "nombreDeVenteParMois");
+    $route->add("GET", "/api/articles/ventes/categories" , "ProductController" , "nbreDeVentePourChaqueCategorieCeMois");
 
 
 

@@ -34,7 +34,7 @@
                         </div>
                     </div>
 
-
+                    
                     <div>
                         <p>Categorie </p>
                         <div>
@@ -65,15 +65,23 @@
                         </div>
                     </div>
 
+                    <div class="lastDiv">
+                        <div>
+                            <p>reglage</p>
+                            <button type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                Rechercher
+                            </button>
+                        </div>
 
-                    <div>
-                        <p>reglage</p>
-                        <button type="reset">
-                            <i class="fa-solid fa-rotate"></i>
-                            Réinitialiser
-                        </button>
+                        <div>
+                            <p>reglage</p>
+                            <button type="reset">
+                                <i class="fa-solid fa-rotate"></i>
+                                Réinitialiser
+                            </button>
+                        </div>
                     </div>
-                    
                 </div>
 
 

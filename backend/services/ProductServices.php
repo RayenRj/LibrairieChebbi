@@ -121,6 +121,49 @@ class ProductServices{
         if(!in_array($critere,["" , "libelle","categorie", "marque" , "prix"])){throw new Exception("La critere est invalide!");}
         return $this->productRepo->rechercherArticle2($data,$critere,$limit, ($page - 1) * $limit);
     }
+    //done
+    public function venteCeMois(){
+        $month = intval(date("m"));
+        $year = intval(date("Y"));
+        return $this->productRepo->venteParMois($month , $year);
+    }
+    //done
+    public function venteDernierMois(){
+        $month = intval(date("m" , strtotime("-1 month")));
+        $year = intval(date("Y", strtotime("-1 month")));
+        return $this->productRepo->venteParMois($month , $year);
+    }
+    //done
+    public function nbreArticleEnRepture(){
+        return $this->productRepo->nbreArticleEnRepture();
+    }
+    //done
+    public function nbreArticleNonVendus(){
+        return $this->productRepo->nbreArticleNonVendus();
+    }
+    //done
+    public function stockElevee(){
+        return $this->productRepo->stockElevee();
+    }
+    //done
+    public function stockMoyen(){
+        return $this->productRepo->stockMoyen();
+    }
+    //done
+    public function stockFaible(){
+        return $this->productRepo->stockElevee();
+    }
+    //done
+    public function nombreDeVenteParMois(int $month , int $year){
+        if($month > 12 || $month < 0 ){throw new Exception("La valeur du mois : $month est invalide!");}
+        if($year > intVal(date("Y")) || $year < 1990){throw new Exception("La valeur de l'année est invalide!");}
+        return $this->productRepo->venteParMois($month ,$year);
+    }
+    //done
+    public function nbreDeVentePourChaqueCategorieCeMois(){
+        return $this->productRepo->nbreDeVentePourChaqueCategorieCeMois();
+    }
+
 }
 
 
