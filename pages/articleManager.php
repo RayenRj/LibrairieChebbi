@@ -2,6 +2,13 @@
     require_once(__DIR__ . "/../backend/controllers/ProductController.php");
     $productService = new ProductServices();
     $productArray = $productService->getAllProduct(8 , 1);
+
+    function calculDePourcentage($currentMonthValue , $lastMonthValue){
+        $x = $currentMonthValue - $lastMonthValue;
+        if($lastMonthValue==0){return 100;} 
+        return ($x * 100)/$lastMonthValue;
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,13 +52,19 @@
                     </div>
                     <div class="text">
                         <p>Total Articles Vendus</p>
-                        <h3>1,248</h3>
+                        <h3><?= $productService->venteCeMois(); ?></h3>
                         <p>
+                            <?php if(calculDePourcentage($productService->venteCeMois() ,$productService->venteDernierMois() ) >= 0): ?>
                             <span class="gain-effect">
-                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
-                                <i class="fa-solid fa-arrow-up" hidden></i>
-                                12.5%
+                                <i class="fa-solid fa-arrow-up" ></i>
+                                <?= number_format(calculDePourcentage($productService->venteCeMois() ,$productService->venteDernierMois()),1)?> %
                             </span>
+                            <?php else: ?>
+                            <span class="loss-effect">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <?= number_format( calculDePourcentage($productService->venteCeMois() ,$productService->venteDernierMois() ),1) ?> %
+                            </span>
+                            <?php endif; ?>
                             vs le mois dernier
                         </p>
                     </div>
@@ -63,8 +76,8 @@
                     </div>
                     <div class="text">
                         <p>Article en repture</p>
-                        <h3>2,356</h3>
-                        <a href="" class="cardLink">Voir la liste</a>
+                        <h3><?= $productService->nbreArticleEnRepture(); ?></h3>
+                        <a href="#articleManagerBottomPart" class="cardLink">Voir la liste</a>
                     </div>
                 </div>
 
@@ -75,8 +88,8 @@
                     </div>
                     <div class="text">
                         <p>Article jamais vendus</p>
-                        <h3>3,892</h3>
-                        <a href="" class="cardLink">Voir la liste</a>
+                        <h3><?= $productService->nbreArticleNonVendus() ?></h3>
+                        <a href="#articleManagerBottomPart" class="cardLink">Voir la liste</a>
                     </div>
                 </div>
             </div>
@@ -97,7 +110,37 @@
                             <canvas id="chart2"></canvas>
                         </div>
                         <div>
-                            <ul>
+                            <ul class="firstList chartList">
+                                <li>
+                                    <p><i class="fa-solid fa-circle"></i> Écriture</p>
+                                    <p>35%</p>
+                                </li>
+                                <li>
+                                    <p><i class="fa-solid fa-circle"></i> Papeterie</p>
+                                    <p>35%</p>
+                                </li>
+                                <li>
+                                    <p><i class="fa-solid fa-circle"></i> Géométrie</p>
+                                    <p>35%</p>
+                                </li>
+                                <li>
+                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
+                                    <p>35%</p>
+                                </li>
+                                <li>
+                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
+                                    <p>35%</p>
+                                </li>
+                                <li>
+                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
+                                    <p>35%</p>
+                                </li>
+                            </ul>
+                            <ul class="lastList chartList">
+                                <li>
+                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
+                                    <p>35%</p>
+                                </li>
                                 <li>
                                     <p><i class="fa-solid fa-circle"></i> Chaiers</p>
                                     <p>35%</p>
@@ -125,7 +168,7 @@
 
             </div>
 
-            <div class="articleManagerBottomPart">
+            <div class="articleManagerBottomPart" id="articleManagerBottomPart">
                 <div class="top">
                     <div>
                         <p>Catégories </p>
@@ -524,7 +567,7 @@
                         <i class="fa-solid fa-box-open"></i>
                         <div class="text">
                             <h5>Stock élevé</h5>
-                            <h2>120 produits</h2>
+                            <h2><?= $productService->stockElevee() ?> produits</h2>
                             <p>(plus de 20 en stock)</p>
                         </div>
                     </div>
@@ -532,7 +575,7 @@
                         <i class="fa-solid fa-box-open"></i>
                         <div class="text">
                             <h5>Stock Moyen</h5>
-                            <h2>120 produits</h2>
+                            <h2><?= $productService->stockMoyen() ?> produits</h2>
                             <p>(entre 6 et 20 en stock)</p>
                         </div>
                     </div>
@@ -540,7 +583,7 @@
                         <i class="fa-solid fa-box-open"></i>
                         <div class="text">
                             <h5>Stock Faible</h5>
-                            <h2>120 produits</h2>
+                            <h2><?= $productService->stockFaible() ?> produits</h2>
                             <p>(entre 1 et 5 en stock)</p>
                         </div>
                     </div>
@@ -548,7 +591,7 @@
                         <i class="fa-solid fa-box-open"></i>
                         <div class="text">
                             <h5>Repture de Stock</h5>
-                            <h2>120 produits</h2>
+                            <h2><?= $productService->nbreArticleEnRepture() ?> produits</h2>
                             <p>(0 en stock)</p>
                         </div>
                     </div>

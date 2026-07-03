@@ -65,12 +65,7 @@
                         <p>Total Packs</p>
                         <h3><?= $packService->totalPacks() ?></h3>
                         <p>
-                            <span class="gain-effect">
-                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
-                                <i class="fa-solid fa-arrow-up" hidden></i>
-                                12.5%
-                            </span>
-                            vs le mois dernier
+                            Le nombre totale de pack dans le stock
                         </p>
                     </div>
                 </div>
@@ -83,12 +78,7 @@
                         <p>Packs Actifs</p>
                         <h3><?= $packService->totalPacksActifs() ?></h3>
                         <p>
-                            <span class="gain-effect">
-                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
-                                <i class="fa-solid fa-arrow-up"  hidden></i>
-                                12.5%
-                            </span>
-                            vs le mois dernier
+                            Le nombre totale de packs actifs dans le stock
                         </p>
                     </div>
                 </div>
@@ -103,12 +93,8 @@
                         <p>Packs En Repture</p>
                         <h3><?= $packService->totalPacksRepture() ?></h3>
                         <p>
-                            <span class="gain-effect"> 
-                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
-                                <i class="fa-solid fa-arrow-up" ></i>
-                                12.5%
-                            </span>
-                            vs le mois dernier
+
+                            Le nombre totale de packs en repture de stock
                         </p>
                     </div>
                 </div>
@@ -122,11 +108,17 @@
                         <p>Revenues Packs</p>
                         <h3><?= $packService->revenuePackCeMois() ?> DT</h3>
                         <p>
+                            <?php if(calculDePourcentage($packService->revenuePackCeMois() , $packService->revenuePackDernierMois())>=0):?>
                             <span class="gain-effect">
-                                <!-- <i class="fa-solid fa-arrow-down"></i> -->
                                 <i class="fa-solid fa-arrow-up" ></i>
-                                <?= number_format(calculDePourcentage($packService->revenuePackCeMois() , $packService->revenuePackDernierMois())) ?>h%
+                                <?= number_format(calculDePourcentage($packService->revenuePackCeMois() , $packService->revenuePackDernierMois()),2) ?>%
                             </span>
+                            <?php else:?>
+                                <span class="loss-effect">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                    <?= number_format(calculDePourcentage($packService->revenuePackCeMois() , $packService->revenuePackDernierMois()),2) ?>%
+                                </span>
+                            <?php endif;?>
                             vs le mois dernier
                         </p>
                     </div>

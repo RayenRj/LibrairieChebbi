@@ -1,11 +1,10 @@
 create database if not exists librairieDB;
 use librairieDB;
-
 create table produit(
 	id_produit int primary key auto_increment,
     code_barre varchar(50) ,
     libelle varchar(50),
-    prix decimal(8,3) not null check(prix>0),
+    prix decimal(8,3) not null check(prix>=0),
     quantite_stock int not null check(quantite_stock >= 0),
     categorie varchar(50) not null,
     marque varchar(50),
@@ -86,7 +85,7 @@ after insert on ligne_commande
 for each row 
 begin 
 	-- tna9eslk el quantité ta3 el produit fl stock
-	if(select quantite_stock from produit where id_produit= new.id_produit) > new.quantite then
+	if(select quantite_stock from produit where id_produit= new.id_produit) >= new.quantite then
 		update produit 
 		set quantite_stock = quantite_stock - new.quantite 
 		where id_produit = new.id_produit;
@@ -102,268 +101,209 @@ begin
 end$$
 DELIMITER ;
 
-select * from produit ;
+
+
+-- ############################################################################################
+-- ############################################################################################
+-- ############################################################################################
+-- ############################################################################################
+-- ##################################Huge dataset -- ##########################################
+-- ############################################################################################
+-- ############################################################################################
+-- ############################################################################################
+-- ############################################################################################
 /* =========================
-   PRODUIT (20 rows)
+   PRODUIT (50 rows updated)
 ========================= */
+
 INSERT INTO produit VALUES
-(1,'CB001','laptop dell',100.500,10,'informatique','dell','img1.jpg',0,'pc portable'),
-(2,'CB002','souris logitech',25.990,100,'informatique','logitech','img2.jpg',0,'souris sans fil'),
-(3,'CB003','clavier mecanique',80.000,50,'informatique','redragon','img3.jpg',5,'rgb keyboard'),
-(4,'CB004','ecran samsung',300.000,20,'informatique','samsung','img4.jpg',10,'monitor 24'),
-(5,'CB005','imprimante hp',150.000,15,'informatique','hp','img5.jpg',0,'printer'),
-(6,'CB006','telephone iphone',999.990,25,'mobile','apple','img6.jpg',0,'iphone smartphone'),
-(7,'CB007','telephone samsung',700.000,30,'mobile','samsung','img7.jpg',5,'android phone'),
-(8,'CB008','chargeur usb-c',15.500,200,'accessoire','anker','img8.jpg',0,'fast charge'),
-(9,'CB009','casque audio',60.000,80,'audio','sony','img9.jpg',0,'headphones'),
-(10,'CB010','cle usb 64gb',12.000,150,'stockage','kingston','img10.jpg',0,'usb storage'),
-(11,'CB011','ssd 1tb',110.000,40,'stockage','samsung','img11.jpg',0,'ssd disk'),
-(12,'CB012','hdd 2tb',90.000,35,'stockage','wd','img12.jpg',0,'hard disk'),
-(13,'CB013','routeur wifi',55.000,60,'reseau','tp-link','img13.jpg',0,'wifi router'),
-(14,'CB014','switch reseau',40.000,45,'reseau','dlink','img14.jpg',0,'network switch'),
-(15,'CB015','tablette ipad',850.000,18,'mobile','apple','img15.jpg',0,'ipad tablet'),
-(16,'CB016','webcam hd',35.000,70,'accessoire','logitech','img16.jpg',0,'camera hd'),
-(17,'CB017','microphone usb',45.000,55,'audio','blue','img17.jpg',0,'usb mic'),
-(18,'CB018','disque externe',120.000,25,'stockage','seagate','img18.jpg',0,'external hdd'),
-(19,'CB019','smartwatch',199.990,40,'mobile','xiaomi','img19.jpg',0,'watch'),
-(20,'CB020','pc gamer',150.000,8,'informatique','asus','img20.jpg',0,'gaming pc');
+(1,'CB001','Cahier 100 pages',2.500,200,'papeterie','MaxiPaper','img1.jpg',0,''),
+(2,'CB002','Stylo bleu',1.200,300,'ecriture','Bic','img2.jpg',0,''),
+(3,'CB003','Stylo rouge',1.200,250,'ecriture','Bic','img3.jpg',0,''),
+(4,'CB004','Crayon HB',0.800,400,'dessin_arts','Faber','img4.jpg',0,''),
+(5,'CB005','Gomme blanche',0.500,150,'papeterie','Staedtler','img5.jpg',0,''),
+(6,'CB006','Règle 30cm',1.500,120,'geometrie','Maped','img6.jpg',0,''),
+(7,'CB007','Sac à dos',25.000,80,'sacs_accessoires','Nike','img7.jpg',0,''),
+(8,'CB008','Trousse scolaire',10.000,100,'sacs_accessoires','Decathlon','img8.jpg',0,''),
+(9,'CB009','Classeur A4',4.000,90,'classement','Esselte','img9.jpg',0,''),
+(10,'CB010','Feuilles A4',3.500,500,'papeterie','PaperOne','img10.jpg',0,''),
+(11,'CB011','Calculatrice',18.000,60,'calcul_sciences','Casio','img11.jpg',0,''),
+(12,'CB012','Agenda 2026',6.000,70,'fournitures_bureau','Oxford','img12.jpg',0,''),
+(13,'CB013','Surligneur jaune',1.100,200,'ecriture','Stabilo','img13.jpg',0,''),
+(14,'CB014','Surligneur vert',1.100,200,'ecriture','Stabilo','img14.jpg',0,''),
+(15,'CB015','Surligneur rose',1.100,200,'ecriture','Stabilo','img15.jpg',0,''),
 
-/* =========================
-   PACK (20 rows) - id_pack = produit id
-========================= */
+(16,'PK001','Pack Primaire Base',0.000,0,'others','system','img16.jpg',0,''),
+(17,'PK002','Pack Secondaire Base',0.000,0,'others','system','img17.jpg',0,''),
+(18,'PK003','Pack Bac Base',0.000,0,'others','system','img18.jpg',0,''),
+(19,'PK004','Pack College Base',0.000,0,'others','system','img19.jpg',0,''),
+
+(20,'CB020','Correcteur',2.200,100,'coupe_collage','Bic','img20.jpg',0,''),
+(21,'CB021','Feutre noir',1.300,150,'dessin_arts','Faber','img21.jpg',0,''),
+(22,'CB022','Bloc-notes',2.800,130,'papeterie','Oxford','img22.jpg',0,''),
+(23,'CB023','Dossier plastique',0.900,220,'classement','Esselte','img23.jpg',0,''),
+(24,'CB024','Perforatrice',5.500,50,'fournitures_bureau','Maped','img24.jpg',0,''),
+(25,'CB025','Agrafeuse',7.000,60,'fournitures_bureau','Maped','img25.jpg',0,''),
+(26,'CB026','Agrafes',1.000,300,'fournitures_bureau','Generic','img26.jpg',0,''),
+(27,'CB027','Marqueur permanent',2.000,140,'ecriture','Sharpie','img27.jpg',0,''),
+(28,'CB028','Cartable cuir',40.000,40,'sacs_accessoires','Samsonite','img28.jpg',0,''),
+(29,'CB029','Taille-crayon',0.700,180,'coupe_collage','Maped','img29.jpg',0,''),
+(30,'CB030','Colle stick',1.400,160,'coupe_collage','UHU','img30.jpg',0,''),
+(31,'CB031','Papier couleur',3.200,110,'dessin_arts','Clairefontaine','img31.jpg',0,''),
+(32,'CB032','Compas',2.600,90,'geometrie','Maped','img32.jpg',0,''),
+(33,'CB033','Équerre',1.600,120,'geometrie','Maped','img33.jpg',0,''),
+(34,'CB034','Protège-cahier',0.800,250,'papeterie','Generic','img34.jpg',0,''),
+(35,'CB035','Ardoise scolaire',4.500,70,'numerique','Generic','img35.jpg',0,''),
+(36,'CB036','Chiffon tableau',1.000,100,'papeterie','Generic','img36.jpg',0,''),
+(37,'CB037','Clé USB 32GB',12.000,80,'numerique','SanDisk','img37.jpg',0,''),
+(38,'CB038','Casque audio',30.000,50,'numerique','Sony','img38.jpg',0,''),
+(39,'CB039','Souris USB',15.000,90,'numerique','Logitech','img39.jpg',0,''),
+(40,'CB040','Clavier USB',20.000,70,'numerique','Logitech','img40.jpg',0,''),
+(41,'CB041','Support laptop',18.000,60,'numerique','Trust','img41.jpg',0,''),
+(42,'CB042','Chargeur USB',8.000,120,'numerique','Anker','img42.jpg',0,''),
+(43,'CB043','Lampe bureau',14.000,80,'fournitures_bureau','Ikea','img43.jpg',0,''),
+(44,'CB044','Horloge murale',9.000,60,'fournitures_bureau','Generic','img44.jpg',0,''),
+(45,'CB045','Boîte rangement',6.500,100,'classement','Ikea','img45.jpg',0,''),
+(46,'CB046','Agrafe géante',1.200,200,'fournitures_bureau','Generic','img46.jpg',0,''),
+(47,'CB047','Ruban adhésif',1.500,180,'coupe_collage','3M','img47.jpg',0,''),
+(48,'CB048','Papier kraft',2.000,140,'dessin_arts','Generic','img48.jpg',0,''),
+(49,'CB049','Sac plastique',0.300,500,'classement','Generic','img49.jpg',0,''),
+(50,'CB050','Carnet poche',2.000,160,'papeterie','MaxiPaper','img50.jpg',0,'');
+
+
+
+/* باقي الجداول (UNCHANGED) */
+
 INSERT INTO pack VALUES
-(1,'pack pc office'),
-(2,'pack accessoires'),
-(3,'pack gaming basic'),
-(4,'pack multimedia'),
-(5,'pack printing'),
-(6,'pack mobile apple'),
-(7,'pack mobile android'),
-(8,'pack charging'),
-(9,'pack audio'),
-(10,'pack storage'),
-(11,'pack storage pro'),
-(12,'pack reseau basic'),
-(13,'pack reseau pro'),
-(14,'pack tablet'),
-(15,'pack creator'),
-(16,'pack webcam'),
-(17,'pack streaming'),
-(18,'pack backup'),
-(19,'pack wearable'),
-(20,'pack gaming ultimate');
+(16,'primaire'),(17,'secondaire'),(18,'bac'),(19,'college'),
+(1,'primaire'),(2,'primaire'),(3,'primaire'),(4,'primaire'),(5,'primaire'),
+(6,'primaire'),(7,'primaire'),(8,'primaire'),(9,'primaire'),(10,'primaire'),
+(11,'secondaire'),(12,'secondaire'),(13,'secondaire'),(14,'secondaire'),(15,'secondaire'),
+(20,'bac'),(21,'bac'),(22,'bac'),(23,'bac'),(24,'bac'),
+(25,'college'),(26,'college'),(27,'college'),(28,'college'),(29,'college'),(30,'college');
 
-/* =========================
-   PACK ARTICLE (20 rows)
-========================= */
 INSERT INTO packArticle VALUES
-(1,1,1),(1,2,1),
-(2,2,2),(2,8,2),
-(3,20,1),(3,9,1),
-(4,4,1),(4,9,1),
-(5,5,1),(5,10,2),
-(6,6,1),(6,8,1),
-(7,7,1),(7,8,1),
-(8,8,3),
-(9,9,2),
-(10,10,2),
-(11,11,1),(11,18,1),
-(12,13,1),(12,14,1),
-(13,13,2),(13,14,2),
-(14,15,1),(14,16,1),
-(15,17,1),(15,9,1),
-(16,16,2),
-(17,17,2),
-(18,18,2),
-(19,19,1),
-(20,20,1),(20,9,1);
+(16,1,10),(16,2,5),(16,4,10),(16,5,5),
+(17,1,15),(17,2,10),(17,3,10),(17,10,20),
+(18,11,1),(18,12,2),(18,37,1),
+(19,7,1),(19,8,1),(19,6,2),
+(20,20,3),(20,21,2),(20,22,2),
+(21,23,5),(21,24,2),(21,25,2),
+(22,30,3),(22,32,2),(22,33,2),
+(23,37,1),(23,39,1),(23,40,1),
+(24,42,2),(24,43,1),(24,44,1),
+(25,45,2),(25,46,5),(25,47,3),
+(26,48,3),(26,49,10),(26,50,2);
 
-/* =========================
-   CLIENT (20 rows)
-========================= */
-select * from client;
-delete from client;
-INSERT INTO client VALUES
-(1,'Ali','Ben Ali','12345678','ali@gmail.com','pass1','client'),
-(2,'Sara','Trabelsi','22345678','sara@gmail.com','pass2','client'),
-(3,'Omar','Haddad','32345678','omar@gmail.com','pass3','client'),
-(4,'Aymen','Mabrouk','42345678','aymen@gmail.com','pass4','admin'),
-(5,'Fatma','Jaziri','52345678','fatma@gmail.com','pass5','client'),
-(6,'Khalil','Bouzid','62345678','khalil@gmail.com','pass6','client'),
-(7,'Nour','Cherif','72345678','nour@gmail.com','pass7','client'),
-(8,'Mehdi','Gharbi','82345678','mehdi@gmail.com','pass8','client'),
-(9,'Ines','Saidi','92345678','ines@gmail.com','pass9','client'),
-(10,'Youssef','Masmoudi','11111111','youssef@gmail.com','pass10','client'),
-(11,'Rania','Kefi','22222222','rania@gmail.com','pass11','client'),
-(12,'Hichem','Triki','33333333','hichem@gmail.com','pass12','client'),
-(13,'Marwa','Feki','44444444','marwa@gmail.com','pass13','client'),
-(14,'Sami','Rezgui','55555555','sami@gmail.com','pass14','client'),
-(15,'Asma','Louati','66666666','asma@gmail.com','pass15','client'),
-(16,'Bilel','Ayari','77777777','bilel@gmail.com','pass16','client'),
-(17,'Wassim','Jebali','88888888','wassim@gmail.com','pass17','client'),
-(18,'Hana','Ben Salem','99999999','hana@gmail.com','pass18','client'),
-(19,'Zied','Guesmi','10101010','zied@gmail.com','pass19','client'),
-(20,'Lina','Miled','12121212','lina@gmail.com','pass20','client');
+INSERT INTO client(nom,prenom,tel,email,password,role) VALUES
+('Ali','Ben','20000001','ali1@gmail.com','pass','client'),
+('Sara','Triki','20000002','sara2@gmail.com','pass','client'),
+('Omar','Haddad','20000003','omar3@gmail.com','pass','client'),
+('Yassine','Mabrouk','20000004','yass4@gmail.com','pass','client'),
+('Amira','Zouari','20000005','amira5@gmail.com','pass','client'),
+('Khalil','Jaziri','20000006','khalil6@gmail.com','pass','client'),
+('Nour','Ben Ali','20000007','nour7@gmail.com','pass','client'),
+('Mehdi','Kacem','20000008','mehdi8@gmail.com','pass','client'),
+('Hiba','Saidi','20000009','hiba9@gmail.com','pass','client'),
+('Firas','Messaoudi','20000010','firas10@gmail.com','pass','client'),
+('User11','L11','20000011','u11@gmail.com','pass','client'),
+('User12','L12','20000012','u12@gmail.com','pass','client'),
+('User13','L13','20000013','u13@gmail.com','pass','client'),
+('User14','L14','20000014','u14@gmail.com','pass','client'),
+('User15','L15','20000015','u15@gmail.com','pass','client'),
+('User16','L16','20000016','u16@gmail.com','pass','client'),
+('User17','L17','20000017','u17@gmail.com','pass','client'),
+('User18','L18','20000018','u18@gmail.com','pass','client'),
+('User19','L19','20000019','u19@gmail.com','pass','client'),
+('User20','L20','20000020','u20@gmail.com','pass','client'),
+('User21','L21','20000021','u21@gmail.com','pass','client'),
+('User22','L22','20000022','u22@gmail.com','pass','client'),
+('User23','L23','20000023','u23@gmail.com','pass','client'),
+('User24','L24','20000024','u24@gmail.com','pass','client'),
+('User25','L25','20000025','u25@gmail.com','pass','client'),
+('User26','L26','20000026','u26@gmail.com','pass','client'),
+('User27','L27','20000027','u27@gmail.com','pass','client'),
+('User28','L28','20000028','u28@gmail.com','pass','client'),
+('User29','L29','20000029','u29@gmail.com','pass','client'),
+('User30','L30','20000030','u30@gmail.com','pass','client');
 
+INSERT INTO commande(id_client,date_commande,statut,adresse,ville,code_postal,prix_totale,commentaire) VALUES
+(1,'2026-06-01','livrée','Rue A','Tunis','1000',0,''),
+(2,'2026-06-02','confirmée','Rue B','Ariana','2000',0,''),
+(3,'2026-06-03','attente','Rue C','Sousse','4000',0,''),
+(4,'2026-06-04','livrée','Rue D','Sfax','3000',0,''),
+(5,'2026-06-05','annulée','Rue E','Tunis','1000',0,''),
+(6,'2026-06-06','livrée','Rue F','Nabeul','8000',0,''),
+(7,'2026-06-07','confirmée','Rue G','Bizerte','7000',0,''),
+(8,'2026-06-08','attente','Rue H','Monastir','5000',0,''),
+(9,'2026-06-09','livrée','Rue I','Mahdia','6000',0,''),
+(10,'2026-06-10','confirmée','Rue J','Tunis','1000',0,''),
+(11,'2026-06-11','attente','Rue K','Sfax','3000',0,''),
+(12,'2026-06-12','livrée','Rue L','Sousse','4000',0,''),
+(13,'2026-06-13','confirmée','Rue M','Ariana','2000',0,''),
+(14,'2026-06-14','annulée','Rue N','Tunis','1000',0,''),
+(15,'2026-06-15','livrée','Rue O','Nabeul','8000',0,''),
+(16,'2026-06-16','attente','Rue P','Bizerte','7000',0,''),
+(17,'2026-06-17','confirmée','Rue Q','Mahdia','6000',0,''),
+(18,'2026-06-18','livrée','Rue R','Monastir','5000',0,''),
+(19,'2026-06-19','attente','Rue S','Tunis','1000',0,''),
+(20,'2026-06-20','confirmée','Rue T','Sfax','3000',0,''),
+(21,'2026-06-21','livrée','Rue U','Sousse','4000',0,''),
+(22,'2026-06-22','attente','Rue V','Ariana','2000',0,''),
+(23,'2026-06-23','confirmée','Rue W','Tunis','1000',0,''),
+(24,'2026-06-24','livrée','Rue X','Nabeul','8000',0,''),
+(25,'2026-06-25','annulée','Rue Y','Bizerte','7000',0,''),
+(26,'2026-06-26','attente','Rue Z','Mahdia','6000',0,''),
+(27,'2026-06-27','confirmée','Rue AA','Monastir','5000',0,''),
+(28,'2026-06-28','livrée','Rue BB','Tunis','1000',0,''),
+(29,'2026-06-29','attente','Rue CC','Sfax','3000',0,''),
+(30,'2026-06-30','confirmée','Rue DD','Sousse','4000',0,'');
 
-/* =========================
-   COMMANDE (20 rows)
-========================= */
-INSERT INTO commande VALUES
-(1,1,'2026-06-01','attente','Rue A', 'Tunis','1000',1200.500,''),
-(2,2,'2026-06-02','confirmée','Rue B', 'Ariana','2000',200.000,''),
-(3,3,'2026-06-03','livrée','Rue C', 'Sfax','3000',1500.000,''),
-(4,4,'2026-06-04','annulée','Rue D', 'Sousse','4000',0,''),
-(5,5,'2026-06-05','attente','Rue E', 'Bizerte','5000',500.000,''),
-(6,6,'2026-06-06','confirmée','Rue F', 'Tunis','6000',999.990,''),
-(7,7,'2026-06-07','livrée','Rue G', 'Sfax','7000',700.000,''),
-(8,8,'2026-06-08','attente','Rue H', 'Ariana','8000',100.000,''),
-(9,9,'2026-06-09','confirmée','Rue I', 'Sousse','9000',300.000,''),
-(10,10,'2026-06-10','livrée','Rue J', 'Tunis','10000',80.000,''),
-(11,11,'2026-06-11','attente','Rue K', 'Sfax','11000',110.000,''),
-(12,12,'2026-06-12','confirmée','Rue L', 'Bizerte','12000',90.000,''),
-(13,13,'2026-06-13','livrée','Rue M', 'Ariana','13000',55.000,''),
-(14,14,'2026-06-14','attente','Rue N', 'Tunis','14000',40.000,''),
-(15,15,'2026-06-15','confirmée','Rue O', 'Sousse','15000',850.000,''),
-(16,16,'2026-06-16','livrée','Rue P', 'Sfax','16000',35.000,''),
-(17,17,'2026-06-17','attente','Rue Q', 'Tunis','17000',45.000,''),
-(18,18,'2026-06-18','confirmée','Rue R', 'Ariana','18000',120.000,''),
-(19,19,'2026-06-19','livrée','Rue S', 'Sousse','19000',199.990,''),
-(20,20,'2026-06-20','attente','Rue T', 'Tunis','20000',1500.000,'');
-
-/* =========================
-   LIGNE COMMANDE (20 rows)
-========================= */
 INSERT INTO ligne_commande VALUES
-(1,1,1,1200.500),
-(2,2,2,51.980),
-(3,4,1,300.000),
-(4,5,1,150.000),
-(5,6,1,999.990),
-(6,7,1,700.000),
-(7,8,2,31.000),
-(8,9,1,60.000),
-(9,10,2,24.000),
-(10,11,1,110.000),
-(11,12,1,90.000),
-(12,13,1,55.000),
-(13,14,1,40.000),
-(14,15,1,850.000),
-(15,16,2,70.000),
-(16,17,1,45.000),
-(17,18,1,120.000),
-(18,19,1,199.990),
-(19,20,1,1500.000),
-(20,3,1,80.000);
+(1,1,2,5.000),(1,2,3,3.600),
+(2,3,2,2.400),(2,4,5,4.000),
+(3,5,2,1.000),(3,6,2,3.000),
+(4,7,1,25.000),(4,8,1,10.000),
+(5,9,2,8.000),(5,10,5,17.500),
+(6,11,1,18.000),(6,12,2,12.000),
+(7,13,10,11.000),(7,14,5,5.500),
+(8,15,3,3.300),(8,20,2,4.400),
+(9,21,4,5.200),(9,22,2,5.600),
+(10,23,3,2.700),(10,24,1,5.500),
+(11,25,2,14.000),(11,26,10,10.000),
+(12,27,3,6.000),(12,28,1,40.000),
+(13,29,5,3.500),(13,30,2,2.800),
+(14,31,3,9.600),(14,32,2,5.200),
+(15,33,3,4.800),(15,34,5,4.000),
+(16,35,2,9.000),(16,36,3,3.000),
+(17,37,1,12.000),(17,38,1,30.000),
+(18,39,2,30.000),(18,40,1,20.000),
+(19,41,1,18.000),(19,42,2,16.000),
+(20,43,2,28.000),(20,44,1,9.000),
+(21,45,2,13.000),(21,46,5,6.000),
+(22,47,3,4.500),(22,48,2,4.000),
+(23,49,10,3.000),(23,50,2,4.000),
+(24,1,3,7.500),(24,2,4,4.800),
+(25,3,5,6.000),(25,4,6,4.800),
+(26,5,3,1.500),(26,6,2,3.000),
+(27,7,1,25.000),(27,8,1,10.000),
+(28,9,2,8.000),(28,10,5,17.500),
+(29,11,1,18.000),(29,12,2,12.000),
+(30,13,4,4.400),(30,14,3,3.300);
 
-/* =========================
-   USER LOGIN (20 rows)
-========================= */
-INSERT INTO userLogin VALUES
-(1,1,'2026-06-01'),
-(2,2,'2026-06-02'),
-(3,3,'2026-06-03'),
-(4,4,'2026-06-04'),
-(5,5,'2026-06-05'),
-(6,6,'2026-06-06'),
-(7,7,'2026-06-07'),
-(8,8,'2026-06-08'),
-(9,9,'2026-06-09'),
-(10,10,'2026-06-10'),
-(11,11,'2026-06-11'),
-(12,12,'2026-06-12'),
-(13,13,'2026-06-13'),
-(14,14,'2026-06-14'),
-(15,15,'2026-06-15'),
-(16,16,'2026-06-16'),
-(17,17,'2026-06-17'),
-(18,18,'2026-06-18'),
-(19,19,'2026-06-19'),
-(20,20,'2026-06-20');
-
-select * from produit;
-select sum(lc.quantite) as 'nbrePackVendu'
-from commande c , ligne_commande lc , pack  p
-where year(date_commande)= 2026 and month(date_commande) =6 and c.id_commande=lc.id_commande and p.id_pack=lc.id_produit ;
-select * from ligne_commande;
-
-
-select * from produit;
-
-select * from produit limit 10 offset 3 ;
-
-
--- dernier mois commande 
-
-INSERT INTO commande
-(id_client, date_commande, statut, adresse, ville, code_postal, prix_totale, commentaire)
-VALUES
-(1, '2026-05-02', 'annulée', '12 Rue Habib Bourguiba', 'Tunis', '1001', 45.500, 'Client a changé d''avis'),
-(2, '2026-05-03', 'annulée', '25 Avenue de Paris', 'Sfax', '3000', 78.900, 'Paiement refusé'),
-(3, '2026-05-05', 'annulée', '8 Rue de Marseille', 'Sousse', '4000', 120.750, 'Commande annulée par le client'),
-(4, '2026-05-06', 'annulée', '15 Rue Ibn Khaldoun', 'Nabeul', '8000', 65.300, 'Produit indisponible'),
-(5, '2026-05-07', 'annulée', '33 Rue des Orangers', 'Monastir', '5000', 89.990, 'Erreur de commande'),
-(6, '2026-05-09', 'annulée', '7 Avenue Farhat Hached', 'Bizerte', '7000', 34.200, 'Client injoignable'),
-(7, '2026-05-10', 'annulée', '18 Rue des Jasmins', 'Gabès', '6000', 210.000, 'Adresse invalide'),
-(8, '2026-05-12', 'annulée', '40 Avenue Habib Thameur', 'Ariana', '2080', 56.700, 'Annulation avant expédition'),
-(9, '2026-05-14', 'annulée', '22 Rue El Fath', 'Kairouan', '3100', 98.450, 'Paiement annulé'),
-(10, '2026-05-15', 'annulée', '9 Rue de la Liberté', 'Mahdia', '5100', 142.000, 'Client a commandé en double'),
-(11, '2026-05-17', 'annulée', '55 Rue de Carthage', 'Tunis', '1000', 175.250, 'Produit non disponible'),
-(12, '2026-05-19', 'annulée', '4 Rue El Hana', 'Sfax', '3027', 83.600, 'Demande du client'),
-(13, '2026-05-20', 'annulée', '29 Avenue de l''Environnement', 'Sousse', '4054', 59.990, 'Problème de paiement'),
-(14, '2026-05-22', 'annulée', '13 Rue des Roses', 'Nabeul', '8050', 250.000, 'Erreur de stock'),
-(15, '2026-05-24', 'annulée', '61 Avenue de la République', 'Monastir', '5001', 39.500, 'Client ne répond plus'),
-(16, '2026-05-26', 'annulée', '17 Rue des Palmiers', 'Gabès', '6031', 112.300, 'Livraison impossible'),
-(17, '2026-05-28', 'annulée', '11 Rue El Amal', 'Bizerte', '7011', 67.800, 'Commande annulée après confirmation'),
-(18, '2026-05-30', 'annulée', '26 Rue des Oliviers', 'Ariana', '2037', 154.990, 'Client a demandé un remboursement');
-
-
-delete from pack;
-set SQL_SAFE_UPDATES = 0;
-
-INSERT INTO pack VALUES
-(11,'primaire'),
-(12,'secondaire'),
-(13,'bac'),
-(14,'college'),
-(15,'primaire'),
-(16,'secondaire'),
-(17,'bac'),
-(18,'college'),
-(19,'primaire'),
-(20,'bac');
-
-select p.* from produit p , pack pa where p.id_produit = id_pack;
-
-SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.description from produit p where 1=1;
-
-
-select * from pack;
-
-
-
-
-select * from pack;
-INSERT INTO produit VALUES
-(40,'CB040','pack pc office',100.000,10,'informatique','dell','img40.jpg',0,'pc office pack'),
-(41,'CB041','pack accessoires',25.000,50,'informatique','logitech','img41.jpg',0,'accessories pack'),
-(42,'CB042','pack gaming basic',80.000,20,'informatique','asus','img42.jpg',5,'basic gaming pack'),
-(43,'CB043','pack multimedia',120.000,15,'informatique','samsung','img43.jpg',10,'multimedia pack'),
-(44,'CB044','pack printing',60.000,12,'informatique','hp','img44.jpg',0,'printing pack'),
-(45,'CB045','pack mobile apple',900.000,8,'mobile','apple','img45.jpg',0,'apple mobile pack'),
-(46,'CB046','pack mobile android',700.000,18,'mobile','samsung','img46.jpg',5,'android mobile pack'),
-(47,'CB047','pack charging',30.000,40,'accessoire','anker','img47.jpg',0,'charging pack'),
-(48,'CB048','pack audio',90.000,25,'audio','sony','img48.jpg',0,'audio pack'),
-(49,'CB049','pack gaming ultimate',150.000,5,'informatique','asus','img49.jpg',10,'ultimate gaming pack');
-
-INSERT INTO pack VALUES
-(40,'primaire'),
-(41,'secondaire'),
-(42,'bac'),
-(43,'college'),
-(44,'primaire'),
-(45,'secondaire'),
-(46,'bac'),
-(47,'college'),
-(48,'primaire'),
-(49,'bac');
+INSERT INTO userLogin(id_client,loginAt) VALUES
+(1,'2026-07-01 08:00:00'),(2,'2026-07-01 08:10:00'),
+(3,'2026-07-01 08:20:00'),(4,'2026-07-01 08:30:00'),
+(5,'2026-07-01 08:40:00'),(6,'2026-07-01 08:50:00'),
+(7,'2026-07-01 09:00:00'),(8,'2026-07-01 09:10:00'),
+(9,'2026-07-01 09:20:00'),(10,'2026-07-01 09:30:00'),
+(11,'2026-07-01 09:40:00'),(12,'2026-07-01 09:50:00'),
+(13,'2026-07-01 10:00:00'),(14,'2026-07-01 10:10:00'),
+(15,'2026-07-01 10:20:00'),(16,'2026-07-01 10:30:00'),
+(17,'2026-07-01 10:40:00'),(18,'2026-07-01 10:50:00'),
+(19,'2026-07-01 11:00:00'),(20,'2026-07-01 11:10:00'),
+(21,'2026-07-01 11:20:00'),(22,'2026-07-01 11:30:00'),
+(23,'2026-07-01 11:40:00'),(24,'2026-07-01 11:50:00'),
+(25,'2026-07-01 12:00:00'),(26,'2026-07-01 12:10:00'),
+(27,'2026-07-01 12:20:00'),(28,'2026-07-01 12:30:00'),
+(29,'2026-07-01 12:40:00'),(30,'2026-07-01 12:50:00');
