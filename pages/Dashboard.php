@@ -6,7 +6,8 @@
     $lastMonth = intval(date("m" , strtotime("-1 month")));
     $lastMonthYear = intval(date("m" , strtotime("-1 month")));
     
-
+    $topArticlesVendues = $statRepo->topArticlesVendues(4);
+    $liste_article_en_repture_stock = $statRepo->ArticleEnReptureStock();
     function calculDePourcentage($currentMonthValue , $lastMonthValue){
         $x = $currentMonthValue - $lastMonthValue;
         if($lastMonthValue==0){return 100;} 
@@ -267,48 +268,18 @@
                         <!-- <a href="">Voir toutes <i class="fa-solid fa-arrow-right"></i></a> -->
                     </div>
                     <ul class="articles">
-                        <li>
-                            <div>
-                                <img src="https://www.fournipro.ma/media/catalog/product/cache/a413661d9c1655056f3fcf1a8f852d13/f/i/file_100_28.jpg" alt="">
-                                <div class="text">
-                                    <h5>Stylo bic</h5>
-                                    <p class="nbre-vente">432 ventes</p>
+                        <?php foreach($topArticlesVendues as $product): ?>
+                            <li>
+                                <div>
+                                    <img src="<?= $product["image_url"] ?>" alt="image de l'article">
+                                    <div class="text">
+                                        <h5><?= $product["libelle"] ?></h5>
+                                        <p class="nbre-vente"><?= $product["quantite_total"] ?> ventes</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <p class="prix">149 Dt</p>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="https://www.fournipro.ma/media/catalog/product/cache/a413661d9c1655056f3fcf1a8f852d13/f/i/file_100_28.jpg" alt="">
-                                <div class="text">
-                                    <h5>Stylo bic</h5>
-                                    <p class="nbre-vente">432 ventes</p>
-                                </div>
-                            </div>
-                            <p class="prix">149 Dt</p>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="https://www.fournipro.ma/media/catalog/product/cache/a413661d9c1655056f3fcf1a8f852d13/f/i/file_100_28.jpg" alt="">
-                                <div class="text">
-                                    <h5>Stylo bic</h5>
-                                    <p class="nbre-vente">432 ventes</p>
-                                </div>
-                            </div>
-                            <p class="prix">149 Dt</p>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="https://www.fournipro.ma/media/catalog/product/cache/a413661d9c1655056f3fcf1a8f852d13/f/i/file_100_28.jpg" alt="">
-                                <div class="text">
-                                    <h5>Stylo bic</h5>
-                                    <p class="nbre-vente">432 ventes</p>
-                                </div>
-                            </div>
-                            <p class="prix">149 Dt</p>
-                        </li>
-
-
+                                <p class="prix"><?= number_format($product["prix"],2,",") ?> Dt</p>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
 
@@ -319,7 +290,7 @@
                             <h3>Articles en repture de stock</h3>
                             <span>12 Produits</span>
                         </div>
-                        <a href="">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/dashboard/articles?stock=repture%20de%20stock#formFiltrage">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
 
                     <ul>

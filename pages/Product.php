@@ -2,12 +2,18 @@
     require_once(__DIR__ . "/../backend/services/ProductServices.php");
     require_once(__DIR__ . "/../backend/models/Product.php");
     $product_service = new ProductServices();
-    $idProduit = $_GET["idProduit"];
+    $idProduit = $_GET["idproduit"];
     $product_coordonee = $product_service->getProductById(intval($idProduit));
     $product = new Product(
         $product_coordonee["id_produit"],
+        $product_coordonee["libelle"],
+        intval($product_coordonee["quantite_stock"]),
+        floatval($product_coordonee["prix"]),
+        $product_coordonee["categorie"],
         $product_coordonee["code_barre"],
-        $product_coordonee["libelle"]
+        $product_coordonee["image_url"],
+        floatval($product_coordonee["remise"]),
+        $product_coordonee["marque"]
     );
 
 ?>
@@ -53,22 +59,24 @@
             </div>
             <div class="text-part">
                 <!-- en cas de stock -->
-                
-                <p class="stock-info " id="in-stock" hidden>
+                <?php if($product->getStock()>0): ?>
+                <p class="stock-info " id="in-stock" >
                     <i class="fa-regular fa-circle-check"></i>
                     In Stock
                 </p>
+                <?php else: ?>
                 <p class="stock-info" id="out-stock">
                     <i class="fa-solid fa-ban"></i>
                     Repture de stock
                 </p>
-                <h2 class="product-title">Premium Spiral Notebook A5</h2>
+                <?php endif; ?>
+                <h2 class="product-title"><?= $product->getLibelle() ?></h2>
                 <div class="review">
                     5 Start
                     <p class="n-review">(24 Reviews)</p>
                 </div>
                 <div class="prix">
-                    <h3>12.900 </h3>
+                    <h3><?= $product->getPrix() ?> </h3>
                     <p>DT</p>
                 </div>
                 <p class="description">
@@ -78,11 +86,11 @@
                 <ul class="list-info">
                     <li>
                         <i class="fa-solid fa-clipboard-list"></i>
-                        Categorie: Notebook
+                        Categorie: <?= $product->getCategorie() ?>
                     </li>
                     <li>
                         <i class="fa-solid fa-tag"></i>
-                        Brand: Bic
+                        Brand: <?= $product->getMarque() ?>
                     </li>
                     <li>
                         <i class="fa-solid fa-expand"></i>

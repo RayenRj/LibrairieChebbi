@@ -53,21 +53,21 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         // top artcle vendu 
-        public function topArticlesVendues(){
+        public function topArticlesVendues($limit){
             $query = "select p.* , sum(quantite) as quantite_total 
                       from produit p , ligne_commande lc 
                       where p.id_produit = lc.id_produit and categorie <> 'pack' 
                       group by p.id_produit 
                       order by quantite_total DESC
-                      limit = 10;"; // limit x offset y : x howa 9adeh ykharejlk max mn ligne , y howa 9addeh y ignori ml lowel
+                      limit $limit;"; // limit x offset y : x howa 9adeh ykharejlk max mn ligne , y howa 9addeh y ignori ml lowel
         
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         // articles en repture de stock
-        public function ArticleEnReptureStock(){
-            $query = "select * from produit where quantite_stock = 0";
+        public function ArticleEnReptureStock($limit){
+            $query = "select * from produit where quantite_stock  < 3 limit ?";
             $stmt= $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
