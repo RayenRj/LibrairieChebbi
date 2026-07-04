@@ -1,3 +1,17 @@
+<?php
+    require_once(__DIR__ . "/../backend/services/ProductServices.php");
+    require_once(__DIR__ . "/../backend/models/Product.php");
+    $product_service = new ProductServices();
+    $idProduit = $_GET["idProduit"];
+    $product_coordonee = $product_service->getProductById(intval($idProduit));
+    $product = new Product(
+        $product_coordonee["id_produit"],
+        $product_coordonee["code_barre"],
+        $product_coordonee["libelle"]
+    );
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +53,7 @@
             </div>
             <div class="text-part">
                 <!-- en cas de stock -->
+                
                 <p class="stock-info " id="in-stock" hidden>
                     <i class="fa-regular fa-circle-check"></i>
                     In Stock

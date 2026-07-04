@@ -84,6 +84,12 @@ img{
     width: 100%;
 }
 
+
+
+#formFiltrage , #articleDeFaibleRotation{
+    scroll-margin-top: 120px;
+}
+
 /* ========================================================================================== */
 /* ========================== Pour copier dans chaque fishier css =========================== */
 /* ========================================================================================== */
@@ -234,12 +240,16 @@ img{
 }
 
 .top-chart > div h3{margin-bottom: 1em;}
+
 .top-chart .left{
-    width: 45%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 2em;
+}
+.top-chart .right{
+    width: 60%;
 }
 
 
@@ -321,18 +331,18 @@ img{
     padding: 1em 0em 0em;
     margin-bottom: 2em;
 }
-
-.articleManagerBottomPart .top{
+.articleManagerBottomPart .top{padding: 0.5em 2em;}
+.articleManagerBottomPart .top > div{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0.5em 2em;
-    margin-bottom: 2em;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
     gap: 1em;
-}
 
-.articleManagerBottomPart .top > div{position: relative;}
+}
 
 div.inputDiv input{
     background-color: white;
@@ -365,7 +375,7 @@ div.inputDiv input{
     outline: none;
 }
 
-.articleManagerBottomPart .top > div.inputDiv > i{
+.articleManagerBottomPart .top > div .inputDiv > i{
     font-size: 13px;
     position: absolute;
     top: 50%;
@@ -374,17 +384,17 @@ div.inputDiv input{
     color: var(--gray-700);
 }
 
-.articleManagerBottomPart .top > div > p{
+.articleManagerBottomPart .top > div p{
     font-size: 13px;
     font-weight: 500;
 }
 
-.articleManagerBottomPart .top > div > div {
+.articleManagerBottomPart .top > div > div > div {
     position: relative;
 }
 
 
-.articleManagerBottomPart .top > div > div > i{
+.articleManagerBottomPart .top >  div > div > div > i{
     position: absolute;
     right: 15px;
     top: calc(50% + 2px);
@@ -393,36 +403,76 @@ div.inputDiv input{
 }
 
 
+
+/* new Design  */
+
+
 .articleManagerBottomPart button[type="reset"]{
-    border: 2px solid var(--blue);
+    border: 2px solid #eee;
     outline: none;
     background-color: white;
-    padding: 0.5em;
+    padding: 0.5em 1.5em;
     border-radius: 0.5em;
     position: relative;
     display: flex;
     align-items: center;
     gap:0.5em;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
-    margin-top: 0.5em;
     cursor: pointer;
     transition: 0.1s all ease;
     height: 40px;
-    width: 135px;
-    justify-content: center;
-    background-color: var(--blue);
-    color: white;
 }
 .articleManagerBottomPart button[type="reset"]:hover{
-    background-color:#2f71db;
+    background-color: var(--gray-100);
+    color: black;
 }
 
-.articleManagerBottomPart .top > div:last-child >p{
-    opacity: 0;
+.articleManagerBottomPart .top > div > div:last-child p{opacity: 0;}
+
+
+.articleManagerBottomPart .top > div:last-child > div:last-child:last-child > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 
+
+.articleManagerBottomPart button[type="submit"]{
+    padding: 0.65em 1.5em;
+    border-radius: 0.5em;
+    outline: none;
+    border: 1px solid var(--gray-200);
+    font-size: 13px;
+    font-weight: 500;
+    appearance:none;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--blue);
+    color: white;
+    height: 40px;
+    width: 100%;
+    min-width: 150px;
+
+}
+
+.articleManagerBottomPart .top button[type="submit"]:hover{background-color: #2f71db;}
+.articleManagerBottomPart .top button[type="submit"]:active{background-color: #4d8cf1;}
+
+.articleManagerBottomPart .top button[type="submit"] i{margin-right: 10px;}
+
+.articleManagerBottomPart .top > div > div p{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+.articleManagerBottomPart .top .lastDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 0.75em;
+}
 
 
 
@@ -702,3 +752,5 @@ div.inputDiv input{
 .cardContainer > div:nth-child(2) h5,.cardContainer > div:nth-child(2) i{color:var(--yellow-deep);}
 .cardContainer > div:nth-child(3) h5,.cardContainer > div:nth-child(3) i{color:rgb(214, 141, 4);}
 .cardContainer > div:nth-child(4) h5 , .cardContainer > div:nth-child(4) i{color:red;}
+
+

@@ -264,7 +264,7 @@
 
             <!--phase des articles-->
             <div class="articles">
-                <a href="Product.php">
+                <a href="/products/product">
                 <article>
                     <div class="image">
                         <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">

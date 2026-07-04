@@ -51,6 +51,9 @@ class ProductServices{
         $tmp = $file["tmp_name"];
         $type = $file["type"];
         $allowedType = ["image/jpeg", "image/png", "image/webp"];
+        if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
+            throw new Exception("Erreur upload : " . $_FILES["image"]["error"]);
+        }
         if(!in_array($type , $allowedType)){throw new Exception("This file Type in not supported!");}
         if($file["size"] > 4 * 1024 * 1024 ){throw new Exception("the File uploaded is too large(>4mb)");}
         $extension = pathinfo($name , PATHINFO_EXTENSION);
@@ -59,7 +62,7 @@ class ProductServices{
         $upload_dir = __DIR__ . "/../../public/assets/images/uploadedImg/";
         if(!is_dir($upload_dir)){mkdir($upload_dir , 0077 , true);}
         $dest = $upload_dir . $newName;
-        $destDB = "/assets/images/uploadedImg/" . $newName; 
+        $destDB = "/assets/images/uploadedImg/articles/" . $newName; 
         if(!move_uploaded_file($tmp , $dest)){throw new Exception("Image Upload Failed!");}
         return $this->productRepo->createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $destDB, $codeBarre);
     }
@@ -163,6 +166,10 @@ class ProductServices{
     public function nbreDeVentePourChaqueCategorieCeMois(){
         return $this->productRepo->nbreDeVentePourChaqueCategorieCeMois();
     }
+    //done
+    public function Top10Ventes(){return $this->productRepo->Top10Ventes();}
+    //done
+    public function ArticleAfaibleRotation(){return $this->productRepo->ArticleAfaibleRotation();}
 
 }
 

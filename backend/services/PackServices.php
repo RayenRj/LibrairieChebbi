@@ -134,6 +134,7 @@
             //file handling 
             if(!isset($file["packImage"])){throw new Exception("La pack doit contenir une image");}
             $image = $file["packImage"];
+            if ($image["error"] !== UPLOAD_ERR_OK) {throw new Exception("Erreur upload : " . $_FILES["image"]["error"]);}
             if(!in_array($image["type"], ["image/jpeg","image/png","image/webp"])){throw new Exception("Ce Type d'image ". $image["type"] ." n'est pas autorisee !");}
             if($image["size"] > 5 * 1024 * 1024){throw new Exception("Image size too large > 5mb");}
             $ext = pathinfo($image["name"] , PATHINFO_EXTENSION);

@@ -157,12 +157,22 @@
                                 <i class="fa-solid fa-caret-down"></i>
                             </div>
                         </div>
-                        <div>
-                            <p>reglage</p>
-                            <button type="sumbit">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                Rechercher
-                            </button>
+                        <div class="lastDiv">
+                            <div>
+                                <p>reglage</p>
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    Rechercher
+                                </button>
+                            </div>
+
+                            <div>
+                                <p>reglage</p>
+                                <button type="reset">
+                                    <i class="fa-solid fa-rotate"></i>
+                                    Réinitialiser
+                                </button>
+                            </div>
                         </div>
                         
                     </div>

@@ -24,6 +24,12 @@
         return ($x * 100)/$lastMonthValue;
     }
 
+
+
+    $query_array= [];
+    foreach($_GET as $key=>$val){$query_array[] = "$key=$val";} 
+    $query_string = implode("&", $query_array) ?? "";
+
 ?>
 
 <!DOCTYPE html>
@@ -232,17 +238,27 @@
                         </div>
 
 
-                        <div>
-                            <p>reglage</p>
-                            <button type="sumbit">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                Rechercher
-                            </button>
+                        <div class="lastDiv">
+                            <div>
+                                <p>reglage</p>
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    Rechercher
+                                </button>
+                            </div>
+
+                            <div>
+                                <p>reglage</p>
+                                <button type="reset">
+                                    <i class="fa-solid fa-rotate"></i>
+                                    Réinitialiser
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>
 
-
+                <!-- el partie eli feha el table -->
                 <div class="table-part">
                     <table>
                         <thead>
@@ -311,12 +327,19 @@
 
                 </div>
 
-
+                <!-- Paginations apres le tableau -->
                 <div class="bottom">
-                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min((($page + 1) * $limit )  , $nbreDeligneFirstListOfCommandes) ?> sur <?= $nbreDeligneFirstListOfCommandes ?> commandes</p>
+                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min($page * $limit  , $nbreDeligneFirstListOfCommandes) ?> sur <?= $nbreDeligneFirstListOfCommandes ?> commandes</p>
                     <div class="pagination">
                         <!-- before -->
-                        <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php if($page > 1) : ?>
+                            <a  href="/dashboard/commandes?page=<?= $page - 1 ?>#commandeTable" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php else : ?>
+                            <a href="#commandeTable" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php endif; ?>
+
+
+
                         <?php if($page> 3):?>
                             <a href="#" id="three-dots">...</a>
                         <?php endif; ?>
@@ -338,7 +361,12 @@
                         <?php endif; ?>
 
                         <!-- after -->
-                        <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php if($page < $nbreTotalePage) : ?>
+                            <a href="/dashboard/commandes?page=<?= $page + 1 ?>#commandeTable" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php else : ?>
+                             <a href="#commandeTable" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php endif; ?>
+
                     </div>
                 </div>
 

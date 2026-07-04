@@ -18,6 +18,7 @@
         public function panierPage(){require(PATH . "Panier.php");}
         public function commandePage(){require(PATH . "Commande.php");}
         public function collectionPage(){require(PATH . "Collection.php");}
+        public function test(){require(PATH . "tes.php");}
 
     }
 
