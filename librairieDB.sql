@@ -307,3 +307,13 @@ INSERT INTO userLogin(id_client,loginAt) VALUES
 (25,'2026-07-01 12:00:00'),(26,'2026-07-01 12:10:00'),
 (27,'2026-07-01 12:20:00'),(28,'2026-07-01 12:30:00'),
 (29,'2026-07-01 12:40:00'),(30,'2026-07-01 12:50:00');
+
+use librairiedb;
+select * from produit;
+
+select p.libelle , p.categorie , sum(lc.quantite) as 'quantite_total'
+from produit p , commande c , ligne_commande lc
+where p.id_produit = lc.id_produit and c.id_commande = lc.id_commande and month(date_commande) = month(curdate() - INTERVAL 1 month) and year(date_commande) = year(curdate())
+group by p.id_produit , P.libelle , p.categorie
+order by quantite_total DESC
+limit 10;

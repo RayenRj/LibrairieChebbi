@@ -1,7 +1,6 @@
 <?php
     require_once(__DIR__ . "/../backend/controllers/ProductController.php");
     $productService = new ProductServices();
-    $productArray = $productService->getAllProduct(8 , 1);
 
     function calculDePourcentage($currentMonthValue , $lastMonthValue){
         $x = $currentMonthValue - $lastMonthValue;
@@ -9,6 +8,29 @@
         return ($x * 100)/$lastMonthValue;
     }
 
+    $categorie = isset($_GET["categorie"]) ? $_GET["categorie"] : "";
+    $libelle = isset($_GET["libelle"]) ? $_GET["libelle"] : "";
+    $prixMax = isset($_GET["prixMax"]) ? floatval($_GET["prixMax"]) : 0;
+    $prixMin = isset($_GET["prixMin"]) ? floatval($_GET["prixMin"]) : 0;
+    $trie = isset($_GET["trie"]) ? $_GET["trie"] : "";
+    $stock = isset($_GET["stock"]) ? $_GET["stock"] : "";
+    $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
+    $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 10;
+
+    // prix min dima 0
+    $list_des_article_filtrée = $productService->rechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);
+    $nombre_de_ligne_list_des_article_filtrée = $productService->nombreLigneRechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);
+
+    $nombre_page_totale = intval(ceil($nombre_de_ligne_list_des_article_filtrée / $limit));
+    
+    
+    $query_array= [];
+    foreach($_GET as $key=>$val){$query_array[] = "$key=$val";} 
+    $query_string = implode("&", $query_array) ?? "";
+
+
+    $top_10_vente_list = $productService->Top10Ventes();
+    $article_faible_rotation_list = $productService->ArticleAfaibleRotation();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +57,7 @@
             <!-- Partie elli feha el text wl input ta3 el date -->
             <div class="top-part">
                 <div class="text">
-                    <h2>Article Manager 📚</h2>
+                    <h2>Article Manager 📚 </h2>
                     <p>Gérez vos articles : ajoutez , modifiez ou supprimez les articles disponibles</p>
                 </div>
                 <button id="addArticle">
@@ -77,7 +99,7 @@
                     <div class="text">
                         <p>Article en repture</p>
                         <h3><?= $productService->nbreArticleEnRepture(); ?></h3>
-                        <a href="#articleManagerBottomPart" class="cardLink">Voir la liste</a>
+                        <a href="/dashboard/articles?stock=repture%20de%20stock#formFiltrage" class="cardLink">Voir la liste</a>
                     </div>
                 </div>
 
@@ -89,7 +111,7 @@
                     <div class="text">
                         <p>Article jamais vendus</p>
                         <h3><?= $productService->nbreArticleNonVendus() ?></h3>
-                        <a href="#articleManagerBottomPart" class="cardLink">Voir la liste</a>
+                        <a href="#articleDeFaibleRotation" class="cardLink">Voir la liste</a>
                     </div>
                 </div>
             </div>
@@ -167,220 +189,173 @@
                 </div>
 
             </div>
+            
 
             <div class="articleManagerBottomPart" id="articleManagerBottomPart">
-                <div class="top">
-                    <div>
-                        <p>Catégories </p>
+                <!-- El partie eli feha filtrage -->
+                <form action="" id="formFiltrage" enctype="multipart/form-data">
+                    <div class="top">
+                        <h2>Liste De Tous Les Articles</h2>
                         <div>
-                            <select name="" id="">
-                                <option value="all" selected>Toutes les Catégories</option>
-                                <option value="all" >Telephone</option>
-                                <option value="all" >Prix</option>
-                                <option value="all" >Email</option>
-                                <option value="all" >Id Commande</option>
-                            </select>
-                            <i class="fa-solid fa-caret-down"></i>
+                            <div>
+                                <p>Catégories</p>
+                                <div>
+                                    <select id="categorie" name="categorie">
+                                        <option value="">-- Sélectionnez une catégorie --</option>
+                                        <option value="ecriture">Écriture</option>
+                                        <option value="papeterie">Papeterie</option>
+                                        <option value="classement">Classement</option>
+                                        <option value="geometrie">Géométrie</option>
+                                        <option value="coupe_collage">Coupe et collage</option>
+                                        <option value="dessin_arts">Dessin et arts</option>
+                                        <option value="sacs_accessoires">Sacs et accessoires</option>
+                                        <option value="calcul_sciences">Calcul et sciences</option>
+                                        <option value="numerique">Numérique</option>
+                                        <option value="livres_pedagogiques">Livres pédagogiques</option>
+                                        <option value="fournitures_bureau">Fournitures de bureau</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Nom de l'article</p>
+                                <div class="inputDiv">
+                                    <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                                    <input type="text" name="libelle" id="packSearch" placeholder="Rechercher un article...">
+                                </div>
+                            </div>
+                            <div>
+                                <p>Prix Max (DT)</p>
+                                <div class="inputDiv">
+                                    <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                                    <input type="number" name="prixMax"  placeholder="Ex: 100.000">
+                                </div>
+                            </div>
+
+                            <div>
+                                <p>Stock </p>
+                                <div>
+                                    <select name="stock" id="">
+                                        <option value="" selected>-- Tous --</option>
+                                        <option value="stock eleve" >Stock élevé</option>
+                                        <option value="stock moyen" >Stock Moyen</option>
+                                        <option value="stock faible" >Stock Faible</option>
+                                        <option value="repture de stock" >Repture de stock</option>
+                                    </select>
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Trié par</p>
+                                <div>
+                                    <select name="trie" id="">
+                                        <option value="" selected>-- Trie --</option>
+                                        <option value="id article">ID Article</option>
+                                        <option value="libellé" >Libellé</option>
+                                        <option value="prix unitaire" >Prix Unitaire</option>
+                                        <option value="stock" >Stock</option>
+                                        <option value="nombre de vente" >Nombre de vente</option>
+                                    </select>
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                            </div>
+
+
+                            <div class="lastDiv">
+                                <div>
+                                    <p>reglage</p>
+                                    <button type="submit">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                        Rechercher
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <p>reglage</p>
+                                    <button type="reset">
+                                        <i class="fa-solid fa-rotate"></i>
+                                        Réinitialiser
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p>Nom de l'article</p>
-                        <div class="inputDiv">
-                            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-                            <input type="text" name="packSearch" id="packSearch" placeholder="Rechercher un article...">
-                        </div>
-                    </div>
-                    <div>
-                        <p>Prix Max (DT)</p>
-                        <div class="inputDiv">
-                            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-                            <input type="number" name="packSearch"  placeholder="Ex: 100.000">
-                        </div>
-                    </div>
-
-                    <div>
-                        <p>Stock </p>
-                        <div>
-                            <select name="" id="">
-                                <option value="all" selected>Tous</option>
-                                <option value="all" >Stock élevé</option>
-                                <option value="all" >Stock Moyen</option>
-                                <option value="all" >Stock Faible</option>
-                                <option value="all" >Repture de stock</option>
-                            </select>
-                            <i class="fa-solid fa-caret-down"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Trié par</p>
-                        <div>
-                            <select name="" id="">
-                                <option value="all" selected>ID Article</option>
-                                <option value="all" >Libellé</option>
-                                <option value="all" >Prix Unitaire</option>
-                                <option value="all" >Stock</option>
-                                <option value="all" >Nombre de vente</option>
-                            </select>
-                            <i class="fa-solid fa-caret-down"></i>
-                        </div>
-                    </div>
-
-
-                    <div>
-                        <p>reglage</p>
-                        <button type="sumbit">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            Rechercher
-                        </button>
-                    </div>
-                    
-                </div>
-
-
-
+                </form>
+                <!-- El partie eli feha el table Part -->
                 <div class="table-part">
                     <table>
                         <thead>
                             <th>ID Article </th>
                             <th>Libellé</th>
                             <th>Prix Unitaire (DT)</th>
+                            <th>Remise (DT)</th>
                             <th>Stock</th>
                             <th>Nbre Vente</th>
                             <th>Actions</th>
                         </thead>
                         <!--el <p> hne just reglage ll font size -->
-                        <?php foreach($productArray as $row): ?>
+                        <?php foreach($list_des_article_filtrée as $row): ?>
                         <tr>
                             <td><p><?= $row["id_produit"] ?></p></td>
                             <td><p><?= $row["libelle"] ?></p></td>
-                            <td><p><?= $row["prix"] ?></p></td>
+                            <td><p><?= $row["prix"]?> <small>DT</small></p></td>
+                            <td><p><?= $row["remise"]?> <small>DT</small></p></td>
                             <td><p><?= $row["quantite_stock"] ?></p></td>
                             <td><p><?= $row["remise"] ?></p></td>
-
                             <td>
                                 <ul>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
+                                    <a href="/products/product?idproduit=<?= $row["id_produit"] ?>"><li><i class="fa-solid fa-eye"></i></li></a>
+                                    <a class="deleteArticleButton" data-idproduit="<?= $row["id_produit"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
                                 </ul>
                             </td>
                         </tr>
                         <?php endforeach; ?>
-                        <!-- <tr>
-                            <td><p>#PRD_1058</p></td>
-                            <td><p>Sac à dos Avengers</p></td>
-                            <td><p>129.000</p></td>
-                            <td><p>25</p></td>
-                            <td><p>152</p></td>
-
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#PRD_1058</p></td>
-                            <td><p>Sac à dos Avengers</p></td>
-                            <td><p>129.000</p></td>
-                            <td><p>25</p></td>
-                            <td><p>152</p></td>
-
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#PRD_1058</p></td>
-                            <td><p>Sac à dos Avengers</p></td>
-                            <td><p>129.000</p></td>
-                            <td><p>25</p></td>
-                            <td><p>152</p></td>
-
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#PRD_1058</p></td>
-                            <td><p>Sac à dos Avengers</p></td>
-                            <td><p>129.000</p></td>
-                            <td><p>25</p></td>
-                            <td><p>152</p></td>
-
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#PRD_1058</p></td>
-                            <td><p>Sac à dos Avengers</p></td>
-                            <td><p>129.000</p></td>
-                            <td><p>25</p></td>
-                            <td><p>152</p></td>
-
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#PRD_1058</p></td>
-                            <td><p>Sac à dos Avengers</p></td>
-                            <td><p>129.000</p></td>
-                            <td><p>25</p></td>
-                            <td><p>152</p></td>
-
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>#PRD_1058</p></td>
-                            <td><p>Sac à dos Avengers</p></td>
-                            <td><p>129.000</p></td>
-                            <td><p>25</p></td>
-                            <td><p>152</p></td>
-
-                            <td>
-                                <ul>
-                                    <a href=""><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a href=""><li><i class="fa-solid fa-trash-can"></i></li></a>
-                                </ul>
-                            </td>
-                        </tr> -->
-
 
                     </table>
 
                 </div>
 
-
+                <!-- el partie eli feha el pagination -->
                 <div class="bottom">
-                    <p>Affichage de 1 à 6 sur 125 packs</p>
+                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min($page * $limit  , $nombre_de_ligne_list_des_article_filtrée) ?> sur <?= $nombre_de_ligne_list_des_article_filtrée ?> commandes</p>
                     <div class="pagination">
-                        <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
-                        <a href="#" class="pagination-selected">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#" id="three-dots">...</a>
-                        <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <!-- before -->
+                        <?php if($page > 1) : ?>
+                            <a  href="/dashboard/articles?page=<?= $page - 1 ?>#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php else : ?>
+                            <a href="#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php endif; ?>
+
+
+                        
+                        <?php if($page> 3):?>
+                            <a href="#" id="three-dots">...</a>
+                        <?php endif; ?>
+
+
+                        <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
+                            <a href="/dashboard/articles?page=<?= $i ?>#formFiltrage"><?= $i ?></a>
+                        <?php endfor; ?>
+
+                        <!-- current page -->
+                        <a href="#" class="pagination-selected"><?= $page ?></a>
+                        <?php for($i=$page +1  ; $i <= min($page + 2 , $nombre_page_totale) ; $i++):?>
+                            <a href="/dashboard/articles?page=<?= $i ?>#formFiltrage"><?= $i ?></a>
+                        <?php endfor; ?> 
+                                    
+                            
+                        <?php if(($nombre_page_totale - $page)> 2): ?>
+                            <a href="#" id="three-dots" data-value = <?= $i ?>>...</a>
+                        <?php endif; ?>
+
+                        <!-- after -->
+                        <?php if($page < $nombre_page_totale) : ?>
+                            <a href="/dashboard/commandes?page=<?= $page + 1 ?>#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php else : ?>
+                             <a href="#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php endif; ?>
+
                     </div>
                 </div>
 
@@ -395,171 +370,11 @@
 
 
 
-
             </div>
 
 
 
-            <!-- partie eli feha 2 tableaux -->
-
-            <div class="twoList">
-                <div class="ListOne">
-                    <h3>Top 10 des articles les plus vendus ce mois</h3>
-                    <table>
-                        <thead>
-                            <th>Rang</th>
-                            <th>Article</th>
-                            <th>Catégorie</th>
-                            <th>Ventes</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>🥇</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-                            <tr>
-                                <td>🥈</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-                            <tr>
-                                <td>🥉</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-
-
-                <div class="ListTwo">
-                    <h3>Articles à faible rotation ce mois</h3>
-                    <table>
-                        <thead>
-                            <th>Article</th>
-                            <th>Catégorie</th>
-                            <th>Stock</th>
-                            <th>Ventes</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Sac à dos spiderMan</td>
-                                <td>Sac</td>
-                                <td>152</td>
-                                <td>0</td>
-                            </tr>
-
-                    </table>
-                </div>
-
-
-
-                
-            </div>
-
+            <!--  partie eli feha stock -->
             <div class="statStock">
                 <h2>Statistiques du stock</h2>
                 <div class="cardContainer">
@@ -597,6 +412,71 @@
                     </div>
                 </div>
             </div>
+
+            <!-- partie eli feha 2 tableaux -->
+
+            <div class="twoList">
+
+                <div class="ListOne">
+                    <h3>Top 10 des articles les plus vendus</h3>
+                    <table>
+                        <thead>
+                            <th>Rang</th>
+                            <th>Article</th>
+                            <th>Catégorie</th>
+                            <th>Ventes</th>
+                        </thead>
+                        <tbody>
+                            <?php foreach($top_10_vente_list as $index=>$article): ?>
+                            <tr>
+                                <?php if($index==0): ?>
+                                <td>🥇</td>
+                                <?php elseif($index==1): ?>
+                                <td>🥈</td>
+                                <?php elseif($index==2): ?>
+                                <td>🥉</td>
+                                <?php else:?>
+                                <td><?= $index + 1 ?></td>
+                                <?php endif; ?>
+                                <td><?= $article["libelle"] ?></td>
+                                <td><?= $article["categorie"] ?></td>
+                                <td><?= $article["quantite_total"] ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="ListTwo" id="articleDeFaibleRotation">
+                    <h3>Articles à faible rotation</h3>
+                    <table>
+                        <thead>
+                            <th>Article</th>
+                            <th>Catégorie</th>
+                            <th>Stock</th>
+                            <th>Ventes</th>
+                        </thead>
+                        <tbody>
+                            <?php foreach($article_faible_rotation_list as $product): ?>
+                            <tr>
+                                <td><?= $product["libelle"] ?></td>
+                                <td><?= $product["categorie"] ?></td>
+                                <td><?= $product["quantite_stock"] ?></td>
+                                <td><?= $product["venteTotale"] ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                    </table>
+                </div>
+
+
+
+                
+            </div>
+
+
+
         </section>
         
     </div>

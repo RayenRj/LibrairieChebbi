@@ -129,6 +129,13 @@
                 return;
             }   
         }
+
+
+        ///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
+        //////////////// partie recherche /////////////////
+        ///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
         //done
         public function rechercherArticle($request){
             try{
@@ -155,6 +162,7 @@
                 return;
             } 
         }
+        //done
         public function nbreDeVentePourChaqueCategorieCeMois($request){
             try{
                 $result = $this->productServices->nbreDeVentePourChaqueCategorieCeMois();
@@ -179,6 +187,7 @@
                 return;
             } 
         }
+        //done
         public function nombreDeVenteParMois($request){
             try{
                 $body = $request["body"];
@@ -204,6 +213,33 @@
                 return;
             } 
         }
+        public function deleteProduct($request){
+            try{
+                $param = $request["params"];
+                $id = intval($param[0]);
+                $result = $this->productServices->deleteProduct($id);
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Deleting product successfully", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }  
+        }
+        
 
 }
 

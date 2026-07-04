@@ -29,7 +29,7 @@ window.addEventListener("load", async function(event){
         })
         let result = await response.json();
         venteParMois.push(parseFloat(result.data));
-        console.log(`for month ${date.month} : ${result.data}`);
+
     }
 
     //barChart Properties
@@ -244,19 +244,16 @@ resetButton.addEventListener("click",function(){
 // partie form
 
 let addArticleForm = document.querySelector("#addArticleForm");
+
 addArticleForm.addEventListener("submit",async function(event){
     event.preventDefault();
     const formData = new FormData(addArticleForm);
-    for(const [key,value] of formData.entries()){
-        console.log(key,value);
-    }
-
     let response = await fetch("/api/articles",{
         method: "POST", 
         body: formData
     });
     let result = await response.json();
-    console.log(result)
+
     if(result.success == true){
         alert("Product added successfully!");
         window.location.reload();
@@ -265,4 +262,45 @@ addArticleForm.addEventListener("submit",async function(event){
     }
     
 
+})
+
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+///////////// partie filtrage
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+
+let formFilter = document.querySelector("#formFiltrage");
+formFilter.addEventListener("submit", function(event){
+    event.preventDefault();
+    let formData = new FormData(formFilter);
+    let str = "";
+    for(const[key ,value] of formData){
+        if(value !== ""){str += `${key}=${value}&`;}
+    }
+    if(str!==""){
+        str = "?" + str;
+        str = str.slice(0,-1)
+    }
+
+    window.location.href = `/dashboard/articles${str}#formFiltrage`;
+})
+
+let deleteArticleButtonList = document.querySelectorAll(".deleteArticleButton")
+console.log(deleteArticleButtonList)
+deleteArticleButtonList.forEach(article =>{
+    article.addEventListener("click",async function(event) {
+        event.preventDefault();
+        let idProduit = article.dataset.idproduit;
+        let response = await fetch(`/api/articles/${idProduit}`,{
+            method: "DELETE"
+        });
+        let result = await response.json();
+        console.log(result)
+        if(result.success && result.data){window.location.reload()}
+        else{alert(result.message)}
+    })
 })

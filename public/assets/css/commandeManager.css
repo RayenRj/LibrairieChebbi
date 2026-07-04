@@ -258,7 +258,42 @@ img{
 }
 
 /* reglage du boutton */
-.commandeManagerBottomPart .top button{
+
+.commandeManagerBottomPart button[type="reset"]{
+    border: 2px solid #eee;
+    outline: none;
+    background-color: white;
+    padding: 0.5em 1.5em;
+    border-radius: 0.5em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap:0.5em;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.1s all ease;
+    height: 40px;
+}
+.commandeManagerBottomPart button[type="reset"]:hover{
+    background-color: var(--gray-100);
+    color: black;
+}
+
+.commandeManagerBottomPart .top > div:last-child p{
+    opacity: 0;
+}
+
+
+.commandeManagerBottomPart .top > div:last-child > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+
+
+.commandeManagerBottomPart button[type="submit"]{
     padding: 0.65em 2em;
     border-radius: 0.5em;
     outline: none;
@@ -270,20 +305,28 @@ img{
     cursor: pointer;
     background-color: var(--blue);
     color: white;
+    height: 40px;
+    width: 100%;
+    min-width: 150px;
 
 }
 
-.commandeManagerBottomPart .top button:hover{background-color: #2f71db;}
-.commandeManagerBottomPart .top button:active{background-color: #4d8cf1;}
+.commandeManagerBottomPart .top button[type="submit"]:hover{background-color: #2f71db;}
+.commandeManagerBottomPart .top button[type="submit"]:active{background-color: #4d8cf1;}
 
-.commandeManagerBottomPart .top button i{margin-right: 10px;}
+.commandeManagerBottomPart .top button[type="submit"] i{margin-right: 10px;}
 
-
-.commandeManagerBottomPart .top > div:last-child >p{
-    opacity: 0;
+.commandeManagerBottomPart .top .text p{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-500);
 }
 
-
+.commandeManagerBottomPart .top > .lastDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 0.75em;
+}
 
 
 

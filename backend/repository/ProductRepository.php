@@ -113,8 +113,8 @@
         public function Top10Ventes(){
             $query = "select p.libelle , p.categorie , sum(lc.quantite) as 'quantite_total'
                       from produit p , commande c , ligne_commande lc
-                      where p.id_produit = lc.id_produit and c.id_commande = lc.id_commande and month(date_commande) = month(curdate()) and year(date_commande) = year(curdate())
-                      group by id_produit ? P.libelle , p.categorie
+                      where p.id_produit = lc.id_produit and c.id_commande = lc.id_commande
+                      group by p.id_produit , P.libelle , p.categorie
                       order by quantite_total DESC
                       limit 10";
 
@@ -123,12 +123,12 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         public function ArticleAfaibleRotation(){
-            $query = "select p.libelle , p.categorie , sum(lc.quantite) as 'quantite_total'
+            $query = "select p.libelle , p.categorie , sum(lc.quantite) as 'venteTotale' , p.quantite_stock
                       from produit p , commande c , ligne_commande lc
-                      where p.id_produit = lc.id_produit and c.id_commande = lc.id_commande and month(date_commande) = month(curdate()) and year(date_commande) = year(curdate())
-                      group by p.id_produit , P.libelle , p.categorie
-                      order by quantite_total ASC
-                      having quantite_total < 6;";
+                      where p.id_produit = lc.id_produit and c.id_commande = lc.id_commande 
+                      group by p.id_produit , p.libelle , p.categorie
+                      having venteTotale < 6
+                      order by venteTotale ASC ;";
             $stmt= $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -138,7 +138,7 @@
         // partie recherche : contient paginaation
         // #######################
         public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
-            $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.description from {$this->tName} p  where 1=1 ";
+            $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.prix , p.description from {$this->tName} p  where 1=1 ";
             $param = [];
             $categorie = mb_strtolower(trim($categorie));
             $stock = mb_strtolower(trim($stock));

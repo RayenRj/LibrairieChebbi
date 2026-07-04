@@ -274,7 +274,42 @@ img{
 }
 
 
-.packManagerBottomPart .top button{
+
+.packManagerBottomPart button[type="reset"]{
+    border: 2px solid #eee;
+    outline: none;
+    background-color: white;
+    padding: 0.5em 1.5em;
+    border-radius: 0.5em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap:0.5em;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.1s all ease;
+    height: 40px;
+}
+.packManagerBottomPart button[type="reset"]:hover{
+    background-color: var(--gray-100);
+    color: black;
+}
+
+.packManagerBottomPart .top > div:last-child p{
+    opacity: 0;
+}
+
+
+.packManagerBottomPart .top > div:last-child > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+
+
+.packManagerBottomPart button[type="submit"]{
     padding: 0.65em 2em;
     border-radius: 0.5em;
     outline: none;
@@ -286,17 +321,27 @@ img{
     cursor: pointer;
     background-color: var(--blue);
     color: white;
+    height: 40px;
+    width: 100%;
+    min-width: 150px;
 
 }
 
-.packManagerBottomPart .top button:hover{background-color: #2f71db;}
-.packManagerBottomPart .top button:active{background-color: #4d8cf1;}
-.packManagerBottomPart .top button i{margin-right: 10px;}
+.packManagerBottomPart .top button[type="submit"]:hover{background-color: #2f71db;}
+.packManagerBottomPart .top button[type="submit"]:active{background-color: #4d8cf1;}
 
+.packManagerBottomPart .top button[type="submit"] i{margin-right: 10px;}
 
+.packManagerBottomPart .top .text p{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-500);
+}
 
-.packManagerBottomPart .top > div:last-child >p{
-    opacity: 0;
+.packManagerBottomPart .top > .lastDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 0.75em;
 }
 
 /* reglage partie tableau */
