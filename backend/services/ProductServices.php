@@ -59,7 +59,7 @@ class ProductServices{
         $extension = pathinfo($name , PATHINFO_EXTENSION);
         // generate unique name
         $newName = bin2hex(random_bytes(16)) . "." . $extension;
-        $upload_dir = __DIR__ . "/../../public/assets/images/uploadedImg/";
+        $upload_dir = __DIR__ . "/../../public/assets/images/uploadedImg/articles/";
         if(!is_dir($upload_dir)){mkdir($upload_dir , 0077 , true);}
         $dest = $upload_dir . $newName;
         $destDB = "/assets/images/uploadedImg/articles/" . $newName; 

@@ -1,3 +1,29 @@
+<?php
+    require_once(__DIR__ . "/../backend/services/ProductServices.php");
+
+    $product_services = new ProductServices();
+
+
+    $categorie = isset($_GET["categorie"]) ? $_GET["categorie"] : "";
+    $libelle = isset($_GET["libelle"]) ? $_GET["libelle"] : "";
+    $prixMax = isset($_GET["prixMax"]) ? floatval($_GET["prixMax"]) : 0;
+    $prixMin = isset($_GET["prixMin"]) ? floatval($_GET["prixMin"]) : 0;
+    $trie = isset($_GET["trie"]) ? $_GET["trie"] : "";
+    $stock = isset($_GET["stock"]) ? $_GET["stock"] : "";
+    $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
+    $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 15;
+
+    $liste_des_produit= $product_services->rechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);
+    $nombre_de_produit = $product_services->nombreLigneRechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);
+    $nombre_page_totale = intval(ceil($nombre_de_produit / $limit));
+
+
+    $query_array= [];
+    foreach($_GET as $key=>$val){$query_array[] = "$key=$val";} 
+    $query_string = implode("&", $query_array) ?? "";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,7 +275,7 @@
 
         <main>
             <div class="information">
-                <p>Affichage de 1 a 12 sur 120 produits</p>
+                <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min($page * $limit  , $nombre_de_produit) ?> sur <?= $nombre_de_produit ?> Articles</p>
                 <div>
                     Trier par 
                     <select name="" id="">
@@ -264,272 +290,74 @@
 
             <!--phase des articles-->
             <div class="articles">
-                <a href="/products/product">
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                </a>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <p class="title">
-                        Cahier oxford 192 pages grand format
-                    </p>
-                    <p class="price">
-                        3,250 Dt
-                    </p>
-                    <button><span>🛒</span> Ajouter au panier</button>
-                </article>
+                <?php foreach($liste_des_produit as $product):?>
+                    <article>
+                        <a href="/products/product?idproduit=<?= $product["id_produit"] ?>">
+                            <div class="image">
+                                <!-- <img src="<?=  $product["image_url"] ?>" alt=""> -->
+                                <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                            <p class="title">
+                                <?= $product["libelle"] ?>
+                            </p>
+                            <p class="price">
+                                <?= $product["prix"] ?> Dt
+                            </p>
+                        </a>
+                        <button class="addCartButton" data-idproduit ="<?= $product["id_produit"] ?>"><span>🛒</span> Ajouter au panier</button>
+                    </article>
+                <?php endforeach; ?>
             </div>
 
 
 
-            <div class="pagination">
-                <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
-                <a href="#" class="pagination-selected">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#" id="three-dots">...</a>
-                <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
-            </div>
+                <!-- el partie eli feha el pagination -->
+                <div class="bottom">
+                    <div class="pagination">
+                        <!-- before -->
+                        <?php if($page > 1) : ?>
+                            <a  href="/products?page=<?= $page - 1 ?>#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php else : ?>
+                            <a href="#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php endif; ?>
+
+
+                        
+                        <?php if($page> 3):?>
+                            <a href="#" id="three-dots">...</a>
+                        <?php endif; ?>
+
+
+                        <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
+                            <a href="/products?page=<?= $i ?>#formFiltrage"><?= $i ?></a>
+                        <?php endfor; ?>
+
+                        <!-- current page -->
+                        <a href="#" class="pagination-selected"><?= $page ?></a>
+                        <?php for($i=$page +1  ; $i <= min($page + 2 , $nombre_page_totale) ; $i++):?>
+                            <a href="/products?page=<?= $i ?>#formFiltrage"><?= $i ?></a>
+                        <?php endfor; ?> 
+                                    
+                            
+                        <?php if(($nombre_page_totale - $page)> 2): ?>
+                            <a href="#" id="three-dots" data-value = <?= $i ?>>...</a>
+                        <?php endif; ?>
+
+                        <!-- after -->
+                        <?php if($page < $nombre_page_totale) : ?>
+                            <a href="/products?page=<?= $page + 1 ?>#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php else : ?>
+                             <a href="#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
         </main>
     </section>
 
     <?php include("../includes/footer.php"); ?>
+
+    <script src="/assets/js/allProductScript.js"></script>
 </body>
 </html>

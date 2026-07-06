@@ -7,12 +7,14 @@
     $lastMonthYear = intval(date("m" , strtotime("-1 month")));
     
     $topArticlesVendues = $statRepo->topArticlesVendues(4);
-    $liste_article_en_repture_stock = $statRepo->ArticleEnReptureStock();
+    $liste_article_en_repture_stock = $statRepo->ArticleEnReptureStock(4);
     function calculDePourcentage($currentMonthValue , $lastMonthValue){
         $x = $currentMonthValue - $lastMonthValue;
         if($lastMonthValue==0){return 100;} 
         return ($x * 100)/$lastMonthValue;
     }
+
+    $commande_recentes = $statRepo->CommandeRecente(10);
 
 ?>
 <!DOCTYPE html>
@@ -140,87 +142,37 @@
                 <div class="right">
                     <div class="top-part">
                         <h3>Commandes récentes</h3>
-                        <a href="CommandesManager.php">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/dashboard/commandes">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                     <table>
+                        <!-- <thead>
+                            <th>id commande</th>
+                            <th>client</th>
+                            <th>description</th>
+                            <th>Statut</th>
+                            <th>Date De Commande</th>
+                            <th>Prix totale</th>
+                        </thead> -->
+                        <?php foreach($commande_recentes as $index => $commande): ?>
                         <tr>
-                            <td >#CMD-1058</td>
-                            <td >Yassine Ben Ali</td>
-                            <td >Pack Secondaire</td>
+                            <td ><?= $commande["id_commande"] ?></td>
+                            <td ><?=  $commande["prenom"] ?> <?= $commande["nom"] ?></td>
+                            <td ><?= $commande["adresse"] ?></td>
                             <td>
-                                <span class="livree">Livrée</span>
-                                <!-- <span class="en_cours">En cours</span> -->
-                                <!-- <span class="en_attente">En attente</span> -->
-                                <!-- <span class="annulee">Annulé</span> -->
+                                <?php if($commande["statut"]=="attente"): ?>
+                                    <span class="en_attente">En attente</span>
+                                <?php elseif($commande["statut"]=="confirmée"): ?>
+                                    <span class="en_cours">Confirmée</span>
+                                <?php elseif($commande["statut"]=="annulée"): ?>
+                                    <span class="annulee">Annulé</span>
+                                <?php else: ?>
+                                    <span class="livree">Livrée</span>
+                                <?php endif; ?>
                             </td>
-                            <td>30/05/2024</td>
-                            <td>159Dt</td>
+                            <td><?=  $commande["date_commande"] ?></td>
+                            <td><?=  $commande["prix_totale"] ?> Dt</td>
                         </tr>
-                        <tr>
-                            <td >#CMD-1058</td>
-                            <td >Yassine Ben Ali</td>
-                            <td >Pack Secondaire</td>
-                            <td>
-                                <!-- <span class="livree">Livrée</span> -->
-                                <span class="en_cours">En cours</span>
-                                <!-- <span class="en_attente">En attente</span> -->
-                                <!-- <span class="annulee">Annulé</span> -->
-                            </td>
-                            <td>30/05/2024</td>
-                            <td>159Dt</td>
-                        </tr>
-                        <tr>
-                            <td >#CMD-1058</td>
-                            <td >Yassine Ben Ali</td>
-                            <td >Pack Secondaire</td>
-                            <td>
-                                <!-- <span class="livree">Livrée</span> -->
-                                <!-- <span class="en_cours">En cours</span> -->
-                                <span class="en_attente">En attente</span>
-                                <!-- <span class="annulee">Annulé</span> -->
-                            </td>
-                            <td>30/05/2024</td>
-                            <td>159Dt</td>
-                        </tr>
-                        <tr>
-                            <td >#CMD-1058</td>
-                            <td >Yassine Ben Ali</td>
-                            <td >Pack Secondaire</td>
-                            <td>
-                                <!-- <span class="livree">Livrée</span> -->
-                                <!-- <span class="en_cours">En cours</span> -->
-                                <!-- <span class="en_attente">En attente</span> -->
-                                <span class="annulee">Annulé</span>
-                            </td>
-                            <td>30/05/2024</td>
-                            <td>159Dt</td>
-                        </tr>
-                        <tr>
-                            <td >#CMD-1058</td>
-                            <td >Yassine Ben Ali</td>
-                            <td >Pack Secondaire</td>
-                            <td>
-                                <!-- <span class="livree">Livrée</span> -->
-                                <!-- <span class="en_cours">En cours</span> -->
-                                <span class="en_attente">En attente</span>
-                                <!-- <span class="annulee">Annulé</span> -->
-                            </td>
-                            <td>30/05/2024</td>
-                            <td>159Dt</td>
-                        </tr>
-                        <tr>
-                            <td >#CMD-1058</td>
-                            <td >Yassine Ben Ali</td>
-                            <td >Pack Secondaire</td>
-                            <td>
-                                <!-- <span class="livree">Livrée</span> -->
-                                <!-- <span class="en_cours">En cours</span> -->
-                                <span class="en_attente">En attente</span>
-                                <!-- <span class="annulee">Annulé</span> -->
-                            </td>
-                            <td>30/05/2024</td>
-                            <td>159Dt</td>
-                        </tr>
+                        <?php endforeach; ?>
                     </table>
                 </div>
 
@@ -277,7 +229,7 @@
                                         <p class="nbre-vente"><?= $product["quantite_total"] ?> ventes</p>
                                     </div>
                                 </div>
-                                <p class="prix"><?= number_format($product["prix"],2,",") ?> Dt</p>
+                                <p class="prix"><?= number_format($product["prix"],3,",") ?> <small>Dt</small></p>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -288,68 +240,28 @@
                     <div class="top-part">
                         <div>
                             <h3>Articles en repture de stock</h3>
-                            <span>12 Produits</span>
+                            <span><?= $statRepo->nbreArticleEnReptureStock() ?> Produits</span>
                         </div>
                         <a href="/dashboard/articles?stock=repture%20de%20stock#formFiltrage">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
 
                     <ul>
+                        <?php foreach($liste_article_en_repture_stock as $product): ?>
                         <li>
                             <div>
-                            <img src="https://spacenet.tn/302029-large_default/sac-a-dos-scolaire-gris.jpg" alt="">
-                            <h5>Sac à dos avengers</h5>
+                            <img src="<?= $product["image_url"] ?>" alt="image de product">
+                            <h5><?=  $product["libelle"] ?></h5>
                             </div>
                             <div>
                                 <span class="zero">0</span>
-                                <span class="presque-zero" hidden>5</span>
                             </div>
                             <div class="buttons">
                                 <a href="">Reapprovisionner</a>
                                 <a href="">Supprimer</a>
                             </div>
                         </li>
-                        <li>
-                            <div>
-                            <img src="https://spacenet.tn/302029-large_default/sac-a-dos-scolaire-gris.jpg" alt="">
-                            <h5>Sac à dos avengers</h5>
-                            </div>
-                            <div>
-                                <span class="zero" hidden>0</span>
-                                <span class="presque-zero" >5</span>
-                            </div>
-                            <div class="buttons">
-                                <a href="">Reapprovisionner</a>
-                                <a href="">Supprimer</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                            <img src="https://spacenet.tn/302029-large_default/sac-a-dos-scolaire-gris.jpg" alt="">
-                            <h5>Sac à dos avengers</h5>
-                            </div>
-                            <div>
-                                <span class="zero">0</span>
-                                <span class="presque-zero" hidden>5</span>
-                            </div>
-                            <div class="buttons">
-                                <a href="">Reapprovisionner</a>
-                                <a href="">Supprimer</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                            <img src="https://spacenet.tn/302029-large_default/sac-a-dos-scolaire-gris.jpg" alt="">
-                            <h5>Sac à dos avengers</h5>
-                            </div>
-                            <div>
-                                <span class="zero">0</span>
-                                <span class="presque-zero" hidden>5</span>
-                            </div>
-                            <div class="buttons">
-                                <a href="">Reapprovisionner</a>
-                                <a href="">Supprimer</a>
-                            </div>
-                        </li>
+                        <?php endforeach ?>
+
                     </ul>
                 </div>
             </div>

@@ -27,10 +27,17 @@
                 <div class="top">
 
                     <div>
+                        <p>Recherche par Identifiat</p>
+                        <div>
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" name="packSearch" id="packSearch" placeholder="Identifiant du produit...">
+                        </div>
+                    </div>
+                    <div>
                         <p>Recherche par nom</p>
                         <div>
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" name="packSearch" id="packSearch" placeholder="Nom du produit...">
+                            <input type="text" name="libelle" id="packSearch" placeholder="Nom du produit...">
                         </div>
                     </div>
 

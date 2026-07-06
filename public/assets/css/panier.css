@@ -126,7 +126,8 @@ main.no-article{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 7em;
+    /* margin-top: 7em; */
+    height: calc(100dvh - 180px);
 }
 
 main.no-article .empty-cart .icon{
@@ -283,8 +284,12 @@ th, td {
 
 }
 
+.quantiteInput::-webkit-inner-spin-button,
+.quantiteInput::-webkit-outer-spin-button{
+    appearance: none;
+}
 
-#quantite{
+.quantiteInput{
     width: 50px;
     height: 40px;
     outline: none;

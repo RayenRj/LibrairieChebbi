@@ -310,10 +310,5 @@ INSERT INTO userLogin(id_client,loginAt) VALUES
 
 use librairiedb;
 select * from produit;
-
-select p.libelle , p.categorie , sum(lc.quantite) as 'quantite_total'
-from produit p , commande c , ligne_commande lc
-where p.id_produit = lc.id_produit and c.id_commande = lc.id_commande and month(date_commande) = month(curdate() - INTERVAL 1 month) and year(date_commande) = year(curdate())
-group by p.id_produit , P.libelle , p.categorie
-order by quantite_total DESC
-limit 10;
+delete from produit where id_produit =54
+select * from produit where id_produit = 52;

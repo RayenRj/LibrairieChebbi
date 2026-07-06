@@ -115,9 +115,11 @@ img{
 }
 
 .PromotionManagerBottomPart .top > div{position: relative;}
-.PromotionManagerBottomPart .top > div:first-child > div{position: relative;}
+.PromotionManagerBottomPart .top > div:first-child > div,
+.PromotionManagerBottomPart .top > div:nth-child(2) > div{position: relative;}
 
-.PromotionManagerBottomPart .top > div:first-child input{
+.PromotionManagerBottomPart .top > div:first-child input,
+.PromotionManagerBottomPart .top > div:nth-child(2) input{
     background-color: white;
     min-width: 250px;
     flex-grow: 1;
@@ -133,7 +135,8 @@ img{
 
 
 
-.PromotionManagerBottomPart .top > div:first-child > div i{
+.PromotionManagerBottomPart .top > div:first-child > div i ,
+.PromotionManagerBottomPart .top > div:nth-child(2) > div i {
     font-size: 13px;
     position: absolute;
     top: 50%;

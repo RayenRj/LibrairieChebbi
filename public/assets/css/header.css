@@ -345,10 +345,22 @@ hr{
     gap: 0.5em;
   }
 
+  header .part-two ul li a{
+  list-style: none;
+  font-size: 12px;
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+  padding: 0.65em 1em;
+  width: fit-content;
+  text-align: center;
+  
+}
+
   header{
-    justify-content: center;
     gap: 2em;
     padding: 0.5em 0em;
+    justify-content: space-evenly;
   }
   header .left-part{
     display: flex;
@@ -359,6 +371,53 @@ hr{
     width: 55%;
   
   }
+
+  header img{
+    width: 120px;
+    object-fit: contain;
+    cursor: pointer;
+  }
+
+
+
+  header .left-part .categories button{
+      font-size: 13px;
+      border: 1px solid var(--gray-300);
+      border-radius: 10px;
+      padding: 0.5em ;
+      background-color: white;
+      cursor: pointer;
+      min-width: 125px;
+  }
+
+  header .left-part .search .input-container input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 80%;
+    border-radius: 2em;
+    border: 1.5px solid var(--gray-200);
+    padding: 1em;
+    padding-left: 45px;
+    padding-right: 1em;
+    background-color: var(--gray-100);
+  }
+
+header .part-two{width: fit-content;}
+
+header .left-part{
+        width: fit-content;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 0.5em;
+        align-items: center;
+
+}
+
+
+
+
 }
 
 

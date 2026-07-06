@@ -94,8 +94,11 @@ main.product{
 }
 
 .product .top .image-part img{
-    width: 90%;
+    width: 80%;
     height: 100%;
+    border-radius: 0.75em;
+    max-width: 450px;
+
 }
 
 .product .top .text-part{
@@ -274,3 +277,8 @@ section.bottom > h3{
 /* ================================ */
 /* =======reglage product ========= */
 /* ================================ */
+
+
+#rating{
+    width: 100px;
+}
