@@ -15,7 +15,7 @@
                 $result = $this->productServices->getProductById(intval($params[0]));
                 $response = [
                     "success" => true,
-                    "message" => "Finding Client by Email",
+                    "message" => "get client part Identifiat",
                     "numberOfLine" => null,
                     "data" => $result,
                     "error" => null

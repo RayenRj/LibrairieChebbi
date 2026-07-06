@@ -46,8 +46,8 @@
             return $stmt->fetch(PDO::FETCH_BOTH)[0];
         }
         // commandeRecente : intervale 2 day
-        public function CommandeRecente(){
-            $query = "select * from commande where date_commande >= date_format(curdate() - INTERVAL 3 day , '%Y-%m-%d') ;";
+        public function CommandeRecente($limit){
+            $query = "select c.* , nom , prenom from commande c , client cli where c.id_client = cli.id_client order by date_commande DESC limit $limit ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -67,10 +67,16 @@
         }
         // articles en repture de stock
         public function ArticleEnReptureStock($limit){
-            $query = "select * from produit where quantite_stock  < 3 limit ?";
+            $query = "select * from produit where quantite_stock =0 limit $limit ";
             $stmt= $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function nbreArticleEnReptureStock(){
+            $query = "select count(*) from produit where quantite_stock = 0 ";
+            $stmt= $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;
         }
         // totale vente des packs
         public function totaleVenteDePack(){

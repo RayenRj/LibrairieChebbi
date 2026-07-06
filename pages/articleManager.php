@@ -1,7 +1,7 @@
 <?php
     require_once(__DIR__ . "/../backend/controllers/ProductController.php");
+    
     $productService = new ProductServices();
-
     function calculDePourcentage($currentMonthValue , $lastMonthValue){
         $x = $currentMonthValue - $lastMonthValue;
         if($lastMonthValue==0){return 100;} 
@@ -27,7 +27,6 @@
     $query_array= [];
     foreach($_GET as $key=>$val){$query_array[] = "$key=$val";} 
     $query_string = implode("&", $query_array) ?? "";
-
 
     $top_10_vente_list = $productService->Top10Ventes();
     $article_faible_rotation_list = $productService->ArticleAfaibleRotation();

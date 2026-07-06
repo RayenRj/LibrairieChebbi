@@ -11,8 +11,10 @@
         private string $marque;
         private string $imageUrl;
         private float $remise;
-
-        public function __construct(string $idProd , string $lib, int $stock , float $prx , string $cat , string $code, string $img  , float $remise , string $marque){
+        private string $description;
+        private float $numberOfStars;
+        private int $review;
+        public function __construct(string $idProd , string $lib, int $stock , float $prx , string $cat , string $code, string $img  , float $remise , string $marque , string $description , int $review , int $stars){
             $this->idProduit = $idProd;
             $this->libelle = $lib;
             $this->stock = $stock;
@@ -22,6 +24,9 @@
             $this->remise = $remise;
             $this->code_a_barre = $code;
             $this->imageUrl = $img;
+            $this->description = $description;
+            $this->numberOfStars = $stars ;
+            $this->review = $review;
         }
 
         // getter
@@ -34,6 +39,9 @@
         public  function getMarque():string{return $this->marque;}
         public  function getImageUrl():string{return $this->imageUrl;}
         public  function getRemise():float{return $this->remise;}
+        public  function getDescription():string{return $this->description;}
+        public  function getNumberOfStars():float{return $this->numberOfStars;}
+        public  function getReview():int{return $this->review;}
         //setter
         public  function setId(string $id):void{$this->idProduit = $id;}
         public  function setLibelle(string $lib):void{$this->libelle = $lib;}
@@ -44,6 +52,9 @@
         public  function setImageUrl(string $img):void{$this->imageUrl = $img;}
         public  function setMarque(string $marque):void{$this->marque = $marque;}
         public  function setCodeABarre(string $code):void{$this->code_a_barre = $code;}
+        public  function setDescription(string $description){$this->description =$description;}
+        public  function setNumberOfStars(float $numberOfStars){$this->numberOfStars =numberOfStars;}
+        public  function setReview(int $review){$this->review =review;}
     }
 
 ?>

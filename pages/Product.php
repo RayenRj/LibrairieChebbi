@@ -13,7 +13,10 @@
         $product_coordonee["code_barre"],
         $product_coordonee["image_url"],
         floatval($product_coordonee["remise"]),
-        $product_coordonee["marque"]
+        $product_coordonee["marque"],
+        $product_coordonee["description"],
+        $product_coordonee["review"] ?? 154,
+        $product_coordonee["number_of_stars"] ?? 3
     );
 
 ?>
@@ -55,7 +58,7 @@
         </div>
         <section class="top">
             <div class="image-part">
-                <img  src="https://i5.walmartimages.com/seo/Pen-Gear-Wide-Ruled-3-Subject-Spiral-Notebook-Blue-10-5-x-8-120-Pages_c855428f-291b-4944-90e7-109feb227414.2bada78a9234b50787a896a37820e894.jpeg" alt="">
+                <img  src="<?= $product->getImageUrl() ?>" alt="">
             </div>
             <div class="text-part">
                 <!-- en cas de stock -->
@@ -72,7 +75,7 @@
                 <?php endif; ?>
                 <h2 class="product-title"><?= $product->getLibelle() ?></h2>
                 <div class="review">
-                    5 Start
+                    <img src="/assets/images/rating/5.png" alt="" id="rating">
                     <p class="n-review">(24 Reviews)</p>
                 </div>
                 <div class="prix">
