@@ -30,6 +30,10 @@
     foreach($_GET as $key=>$val){$query_array[] = "$key=$val";} 
     $query_string = implode("&", $query_array) ?? "";
 
+
+    if(!isset($_SESSION["role"]) || $_SESSION["role"]!="admin"):
+        header("Location: /main");
+    else:
 ?>
 
 <!DOCTYPE html>
@@ -388,3 +392,6 @@
     <script src="/assets/js/commandeManager.js"></script>
 </body>
 </html>
+
+
+<?php endif; ?>

@@ -1,5 +1,6 @@
 create database if not exists librairieDB;
 use librairieDB;
+
 create table produit(
 	id_produit int primary key auto_increment,
     code_barre varchar(50) ,
@@ -49,7 +50,7 @@ create table commande(
     code_postal varchar(20),
     prix_totale decimal(8,3),
     commentaire varchar(255),
-    foreign key(id_client) references client(id_client)
+    foreign key(id_client) references client(id_client) on DELETE CASCADE On update CASCADE
 );
 
 
@@ -69,12 +70,10 @@ create table userLogin(
     id_client int not null,
     loginAt datetime not null default current_timestamp,
     primary key(id),
-    foreign key(id_client) references client(id_client)
+    foreign key(id_client) references client(id_client) on DELETE CASCADE On update CASCADE
 );
 
 
-
--- alter 
 
 
 
@@ -310,5 +309,8 @@ INSERT INTO userLogin(id_client,loginAt) VALUES
 
 use librairiedb;
 select * from produit;
-delete from produit where id_produit =54
+delete from produit where id_produit =54;
 select * from produit where id_produit = 52;
+
+
+select * from client;

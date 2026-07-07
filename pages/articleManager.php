@@ -30,7 +30,16 @@
 
     $top_10_vente_list = $productService->Top10Ventes();
     $article_faible_rotation_list = $productService->ArticleAfaibleRotation();
+
+
+    if(!isset($_SESSION["role"]) || $_SESSION["role"]!="admin"):
+        header("Location: /main");
+    else:
+
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -636,3 +645,6 @@
     <script src="/assets/js/articleManager.js"></script>
 </body>
 </html>
+
+
+<?php endif;?>

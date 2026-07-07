@@ -68,8 +68,10 @@ error_reporting(E_ALL);
     $route->add("POST" , "/api/users/createUser" , "ClientController","SignUp");
     $route->add("POST" , "/api/users/signIn" , "ClientController","signIn");
     $route->add("PATCH","/api/users/addAdmin/{id}","ClientController","addAdmin");
-    $route->add("PATCH","/api/users/deleteAdmin/{id}","ClientController","deleteAdmin");
+    $route->add("PATCH","/api/users/deletAdmin/{id}","ClientController","removeAdmin");
+    $route->add("DELETE","/api/users/deleteClient/{id}","ClientController","deleteClient");
     $route->add("GET","/api/users", "ClientController" , "getAllUsers");
+    $route->add("GET","/api/users/logout", "ClientController" , "logOut");
 
 
     //=========> commande Routes <=======

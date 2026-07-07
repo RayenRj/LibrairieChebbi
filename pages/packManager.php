@@ -22,7 +22,9 @@
 
     // partie el add pack
 
-
+    if(!isset($_SESSION["role"]) || $_SESSION["role"]!="admin"):
+        header("Location: /main");
+    else:
 
 ?>
 
@@ -554,3 +556,5 @@
     <script src="../assets/js/packManager.js"></script>
 </body>
 </html>
+
+<?php endif;?>

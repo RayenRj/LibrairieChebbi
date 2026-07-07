@@ -16,6 +16,10 @@
 
     $commande_recentes = $statRepo->CommandeRecente(10);
 
+
+    if(!isset($_SESSION["role"]) || $_SESSION["role"]!="admin"):
+        header("Location: /main");
+    else:
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -273,3 +277,6 @@
     <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>
+
+
+<?php endif;?>
