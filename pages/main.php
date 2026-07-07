@@ -77,10 +77,10 @@
     <div class="categories-part">
         <div class="top-part">
             <h2>Nos Categories</h2>
-            <a href="AllProduct.php">Voir toutes les categories <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="/products">Voir toutes les categories <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="bottom-part">
-            <a href="AllProduct.php" class="card-link">
+            <a href="/products" class="card-link">
                 <div class="card">
                     <img src="../assets/images/mainPageImg/books.png" alt="">
                     <div class="text">
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </a>
-            <a href="Collection.php" class="card-link">
+            <a href="/collections" class="card-link">
                 <div class="card">
                     <img src="../assets/images/mainPageImg/sac.png" alt="">
                     <div class="text">
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </a>
-            <a href="AllProduct.php" class="card-link">
+            <a href="/products" class="card-link">
                 <div class="card">
                     <img src="../assets/images/mainPageImg/pens.png" alt="">
                     <div class="text">
@@ -110,7 +110,7 @@
                     </div>
                 </div>
             </a>
-            <a href="games.php" class="card-link">
+            <a href="/games" class="card-link">
                 <div class="card">
                     <img src="../assets/images/mainPageImg/gift.png" alt="">
                     <div class="text">
@@ -158,7 +158,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="" class="button">Découvrir les fournitures</a>
+                <a href="/products" class="button">Découvrir les fournitures</a>
             </div>
             <div class="card-type-1 card">
                 <img src="../assets/images/mainPageImg/img7.png" alt="" class="background-img">
@@ -190,7 +190,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="Collection.php" class="button">Voir les sacs</a>
+                <a href="/collections" class="button">Voir les sacs</a>
             </div>
         </div>
         <!-- 3rd part -->
@@ -218,7 +218,7 @@
                     </li>
 
                 </ul>
-                <a href="Pack.php" class="button">Voir les packs</a>
+                <a href="/packs" class="button">Voir les packs</a>
             </div>
             <div class="card-type-2 card">
                 <img src="../assets/images/mainPageImg/img5.png" alt="">
@@ -241,7 +241,7 @@
                         <i class="fa-solid fa-circle-check"></i>Livres de Dessin
                     </li>
                 </ul>
-                <a href="games.php" class="button">Explorer les cadeaux</a>
+                <a href="/games" class="button">Explorer les cadeaux</a>
             </div>
         </div>
 
@@ -250,7 +250,7 @@
     <div class="article-slide">
         <div class="top-part">
             <h2>Nos produits vedettes</h2>
-            <a href="AllProduct.php">Voir tous les produits <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="/products">Voir tous les produits <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <section class="bottom">
             <div class="slider">

@@ -111,6 +111,7 @@
                     <main>
                         <h4>Résumé de la commande</h4>
                         <div class="articles">
+                            <!--
                             <article>
                                 <div>
                                     <img src="../assets/images/pack/pack_images/pack1.png" alt="">
@@ -121,63 +122,14 @@
                                 </div>
                                 <p class="prix">149Dt</p>
                             </article>
-                            <article>
-                                <div>
-                                    <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                                    <div class="txt">
-                                        <p class="nom-produit">Pack Bac Math</p>
-                                        <p class="quantite">x1</p>
-                                    </div>
-                                </div>
-                                <p class="prix">149Dt</p>
-                            </article>
-                            <article>
-                                <div>
-                                    <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                                    <div class="txt">
-                                        <p class="nom-produit">Pack Bac Math</p>
-                                        <p class="quantite">x1</p>
-                                    </div>
-                                </div>
-                                <p class="prix">149Dt</p>
-                            </article>
-                            <article>
-                                <div>
-                                    <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                                    <div class="txt">
-                                        <p class="nom-produit">Pack Bac Math</p>
-                                        <p class="quantite">x1</p>
-                                    </div>
-                                </div>
-                                <p class="prix">149Dt</p>
-                            </article>
-                            <article>
-                                <div>
-                                    <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                                    <div class="txt">
-                                        <p class="nom-produit">Pack Bac Math</p>
-                                        <p class="quantite">x1</p>
-                                    </div>
-                                </div>
-                                <p class="prix">149Dt</p>
-                            </article>
-                            <article>
-                                <div>
-                                    <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                                    <div class="txt">
-                                        <p class="nom-produit">Pack Bac Math</p>
-                                        <p class="quantite">x1</p>
-                                    </div>
-                                </div>
-                                <p class="prix">149Dt</p>
-                            </article>
+-->
                         </div>
 
                         <hr>
                         <div class="les-prix">
                             <div>
                                 <p>Sous-total</p>
-                                <p class="prix">456 Dt</p>
+                                <p class="prix"><?= $_GET["total"] ?? 0 ?> Dt</p>
                             </div>
                             <div>
                                 <p>Frais de livraison</p>
@@ -189,7 +141,7 @@
                         <div class="totale">
                             <div>
                                 <h4>Total</h4>
-                                <p class="prix-bleu">462 Dt</p>
+                                <p class="prix-bleu"><?= $_GET["total"] + 6 ?? 0 ?> Dt</p>
                             </div>
                             <p>TVA inclue</p>
                         </div>
@@ -212,7 +164,7 @@
                         <div class="aide-text">
                             <h5>Besoin d'aide</h5>
                             <p>Notre équipe est la pour vous aider</p>
-                            <a href="ContactUs.php">Nous Contacter <i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="/contactus">Nous Contacter <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -228,7 +180,7 @@
             <span class="overlay-order"></span>
             <main class="order">
                 <div class="card-order"> 
-                    <a class="dismiss button" href="#" hidden>×</a> 
+                    <a class="dismiss button" href="/products" hidden>×</a> 
                     <div class="header-order"> 
                         <div class="image">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>

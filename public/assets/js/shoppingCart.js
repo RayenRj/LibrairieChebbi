@@ -33,19 +33,7 @@ window.addEventListener("load",async function(){
     }
 
 
-    let last_tr = ` <tr class="last-tr">
-                        <td colspan="7" >
-                            <div class="button">
-                        <!-- From Uiverse.io by carlosepcc --> 
-                                    <a href="/commande" class="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
-                                    border-blue-600
-                                    border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-                                    active:border-b-[2px] active:brightness-90 active:translate-y-[2px] button-commande">
-                                    passer la commande >>
-                                    </a>
-                            </div>
-                        </td>
-                    </tr> `;
+
 
     tbody.innerHTML = "";
     let totale = 0;
@@ -56,7 +44,6 @@ window.addEventListener("load",async function(){
     for(article of cartTable){
         let response = await fetch(`/api/products/${article.idproduit}`);
         let result = await response.json();
-        console.log(result.data.image_url)
 
         tbody.innerHTML += `
                     <tr>
@@ -98,6 +85,20 @@ window.addEventListener("load",async function(){
                         <td></td>
                     </tr>
     `
+
+    let last_tr = ` <tr class="last-tr">
+                        <td colspan="7" >
+                            <div class="button">
+                        <!-- From Uiverse.io by carlosepcc --> 
+                                    <a href="/commande?total=${totale}" class="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
+                                    border-blue-600
+                                    border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+                                    active:border-b-[2px] active:brightness-90 active:translate-y-[2px] button-commande">
+                                    passer la commande >>
+                                    </a>
+                            </div>
+                        </td>
+                    </tr> `;
     if(cartTable.length !==0){
         tbody.innerHTML += beforeLast_tr
         tbody.innerHTML += last_tr
