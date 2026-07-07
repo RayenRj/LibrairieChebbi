@@ -255,18 +255,20 @@ article{
 }
 
 article div.image{
-    height: 150px;
+    height: 200px;
     width: 100%;
     position: relative;
     display: flex;
     justify-items: center;
     justify-content: center;    
+    align-items: flex-start;
     margin-bottom: 2em;
-
+    object-fit: cover;
+    padding: 0.5em;
 }
 article div.image img{
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 

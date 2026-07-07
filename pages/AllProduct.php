@@ -294,8 +294,8 @@
                     <article>
                         <a href="/products/product?idproduit=<?= $product["id_produit"] ?>">
                             <div class="image">
-                                <!-- <img src="<?=  $product["image_url"] ?>" alt=""> -->
-                                <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt="">
+                                <img src="<?=  $product["image_url"] ?>" alt=""> 
+                                <!-- <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt=""> -->
                                 <i class="fa-regular fa-heart"></i>
                             </div>
                             <p class="title">
