@@ -5,7 +5,8 @@ let SignUpButton = document.querySelector("#sign-up");
 let beforeSignIn = document.querySelector(".before-signin");
 let beforeSignUp = document.querySelector(".before-signup");
 let body = document.body;
-console.log(body);
+let logOutButton = document.querySelector("#log_out");
+
 
 SignInButton.addEventListener("click",()=>{
     SignInCard.removeAttribute("hidden");
@@ -43,4 +44,17 @@ switchSignUp.addEventListener("click", (event)=>{
 switchSignIn.addEventListener("click", (event)=>{
     SignUpCard.setAttribute("hidden","");
     SignInCard.removeAttribute("hidden");
+})
+
+
+// partie log out + remove session
+logOutButton.addEventListener("click", async function(event){
+    event.preventDefault()
+    let response = await fetch("/api/users/logout");
+    let result = await response.json();
+    if(result.success){
+        window.location.href = "/main";
+    }else{
+        alert(result.message);
+    }
 })

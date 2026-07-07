@@ -17,17 +17,14 @@
         }
 
         //done :
-        /**
-         * @return Client array if the email and passsword existe dans la base snn el retourne false
-         */
-        public function authenticate(string $email , string $password): mixed{
+        public function authenticate(string $email , string $password){
             $email = trim($email);
             $password = trim($password);
             if(empty($email)){throw new Exception("Email est vide!");}
             if(empty($password)){throw new Exception("password est vide!");}
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){throw new Exception("Email est invalide!");}
             $client = $this->clientRepo->findClientByEmail($email);
-            if($client === null){return false;}
+            if($client === null || $client === false){return false;}
             $password_hash = $client['password'];
             if(password_verify($password , $password_hash)){return $client;}
             return false;
@@ -41,7 +38,7 @@
         public function deleteClient(int $id) : bool {
             if($id<1){throw new Exception("L'identifiant doit etre > 0");}
             if($this->clientRepo->findClientById($id) === null){throw new Exception("Cette id ne correspond a aucun client!");}
-            if(!($this->deleteClient($id))){throw new Exception("Delete Client failed!");}
+            if(!($this->clientRepo->deleteById($id))){throw new Exception("Delete Client failed!");}
             return true;
         }
         //done
@@ -69,8 +66,10 @@
         }
 
         //done
-        public function getAllAdmins() : ?array {
-            return $this->clientRepo->findAllAdmins();
+        public function getAllAdmins(int $limit ,int $page) : ?array {
+            if($limit<1){throw new Exception("La limite est invalide!");}
+            if($page<1){throw new Exception("La valeur de la page est invalide!!");}
+            return $this->clientRepo->findAllAdmins($limit , ($page - 1) * $limit);
         }
         //done
         public function updateClient(int $idClient , array $data) : bool{
@@ -93,10 +92,30 @@
             if($this->clientRepo->findClientById($idClient) === false){throw new Exception("Le client avec cette ID n'existe pas!");}
             return $this->clientRepo->getCommandeByIdClient($idClient) ?: null;
         }
-
-
         public function lastInsertedId(){
             return $this->clientRepo->lastInsertedId();
+        }
+        //done
+        public function addAdmin(int $idClient){
+            return $this->clientRepo->addAdmin($idClient);
+        }
+        //done
+        public function removeAdmin(int $idClient){
+            return $this->clientRepo->modifyClient($idClient, ["role" => "client"]);
+        }
+
+        //done
+        public function nombreLigneAllAdmin(){return $this->clientRepo->nombreLigneAllAdmin();}
+
+        //done
+        public function searchClient(string $idClient , string $nom , string $prenom , string $email , string $tel , int $limit , int $page){
+            if($limit < 1){throw new Exception("La limite est invalide!");}
+            if($page < 1){throw new Exception("La page est invalide!page");}
+            $offset = ($page - 1) * $limit;
+            return $this->clientRepo->searchClient($idClient , $nom , $prenom , $email , $tel , $limit, $offset);
+        }
+        public function nombreDeLigneSearchClient(string $idClient , string $nom , string $prenom , string $email , string $tel){
+            return $this->clientRepo->nombreDeLigneSearchClient($idClient , $nom , $prenom , $email , $tel);
         }
     }
 ?>

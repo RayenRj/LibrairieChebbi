@@ -80,7 +80,9 @@
                 </div>
                 <div class="text">
                     <h4>Admin</h4>
-                    <p>Ramzi Chebbi</p>
+                    <?php if(isset($_SESSION["lastName"]) && isset($_SESSION["firstName"])): ?>
+                        <p><?= $_SESSION["lastName"] ?> <?= $_SESSION["firstName"] ?></p>
+                    <?php endif; ?>
                 </div>
             </div>
             <!-- <i class="fa-solid fa-angle-down"></i> -->

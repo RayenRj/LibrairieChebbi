@@ -12,18 +12,18 @@
         public function signIn($request){
             try{
                 $body = $request["body"];
-                $result = $this->clientServices->authenticate($body["email"], $body["password"]);
-                if($result == true){
-                    $_SESSION["userId"]= $this->clientServices->lastInsertedId();
-                    $user = $this->clientServices->getClientById($_SESSION["userId"]);
-                    $_SESSION["firstName"]=$user["prenom"];
-                    $_SESSION["lastName"]=$user["nom"];
+                $user = $this->clientServices->authenticate($body["email"], $body["password"]);
+                if($user){
+                    $_SESSION["userId"]=  $user["id_client"];
+                    $_SESSION["firstName"]= $user["prenom"];
+                    $_SESSION["lastName"]= $user["nom"];
+                    $_SESSION["role"] = $user["role"];
                 }
                 $response = [
                     "success" => true,
                     "message" => "Finding Client by Email",
                     "numberOfLine" =>null,
-                    "data" => $result,
+                    "data" => $user,
                     "error" => null
                 ];
 
@@ -42,7 +42,45 @@
                 return;
             } 
         }
+        public function logOut($request){
+            try{
+                session_unset();
+                session_destroy();
+                if(ini_get("session.use_cookies")){ // ma3neha el session testa3mel el cookies
+                    $args = session_get_cookie_params();
+                    setcookie(
+                        session_name(),
+                        "",
+                        time() - 5 ,
+                        $args["path"],
+                        $args["domain"],
+                        $args["secure"],
+                        $args["httponly"],
+                    );
+                }
+                $response = [
+                    "success" => true,
+                    "message" => "Finding Client by Email",
+                    "numberOfLine" =>null,
+                    "data" => true,
+                    "error" => null
+                ];
 
+                echo json_encode($response);
+                return;
+
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
         //done 
         public function SignUp($request){
             try{
@@ -196,8 +234,8 @@
         //done
         public function deleteClient($request){
             try{
-                $body = $request["body"];
-                $result = $this->clientServices->deleteClient($body["idClient"]);
+                $params = $request["params"];
+                $result = $this->clientServices->deleteClient(intval($params[0]));
                 $response = [
                     "success" => true,
                     "message" => "checking if the email exist",
@@ -268,12 +306,35 @@
             }
         }
         //done 
+        public function removeAdmin($request){
+            try{
+                $response = [
+                    "success" => true,
+                    "message" => "add Admin successfully",
+                    "data" => $this->clientServices->removeAdmin(intval($request["params"][0])),
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
+        //done 
         public function addAdmin($request){
             try{
                 $response = [
                     "success" => true,
                     "message" => "add Admin successfully",
-                    "data" => $this->clientServices->addAdmin($request["body"]["idClient"]),
+                    "data" => $this->clientServices->addAdmin(intval($request["params"][0])),
                     "error" => null
                 ];
                 echo json_encode($response);

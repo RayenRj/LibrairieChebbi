@@ -5,7 +5,7 @@ signInForm.addEventListener("submit",async function(event){
 
     event.preventDefault();
     const dataForm = new FormData(signInForm);
-    for(const[key,value] in dataForm.entries()){
+    for(const[key,value] of dataForm.entries()){
         console.log(key,value);
     }
 
@@ -13,13 +13,14 @@ signInForm.addEventListener("submit",async function(event){
         method : "POST",
         body: dataForm
     });
+
     const result = await response.json();
-    console.log(result);
     if(result.success){
         if(result.data == false){
             alert("Adreese email ou mot de passe incorrect!");
         }else{
             window.location.reload();
+
         }
     }else{
         alert("Adreese email ou mot de passe incorrect!");

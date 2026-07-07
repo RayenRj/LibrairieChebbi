@@ -12,13 +12,13 @@
         // Crud Operations
         // ################################
         public function findClientById(int $id){
-            $query = "select from client where id_client = ?;";
+            $query = "select * from client where id_client = ?;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_BOTH)[0];
         }
         public function deleteById(int $id) : bool{
-            $query = "delete from client where id_client = ?;";
+            $query = "delete from client where id_client = ? ";
             $stmt = $this->db->prepare($query);
             return $stmt->execute([$id]);
         }
@@ -32,16 +32,22 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
-        public function findAllAdmins(){
-            $stmt = $this->db->prepare("select * from client where role = client ;");
+        public function findAllAdmins(int $limit , int $offset){
+            $stmt = $this->db->prepare("select * from client where role = 'admin' limit $limit offset $offset");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
+        }
+
+        public function nombreLigneAllAdmin(){
+            $stmt = $this->db->prepare("select count(*) from client where role = 'admin' ");
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?: null;
         }
         public function findClientByEmail(string $email){
            $query = "select * from client where email = ? ;"; 
            $stmt = $this->db->prepare($query);
            $stmt->execute([$email]);
-           return $stmt->fetch(PDO::FETCH_ASSOC) ?: null; // FETCH_CLASS , "className" => yraja3lk les donné sous formes d'un object client
+           return $stmt->fetch(PDO::FETCH_ASSOC); // FETCH_CLASS , "className" => yraja3lk les donné sous formes d'un object client
         }   
 
         // ###############################################################        
@@ -104,12 +110,12 @@
                 $query .= " password = ? , ";
                 $params[] = $data["password"];
             }
-            if (isset($data["role"])){
+            if(isset($data["role"])){
                 $query .= " role = ? , ";
                 $params[] = $data["role"];
             }
             if(empty($params)){return false;}
-            $query = substr($query , 0 , -2) . " where id_client = ? ;";
+            $query = substr($query , 0 , -2) . " where id_client = ? ";
             $params[] = $id;
             $stmt = $this->db->prepare($query);
             return $stmt->execute($params); 
@@ -137,6 +143,89 @@
             return $stmt->fetch(PDO::FETCH_BOTH) ?: null;
         }
         
+
+        // recherche client
+        public function searchClient(string $idClient , string $nom , string $prenom , string $email , string $tel , int $limit , int $offset){
+            $nom = trim(mb_strtolower($nom));
+            $idClient = trim(mb_strtolower($idClient));
+            $prenom = trim(mb_strtolower($prenom));
+            $email = trim(mb_strtolower($email));
+            $tel = trim(mb_strtolower($tel));
+
+            $query = "select * from client ";
+            $params=[];
+            $query_list=[];
+            if(!empty($idClient)){
+                $query_list[] = "id_client = ?";
+                $params[] = $idClient;
+            }
+
+            if(!empty($nom)){
+                $query_list[] = "nom = ?";
+                $params[] = $nom;                
+            }
+            if(!empty($prenom)){
+                $query_list[] = "prenom = ?";
+                $params[] = $prenom;   
+            }
+            if(!empty($email)){
+                $query_list[] = "email = ?";
+                $params[] = $email;   
+            }
+            if(!empty($tel)){
+                $query_list[] = "tel = ?";
+                $params[] = $tel;   
+            }
+
+            if(sizeof($params)>0){
+                $query .= " where ";
+                $query .= implode(" and " , $query_list); 
+            }
+            $query .= " LIMIT $limit OFFSET $offset ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($params);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function nombreDeLigneSearchClient(string $idClient , string $nom , string $prenom , string $email , string $tel){
+            $nom = trim(mb_strtolower($nom));
+            $idClient = trim(mb_strtolower($idClient));
+            $prenom = trim(mb_strtolower($prenom));
+            $email = trim(mb_strtolower($email));
+            $tel = trim(mb_strtolower($tel));
+
+            $query = "select count(*) from client ";
+            $params=[];
+            $query_list=[];
+            if(!empty($idClient)){
+                $query_list[] = "id_client = ?";
+                $params[] = $idClient;
+            }
+
+            if(!empty($nom)){
+                $query_list[] = "nom = ?";
+                $params[] = $nom;                
+            }
+            if(!empty($prenom)){
+                $query_list[] = "prenom = ?";
+                $params[] = $prenom;   
+            }
+            if(!empty($email)){
+                $query_list[] = "email = ?";
+                $params[] = $email;   
+            }
+            if(!empty($tel)){
+                $query_list[] = "tel = ?";
+                $params[] = $tel;   
+            }
+
+            if(sizeof($params)>0){
+                $query .= " where ";
+                $query .= implode(" and " , $query_list); 
+            }
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($params);
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
     }
 
 ?>

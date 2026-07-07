@@ -1,3 +1,20 @@
+<?php
+
+
+
+
+
+
+
+
+
+
+
+    if(!isset($_SESSION["role"]) || $_SESSION["role"]!="admin"):
+        header("Location: /main");
+    else:
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -205,3 +222,6 @@
 
 </body>
 </html>
+
+
+<?php endif;?>

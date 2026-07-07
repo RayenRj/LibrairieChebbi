@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,15 +12,19 @@
     <link rel="stylesheet" href="../assets/css/signin.css">
 </head>
 <body>
-
-    <!--start of partie header-->
+    
+    <!-- ######################################### -->
+    <!-- ######################################### -->
+    <!-- ######## start of partie header #########-->
+    <!-- ######################################### -->
+    <!-- ######################################### -->
     <header>
         <div class="left-part">
             <div class="logo">
                 <img src="../assets/images/logo/logo2.png"  alt="logo">
             </div>  
             <div class="categories">
-                <button>📦 Categories ▾ </button>
+                <button>📦 Categories ▾</button>
                 <ul class="dropdown-menu">
                     <li><a href="/main">⭐ <span>main</span></a></li>
                     <li><a href="/products">🛍️ <span>All Products</span></a></li>
@@ -45,8 +50,10 @@
 
         <div class="part-two">
             <ul>
-                <li><a href="#" id="sign-in">Sign in</a></li>
-                <li><a href="#" id="sign-up">Sign up</a></li>
+                <li <?= isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="#" id="sign-in" >Sign in</a></li>
+                <li <?= isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="#" id="sign-up">Sign up</a></li>
+                <li <?= !isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="#" id="log_out" ><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</a></li>
+                <li <?= (!isset($_SESSION["userId"]) || !isset($_SESSION["role"]) || !($_SESSION["role"]=="admin")) ? "hidden" : "" ?>   ><a href="/dashboard" id="admin_part">📊 Dashboard</a></li>
                 <li><a href="/panier" id="cart">🛒 cart<span class="cartCount">0</span></a></li>
             </ul>
         </div>
@@ -78,10 +85,11 @@
     </header>
     <!--end of partie header-->
 
-
-
-
-    <!-- start of sign up part-->
+    <!-- ######################################### -->
+    <!-- ######################################### -->
+    <!-- ######### start of sign up part #########-->
+    <!-- ######################################### -->
+    <!-- ######################################### -->
     <div class="signup-part" hidden>
         <span class="before-signup"></span>
         <div class="signup">
@@ -142,16 +150,17 @@
     </div>
     <!--end of signup-part-->
 
-
-
-
-    <!-- partie sign in -->
+    <!-- ######################################### -->
+    <!-- ######################################### -->
+    <!-- ####### start of partie sign in #########-->
+    <!-- ######################################### -->
+    <!-- ######################################### -->
     <div class="signin-part" hidden>
         <span class="before-signin"></span>
         <div class="signin">
             <div class="choose">
                 <h1 class="header">Sign in</h1>
-                <form method="POST" id="signInForm">
+                <form id="signInForm">
                     <div class="email">
                         <input type="email" name="email" class="input" required>
                         <label for="">Email</label>

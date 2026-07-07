@@ -117,17 +117,21 @@ body.pack .button a{
    display: flex;
    justify-content: center;
    align-items: center;
+   
+
 }
 .button a:first-of-type{
     background-color: var(--blue);
     color: white;
+    border: 2px solid var(--blue);
     
 }
 .button a:first-of-type:hover{
     background-color: #3172db;
+    border-color: #3172db;
 }
 
-.button a:last-of-type {
+.button a:last-of-type{
     color: var(--yellow-deep);
     transition: 0.5s ease all;
     border: 2px solid var(--yellow-deep);
@@ -136,7 +140,6 @@ body.pack .button a{
 .button a:last-of-type:hover{
     background-color: var(--yellow-deep);
     color: white;
-    border-color:var(--yellow-deeps);
 }
 /* endof big image part  */
 
@@ -363,3 +366,270 @@ article:hover {
 .pack-bac{background-color: #1e38ff2d;}
 
 /* end of packs  */
+
+
+
+
+
+
+/* /////////////////////////////////////////////////// */
+/* ///////////////// PARTIE MEDIA //////////////////// */
+/* /////////////////////////////////////////////////// */
+
+@media (max-width:1400px) {
+    body.pack div.image-container {
+        height: 60vh;
+        margin: 0 auto 1em auto;
+        padding: 2em;
+        min-height: unset;
+    }
+
+    body.pack .button a{
+        padding: 0.55em 1.25em;
+        font-size: 14px;
+    }
+
+    body.pack .text h1{
+        font-size: clamp(1em,8vw,3.5em);
+        line-height: 1.2;
+        font-weight: bold;
+        margin-top: 1em;
+    }
+
+    body.pack .text {
+        max-width: 45%;
+        margin-top: 5em;
+    }
+
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        margin: 3em auto;
+        gap: 2em;
+    }
+
+    .card {
+        background-color: var(--gray-300);
+        height: 250px;
+        border-radius: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1em;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: 0.3s ease all;
+        border-style: solid;
+        border-color: transparent;
+        border-width: 2.5px;
+        user-select: none;
+    }
+
+    /* partie packs */
+
+
+
+}
+
+
+@media (max-width:1320px){
+    body.pack div.image-container {height: 50vh;}
+    body.pack .text {
+        max-width: 45%;
+        margin-top: 4em;
+    }
+    body.pack .text p {margin-top: 2em}
+    body.pack .text .button {margin-top: 2em;}
+    body.pack .button a {
+        padding: 0.55em 1.25em;
+        border-radius: 10px;
+        font-size: clamp(10px , 50vw ,12px);
+    }
+    body.pack .text h1 {
+        font-size: clamp(1em, 8vw, 3.2em);
+        line-height: 1.1;
+        margin-top: 1em;
+    }
+
+}
+
+@media(max-width:1235px){
+    .card-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        margin: 2.5em auto;
+        gap: 1.5em;
+    }
+
+    .card {
+        height: 200px;
+        gap: 0.75em;
+        border-width: 2px;
+    }
+    .card img {
+        height: 27.5%;
+        margin-top: -20px;
+        margin-bottom: -5px;
+    }
+    .card h2 {font-size: 2.15vw;margin-bottom: -10px;}
+    .card a {font-size: 1.25vw;}
+}
+
+@media (max-width:1160px){
+    body.pack .button a {
+        padding: 0.45em 1em;
+        font-size: clamp(10px, 50vw, 11px);
+    }
+
+
+
+    /* packs cards */
+    .packs-container main {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2em;
+        padding: 1em 2vw;
+    }
+
+    .packs-container main article .button-pack a {
+        font-size: 10px;
+        margin-top: 0.5em;
+    }
+    .packs-container main article {
+        padding:1.25em 1em;
+    }
+
+    .packs-container .text {
+        margin-top: 0;
+    }
+}
+
+
+
+@media (max-width:1170px){
+    body.pack div.image-container {height: 40vh;}
+    body.pack .button a {
+        font-weight: bold;
+        transition: 0.25s ease all;
+        padding: 0.45em 0.75em;
+        font-size: 10px;
+    }
+
+    body.pack .text p {margin-top: 2em}
+    body.pack .text .button {
+        margin-top: 1em;
+        width: 80%;
+        gap: 0.5em;
+    }
+    body.pack .button a {
+        padding: 0.55em 0.75em;
+        border-radius: 10px;
+        font-size: clamp(10px , 50vw ,12px);
+    }
+    body.pack .text h1 {
+        font-size: clamp(1em, 20vw, 3em);
+        line-height: 1.1;
+        margin-top: 0;
+    }
+
+    body.pack .text {
+        max-width: 100%;
+        margin-top: 1.5em;
+    }
+}
+
+
+@media (max-width:1000px) {
+    body.pack div.image-container {height: 50vw;max-height: 380px;}
+    body.pack .text h1 {
+        font-size: 5.25vw;
+    }
+    body.pack .text p {
+        margin-top: 1.5em;
+        font-size: 1.35vw;
+    }
+
+    body.pack .button a {
+        padding: 0.55em 0.75em;
+        font-size: 1.15vw;
+    }
+
+    /* partie eli feha el cards */
+    .card-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        margin: 2.5em auto;
+        gap: 1.5em;
+    }
+
+    .card {
+        max-height: 150px;
+        gap: 0.75em;
+        border-width: 2px;
+    }
+
+        /* packs cards */
+    .packs-container main {
+        grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+        gap: 1em;
+        padding: 1em;
+    }
+
+    .packs-container main article .button-pack a {
+        font-size: 10px;
+        margin-top: 0.5em;
+    }
+    .packs-container main article {
+        padding:1.25em 1em;
+    }
+
+    .packs-container .text {
+        margin-top: 0 !important;
+        margin-bottom: 1em;
+    }
+}
+
+
+@media (max-width:850px){
+        /* partie eli feha el cards */
+    .card-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        margin: 2em auto;
+        gap: 1.5em;
+    }
+
+    .card {
+        max-height: 150px;
+        gap: 0.75em;
+        border-width: 2px;
+    }
+    .card img {
+        height: 27.5%;
+        margin-top: -10px;
+        margin-bottom: -5px;
+    }
+    .card h2 {font-size: 16px;margin-bottom: -10px;}
+    .card a {font-size: 10px;}
+
+
+}
+
+
+@media (max-width: 600px){
+
+    .packs-container main article {
+        max-width: 285px;
+        margin: auto;
+    }
+
+}
+
+@media (max-width:400px){
+    /* reglage header de chaque container de pack */
+    .packs-container .text h2 {
+        font-weight: bold;
+        font-size: 5vw;
+    }
+    .packs-container .text {gap: 1em;}
+    .packs-container .text img {
+        height: 10vw;
+    }
+}
