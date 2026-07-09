@@ -434,7 +434,7 @@ article:hover {
 
 
 @media (max-width:1320px){
-    body.pack div.image-container {height: 50vh;}
+    body.pack div.image-container {height: 60vh;}
     body.pack .text {
         max-width: 45%;
         margin-top: 4em;
@@ -506,7 +506,7 @@ article:hover {
 
 
 @media (max-width:1170px){
-    body.pack div.image-container {height: 40vh;}
+    body.pack div.image-container {height: 50vh;}
     body.pack .button a {
         font-weight: bold;
         transition: 0.25s ease all;
@@ -532,14 +532,14 @@ article:hover {
     }
 
     body.pack .text {
-        max-width: 100%;
+        max-width: 45%;
         margin-top: 1.5em;
     }
 }
 
 
 @media (max-width:1000px) {
-    body.pack div.image-container {height: 50vw;max-height: 380px;}
+    body.pack div.image-container{height: 45vw;}
     body.pack .text h1 {
         font-size: 5.25vw;
     }
@@ -609,6 +609,10 @@ article:hover {
     .card h2 {font-size: 16px;margin-bottom: -10px;}
     .card a {font-size: 10px;}
 
+    body.pack .text {
+        max-width: 45%;
+        margin-top: 0em;
+    }
 
 }
 
@@ -618,6 +622,12 @@ article:hover {
     .packs-container main article {
         max-width: 285px;
         margin: auto;
+    }
+
+
+    body.pack .text {
+        max-width: 45%;
+        margin-top: -1em;
     }
 
 }

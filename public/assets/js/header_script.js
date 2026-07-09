@@ -34,8 +34,7 @@ let signUppassword = document.querySelector("#PasswordSignUp");
 // changement entre sign in et sign up
 let switchSignUp = document.querySelector("#switchSignUp");
 let switchSignIn = document.querySelector("#switchSignIn");
-
-console.log(switchSignUp);
+    
 switchSignUp.addEventListener("click", (event)=>{
     SignInCard.setAttribute("hidden","");
     SignUpCard.removeAttribute("hidden");

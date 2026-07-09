@@ -100,6 +100,7 @@
     left: 18%;
     background-color: white;
     padding: 0;
+    cursor: text;
 }
 
 .signup form > div .input{
@@ -110,6 +111,7 @@
     border: 0.5px solid var(--gray-400);
     padding: 10px;
     outline: none;
+    font-size: 14px;
 }
 
 .signup .double{
@@ -130,6 +132,7 @@
     
 }
 
+.signup form > div label.inputFocus,
 .signup form > div .input:focus + label{
     top: 0;
     padding: 0em 0.4em;

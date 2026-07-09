@@ -98,23 +98,23 @@
                 <form action="<?= __DIR__ ?>/" method="POST" id="signUpForm">
                     <div class="name">
                         <input type="text" name="firstName" id="firstName" class="input" required>
-                        <label for="">Prénom</label>
+                        <label for="firstName" class="inputLabel">Prénom</label>
                     </div>
                     <div class="name">
                         <input type="text" name="lastName" id="lastName" class="input" required>
-                        <label for="">Nom</label>
+                        <label for="lastName" class="inputLabel">Nom</label>
                     </div>
                     <div class="email">
                         <input type="email" name="email" id="EmailSignUp" class="input" required>
-                        <label for="">Email</label>
+                        <label for="EmailSignUp" class="inputLabel">Email</label>
                     </div>
                     <div class="password">
                         <input type="password" name="password" id="PasswordSignUp" class="input" required>
-                        <label for="">Password</label>
+                        <label for="PasswordSignUp" class="inputLabel">Password</label>
                     </div>
                     <div class="password">
                         <input type="text" name="tel" id="tel" class="input" required>
-                        <label for="">Telephone</label>
+                        <label for="tel" class="inputLabel">Telephone</label>
                     </div>
                     <div class="button">
                         <input type="submit" value="Sign Up" id="signUpButton">
@@ -162,12 +162,12 @@
                 <h1 class="header">Sign in</h1>
                 <form id="signInForm">
                     <div class="email">
-                        <input type="email" name="email" class="input" required>
-                        <label for="">Email</label>
+                        <input type="email" name="email" class="input" required id="email">
+                        <label for="email" class="inputLabel">Email</label>
                     </div>
                     <div class="password">
-                        <input type="password" name="password" id="" class="input" required>
-                        <label for="">Password</label>
+                        <input type="password" name="password" id="password" class="input" required>
+                        <label for="password" class="inputLabel">Password</label>
                     </div>
                     <div class="checkbox">
                         <input type="checkbox" name="keepLog" id="keepLog">

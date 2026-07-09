@@ -11,7 +11,7 @@
     $trie = isset($_GET["trie"]) ? $_GET["trie"] : "";
     $stock = isset($_GET["stock"]) ? $_GET["stock"] : "";
     $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
-    $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 15;
+    $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 16;
 
     $liste_des_produit= $product_services->rechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);
     $nombre_de_produit = $product_services->nombreLigneRechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);
@@ -21,6 +21,10 @@
     $query_array= [];
     foreach($_GET as $key=>$val){$query_array[] = "$key=$val";} 
     $query_string = implode("&", $query_array) ?? "";
+
+    $list_of_categories= $product_services->getAllCategorie();
+    $list_of_ = $product_services->getAllMarque();
+
 ?>
 
 
@@ -74,7 +78,7 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Livres
+                                    Écriture
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -86,7 +90,7 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Stylo
+                                    Papeterie
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -98,7 +102,7 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Feutres
+                                    Classement
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -110,7 +114,7 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Arts
+                                    Géométrie
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -122,7 +126,91 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Cahiers
+                                    Coupe et collage
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Dessin et arts
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Dessin et arts
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Sacs et accessoires
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Calcul et sciences
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Numérique
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Livres pédagogiques
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Fournitures de bureau
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -181,7 +269,7 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Cahiers
+                                    BIC
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -193,7 +281,7 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Cahiers
+                                    Maped
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -205,7 +293,7 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Cahiers
+                                    Stabilo
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -217,7 +305,7 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Cahiers
+                                    Faber-Castell
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -229,7 +317,7 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Cahiers
+                                    Staedtler
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
@@ -241,7 +329,91 @@
                                             <div class="transition"></div>
                                         </label>
                                     </div>
-                                    Cahiers
+                                    Pilot
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Pelikan
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Carioca
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Schneider
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Milan
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Jovi
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    Canson
+                                </div>
+                                <span class="number-product">35</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="content">
+                                        <label class="checkBox">
+                                            <input id="ch1" type="checkbox" checked>
+                                            <div class="transition"></div>
+                                        </label>
+                                    </div>
+                                    other
                                 </div>
                                 <span class="number-product">35</span>
                             </li>
