@@ -532,7 +532,7 @@ article:hover {
     }
 
     body.pack .text {
-        max-width: 100%;
+        max-width: 40%;
         margin-top: 1.5em;
     }
 }
