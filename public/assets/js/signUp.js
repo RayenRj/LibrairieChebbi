@@ -6,6 +6,21 @@ let password = document.querySelector("#PasswordSignUp").value;
 let tel = document.querySelector("#tel").value;
 let form = document.querySelector("#signUpForm");
 
+let signUpinput = document.querySelectorAll(".signup .input");
+let signUplabel = document.querySelectorAll(".signup .inputLabel");
+for(let i=0 ; i<signUpinput.length; i++){
+    let input = signUpinput[i];
+    input.addEventListener("blur",function(){
+        let label = signUplabel[i];
+        if(input.value!==""){
+            label.classList.add("inputFocus")
+            input.style.border="1px solid var(--blue)";
+        }else{
+            label.classList.remove("inputFocus");
+            input.style.border="0.5px solid var(--gray-400);";
+        }
+    })
+}
 
 
 form.addEventListener("submit",async function(event){

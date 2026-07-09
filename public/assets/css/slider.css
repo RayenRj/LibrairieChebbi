@@ -136,6 +136,7 @@
 
 .card-list .card-link .card-image{
     width: 100%;
+    height: 162px;
     object-fit: contain;
     border-radius: 10px;
     margin: auto;

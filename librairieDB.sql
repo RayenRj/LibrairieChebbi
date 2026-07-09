@@ -50,7 +50,7 @@ create table commande(
     code_postal varchar(20),
     prix_totale decimal(8,3),
     commentaire varchar(255),
-    foreign key(id_client) references client(id_client) on DELETE CASCADE On update CASCADE
+    foreign key(id_client) references client(id_client)
 );
 
 
@@ -70,10 +70,12 @@ create table userLogin(
     id_client int not null,
     loginAt datetime not null default current_timestamp,
     primary key(id),
-    foreign key(id_client) references client(id_client) on DELETE CASCADE On update CASCADE
+    foreign key(id_client) references client(id_client)
 );
 
 
+
+-- alter 
 
 
 
@@ -307,10 +309,13 @@ INSERT INTO userLogin(id_client,loginAt) VALUES
 (27,'2026-07-01 12:20:00'),(28,'2026-07-01 12:30:00'),
 (29,'2026-07-01 12:40:00'),(30,'2026-07-01 12:50:00');
 
-use librairiedb;
-select * from produit;
-delete from produit where id_produit =54;
-select * from produit where id_produit = 52;
 
 
+
+
+
+use librairieDB;
 select * from client;
+
+update client
+set role = "admin" where id_client = 31;
