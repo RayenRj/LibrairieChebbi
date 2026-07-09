@@ -1,3 +1,12 @@
+<?php 
+    require_once(__DIR__ . "/../backend/services/ProductServices.php");
+    $product_service = new ProductServices();
+
+    $list_all_product = $product_service->getAllProduct(9,1);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -258,150 +267,19 @@
                     <div class="card-wrapper ">
                         
                         <ul class="card-list swiper-wrapper">
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="card-item swiper-slide">
-                                <a href="" class="card-link ">
-                                    <img class="card-image" src="https://opusartsupplies.com/cdn/shop/products/SML10830.jpg?v=1660668993" alt="">
-                                    <p class="badge">Smooth Ball Pen Blue</p>
-                                    <h2 class="card-title">2,900 <span>dt</span></h2>
-                                    <div class="rating-container">
-                                         <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                        <div class="number">(18)</div>
-                                    </div>
-                                </a>
-                            </li>
- 
+                            <?php foreach($list_all_product as $product): ?>
+                                <li class="card-item swiper-slide">
+                                    <a href="" class="card-link ">
+                                        <img class="card-image" src="<?= $product["image_url"] ?>" alt="">
+                                        <p class="badge">S<?= $product["libelle"] ?></p>
+                                        <h2 class="card-title"><?= $product["prix"] ?> <span>dt</span></h2>
+                                        <div class="rating-container">
+                                            <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
+                                            <div class="number">(18)</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
                             
                         </ul>
 

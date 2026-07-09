@@ -1,4 +1,20 @@
 let signInForm = document.querySelector("#signInForm");
+let signIninput = document.querySelectorAll(".signin .input");
+let signInlabel = document.querySelectorAll(".signin .inputLabel");
+
+for(let i=0 ; i<signIninput.length; i++){
+    let input = signIninput[i];
+    input.addEventListener("blur",function(){
+        let label = signInlabel[i];
+        if(input.value!==""){
+            label.classList.add("inputFocus")
+            input.style.border="1px solid var(--blue)";
+        }else{
+            label.classList.remove("inputFocus");
+            input.style.border="0.5px solid var(--gray-400);";
+        }
+    })
+}
 
 
 signInForm.addEventListener("submit",async function(event){
