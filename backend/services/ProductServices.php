@@ -171,6 +171,10 @@ class ProductServices{
     //done
     public function ArticleAfaibleRotation(){return $this->productRepo->ArticleAfaibleRotation();}
 
+
+
+    public function getAllMarque(){return $this->productRepo->getAllMarque();}
+    public function getAllCategorie(){return $this->productRepo->getAllMarque();}
 }
 
 

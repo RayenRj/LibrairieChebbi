@@ -278,7 +278,18 @@
             return $stmt->execute([$quantityToDelete , $product]);
         } 
 
-
+        public function getAllCategorie(){
+            $query = "SELECT DISTINCT(categorie) from produit";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_NUM);
+        }
+        public function getAllMarque(){
+            $query = "SELECT DISTINCT(marque) from produit";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_NUM);
+        }
 
         //ajouter un remise 
         public function ajouterUnRemiseSurProduit(int $idProduit , float $amountRemise) :bool{

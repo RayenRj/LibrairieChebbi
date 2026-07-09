@@ -64,7 +64,7 @@
                 <a href="/main" id="deconnexion">
                     <li>
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        <p>Déconnexion</p>
+                        <p>Sortir du dashboard</p>
                     </li>
                 </a>
 
