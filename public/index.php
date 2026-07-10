@@ -40,6 +40,7 @@ error_reporting(E_ALL);
     $route->add("GET", "/collections" , "PageController","collectionPage");
     $route->add("GET", "/test" , "PageController","test");
     $route->add("GET", "/packs/pack" , "PageController","productPack");
+    $route->add("GET", "/client" , "PageController","clientPage");
 
     //=========> Product Routes <=======
     $route->add("POST","/api/articles","ProductController","addProduct");
@@ -77,7 +78,7 @@ error_reporting(E_ALL);
 
     //=========> commande Routes <=======
     $route->add("DELETE" , "/api/commandes/{id}", "CommandeController","deleteCommande");
-    $route->add("POST" , "/api/commandes/save/{id}", "CommandeController","saveCommande");
+    $route->add("POST" , "/api/commandes/save", "CommandeController","saveCommande");
     $route->add("PATCH" , "/api/commandes/confirme/{id}", "CommandeController","confirmeCommande");
     $route->add("PATCH" , "/api/commandes/annule/{id}", "CommandeController","annuleeCommande");
     $route->add("PATCH" , "/api/commandes/livre/{id}", "CommandeController","livreeCommande");

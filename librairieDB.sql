@@ -36,6 +36,7 @@ create table client(
     prenom varchar(50),
     tel varchar(50),
     email varchar(100) check (email like "%@gmail.com")unique not null,
+    addresse varchar(100) ,
 	password varchar(255) not null ,
     role varchar(50) check(role in("client","admin")) default 'client'
 );
@@ -43,7 +44,7 @@ create table client(
 create table commande(
 	id_commande int auto_increment primary key,
     id_client int,
-    date_commande date not null,
+    date_commande datetime not null,
 	statut varchar(50) check(statut in('attente','confirmée','annulée','livrée')),
     adresse varchar(255) not null,
     ville varchar(100),
@@ -76,29 +77,39 @@ create table userLogin(
 
 
 -- alter 
+drop trigger after_ligne_commande_insert;
+DELIMITER $$
+	create trigger before_insert_into_ligne_commande
+    before insert on ligne_commande
+    for each row
+    begin
+		declare price float ;
+		declare quantity int;
+		set quantity = new.quantite;
+        select prix into price from produit where id_produit = new.id_produit;
+		-- tna9eslk el quantité ta3 el produit fl stock
+		if(select quantite_stock from produit where id_produit= new.id_produit) < new.quantite then
+			signal sqlstate '45000'
+			set message_text = "Stock du l'article est insuffisant !!!";
+		end if;
+		set new.sous_total = price * quantity;
+    
 
 
+	end$$
+DELIMITER;
 
 -- triggers
 DELIMITER $$
 create trigger after_ligne_commande_insert
 after insert on ligne_commande
 for each row 
+
 begin 
-	-- tna9eslk el quantité ta3 el produit fl stock
-	if(select quantite_stock from produit where id_produit= new.id_produit) >= new.quantite then
-		update produit 
-		set quantite_stock = quantite_stock - new.quantite 
-		where id_produit = new.id_produit;
-	else 
-		signal sqlstate '45000'
-        set message_text = "Stock insuffisant";
-	end if;
-    
+	update produit 
+	set quantite_stock = quantite_stock - new.quantite 
+	where id_produit = new.id_produit;
 	-- te7seblk el total automatique
-    update commande 
-    set prix_totale = prix_totale + new.sous_total
-    where id_commande = new.id_commande;
 end$$
 DELIMITER ;
 
@@ -316,3 +327,9 @@ select count(*) from produit
 where id_produit not in (select distinct(id_pack) from pack);
 
 select * from pack;
+
+select id_client , count(*)
+from commande
+group by id_client;
+
+select * from commande;

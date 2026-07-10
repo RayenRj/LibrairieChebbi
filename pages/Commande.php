@@ -1,3 +1,29 @@
+<?php
+    require_once(__DIR__ . "/../backend/services/ClientServices.php");
+    require_once(__DIR__ . "/../backend/models/Client.php");
+    require_once(__DIR__ . "/../backend/services/CommandeServices.php");
+    if(!isset($_SESSION["userId"])){
+        header("Location: /main");
+        exit;
+    }
+    $services_client = new ClientServices();
+    $services_commande = new CommandeServices();
+    $clientId = intval($_SESSION["userId"]);
+    $client_data = $services_client->getClientById($clientId);
+    $client = new Client(
+        $client_data["nom"],
+        $client_data["prenom"],
+        $client_data["tel"],
+        $client_data["email"],
+        $client_data["password"],
+        $client_data["role"],
+        $client_data["addresse"] ?? ""
+    );
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,67 +71,93 @@
                     </div>
 
                     <!-- fieldset -->
-                    <fieldset>
-                        <div class="top-part">
-                            <h2>informations Personelles</h2>
-                            <div class="double">
-                                <div class="with-label">
-                                    <label for="nom">Nom Complet</label>
-                                    <input type="text" placeholder="Entrer votre nom complet" required>
+                    <form action="" enctype="multipart/form-data" id="commandeForm">
+                        <fieldset>
+                            <div class="top-part">
+                                <h2>informations Personelles</h2>
+                                <div class="double">
+                                    <div class="with-label">
+                                        <label for="nom">Nom Complet</label>
+                                        <input type="text" name="nomComplet"  placeholder="Entrer votre nom complet" required value="<?= $client->getNom() . " " . $client->getPrenom() ?>">
+                                    </div>
+                                    <div class="with-label">
+                                        <label for="nom">Numero de téléphone</label>
+                                        <input type="text" name="tel" placeholder="Ex: 51 234 528" required value="<?= $client->getTel() ?>">
+                                    </div>
                                 </div>
-                                <div class="with-label">
-                                    <label for="nom">Numero de téléphone</label>
-                                    <input type="text" placeholder="Ex: 51 234 528" required>
+                                <div class="email">
+                                    <div class="with-label">
+                                        <label for="nom">Email</label>
+                                        <input type="text" name="email" placeholder="Entrez votre email" required value="<?= $client->getEmail() ?>">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="email">
-                                <div class="with-label">
-                                    <label for="nom">Email</label>
-                                    <input type="text" placeholder="Entrez votre email" required>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
+                            <hr>
 
-                        <div class="bottom-part">
-                            <h2>Adresse de livraison</h2>
-                            <div class="double">
-                                <div class="with-label">
-                                    <label for="nom">Gouvernorat</label>
-                                    <select name="" id="" >
-                                        <option value="#" selected disabled>Sélectionnez votre gouvernorat</option>
-                                    </select>
+                            <div class="bottom-part">
+                                <h2>Adresse de livraison</h2>
+                                <div class="double">
+                                    <div class="with-label">
+                                        <label for="">Gouvernorat</label>
+                                            <select name="gouvernorat" id="gouvernorat">
+                                                <option value="">-- Sélectionnez un gouvernorat --</option>
+                                                <option value="Ariana">Ariana</option>
+                                                <option value="Béja">Béja</option>
+                                                <option value="Ben Arous">Ben Arous</option>
+                                                <option value="Bizerte">Bizerte</option>
+                                                <option value="Gabès">Gabès</option>
+                                                <option value="Gafsa">Gafsa</option>
+                                                <option value="Jendouba">Jendouba</option>
+                                                <option value="Kairouan">Kairouan</option>
+                                                <option value="Kasserine">Kasserine</option>
+                                                <option value="Kébili">Kébili</option>
+                                                <option value="Le Kef">Le Kef</option>
+                                                <option value="Mahdia">Mahdia</option>
+                                                <option value="Manouba">Manouba</option>
+                                                <option value="Médenine">Médenine</option>
+                                                <option value="Monastir">Monastir</option>
+                                                <option value="Nabeul">Nabeul</option>
+                                                <option value="Sfax">Sfax</option>
+                                                <option value="Sidi Bouzid">Sidi Bouzid</option>
+                                                <option value="Siliana">Siliana</option>
+                                                <option value="Sousse">Sousse</option>
+                                                <option value="Tataouine">Tataouine</option>
+                                                <option value="Tozeur">Tozeur</option>
+                                                <option value="Tunis">Tunis</option>
+                                                <option value="Zaghouan">Zaghouan</option>
+                                            </select>
+                                    </div>
+                                    <div class="with-label">
+                                        <label for="nom">Delegation</label>
+                                        <select name="delegation" id="delegation">
+                                            <option value="#" selected disabled>Sélectionnez votre délégation</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="with-label">
-                                    <label for="nom">Delegation</label>
-                                    <select name="" id="">
-                                        <option value="#" selected disabled>Sélectionnez votre délégation</option>
-                                    </select>
+                                <div class="adresse-complete">
+                                    <div class="with-label">
+                                        <label for="nom">Adresse Complète</label>
+                                        <input type="text" name="addresseComplete" placeholder="Numéro de rue, nom de rue , quartier..." required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="adresse-complete">
-                                <div class="with-label">
-                                    <label for="nom">Adresse Complète</label>
-                                    <input type="text" placeholder="Numéro de rue, nom de rue , quartier..." required>
+                                <div class="double">
+                                    <div class="with-label">
+                                        <label for="nom">Code Postal</label>
+                                        <input type="text" placeholder="Ex: 2063" name="codePostal">
+                                    </div>
+                                    <div class="with-label">
+                                        <label for="nom">Instructions spéciales (optionel)</label>
+                                        <input type="text" name="comment" placeholder="Insctruction pour la livraison..." >
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="double">
-                                <div class="with-label">
-                                    <label for="nom">Code Postal</label>
-                                    <input type="text" placeholder="Ex: 2063" required>
-                                </div>
-                                <div class="with-label">
-                                    <label for="nom">Instructions spéciales (optionel)</label>
-                                    <input type="text" placeholder="Insctruction pour la livraison..." >
+
+                                <div class="button-confirmation">
+                                    <button data-prixtotale="<?=  $_GET["total"] ?>"  data-idclient="<?= $_SESSION["userId"] ?>" type="submit" class="btn-confirmation">Confirmer Votre Commade <i class="fa-solid fa-arrow-right-long"></i></button>
                                 </div>
                             </div>
 
-                            <div class="button-confirmation">
-                                <a href="#" class="btn-confirmation">Confirmer Votre Commade <i class="fa-solid fa-arrow-right-long"></i></a>
-                            </div>
-                        </div>
-
-                    </fieldset>
+                        </fieldset>
+                    </form>
                 </div>
                 <div class="part-commande-resume">
                     <main>
@@ -133,7 +185,7 @@
                             </div>
                             <div>
                                 <p>Frais de livraison</p>
-                                <p class="prix">6 Dt</p>
+                                <p class="prix">7 Dt</p>
                             </div>
 
                         </div>
@@ -141,7 +193,7 @@
                         <div class="totale">
                             <div>
                                 <h4>Total</h4>
-                                <p class="prix-bleu"><?= $_GET["total"] + 6 ?? 0 ?> Dt</p>
+                                <p class="prix-bleu"><?= $_GET["total"] + 7 ?? 0 ?> Dt</p>
                             </div>
                             <p>TVA inclue</p>
                         </div>
@@ -190,8 +242,8 @@
                             <p class="message">Merci pour votre achat. Votre commande sera livrée dans un délai de 2 jours à compter de la date d'achat.</p> 
                         </div> 
                         <div class="actions-order">
-                            <button class="history button" type="button">Historique</button> 
-                            <a class="track button" href="main.php" type="button">Page Acceuill</a> 
+                            <a href="/client" class="history button" type="button">Historique</a> 
+                            <a class="track button" href="/main" type="button">Page Acceuill</a> 
                         </div> 
                     </div> 
                 </div>
