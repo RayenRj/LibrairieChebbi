@@ -8,14 +8,16 @@
         private string $email;
         private string $password;
         private string $role;
+        private string $adresse;
 
-        public function __construct(string $nom, string $prenom , string $tel , string $email , string $pass , string $role){
+        public function __construct(string $nom, string $prenom , string $tel , string $email , string $pass , string $role , string $adresse){
             $this->nom  = $nom;
             $this->prenom = $prenom;
             $this->tel = $tel;
             $this->password = $pass;
             $this->email = $email;
             $this->role = $role;
+            $this->adresse = $adresse;
         }
 
 
@@ -27,6 +29,7 @@
         public function getTel(){return $this->tel;}
         public function getPassword(){return $this->password;}
         public function getRole(){return $this->role;}
+        public function getAdresse(){return $this->adresse;}
 
         //setter
         public function setIdClient(int $id){$this->idClient = $id;}
@@ -35,7 +38,7 @@
         public function setEmail(string $email){$this->email=$email;}
         public function setTel(string $tel){$this->tel = $tel;}
         public function setPassword(string $password){$this->password=$password;}
-        public function setRole(string $role){$this->role = $role;}
+        public function setAdresse(string $adresse){$this->adresse = $adresse;}
 
         // tosting function
         public function __toString()

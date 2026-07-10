@@ -208,7 +208,7 @@ header .left-part .search .input-container span{
 /* part two */
 
 header .part-two{
-  width: 25%;
+  width: 32.5%;
 }
 header .part-two ul{
   list-style-type: none;
@@ -251,6 +251,18 @@ header .part-two ul li a{
   justify-content: center;
 }
 
+#profile{
+  color: white;
+  width: 120px;
+  background-color: var(--blue);
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
+}
+#profile:hover{
+  background-color: #2761c0;
+}
 #log_out:hover{
   background-color:  rgba(239, 68, 68, 0.15);
   color: rgb(165, 14, 14);

@@ -129,7 +129,7 @@
             return $this->commande_repo->nombreTotaleCommandeDernierMois($statut);
         }
         //done
-        public function saveCommande(int $idClient , string $dateCommande , string $statut , string $addresse , string $ville , int $codePostal , float $prixTotale , string $comment ,array $ligneCommandes){
+        public function saveCommande(string $idClient , string $dateCommande , string $statut , string $addresse , string $ville , string $codePostal , string $prixTotale , string $comment ,array $ligneCommandes){
             if($idClient < 1 ){throw new Exception("La valeur de l'identifiatn de client qui passe la commande est invalide!");}
             if(empty($dateCommande)){throw new Exception("La date de commande est vide!");}
             if(empty($statut)){throw new Exception("La statut de commande est vide!");}
@@ -138,8 +138,12 @@
             if(empty($ville)){throw new Exception("L'ville du client est vide!");}
             if($prixTotale < 0){throw new Exception("Prix totale de la commande est invalide!");}
             if(empty($ligneCommandes)){throw new Exception("La Liste des articles de la commande est vide!");}
-            $this->commande = new Commande($idClient, $dateCommande , $statut , $addresse , $ville ,$codePostal , $prixTotale,$comment , $ligneCommandes);
-            return $this->commande_repo->saveCommande($this->commande);
+            return $this->commande_repo->saveCommande($idClient , $dateCommande ,  $statut ,  $addresse ,  $ville ,  $codePostal ,  $prixTotale ,  $comment , $ligneCommandes);
+        }
+        //done 
+        public function getCommandeArticles(int $idCommande){
+            if($idCommande < 1 ){throw new Exception("La valeur de l'identifiatn de client qui passe la commande est invalide!");}
+            return $this->commande_repo->getCommandeArticles($idCommande);
         }
         
     

@@ -11,7 +11,7 @@
 
 
         //done
-        public function getClientById(int $id): ?Client{
+        public function getClientById(int $id){
             if($id < 1){throw new Exception("L'id du client doit etres > 1");}
             return $this->clientRepo->findClientById($id);
         }
@@ -53,7 +53,7 @@
             if(empty($password) || strlen($password) < 6){throw new Exception("password est invalide!");}
             if(empty($email) || !filter_var($email , FILTER_VALIDATE_EMAIL)){throw new Exception("Email est invalide!");}
             $password_hash = password_hash($password , PASSWORD_DEFAULT);
-            $client = new Client($nom , $prenom , $tel , $email , $password_hash , "client");
+            $client = new Client($nom , $prenom , $tel , $email , $password_hash , "client", "");
             $result = $this->clientRepo->createClient($client);
             if(!$result){throw new Exception("L'insertion du client echoue !!");}
             return true;

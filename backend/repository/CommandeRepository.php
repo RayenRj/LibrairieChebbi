@@ -242,37 +242,34 @@
         // ######## CRUD    Commandes ########
         // ###################################
         // save done
-        public function saveCommande(Commande $commande) : bool{
+        public function saveCommande(string $idClient , string $dateCommande , string $statut , string $addresse , string $ville , string $codePostal , string $prixTotale , string $comment ,array $ligneCommandes) : bool{
             $this->db->beginTransaction();
             try{
-                foreach($commande->getCommandeLines() as $ligne_commande){
-                    $this->productRepo->decreaseQuantity($ligne_commande->getProduit() , $ligne_commande->getQuantite());
-                }
+                // decrease every product's quantity
+                // foreach($ligneCommandes as $index => $article){
+                //     foreach($article as $idArticle => $quantity)
+                //     $this->productRepo->decreaseQuantity(intval($idArticle), $quantity);
+                // }
                 $query = "INSERT into commande(id_client,date_commande, statut , adresse , ville , code_postal , prix_totale , commentaire) values (?,?,?,?,?,?,?,?)";
                 $stmt = $this->db->prepare($query);
-                if (!$stmt->execute([$commande->getIdClient() ,
-                                $commande->getDateCommande() , 
-                                $commande->getStatut(),
-                                $commande->getAddresse(),
-                                $commande->getVille(),
-                                $commande->getCodePostal(),
-                                $commande->getPrixTotale(),
-                                $commande->getComment()])){throw new Exception(message: "Saving the commande failed!");}
+                if (!$stmt->execute([$idClient ,$dateCommande , $statut,$addresse,$ville,$codePostal,$prixTotale,$comment])){throw new Exception(message: "Saving the commande failed!");}
                 
-                                // decrease every product's quantity
 
                 $id_commande = $this->db->lastInsertId();
-                $query2 = "INSERT into ligne_commande(id_commande , id_produit , quantite , sous_total) VALUES ";
+                $query2 = "INSERT into ligne_commande(id_commande , id_produit , quantite) VALUES ";
                 // build insert safely
                 $params= [];
                 $values= [];
-                foreach ($commande->getCommandeLines() as $ligne_commande ){
-                    $values[] = "(?,?,?,?)";
-                    $params[] = $id_commande;// ici il faut avoir l'id de la commande
-                    $params[] = $ligne_commande->getProduit()->getId();
-                    $params[] = $ligne_commande->getQuantite(); // quantite
-                    $params[] = $ligne_commande->getPrixTotale(); 
-                }
+
+                foreach($ligneCommandes as $index => $article){
+                    foreach($article as $idArticle => $quantity){
+                        $values[] = "(?,?,?)";
+                        $params[] = $id_commande;// ici il faut avoir l'id de la commande
+                        $params[] = $idArticle;
+                        $params[] = $quantity; // quantite
+                    }       
+                }        
+
                 
                 if(!empty($values)){
                     $query2 .= implode(",",$values);
@@ -335,13 +332,13 @@
             $query = "select * from commande where id_commande = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id_commande]);
-            return $stmt->fetch(PDO::FETCH_BOTH)[0];
+            return $stmt->fetch(PDO::FETCH_BOTH);
         }
         public function getCommandeByIdClient(int $idClient) : ?array{
             $query = "select * from commande where id_client = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$idClient]);
-            return $stmt->fetch(PDO::FETCH_BOTH);
+            return $stmt->fetchAll(PDO::FETCH_BOTH);
         }
         
         public function deleteCommandeArticles($id_commande){
@@ -351,7 +348,7 @@
         }
 
         public function getCommandeArticles($id_commande){
-            $query = "select * from ligne_commande where id_commande = ? ;";
+            $query = "select * from ligne_commande lc , produit p where id_commande = ? and lc.id_produit = p.id_produit;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id_commande]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

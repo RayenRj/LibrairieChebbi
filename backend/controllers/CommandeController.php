@@ -101,11 +101,11 @@
         public function saveCommande($request){
             try{
                 $body = $request["body"];
-                $result = $this->commande_services->saveCommande($body["idClient"],$body["dateCommande"],$body["statut"] ,$body["addresse"] , $body["ville"],$body["codePostal"],$body["prixTotale"],$body["comment"],$body["ligneCommandes"]);
+                $result = $this->commande_services->saveCommande($body["id_client"],$body["date_commande"],$body["statut"] ,$body["addresseComplete"] , $body["ville"],$body["codePostal"],$body["prix_totale"],$body["comment"],json_decode($body["ligneCommandes"],true));
                 $response=[
                     "success" => true,
                     "numberOfLine" =>null,
-                    "message" => "get commande by ID",
+                    "message" => "inserting commande in the database",
                     "data" => $result,
                     "error" => null
                 ];

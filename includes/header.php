@@ -54,6 +54,7 @@
                 <li <?= isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="#" id="sign-up">Sign up</a></li>
                 <li <?= !isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="#" id="log_out" ><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</a></li>
                 <li <?= (!isset($_SESSION["userId"]) || !isset($_SESSION["role"]) || !($_SESSION["role"]=="admin")) ? "hidden" : "" ?>   ><a href="/dashboard" id="admin_part">📊 Dashboard</a></li>
+                <li <?= !isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="/client" id="profile" ><i class="fa-solid fa-user"></i> Profile</a></li>
                 <li><a href="/panier" id="cart">🛒 cart<span class="cartCount">0</span></a></li>
             </ul>
         </div>
