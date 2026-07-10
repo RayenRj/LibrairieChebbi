@@ -87,8 +87,8 @@
                             <td><?= $client["id_client"] ?></td>
                             <td><?= $client["nom"] ?></td>
                             <td><?= $client["prenom"] ?></td>
-                            <td><?= $client["tel"] ?></td>
                             <td><?= $client["email"] ?></td>
+                            <td><?= $client["tel"] ?></td>
                             <td>
                                 <button data-idClient="<?= $client["id_client"] ?>" class="addAdmin"><i class="fa-solid fa-user-plus" data-idclient="<?= $client["id_client"] ?>"></i></button>
                                 <button data-idclient="<?= $client["id_client"] ?>" class="deleteClient"><i class="fa-solid fa-trash-can" data-idclient="<?= $client["id_client"] ?>"></i></button>
