@@ -109,7 +109,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
         public function findPackById(int $id){
-            $query =  " select p.id_produit , p.code_barre , p.libelle, p.prix , p.quantite_stock , p.categorie , p.marque , image_url , p.remise , p.description 
+            $query =  " select p.id_produit , p.code_barre , p.libelle, p.prix , p.quantite_stock , pa.type , image_url , p.remise , p.description 
                         from produit p , pack pa
                         where pa.id_pack = ? and pa.id_pack = p.id_produit";
             $stmt = $this->db->prepare($query);
@@ -253,10 +253,16 @@
         }
         // Get Pack Articles
         public function getPackArticles(int $idPack){
-            $query = "select id_produit , quantite from packArticle where id_pack = ? ;";
+            $query = "select libelle , marque , prix , categorie , quantite , image_url from packArticle pa , produit pr WHERE pa.id_produit = pr.id_produit AND id_pack = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$idPack]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        }
+        public function getNumberPackArticles(int $idPack){
+            $query = "SELECT COUNT(*) from packArticle pa , produit pr WHERE pa.id_produit = pr.id_produit AND id_pack = ? ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$idPack]);
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
         // supprimé un article du pack
         public function deleteArticleDuPack(int $idPack , int $idArticle) : bool{
@@ -270,6 +276,13 @@
             $query = "insert into packArticle values(?,?,?) ;";
             $stmt = $this->db->prepare($query);
             return $stmt->execute([$idPack, $idArticle , $quantite]) ?: null;
+        }
+        //chercher pack par id
+        public function getPackByType(string $type){
+            $query = "SELECT id_produit , type , image_url , prix , libelle from produit p , pack pa where id_produit = id_pack and type = ? ;";
+            $stmt= $this->db->prepare($query);
+            $stmt->execute([$type]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
     

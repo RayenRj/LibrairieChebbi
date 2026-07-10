@@ -39,6 +39,7 @@ error_reporting(E_ALL);
     $route->add("GET", "/commande" , "PageController","commandePage");
     $route->add("GET", "/collections" , "PageController","collectionPage");
     $route->add("GET", "/test" , "PageController","test");
+    $route->add("GET", "/packs/pack" , "PageController","productPack");
 
     //=========> Product Routes <=======
     $route->add("POST","/api/articles","ProductController","addProduct");

@@ -231,7 +231,7 @@
                             </td>
                             <td>
                                 <ul>
-                                    <li><a href="" data-idPack="<?= $row["id_produit"]?>"><i class="fa-regular fa-eye"></i></a></li>
+                                    <li data-idPack="<?= $row["id_produit"]?>" class="showLink"><a href="/packs/pack?idPack=<?= $row["id_produit"]?>" ><i class="fa-regular fa-eye"></i></a></li>
                                     <li><a href="" data-idPack="<?= $row["id_produit"]?>"><i class="fa-regular fa-pen-to-square"></i></a></li>
                                     <li><a href="" data-idPack="<?= $row["id_produit"]?>"><i class="fa-regular fa-trash-can"></i></a></li>
                                 </ul>

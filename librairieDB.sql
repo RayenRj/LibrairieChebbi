@@ -311,11 +311,8 @@ INSERT INTO userLogin(id_client,loginAt) VALUES
 
 
 
-
-
-
 use librairieDB;
-select * from client;
+select count(*) from produit
+where id_produit not in (select distinct(id_pack) from pack);
 
-update client
-set role = "admin" where id_client = 31;
+select * from pack;

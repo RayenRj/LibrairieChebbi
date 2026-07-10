@@ -9,6 +9,8 @@ let selectedArticleTable = document.querySelector(".articleSelectionne #addPackT
 let tbody = document.querySelector("#articleSelectionnéeTBody");
 let packManagerContainerBody = document.querySelector(".pack-manager");
 var limit = 8;
+let tablePart = document.querySelector(".table-part")
+
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -260,7 +262,7 @@ async function remplirTableDataFromDB(current_page, limit){
         let td7 = document.createElement("td")
         // Td1
         td1.innerHTML=`
-            <img src="https://imgs.search.brave.com/YrXoOSIBI3dNT-8nmHwgFfrUVF5WlxJWR5dbNZJck3E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFZRGdYQXZFS0wu/anBn" alt="">
+            <img src="${result.data[i]["image_url"]}" alt="">
             <div class="text">
                 <h4>${result.data[i]["libelle"]}</h4>
                     <p>${result.data[i]["description"]}</p>
@@ -323,3 +325,19 @@ buttonRechercher.addEventListener("click",function(event){
 })
 
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+////////////// Reglage ll boutton show packks   ///////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+tablePart.addEventListener("click",function(event){
+    console.log(event.target)
+    if(event.target.classList.contains("showLink")){
+        event.preventDefault()
+        let idPack = event.target.dataset.idpack;
+        window.location.href = `/packs/pack?idPack=${idPack}`;
+    }
+})

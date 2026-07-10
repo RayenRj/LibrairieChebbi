@@ -22,7 +22,6 @@
 
 
         // recher Article avec filtrage 
-
         public function recherchePack(string $nom, string $niveau , string $statut , int $limit , int $pagination){
             if(!in_array($niveau , ["primaire", "college","secondaire","bac" ,""])){throw new Exception("Le niveau scolaire de cette pack est invalide!");}
             if(!in_array($statut,["actif", "rupture",""])){throw new Exception("La statut de cette pack est invalide");}
@@ -44,9 +43,18 @@
             if($pack== null){throw new Exception("Cette pack n'existe pas!");}
             return $this->packRepo->getPackArticles($idPack);
         }
+        //done 
+        public function getPackByType(string $type){
+            if(!in_array($type,["primaire", "secondaire" , "bac", "college"])){throw new Exception("Le type de pack n'est pas valide!");}
+            return $this->packRepo->getPackByType($type);
+        }
         //done
         public function getAllPack(){
             return $this->packRepo->findAllPacks();
+        }
+        //done
+        public function getNumberPackArticles(int $id){
+            return $this->packRepo->getNumberPackArticles($id);
         }
         //done
         public function getPackById(int $idPack){
@@ -144,7 +152,7 @@
             if(!is_dir($uploadDir)){mkdir($uploadDir , 0777,true);}
             $destination = $uploadDir . $newName;
             if(!move_uploaded_file($image["tmp_name"],$destination)){throw new Exception("Failed to save the image!!");}
-            $image_url = "/assets/uploadedImg/packImg/" . $newName;
+            $image_url = "/assets/images/uploadedImg/packImg/" . $newName;
             return $this->packRepo->createNewPack($data , $prix , $niveau , $libelle, $quantite, $image_url , $remise , $description);
         }
     }
