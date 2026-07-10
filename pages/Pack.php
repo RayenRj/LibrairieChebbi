@@ -1,3 +1,13 @@
+<?php 
+    require_once(__DIR__ . "/../backend/services/PackServices.php");
+    $pack_service = new PackServices();
+
+    $pack_primaire = $pack_service->getPackByType("primaire");
+    $pack_secondaire = $pack_service->getPackByType("secondaire");
+    $pack_bac = $pack_service->getPackByType("bac");
+    $pack_college = $pack_service->getPackByType("college");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,22 +46,22 @@
 
     <div class="card-container boxwidth" >
         <div class="card">
-            <img src="../assets/images/pack/calc.png" alt="">
+            <img src="/assets/images/pack/calc.png" alt="">
             <h2>Primaire</h2>
             <a href="#pack-primaire"><span>Voir les packs</span> ⭢</a>
         </div>
         <div class="card">
-            <img src="../assets/images/pack/palette.png" alt="">
+            <img src="/assets/images/pack/palette.png" alt="">
             <h2>Collège</h2>
             <a href="#pack-college"><span>Voir les packs</span> ⭢</a>
         </div>
         <div class="card">
-            <img src="../assets/images/pack/book.png" alt="">
+            <img src="/assets/images/pack/book.png" alt="">
             <h2>Secondaire</h2>
             <a href="#pack-secondaire"><span>Voir les packs</span> ⭢</a>
         </div>
         <div class="card">
-            <img src="../assets/images/pack/hat.webp" alt="">
+            <img src="/assets/images/pack/hat.webp" alt="">
             <h2>Bac</h2>
             <a href="#pack-bac"><span>Voir les packs</span> ⭢</a>
         </div>
@@ -69,90 +79,23 @@
                 <h2>Packs Primaire</h2>
             </div>
             <main>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
+                <?php foreach($pack_primaire as $pack): ?>
+                    <article>
+                        <div class="image">
+                            <img src="<?= $pack["image_url"] ?>" alt="image d'un pack de fourniture scholaire en tunisie | Librairie Chebbi">
+                        </div>
+                        <div class="text-pack">
+                            <h2>Pack primaire</h2>
+                            <p><?= $pack_service->getNumberPackArticles($pack["id_produit"]); ?> articles</p>
+                            <p class="price"><?= $pack["prix"] ?> Dt</p>
+                        </div>
+                        <div class="button-pack">
+                            <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
+                            <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+
             </main>
         </div>
         <!-- end of primary part -->
@@ -168,90 +111,23 @@
                 <h2>Packs Primaire</h2>
             </div>
             <main>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack2.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack2.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack2.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack2.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack2.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack2.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
+                <?php foreach($pack_college as $pack): ?>
+                    <article>
+                        <div class="image">
+                            <img src="<?= $pack["image_url"] ?>" alt="image d'un pack de fourniture scholaire en tunisie | Librairie Chebbi">
+                        </div>
+                        <div class="text-pack">
+                            <h2>Pack primaire</h2>
+                            <p><?= $pack_service->getNumberPackArticles($pack["id_produit"]); ?> articles</p>
+                            <p class="price"><?= $pack["prix"] ?> Dt</p>
+                        </div>
+                        <div class="button-pack">
+                            <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
+                            <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+
             </main>
         </div>
 
@@ -269,90 +145,23 @@
                 <h2>Packs Primaire</h2>
             </div>
             <main>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack3.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack3.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack3.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack3.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack3.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack3.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
+                <?php foreach($pack_secondaire as $pack): ?>
+                    <article>
+                        <div class="image">
+                            <img src="<?= $pack["image_url"] ?>" alt="image d'un pack de fourniture scholaire en tunisie | Librairie Chebbi">
+                        </div>
+                        <div class="text-pack">
+                            <h2>Pack primaire</h2>
+                            <p><?= $pack_service->getNumberPackArticles($pack["id_produit"]); ?> articles</p>
+                            <p class="price"><?= $pack["prix"] ?> Dt</p>
+                        </div>
+                        <div class="button-pack">
+                            <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
+                            <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+
             </main>
         </div>
 
@@ -368,90 +177,23 @@
                 <h2>Packs Primaire</h2>
             </div>
             <main>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="image">
-                        <img src="../assets/images/pack/pack_images/pack1.png" alt="">
-                    </div>
-                    <div class="text-pack">
-                        <h2>Pack primaire</h2>
-                        <p>25 articles</p>
-                        <p class="price">59 Dt</p>
-                    </div>
-                    <div class="button-pack">
-                        <a href="">Voir Details</a>
-                        <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                    </div>
-                </article>
+                <?php foreach($pack_bac as $pack): ?>
+                    <article>
+                        <div class="image">
+                            <img src="<?= $pack["image_url"] ?>" alt="image d'un pack de fourniture scholaire en tunisie | Librairie Chebbi">
+                        </div>
+                        <div class="text-pack">
+                            <h2>Pack primaire</h2>
+                            <p><?= $pack_service->getNumberPackArticles($pack["id_produit"]); ?> articles</p>
+                            <p class="price"><?= $pack["prix"] ?> Dt</p>
+                        </div>
+                        <div class="button-pack">
+                            <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
+                            <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+
             </main>
         </div>
 

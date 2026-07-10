@@ -138,7 +138,7 @@
         // partie recherche : contient paginaation
         // #######################
         public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
-            $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.prix , p.description from {$this->tName} p  where 1=1 ";
+            $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.prix , p.description from {$this->tName} p  where 1=1 and id_produit not in (select distinct(id_pack) from pack) ";
             $param = [];
             $categorie = mb_strtolower(trim($categorie));
             $stock = mb_strtolower(trim($stock));
@@ -190,9 +190,9 @@
         }
         // retourne le nombre totale de ligne de la recherche d'article
         public function nombreLigneRechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
-            $query = "SELECT count(*) from {$this->tName} p  where ";
+            $query = "SELECT count(*) from produit p  where ";
             $param = [];
-            $queryList = [];
+            $queryList = [" p.id_produit not in (select distinct(id_pack) from pack) "];
             $categorie = mb_strtolower(trim($categorie));
             $stock = mb_strtolower(trim($stock));
             $trie = mb_strtolower(trim($trie));
@@ -229,8 +229,8 @@
             else if($stock == "repture de stock"){$queryList[] = "p.quantite_stock = 0";}
             
            
-            if(empty($queryList)){
-                $query = "select count(*) from produit ;";
+            if(sizeof($queryList)<= 1){
+                $query = "select count(*) from produit where id_produit not in (select distinct(id_pack) from pack);";
                 $param=[];
             }else{
                 $query .= implode(" AND " , $queryList);

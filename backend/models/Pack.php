@@ -7,28 +7,37 @@
         private int $id_pack;
         private float $prix_totale;
         private array $products = [];
-        public function __construct(int $id_pack,array $produits, float $prix){
+        private string $libelle ;
+        private string $type;
+        private string $image_url;
+        private int $quantite;
+
+
+        public function __construct(int $id_pack, string $libelle , string $type ,array $produits, float $prix , string $image_url,int $quantite){
             $this->prix_totale = $prix;
             $this->products = $produits;
             $this->id_pack = $id_pack;
+            $this->libelle = $libelle;
+            $this->type = $type;
+            $this->image_url = $image_url;
+            $this->quantite = $quantite;
         }
 
-        public function addProduct(Product $produit) : void {
-            $this->products[] = $produit;
-            $this->prix_totale += $produit->getPrix();
-        }
-        
-        public function deleteProduct(string $id) : void{
-            foreach($this->products as $key => $product){
-                if($product.getId() == $id){
-                    unset($this->products ,$key);
-                    // unset tekhoulk 2 param : el array wl key mta3 el item eli t7eb tna7ih khater f kol array el key unique
-                }
-            }
-        }
-
+        // getters
         public function getPrixTotale() : float{return $this->prix_totale;}
         public function getPackId() : int{return $this->id_pack;}
         public function getProducts() : array {return $this->products;}
+        public function getLibelle() : string {return $this->libelle;}
+        public function getType() : string {return $this->type;}
+        public function getImageUrl() : string {return $this->image_url;}
+        public function getStock() : string {return $this->quantite;}
+        // setters
+        public function setPrixTotale(float $prix){$this->prix_totale = $prix;}
+        public function setPackId(int $packId){$this->id_pack = $packId;}
+        public function setProducts(array $products_array){ $this->products = $products_array;}
+        public function setlibelle(string $libelle){$this->libelle= $libelle;}
+        public function setType(string $type){$this->type = $type;}
+        public function setImageUrl(string $img){$this->image_url = $img;}
+        public function setStock(int $quantite){$this->quantite = $quantite;}
     }
 ?>

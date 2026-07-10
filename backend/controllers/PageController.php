@@ -19,6 +19,7 @@
         public function commandePage(){require(PATH . "Commande.php");}
         public function collectionPage(){require(PATH . "Collection.php");}
         public function test(){require(PATH . "tes.php");}
+        public function productPack(){require(PATH . "product_pack.php");}
 
     }
 
