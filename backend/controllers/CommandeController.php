@@ -127,7 +127,7 @@
         public function confirmeCommande($request){
             try{
                 $param = $request["params"];
-                $result = $this->commande_services->confirmeCommande($param[0] , );
+                $result = $this->commande_services->confirmeCommande($param[0]);
                 $response=[
                     "success" => true,
                     "numberOfLine" =>null,
@@ -153,7 +153,7 @@
         public function annuleeCommande($request){
             try{
                 $param = $request["params"];
-                $result = $this->commande_services->annuleeCommande($param[0] , );
+                $result = $this->commande_services->annuleeCommande($param[0]);
                 $response=[
                     "success" => true,
                     "numberOfLine" =>null,
@@ -179,7 +179,7 @@
         public function livreeCommande($request){
             try{
                 $param = $request["params"];
-                $result = $this->commande_services->livreeCommande($param[0] , );
+                $result = $this->commande_services->livreeCommande($param[0]);
                 $response=[
                     "success" => true,
                     "numberOfLine" =>null,
@@ -202,6 +202,33 @@
             }
         }
 
+
+        public function addRemise($request){
+            try{
+                $param = $request["params"];
+                $body = $request=["body"];
+                $result = $this->commande_services->remi($param[0]);
+                $response=[
+                    "success" => true,
+                    "numberOfLine" =>null,
+                    "message" => "get commande by ID",
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response=[
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" =>null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
 
 
         

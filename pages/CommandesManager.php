@@ -25,9 +25,12 @@
     }
 
 
-
     $query_array= [];
-    foreach($_GET as $key=>$val){$query_array[] = "$key=$val";} 
+    foreach($_GET as $key=>$val){
+        if($key !== "page")
+        $query_array[] = "$key=$val";
+        
+    } 
     $query_string = implode("&", $query_array) ?? "";
 
 
@@ -337,7 +340,7 @@
                     <div class="pagination">
                         <!-- before -->
                         <?php if($page > 1) : ?>
-                            <a  href="/dashboard/commandes?page=<?= $page - 1 ?>#commandeTable" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                            <a  href="/dashboard/commandes?page=<?= $page - 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#commandeTable" id="prev"><i class="fa-solid fa-angle-left"></i></a>
                         <?php else : ?>
                             <a href="#commandeTable" id="prev"><i class="fa-solid fa-angle-left"></i></a>
                         <?php endif; ?>
@@ -350,13 +353,13 @@
 
 
                         <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
-                            <a href="/dashboard/commandes?page=<?= $i ?>#commandeTable"><?= $i ?></a>
+                            <a href="/dashboard/commandes?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#commandeTable"><?= $i ?></a>
                         <?php endfor; ?>
 
                         <!-- current page -->
                         <a href="#" class="pagination-selected"><?= $page ?></a>
                         <?php for($i=$page +1  ; $i <= min($page + 2 , $nbreTotalePage) ; $i++):?>
-                            <a href="/dashboard/commandes?page=<?= $i ?>#commandeTable"><?= $i ?></a>
+                            <a href="/dashboard/commandes?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#commandeTable"><?= $i ?></a>
                         <?php endfor; ?> 
                                     
                             
@@ -366,7 +369,7 @@
 
                         <!-- after -->
                         <?php if($page < $nbreTotalePage) : ?>
-                            <a href="/dashboard/commandes?page=<?= $page + 1 ?>#commandeTable" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                            <a href="/dashboard/commandes?page=<?= $page + 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#commandeTable" id="post"><i class="fa-solid fa-angle-right"></i></a>
                         <?php else : ?>
                              <a href="#commandeTable" id="post"><i class="fa-solid fa-angle-right"></i></a>
                         <?php endif; ?>

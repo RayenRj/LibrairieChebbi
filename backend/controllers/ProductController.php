@@ -35,37 +35,6 @@
                 return;
             }
         }
-        
-        //
-        // public function rechercherUnArticle($request){
-        //     try{
-        //         $body = $request["body"];
-        //         $query = $request["query"];
-        //         $result = $this->productServices->rechercherArticle($body["idProduct"] , );
-                
-        //         $response = [
-        //             "success" => true,
-        //             "message" => "Finding Client by Email",
-        //             "numberOfLine" => null,
-        //             "data" => $result,
-        //             "error" => null
-        //         ];
-        //         echo json_encode($response);
-        //         return;
-
-        //     }catch(Exception $e){
-        //         $response = [
-        //             "success" => false,
-        //             "numberOfLine" => null,
-        //             "message" => $e->getMessage(),
-        //             "data" => null,
-        //             "error" => null
-        //         ];
-        //         echo json_encode($response);
-        //         return;
-        //     } 
-        // }
-
         //done
         public function addProduct($request){
             try{
@@ -240,6 +209,34 @@
             }  
         }
         
+        // done
+        public function addRemise($request){
+            try{
+                $param = $request["params"];
+                $id = intval($param[0]);
+                $remise = floatval($request["body"]["remise"]);
+                $result = $this->productServices->faireRemise($id,$remise);
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Deleting product successfully", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }  
+        }
 
 }
 

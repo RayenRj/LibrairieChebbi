@@ -51,6 +51,7 @@ error_reporting(E_ALL);
     $route->add("POST", "/api/articles/vente" , "ProductController" , "nombreDeVenteParMois");
     $route->add("GET", "/api/articles/ventes/categories" , "ProductController" , "nbreDeVentePourChaqueCategorieCeMois");
     $route->add("GET","/api/products/{id}","ProductController","getProductById");
+    $route->add("PATCH","/api/articles/remise/{id}","ProductController","addRemise");
 
 
 

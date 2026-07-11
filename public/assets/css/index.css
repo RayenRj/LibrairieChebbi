@@ -64,7 +64,6 @@ p{font-size: 13px;}
     width: 90%;
     margin: 3em auto;
     height: 70vh;
-    background-color: red;
     background-image: url('../images/Designes/index-page-img.png');
     background-size: cover;
     background-repeat: no-repeat;
@@ -527,4 +526,13 @@ p{font-size: 13px;}
     font-weight: 600;
     align-content: center;
 
+}
+
+
+
+/* contact us part */
+.contactUs{
+    margin-top: 3em;
+    margin-bottom: 3em;
+    width: 100%;
 }

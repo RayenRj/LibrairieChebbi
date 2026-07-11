@@ -72,7 +72,7 @@
             $stmt->execute($param);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        public function nbreRowRecherchePack(string $nom, string $niveau , string $statut , int $limit , int $pagination){
+        public function nbreRowRecherchePack(string $nom, string $niveau , string $statut){
             $query =    "select count(*) from produit pr , pack p  where pr.id_produit = p.id_pack ";
             $statut = mb_strtolower($statut);
             $niveau = mb_strtolower($niveau);
@@ -93,10 +93,6 @@
                     $query .= " AND pr.quantite_stock = 0 " ;
                 }
             }
-            $pagination = max($pagination , 1);
-            $limit = max($limit , 1);
-            $offset = ($pagination - 1) * $limit;
-            $query .= " LIMIT {$limit} OFFSET {$offset} ;";
 
             $stmt = $this->db->prepare($query);
             $stmt->execute($param);

@@ -11,7 +11,7 @@
     $trie = isset($_GET["trie"]) ? $_GET["trie"] : "";
     $stock = isset($_GET["stock"]) ? $_GET["stock"] : "";
     $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
-    $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 16;
+    $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 15;
 
     $liste_des_produit= $product_services->rechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);
     $nombre_de_produit = $product_services->nombreLigneRechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);

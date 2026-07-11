@@ -225,7 +225,7 @@ window.addEventListener("load",async function(event){
         let product = await response.json();
         product= product.data;
         articles.innerHTML += `
-                            <article data-idarticle=${article.idproduit} data-quantity=>${article.quantity}
+                            <article data-idarticle=${article.idproduit} data-quantity=${article.quantity} >
                                 <div>
                                     <img src="${product.image_url}" alt="">
                                     <div class="txt">

@@ -215,43 +215,53 @@ img{
 .packManagerBottomPart .top{
     display: flex;
     justify-content: space-between;
-    gap: 1em;
+    gap: 1.5em;
     align-items: center;
     padding: 0.5em 2em;
     margin-bottom: 2em;
 }
-.packManagerBottomPart .top > div{position: relative;}
-.packManagerBottomPart .top > div:first-child input{
+
+
+
+.packManagerBottomPart .top > main{
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start;
+    gap: 2em;
+}
+
+
+
+
+
+
+
+.packManagerBottomPart .top main > div{position: relative;}
+.packManagerBottomPart .top main > div:first-child input{
     background-color: white;
     width: 350px;
-    /* height: 40px; */
+    height: 40px;
     border-radius: 0.5em;
     border: 2px solid #eee;
     outline: none;
     font-size: 14px;
     font-weight: 400;
-    padding: 10px 15px 10px 32px;
+    padding: 10px 32px 10px 15px;
+    margin-top: 0.5em;
 }
 
 
-.packManagerBottomPart .top > div:first-child > i{
-    font-size: 13px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 13px;
-    color: var(--gray-700);
-}
 
-.packManagerBottomPart .top > div > p{
+
+.packManagerBottomPart .top main > div > p{
     font-size: 13px;
     font-weight: 500;
 }
 
-.packManagerBottomPart .top > div > div {
+.packManagerBottomPart .top main > div > div {
     position: relative;
 }
-.packManagerBottomPart .top > div > div > i{
+.packManagerBottomPart .top main > div > div > i{
     position: absolute;
     right: 15px;
     top: 50%;
@@ -259,7 +269,19 @@ img{
     font-size: 12px;
 }
 
-.packManagerBottomPart .top > div > div select{
+
+.packManagerBottomPart .top main > div:first-child > div > i{
+    font-size: 13px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-20%);
+    right: 13px;
+    color: var(--gray-700);
+    width: fit-content;
+}
+
+
+.packManagerBottomPart .top main > div > div select{
     appearance: none;
     -webkit-appearance: none;
     padding: 0.7em 4em 0.7em 1.25em; 
@@ -271,6 +293,7 @@ img{
     margin-top: 0.5em;
     font-size: 12px;
     outline: none;
+    height: 40px;
 }
 
 

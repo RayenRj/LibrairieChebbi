@@ -190,7 +190,7 @@
                             <canvas id="pie-chart"></canvas>
                             <div class="text">
                                 <h4>Total</h4>
-                                <h2 id="total_pack_vente"><?= $statRepo->totaleVenteDePack() ?></h2>
+                                <h2 id="total_pack_vente"><?= $statRepo->totaleVenteDePack() ?? 0 ?></h2>
                             </div>
                         </div>
                         <ul class="legend">

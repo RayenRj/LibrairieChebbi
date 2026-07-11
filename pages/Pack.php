@@ -91,7 +91,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a href="" class="addToCart" data-idpack="<?= $pack["id_produit"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -108,7 +108,7 @@
         <div class="pack-college packs-container" id="pack-college">
             <div class="text">
                 <img src="../assets/images/pack/palette.png" alt="">
-                <h2>Packs Primaire</h2>
+                <h2>Packs Collége</h2>
             </div>
             <main>
                 <?php foreach($pack_college as $pack): ?>
@@ -123,7 +123,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a href="" class="addToCart" data-idpack="<?= $pack["id_produit"] ?>" ><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -142,7 +142,7 @@
         <div class="pack-secondaire packs-container" id="pack-secondaire">
             <div class="text">
                 <img src="../assets/images/pack/palette.png" alt="">
-                <h2>Packs Primaire</h2>
+                <h2>Packs Secondaire</h2>
             </div>
             <main>
                 <?php foreach($pack_secondaire as $pack): ?>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a href="" class="addToCart" data-idpack="<?= $pack["id_produit"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -174,7 +174,7 @@
     <div class="pack-bac packs-container" id="pack-bac">
             <div class="text">
                 <img src="../assets/images/pack/palette.png" alt="">
-                <h2>Packs Primaire</h2>
+                <h2>Packs Bac</h2>
             </div>
             <main>
                 <?php foreach($pack_bac as $pack): ?>
@@ -189,7 +189,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href=""><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a href="" class="addToCart" data-idpack="<?= $pack["id_produit"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -200,6 +200,9 @@
 
      </section>
      
+     
     <?php include("../includes/footer.php"); ?>
+
+    <script src="/assets/js/pack.js"></script>
 </body>
 </html>
