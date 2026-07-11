@@ -232,3 +232,57 @@ main.contact .double > div> input:focus,
 
 /* reglage ll maps */
 
+/* ========================================================================================== */
+/* ==================================== partie lekhra =================================== */
+/* ========================================================================================== */
+
+.dernier-part{
+    width: 100%;
+    background-color: var(--gray-100);
+    padding: 3em 5em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.dernier-part i{
+    font-size: clamp(2em, 5vw, 5em);
+}
+.dernier-part .text{
+    display: flex;
+    gap: 2em;
+    align-items: center;
+    margin-right: 2em;
+}
+
+.dernier-part form input[type="email"]{
+    width: 400px;
+    height: 45px;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    outline: none;
+    border: 1px solid var(--border-gray);
+    font-size: 14px;
+    margin-top: 1px;
+    
+}
+.dernier-part form input[type="email"]::placeholder{
+    opacity: 0.6;
+}
+
+.dernier-part form input[type="submit"]{
+    height: 45px;
+    width: 100px;
+    border-radius: 0.5em;
+    border: none;
+    background-color:orange;
+    margin-left: -25px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;
+    font-weight: 600;
+    align-content: center;
+
+}
+

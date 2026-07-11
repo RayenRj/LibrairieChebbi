@@ -340,14 +340,12 @@
         </ul>
     </div>
 
-
-    <!--
     <div class="contactUs">
-        <?php // include("ContactUs.php"); ?>
+        <?php  include("ContactUs.php"); ?>
     </div>
-                            -->
+                           
 
-    <div class="dernier-part">
+    <!-- <div class="dernier-part">
         <div class="text">
             <i class="fa-regular fa-envelope"></i>
             <div>
@@ -359,14 +357,13 @@
             <input type="email" placeholder="Votre email">
             <input type="submit" value="S'abonner">
         </form>
-    </div>
+    </div> -->
 
 
 
     </div>
 
 
-    <?php include("../includes/footer.php") ?>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="../assets/js/slider.js"></script>

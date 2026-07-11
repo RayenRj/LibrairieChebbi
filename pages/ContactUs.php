@@ -98,6 +98,20 @@
         </div>
     </main>
 
+    <div class="dernier-part">
+        <div class="text">
+            <i class="fa-regular fa-envelope"></i>
+            <div>
+                <h2>Ne manquez aucune promotion !</h2>
+                <p>Recevez nos nouveautés et offres spéciales directement dans votre boite mail.</p>
+            </div>
+        </div>
+        <form action="">
+            <input type="email" placeholder="Votre email">
+            <input type="submit" value="S'abonner">
+        </form>
+    </div>
+
 
     <?php include("../includes/footer.php"); ?>
 </body>

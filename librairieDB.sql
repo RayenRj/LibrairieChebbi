@@ -1,6 +1,7 @@
 create database if not exists librairieDB;
 use librairieDB;
 
+
 create table produit(
 	id_produit int primary key auto_increment,
     code_barre varchar(50) ,
@@ -77,7 +78,6 @@ create table userLogin(
 
 
 -- alter 
-drop trigger after_ligne_commande_insert;
 DELIMITER $$
 	create trigger before_insert_into_ligne_commande
     before insert on ligne_commande
@@ -331,5 +331,9 @@ select * from pack;
 select id_client , count(*)
 from commande
 group by id_client;
+
+select * from client;
+update client set role = "admin" where id_client = 31;
+
 
 select * from commande;
