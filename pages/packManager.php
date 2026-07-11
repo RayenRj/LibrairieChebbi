@@ -10,8 +10,7 @@
     $statut = $_GET["statut"] ?? "";
     $nom_pack = $_GET["nom"] ?? "" ;
     $list_of_packs_filtred= $packService->recherchePack($nom_pack , $niveau , $statut , $limit , $page);
-
-    $nombre_row_totale= $packService->nbreRowRecherchePack($nom_pack , $niveau , $statut , $limit , $page);
+    $nombre_row_totale= $packService->nbreRowRecherchePack($nom_pack , $niveau , $statut);
 
     $nombre_totale_page = ceil($nombre_row_totale / $limit);
     function calculDePourcentage($currentMonthValue , $lastMonthValue){
@@ -20,6 +19,16 @@
         return ($x * 100)/$lastMonthValue;
     }
 
+
+
+        
+    $query_array= [];
+    foreach($_GET as $key=>$val){
+        if($key !== "page")
+        $query_array[] = "$key=$val";
+        
+    } 
+    $query_string = implode("&", $query_array) ?? "";
     // partie el add pack
 
     if(!isset($_SESSION["role"]) || $_SESSION["role"]!="admin"):
@@ -131,52 +140,57 @@
             <div class="packManagerBottomPart" id="packs">
                 <form id="packManagerForm">
                     <div class="top">
-                        <div>
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" name="nom" id="packSearch" placeholder="Rechercher un pack...">
-                        </div>
-                        <div>
-                            <p>Niveau scolaire</p>
+                        <main>
                             <div>
-                                <select name="niveau" id="">
-                                    <option value="" selected>Tous les Niveau</option>
-                                    <option value="primaire" >Primaire</option>
-                                    <option value="college" >Collège</option>
-                                    <option value="secondaire" >Secondaire</option>
-                                    <option value="bac" >Bac</option>
-                                </select>
-                                <i class="fa-solid fa-caret-down"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <p>Statut</p>
-                            <div>
-                                <select name="statut" id="">
-                                    <option value="" selected>Tous</option>
-                                    <option value="actif" >Actif</option>
-                                    <option value="rupture" >En rupture</option>
-                                </select>
-                                <i class="fa-solid fa-caret-down"></i>
-                            </div>
-                        </div>
-                        <div class="lastDiv">
-                            <div>
-                                <p>reglage</p>
-                                <button type="submit">
+                                <p>Libellé Du Pack</p>
+                                <div>
                                     <i class="fa-solid fa-magnifying-glass"></i>
-                                    Rechercher
-                                </button>
+                                    <input type="text" name="nom" id="packSearch" placeholder="Rechercher un pack...">
+                                </div>
                             </div>
-
+                            
                             <div>
-                                <p>reglage</p>
-                                <button type="reset">
-                                    <i class="fa-solid fa-rotate"></i>
-                                    Réinitialiser
-                                </button>
+                                <p>Niveau scolaire</p>
+                                <div>
+                                    <select name="niveau" id="">
+                                        <option value="" selected>Tous les Niveau</option>
+                                        <option value="primaire" >Primaire</option>
+                                        <option value="college" >Collège</option>
+                                        <option value="secondaire" >Secondaire</option>
+                                        <option value="bac" >Bac</option>
+                                    </select>
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
                             </div>
-                        </div>
-                        
+                            <div>
+                                <p>Statut</p>
+                                <div>
+                                    <select name="statut" id="">
+                                        <option value="" selected>Tous</option>
+                                        <option value="actif" >Actif</option>
+                                        <option value="rupture" >En rupture</option>
+                                    </select>
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                            </div>
+                        </main>
+                            <div class="lastDiv">
+                                <div>
+                                    <p>reglage</p>
+                                    <button type="submit">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                        Rechercher
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <p>reglage</p>
+                                    <button type="reset">
+                                        <i class="fa-solid fa-rotate"></i>
+                                        Réinitialiser
+                                    </button>
+                                </div>
+                            </div>
                     </div>
                 </form>
 
@@ -196,7 +210,7 @@
                         <?php foreach($list_of_packs_filtred as $index => $row): ?>
                         <tr>
                             <td>
-                                <img src="https://www.agrafe.tn/4242-large_default/pochette-de-12-stylo-feutre-kids-bic.jpg" alt="">
+                                <img src="<?= $row["image_url"] ?>" alt="">
                             </td>
                             <td>
                                 <div class="text">
@@ -246,23 +260,34 @@
 
 
                 <div class="bottom">
-                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min((($page + 1) * $limit )  , $nombre_row_totale) ?> sur <?= $nombre_row_totale ?> packs</p>
+                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min($page * $limit  , $nombre_row_totale) ?> sur <?= $nombre_row_totale ?> packs</p>
                     <div class="pagination">
                         <!-- before -->
-                        <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php if($page > 1) : ?>
+                            <a  href="/dashboard/packs?page=<?= $page - 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php else : ?>
+                            <a href="#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php endif; ?>
+
+
+
+
                         <?php if($page> 3):?>
                             <a href="#" id="three-dots">...</a>
                         <?php endif; ?>
 
 
                         <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
-                            <a href="/dashboard/packs?page=<?= $i ?>#packs"><?= $i ?></a>
+                            <a href="/dashboard/packs?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#packs"><?= $i ?></a>
                         <?php endfor; ?>
 
                         <!-- current page -->
-                        <a href="#" class="pagination-selected"><?= $page ?></a>
+                        <a href="#formFiltrage" class="pagination-selected"><?= $page ?></a>
+
+
+
                         <?php for($i=$page +1  ; $i <= min($page + 2 , $nombre_totale_page) ; $i++):?>
-                            <a href="/dashboard/packs?page=<?= $i ?>#packs"><?= $i ?></a>
+                            <a href="/dashboard/packs?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#packs"><?= $i ?></a>
                         <?php endfor; ?> 
                                     
                             
@@ -271,7 +296,11 @@
                         <?php endif; ?>
 
                         <!-- after -->
-                        <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php if($page < $nombre_totale_page) : ?>
+                            <a href="/dashboard/packs?page=<?= $page + 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php else : ?>
+                             <a href="#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php endif; ?>
                     </div>
                 </div>
 

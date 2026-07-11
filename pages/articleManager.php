@@ -1,5 +1,5 @@
 <?php
-    require_once(__DIR__ . "/../backend/controllers/ProductController.php");
+    require_once(__DIR__ . "/../backend/services/ProductServices.php");
     
     $productService = new ProductServices();
     function calculDePourcentage($currentMonthValue , $lastMonthValue){
@@ -25,7 +25,11 @@
     
     
     $query_array= [];
-    foreach($_GET as $key=>$val){$query_array[] = "$key=$val";} 
+    foreach($_GET as $key=>$val){
+        if($key !== "page")
+        $query_array[] = "$key=$val";
+        
+    } 
     $query_string = implode("&", $query_array) ?? "";
 
     $top_10_vente_list = $productService->Top10Ventes();
@@ -330,7 +334,7 @@
                     <div class="pagination">
                         <!-- before -->
                         <?php if($page > 1) : ?>
-                            <a  href="/dashboard/articles?page=<?= $page - 1 ?>#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                            <a  href="/dashboard/articles?page=<?= $page - 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
                         <?php else : ?>
                             <a href="#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
                         <?php endif; ?>
@@ -343,13 +347,13 @@
 
 
                         <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
-                            <a href="/dashboard/articles?page=<?= $i ?>#formFiltrage"><?= $i ?></a>
+                            <a href="/dashboard/articles?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage"><?= $i ?></a>
                         <?php endfor; ?>
 
                         <!-- current page -->
                         <a href="#" class="pagination-selected"><?= $page ?></a>
                         <?php for($i=$page +1  ; $i <= min($page + 2 , $nombre_page_totale) ; $i++):?>
-                            <a href="/dashboard/articles?page=<?= $i ?>#formFiltrage"><?= $i ?></a>
+                            <a href="/dashboard/articles?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage"><?= $i ?></a>
                         <?php endfor; ?> 
                                     
                             
@@ -359,7 +363,7 @@
 
                         <!-- after -->
                         <?php if($page < $nombre_page_totale) : ?>
-                            <a href="/dashboard/commandes?page=<?= $page + 1 ?>#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                            <a href="/dashboard/commandes?page=<?= $page + 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
                         <?php else : ?>
                              <a href="#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
                         <?php endif; ?>

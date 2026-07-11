@@ -253,6 +253,12 @@ article{
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     min-height: 350px;
+    transition: 0.5s ease all;
+}
+
+article:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 article div.image{
@@ -266,10 +272,15 @@ article div.image{
     margin-bottom: 2em;
     object-fit: cover;
     padding: 0.5em;
+    overflow: hidden;
 }
 article div.image img{
     height: 100%;
     object-fit: cover;
+    transition: 0.5s all ease;
+}
+article div.image img:hover{
+    transform: scale(1.1);
 }
 
 

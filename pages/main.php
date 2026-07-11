@@ -35,7 +35,7 @@
             <h1><span>Apprendre</span>,<br>Grandir & Réussir</h1>
             <p>livres, sacs , fournitures scolaires , cadeaux et plus encore... au meilleur prix !</p>
             <div class="button">
-                <a href="">Shop Now</a>
+                <a href="/products">Shop Now</a>
                 <a href="">Decouvrir les catégories</a>
             </div>
         </div>
@@ -269,7 +269,7 @@
                         <ul class="card-list swiper-wrapper">
                             <?php foreach($list_all_product as $product): ?>
                                 <li class="card-item swiper-slide">
-                                    <a href="" class="card-link ">
+                                    <a href="/products/product?idproduit=<?= $product["id_produit"] ?>" class="card-link ">
                                         <img class="card-image" src="<?= $product["image_url"] ?>" alt="">
                                         <p class="badge">S<?= $product["libelle"] ?></p>
                                         <h2 class="card-title"><?= $product["prix"] ?> <span>dt</span></h2>
@@ -341,7 +341,11 @@
     </div>
 
 
-
+    <!--
+    <div class="contactUs">
+        <?php // include("ContactUs.php"); ?>
+    </div>
+                            -->
 
     <div class="dernier-part">
         <div class="text">

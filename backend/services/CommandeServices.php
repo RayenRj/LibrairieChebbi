@@ -37,29 +37,29 @@
             return $this->commande_repo->nbreDeLigneDeRecherche($data , $critere , $statut , $dateDebut , $dateFin);
         }
         //done
-        public function creeCommande(int $id_client, string $addresse , string $ville , string $codePostal , string $comment , array $ligneCommandes) : bool{ 
-            $dateCommande = (new DateTime('now'))->format("Y-m-d");
-            $statut = "attente";
-            if(empty($id_client)){throw new Exception("l'identifiant du client ne doit pas etre vide!");}
-            if(empty($addresse)){throw new Exception("l'addresse doit etre non vide!");}
-            if(empty($ville)){throw new Exception("la ville doit etre non vide");}
-            if(empty($ligneCommandes)){throw new Exception("La commande doit contenir au moins un produit!");}
+        // public function creeCommande(int $id_client, string $addresse , string $ville , string $codePostal , string $comment , array $ligneCommandes) : bool{ 
+        //     $dateCommande = (new DateTime('now'))->format("Y-m-d");
+        //     $statut = "attente";
+        //     if(empty($id_client)){throw new Exception("l'identifiant du client ne doit pas etre vide!");}
+        //     if(empty($addresse)){throw new Exception("l'addresse doit etre non vide!");}
+        //     if(empty($ville)){throw new Exception("la ville doit etre non vide");}
+        //     if(empty($ligneCommandes)){throw new Exception("La commande doit contenir au moins un produit!");}
 
-            $somme= 0;
-            foreach($ligneCommandes as $ligneCommande){
-                $article = $ligneCommande->getProduit();
-                $quantite = $ligneCommande->getQuantite();
-                $prix_tot = $ligneCommande->getPrixTotale();
-                if($quantite > $article->getStock()){
-                    throw new Exception("La quantite est supérieure au stock!");
-                }
-                $somme += $prix_tot;
+        //     $somme= 0;
+        //     foreach($ligneCommandes as $ligneCommande){
+        //         $article = $ligneCommande->getProduit();
+        //         $quantite = $ligneCommande->getQuantite();
+        //         $prix_tot = $ligneCommande->getPrixTotale();
+        //         if($quantite > $article->getStock()){
+        //             throw new Exception("La quantite est supérieure au stock!");
+        //         }
+        //         $somme += $prix_tot;
 
-            }
+        //     }
 
-            $commande = new Commande(mb_strtolower($id_client),$dateCommande, $statut , $addresse , $ville , $codePostal , $somme , $comment , $ligneCommandes);
-            return $this->commande_repo->save($commande);
-        }
+        //     $commande = new Commande(mb_strtolower($id_client),$dateCommande, $statut , $addresse , $ville , $codePostal , $somme , $comment , $ligneCommandes);
+        //     return $this->commande_repo->saveCommande($commande);
+        // }
         //done
         public function deleteCommande(int $idCommande) : bool{
             if($idCommande <= 0){

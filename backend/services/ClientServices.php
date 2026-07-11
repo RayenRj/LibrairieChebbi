@@ -117,5 +117,8 @@
         public function nombreDeLigneSearchClient(string $idClient , string $nom , string $prenom , string $email , string $tel){
             return $this->clientRepo->nombreDeLigneSearchClient($idClient , $nom , $prenom , $email , $tel);
         }
+
+
+
     }
 ?>
