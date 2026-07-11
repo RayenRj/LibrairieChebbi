@@ -437,6 +437,10 @@ p{font-size: 13px;}
     padding: 2.5em 3em 3em 3em;
     box-shadow: inset -5px -5px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    animation: appear;
+    animation: appear1 both;
+    animation-timeline: view(auto auto); 
+    animation-range: entry 0% cover 30%;
     /* max-width: 1400px; */
 }
 
@@ -478,6 +482,7 @@ p{font-size: 13px;}
 /* ==================================== partie lekhra =================================== */
 /* ========================================================================================== */
 
+
 .dernier-part{
     width: 100%;
     background-color: var(--gray-100);
@@ -494,6 +499,9 @@ p{font-size: 13px;}
     gap: 2em;
     align-items: center;
     margin-right: 2em;
+    animation: appear both;
+    animation-timeline: view(auto auto);
+    animation-range: entry 0% cover 20%;
 }
 
 .dernier-part form input[type="email"]{
@@ -528,11 +536,82 @@ p{font-size: 13px;}
 
 }
 
+.dernier-part form{
+    animation: appear2 both;
+    animation-timeline: view(auto auto); 
+    animation-range: entry 0% cover 20%;
+}
+
 
 
 /* contact us part */
 .contactUs{
-    margin-top: 3em;
-    margin-bottom: 3em;
+    margin-top: 6em;
     width: 100%;
+}
+
+.first-header{
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    animation: appear1 both;
+    animation-timeline: view(auto auto); 
+    animation-range: entry 0% cover 30%;
+}
+.second-part{
+    animation: second-part both;
+    animation: appear2;
+    animation-timeline: view(auto auto);
+    animation-range: entry 0% cover 30%;
+}
+
+.first-header span{
+    background-color: var(--yellow-dark);
+    padding: 0 0.2em;
+}
+.contact{
+    margin: auto;
+}
+.second-part{
+    width: calc(45% - 1em) !important;
+}
+
+main.contact .first-part{
+    animation: appear both linear;
+    animation-timeline: view();
+    animation-range: entry 10% cover 20%;
+
+}
+
+
+@keyframes appear{
+    from{
+        transform: translateX(-30%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes appear2{
+    from{
+        transform: translateX(+30%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes appear1 {
+    from{
+        transform: translateY(200px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

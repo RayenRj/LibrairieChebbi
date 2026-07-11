@@ -117,7 +117,7 @@
                             <input type="number" id="quantity" value="1">
                             <button id="plusButton" type="button">+</button>
                         </div>
-                        <a href="" class="add-to-cart"><i class="fa-solid fa-cart-plus"></i>Add to cart</a>
+                        <a href="" class="add-to-cart" data-idpack="<?= $product->getId() ?>"><i class="fa-solid fa-cart-plus"></i>Add to cart</a>
                     </form>
                 </div>
                 <a href="" class="wishlist"><i class="fa-regular fa-heart"></i>Add to Wishlist</a>

@@ -7,8 +7,9 @@ let cartCount =document.querySelector(".cartCount");
 
 
 // reglage ll count cart f awel reload 
-
-cartCount.innerHTML = JSON.parse(localStorage.getItem("cartTable")).length
+if(localStorage.getItem("cartTable")){
+    cartCount.innerHTML = (JSON.parse(localStorage.getItem("cartTable"))).length
+}else{cartCount.innerHTML=0}
 plusButton.addEventListener("click", function(e){
     e.preventDefault();
     quantity.value = (parseInt(quantity.value) + 1).toString();
