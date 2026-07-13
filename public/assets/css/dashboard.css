@@ -535,3 +535,55 @@ img{
 #pie-chart{
     z-index: 22;
 }
+
+
+
+
+/* ################################################### */
+/* ##############partie ki yabda mafamech repture en stock########### */
+/* ################################################### */
+
+/* Empty State (Stock Impeccable) */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px; /* py-8 px-4 */
+  text-align: center;
+}
+
+/* Icon Circle Container */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px; /* w-16 */
+  height: 64px; /* h-16 */
+  margin-bottom: 16px; /* mb-4 */
+  border-radius: 50%;
+  margin-top: 1.5em;
+  background-color: #ecfdf5; 
+  color: #10b981;
+}
+/* Text elements inside Empty State */
+.empty-title {
+  font-size: 16px; /* text-base */
+  font-weight: 600;
+  color: #1e293b; /* slate-800 */
+  margin-bottom: 4px; /* mb-1 */
+}
+
+.empty-desc {
+  font-size: 12px; 
+  color: #94a3b8; 
+  max-width: 240px;
+  line-height: 1.5;
+}
+
+/* ki yabda 3andk 0 produit */
+
+.zeroRepture{
+    background-color: var(--blue-glass) !important; 
+    color: var(--blue) !important;
+}

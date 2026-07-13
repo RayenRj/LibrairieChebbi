@@ -232,11 +232,37 @@
                     <div class="top-part">
                         <div>
                             <h3>Articles en repture de stock</h3>
-                            <span><?= $statRepo->nbreArticleEnReptureStock() ?> Produits</span>
+                            <span class="<?= $statRepo->nbreArticleEnReptureStock() == 0 ? "zeroRepture" : "" ?>"><?= $statRepo->nbreArticleEnReptureStock() ?> Produits</span>
                         </div>
                         <a href="/dashboard/articles?stock=repture%20de%20stock#formFiltrage">Voir toutes <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
+                    <?php if(sizeof($liste_article_en_repture_stock)==0): ?>
 
+                        <!-- L-Card Principal -->
+                        <div class="card">
+                            <!-- 2. Empty State: Ki yabda l-stock mriguel (No rupture) -->
+                            <div id="empty-state" class="empty-state">
+                            <!-- Icon (Package Check inline SVG) -->
+                            <div class="icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m16 16 2 2 4-4"/>
+                                <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/>
+                                <path d="M12 22V12"/>
+                                <path d="m3.3 7 8.7 5 8.7-5"/>
+                                <path d="M12 12H3"/>
+                                </svg>
+                            </div>
+                            
+                            <!-- Message principal -->
+                            <h4 class="empty-title">Votre stock est impeccable !</h4>
+                            
+                            <!-- Message secondaire -->
+                            <p class="empty-desc">Aucun produit n'est actuellement en rupture de stock. Beau travail !</p>
+                            </div>
+
+                        </div>
+
+                    <?php else:?>
                     <ul>
                         <?php foreach($liste_article_en_repture_stock as $product): ?>
                         <li>
@@ -245,7 +271,7 @@
                             <h5><?=  $product["libelle"] ?></h5>
                             </div>
                             <div>
-                                <span class="zero">0</span>
+                                <span class="zero ">0</span>
                             </div>
                             <div class="buttons">
                                 <a href="">Reapprovisionner</a>
@@ -255,6 +281,7 @@
                         <?php endforeach ?>
 
                     </ul>
+                    <?php endif;?>
                 </div>
             </div>
         </section>

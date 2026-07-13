@@ -97,14 +97,18 @@ window.addEventListener("load",async function name(params) {
     }
    
   }else{
-    // en cas de pas de vente
+    // en cas de pas de vente : remplir avec des data faux
       Label = ["Primaire" , "Secondaire" , "College","Bac"]
       for(let text of Label){
       html += ` 
                                   <li>
                                       <h5>${text}</h5>
                                       <p>0% (0 ventes)</p>
-                                  </li>`;      
+                                  </li>`; 
+      data2.push({
+        "type" : text,
+        "nombreVente" : 50
+      })     
     }
   }
 
