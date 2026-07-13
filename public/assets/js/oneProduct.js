@@ -3,7 +3,6 @@ let minusButton= document.querySelector("#minusButton");
 let quantity = document.querySelector("#quantity");
 let review = document.querySelector(".n-review");
 let addToCart = document.querySelector(".add-to-cart");
-let cartCount =document.querySelector(".cartCount");
 
 
 // reglage ll count cart f awel reload 
@@ -53,7 +52,6 @@ addToCart.addEventListener("click",function(event){
     }
     table.push(pack);
     localStorage.setItem("cartTable", JSON.stringify(table));
-
-    
-    cartCount.innerHTML = parseInt(cartCount.value) + 1 ;
+    console.log(cartCount.textContent)
+    cartCount.textContent = parseInt(cartCount.textContent) + 1 ;
 })

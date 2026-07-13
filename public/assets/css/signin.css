@@ -37,6 +37,13 @@
 
 }
 
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus{
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
 .before-signin{
     position: absolute;
     top:0;
@@ -102,6 +109,7 @@
     padding: 0;
     cursor: text;
 }
+
 
 .signin form > div .input{
     width: 70%;

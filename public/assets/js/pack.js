@@ -1,5 +1,4 @@
 let addToCartButton = document.querySelectorAll(".addToCart")
-let cartCount = document.querySelector(".cartCount");
 
 
 function getLocalStorageArticlesList(){

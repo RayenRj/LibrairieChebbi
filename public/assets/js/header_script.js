@@ -8,21 +8,53 @@ let body = document.body;
 let logOutButton = document.querySelector("#log_out");
 
 
+
+let cartCount = document.querySelector(".cartCount");
+
+
+
+
+function getLocalStorageArticlesList(){
+    let cartTableString = localStorage.getItem("cartTable");
+    var cartTable = [];
+    if(cartTableString !== null){cartTable = JSON.parse(cartTableString)}
+    return cartTable
+}
+
+
+cartCount.textContent = getLocalStorageArticlesList().length ;
+
+
+
+
+
+
+
+
+
+
+
 SignInButton.addEventListener("click",()=>{
     SignInCard.removeAttribute("hidden");
-    body.style.maxHeight= "100dh";
+    body.style.maxHeight= "100vdh";
+    body.style.overflow="hidden";
 })
 
 SignUpButton.addEventListener("click",()=>{
     SignUpCard.removeAttribute("hidden");
     body.style.maxHeight= "100vdh";
+    body.style.overflow="hidden";
 })
 
 beforeSignIn.addEventListener("click",()=>{
     SignInCard.setAttribute("hidden","");
+    body.style.overflow="";
+
 })
 beforeSignUp.addEventListener("click",()=>{
     SignUpCard.setAttribute("hidden","");
+    body.style.overflow="";
+
 })
 
 

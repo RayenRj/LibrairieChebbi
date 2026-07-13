@@ -1,7 +1,7 @@
 let articleContainer = document.querySelector(".article")
 let noArticleContainer = document.querySelector(".no-article")
 let tbody = document.querySelector("#panierTableBody");
-let cartCount = document.querySelector(".cartCount");
+let passerCommande = document.querySelector(".passerCommande");
 
 
 
@@ -13,8 +13,6 @@ function getLocalStorageArticlesList(){
     return cartTable
 }
 
-
-cartCount.textContent = getLocalStorageArticlesList().length ;
 
 
 
@@ -90,7 +88,7 @@ window.addEventListener("load",async function(){
                         <td colspan="7" >
                             <div class="button">
                         <!-- From Uiverse.io by carlosepcc --> 
-                                    <a href="/commande?total=${totale}" class="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
+                                    <a data-total="${totale}" class="passerCommande cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
                                     border-blue-600
                                     border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
                                     active:border-b-[2px] active:brightness-90 active:translate-y-[2px] button-commande">
@@ -111,7 +109,7 @@ window.addEventListener("load",async function(){
 
 })
 
-// shop now button when the cart is open
+// shop now button when the cart is empty
 let shopNowButton = document.querySelector(".shopNow");
 shopNowButton.addEventListener("click",function(){
     window.location.href="/products"
@@ -122,7 +120,7 @@ let plusQuantityButtonList = document.querySelectorAll(".plusQuantityButton");
 let minusQuantityButtonList = document.querySelectorAll(".minusQuantityButton");
 
 
-tbody.addEventListener("click",function(event){
+tbody.addEventListener("click",async function(event){
     if(event.target.classList.contains("plusQuantityButton")){
         let prixUnitaire = event.target.parentElement.nextElementSibling.firstElementChild;
         let totalAmount = event.target.parentElement.nextElementSibling.nextElementSibling.firstElementChild;
@@ -192,5 +190,22 @@ tbody.addEventListener("click",function(event){
             noArticleContainer.removeAttribute("hidden")
         }
 
+    }
+
+    // passer commande button
+    if(event.target.classList.contains("passerCommande")){
+        event.preventDefault()
+        let total = event.target.dataset.total
+        let result = await fetch("/api/users/isClientLoggedIn");
+        let response = await result.json();
+        if(response.success && response.data){
+            window.location.href = `/commande?total=${total}`;
+        }else if(response.success && !response.data){
+            SignInCard.removeAttribute("hidden");
+            body.style.maxHeight= "100vdh";
+            body.style.overflow="hidden";
+        }else{
+            alert(response.message)
+        }
     }
 })

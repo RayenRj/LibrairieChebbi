@@ -545,7 +545,30 @@
         //#####################################################
 
 
+        public function isClientLoggedIn($request){
+            try{
+                $response = [
+                    "success" => true,
+                    "message" => "Le client est connectée par son compte",
+                    "numberOfLine" => null,
+                    "data" => isset($_SESSION["userId"]),
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
 
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
 
 
 
