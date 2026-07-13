@@ -544,7 +544,9 @@ img{
 /* ######################### */
 /* ######################### */
 /* ######################### */
-
+.commandeContainer::-webkit-scrollbar{
+    appearance: none;
+}
 
 .commandeContainer{
     width: 70%;
@@ -555,7 +557,6 @@ img{
     gap: 1em;
     border-radius: 1em;
     height: fit-content;
-    margin: 4em auto;
     padding: 3em;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     position: absolute;

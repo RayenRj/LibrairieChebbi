@@ -1,80 +1,225 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails de la Commande - Chebbi Librairie</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Stock Dashboard</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc; /* Slate-50 background */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Card Container */
+    .card {
+      width: 100%;
+      max-width: 400px;
+      background-color: #ffffff;
+      border: 1px solid #f1f5f9; /* slate-100 */
+      border-radius: 16px; /* rounded-2xl */
+      padding: 24px; /* p-6 */
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05); /* shadow-sm */
+    }
+
+    /* Card Header */
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px; /* mb-6 */
+    }
+
+    .card-title {
+      font-size: 18px; /* text-lg */
+      font-weight: 600;
+      color: #1e293b; /* slate-800 */
+    }
+
+    /* Alert Badge */
+    .badge-alerte {
+      padding: 4px 10px;
+      font-size: 12px; /* text-xs */
+      font-weight: 500;
+      background-color: #fef2f2; /* red-50 */
+      color: #dc2626; /* red-600 */
+      border-radius: 9999px; /* rounded-full */
+    }
+
+    /* Article List style */
+    .liste-rupture {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .article-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f1f5f9; /* border-slate-100 */
+    }
+
+    .article-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .article-name {
+      font-size: 14px; /* text-sm */
+      font-weight: 500;
+      color: #334155; /* slate-700 */
+    }
+
+    .rupture-tag {
+      padding: 2px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background-color: #fee2e2; /* red-100 */
+      color: #dc2626; /* red-600 */
+      border-radius: 4px;
+    }
+
+    /* Empty State (Stock Impeccable) */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px; /* py-8 px-4 */
+      text-align: center;
+    }
+
+    /* Icon Circle Container */
+    .icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px; /* w-16 */
+      height: 64px; /* h-16 */
+      margin-bottom: 16px; /* mb-4 */
+      border-radius: 50%;
+      background-color: #ecfdf5; /* emerald-50 (green background khfif) */
+      color: #10b981; /* emerald-500 (icon color green) */
+    }
+
+    /* Text elements inside Empty State */
+    .empty-title {
+      font-size: 16px; /* text-base */
+      font-weight: 600;
+      color: #1e293b; /* slate-800 */
+      margin-bottom: 4px; /* mb-1 */
+    }
+
+    .empty-desc {
+      font-size: 12px; /* text-xs */
+      color: #94a3b8; /* slate-400 */
+      max-width: 240px;
+      line-height: 1.5;
+    }
+
+    /* Helper utility to hide elements */
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="commandeContainer">
-                                    <div class="topPart">
-                                        <div>
-                                            <div>
-                                                <h4>Commande#<?= $commande["id_commande"] ?></h4>
-                                                <?php if(in_array($commande["statut"],["confirmée","attente"])): ?>
-                                                    <li class="statutExpediee statutCommande">Expediée</li>
-                                                <?php elseif($commande["statut"] == "annulée"): ?>
-                                                    <li class="statutAnnulee statutCommande">Annulée</li>
-                                                <?php elseif($commande["statut"] == "livrée"): ?>
-                                                    <li class="statutLivree statutCommande">Livrée</li>
-                                                <?php endif; ?>
-                                            </div>
-                                            <p>Passé le <?= "$day $month $year" ?> à <?= $time ?></p>
-                                        </div>
-
-                                        <div>
-                                            <p>Total : <span><?= number_format($commande["prix_totale"] , 3 , "," , " ") ?> Dt</span></p>
-                                        </div>
-
-                                    </div>
-
-                                    <?php $liste_article = $services_commande->getCommandeArticles($commande["id_commande"]);?>
-                                    <!-- 1 article  -->
-
-                                
-                                    <div class="listArticles">
-                                        <p>Articles Commandés</p>
-                                        <ul class="articleContainer">
-                                            <?php foreach($liste_article as $article): ?>
-                                                <li>
-                                                    <ul>
-                                                        <li>
-                                                            <img src="<?= $article["image_url"] ?>" alt="Image d'une fourniture scholaire | Librairie chebbi | tunisie">
-                                                            <div class="text">
-                                                                <h5><?= $article["libelle"] ?></h5>
-                                                                <p><?= $article["categorie"] ?>, <?= $article["marque"] ?></p>
-                                                            </div>
-                                                        </li>
-                                                        <li>x<?= $article["quantite"] ?></li>
-                                                        <li><?= number_format(floatval($article["quantite"]) * floatval($article["prix"]) , 3 , "," , " ") ?> Dt</li>
-                                                    </ul>
-                                                </li>
-                                            <?php endforeach; ?>
-
-                                        </ul>
-                                    </div>
-
-                                    <div class="bottomPart">
-                                        <div class="double">
-                                            <h5>Sous-total</h5>
-                                            <p><?= number_format(floatval($commande["prix_totale"]) - 7 , 3 , "," , " ") ?> Dt</p>
-                                        </div>
-                                        <div class="double">
-                                            <h5>Livraison</h5>
-                                            <p>7,000 Dt</p>
-                                        </div>
-                                        <hr>
-                                        <div class="double">
-                                            <h3>Total</h3>
-                                            <h3><?= number_format($commande["prix_totale"] , 3 , "," , " ") ?> Dt</h3>
-                                        </div>
-                                    </div>
+  <!-- L-Card Principal -->
+  <div class="card">
+    
+    <!-- Header mta3 l-Card -->
+    <div class="card-header">
+      <h3 class="card-title">Articles en rupture</h3>
+      <!-- Badge d'alerte (dynamic via JS) -->
+      <span id="badge-alerte" class="badge-alerte hidden">0 alertes</span>
     </div>
-    <script src="script.js"></script>
 
+    <!-- 1. State: Ki yabda fama articles (bich yet7akem fih l-JS) -->
+    <div id="liste-rupture" class="liste-rupture hidden">
+      <!-- L-articles bech yt-injectaw hna bil-JS -->
+    </div>
+
+    <!-- 2. Empty State: Ki yabda l-stock mriguel (No rupture) -->
+    <div id="empty-state" class="empty-state">
+      <!-- Icon (Package Check inline SVG) -->
+      <div class="icon-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m16 16 2 2 4-4"/>
+          <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/>
+          <path d="M12 22V12"/>
+          <path d="m3.3 7 8.7 5 8.7-5"/>
+          <path d="M12 12H3"/>
+        </svg>
+      </div>
+      
+      <!-- Message principal -->
+      <h4 class="empty-title">Votre stock est impeccable !</h4>
+      
+      <!-- Message secondaire -->
+      <p class="empty-desc">Aucun produit n'est actuellement en rupture de stock. Beau travail !</p>
+    </div>
+
+  </div>
+
+  <!-- JavaScript logic -->
+  <script>
+    // 1. Data mte3ek (Testiha bil-empty array [] wala zeyda bech tchouf l'affichage)
+    const articlesEnRupture = [
+      // { id: 1, name: "Café Espresso Intenso" },
+      // { id: 2, name: "Lait demi-écrémé 1L" }
+    ];
+
+    // 2. Selectors mta3 l-DOM
+    const badgeAlerte = document.getElementById('badge-alerte');
+    const listeRupture = document.getElementById('liste-rupture');
+    const emptyState = document.getElementById('empty-state');
+
+    // 3. Render function
+    function renderStockCard() {
+      const count = articlesEnRupture.length;
+
+      if (count > 0) {
+        // Na7i empty-state, w warri l-liste w l-badge
+        emptyState.classList.add('hidden');
+        listeRupture.classList.remove('hidden');
+        badgeAlerte.classList.remove('hidden');
+        
+        badgeAlerte.textContent = `${count} ${count === 1 ? 'alerte' : 'alertes'}`;
+
+        // Injecti articles f list
+        listeRupture.innerHTML = articlesEnRupture.map(art => `
+          <div class="article-item">
+            <span class="article-name">${art.name}</span>
+            <span class="rupture-tag">Rupture</span>
+          </div>
+        `).join('');
+
+      } else {
+        // Ki yabda l-stock mriguel: Affichi empty state w5abi l-be9i
+        emptyState.classList.remove('hidden');
+        listeRupture.classList.add('hidden');
+        badgeAlerte.classList.add('hidden');
+      }
+    }
+
+    // Khaddem l-function awel may-loadi l-script
+    renderStockCard();
+  </script>
 </body>
 </html>

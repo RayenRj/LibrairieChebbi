@@ -310,15 +310,17 @@ showCommandeButton.forEach(button=>{
         
         commandeContainer.style.display = "flex";
         overlay.removeAttribute("hidden");
+
+
+
+        // reglage de hauteur ll pop up
         let height = commandeContainer.getBoundingClientRect().height;
-
-        commandeContainer.style.top = `calc(${window.scrollY}px) `;
-        commandeContainer.style.transform = " translate(-50%)";
-        // commandeContainer.style.top = `3em`;
-
-        overlay.style.minHeight = Math.max(document.body.getBoundingClientRect().height, height + window.scrollY) + 200 + "px";
-        console.log(document.body.getBoundingClientRect().height)
-        console.log(height + window.scrollY)
+        commandeContainer.style.maxHeight = "90dvh"
+        commandeContainer.style.overflowY = "scroll"
+        body.style.overflowY= "hidden"
+        commandeContainer.style.top = `calc(50% + ${window.scrollY}px)`;
+        commandeContainer.style.transform = " translate(-50%,-50%)";
+        overlay.style.top = `${window.scrollY}px`;
     })
 
 
@@ -337,4 +339,5 @@ showCommandeButton.forEach(button=>{
 overlay.addEventListener("click",function(){
     commandeContainer.style.display = "none";
     overlay.setAttribute("hidden","")
+    body.style.overflowY= ""
 })
