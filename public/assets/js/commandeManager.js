@@ -312,16 +312,8 @@ showCommandeButton.forEach(button=>{
         overlay.removeAttribute("hidden");
         let height = commandeContainer.getBoundingClientRect().height;
 
-        if(height * 0.5 > window.scrollY * 2){
-            commandeContainer.style.top = `50px `;
-            commandeContainer.style.transform = `translate(-50% )`;
-            console.log("hello")
-            
-        }else{
-            commandeContainer.style.marginTop ="0px";
-            commandeContainer.style.top = `calc(50%)`;
-            commandeContainer.style.transform = " translate(-50%, 50%)";
-        }
+        commandeContainer.style.top = `calc(${window.scrollY}px) `;
+        commandeContainer.style.transform = " translate(-50%)";
         // commandeContainer.style.top = `3em`;
 
         overlay.style.minHeight = Math.max(document.body.getBoundingClientRect().height, height + window.scrollY) + 200 + "px";
