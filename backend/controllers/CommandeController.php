@@ -203,15 +203,43 @@
         }
 
 
-        public function addRemise($request){
+        // public function addRemise($request){
+        //     try{
+        //         $param = $request["params"];
+        //         $body = $request=["body"];
+        //         $result = $this->commande_services->addRemise($param[0]);
+        //         $response=[
+        //             "success" => true,
+        //             "numberOfLine" =>null,
+        //             "message" => "get commande by ID",
+        //             "data" => $result,
+        //             "error" => null
+        //         ];
+        //         echo json_encode($response);
+        //         return;
+        //     }catch(Exception $e){
+        //         $response=[
+        //             "success" => false,
+        //             "numberOfLine" => null,
+        //             "message" => $e->getMessage(), 
+        //             "data" => null,
+        //             "error" =>null
+        //         ];
+        //         echo json_encode($response);
+        //         return;
+        //     }
+        // }
+
+
+        //done
+        public function getCommandeArticles($request){
             try{
-                $param = $request["params"];
-                $body = $request=["body"];
-                $result = $this->commande_services->remi($param[0]);
+                $idCommade = intval($request["params"][0]);
+                $result = $this->commande_services->getCommandeArticles($idCommade);
                 $response=[
                     "success" => true,
                     "numberOfLine" =>null,
-                    "message" => "get commande by ID",
+                    "message" => "getting the requested commande articles",
                     "data" => $result,
                     "error" => null
                 ];

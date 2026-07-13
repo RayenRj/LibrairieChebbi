@@ -204,11 +204,39 @@
                 return;
             }
         }
-        //done
+        //done : it usess the body of the api
         public function getClientById($request){
             try{
                 $body = $request["body"];
                 $result = $this->clientServices->getClientById($body["idClient"]);
+                $response = [
+                    "success" => true,
+                    "message" => "Finding Client by id",
+                    "numberOfLine" => null,
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
+
+        // it uses params of url
+        public function getClientByIdentifier($request){
+            try{
+                $params = $request["params"];
+                $result = $this->clientServices->getClientById(intval($params[0]));
                 $response = [
                     "success" => true,
                     "message" => "Finding Client by id",
