@@ -1,12 +1,80 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Détails de la Commande - Chebbi Librairie</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
+    <div class="commandeContainer">
+                                    <div class="topPart">
+                                        <div>
+                                            <div>
+                                                <h4>Commande#<?= $commande["id_commande"] ?></h4>
+                                                <?php if(in_array($commande["statut"],["confirmée","attente"])): ?>
+                                                    <li class="statutExpediee statutCommande">Expediée</li>
+                                                <?php elseif($commande["statut"] == "annulée"): ?>
+                                                    <li class="statutAnnulee statutCommande">Annulée</li>
+                                                <?php elseif($commande["statut"] == "livrée"): ?>
+                                                    <li class="statutLivree statutCommande">Livrée</li>
+                                                <?php endif; ?>
+                                            </div>
+                                            <p>Passé le <?= "$day $month $year" ?> à <?= $time ?></p>
+                                        </div>
+
+                                        <div>
+                                            <p>Total : <span><?= number_format($commande["prix_totale"] , 3 , "," , " ") ?> Dt</span></p>
+                                        </div>
+
+                                    </div>
+
+                                    <?php $liste_article = $services_commande->getCommandeArticles($commande["id_commande"]);?>
+                                    <!-- 1 article  -->
+
+                                
+                                    <div class="listArticles">
+                                        <p>Articles Commandés</p>
+                                        <ul class="articleContainer">
+                                            <?php foreach($liste_article as $article): ?>
+                                                <li>
+                                                    <ul>
+                                                        <li>
+                                                            <img src="<?= $article["image_url"] ?>" alt="Image d'une fourniture scholaire | Librairie chebbi | tunisie">
+                                                            <div class="text">
+                                                                <h5><?= $article["libelle"] ?></h5>
+                                                                <p><?= $article["categorie"] ?>, <?= $article["marque"] ?></p>
+                                                            </div>
+                                                        </li>
+                                                        <li>x<?= $article["quantite"] ?></li>
+                                                        <li><?= number_format(floatval($article["quantite"]) * floatval($article["prix"]) , 3 , "," , " ") ?> Dt</li>
+                                                    </ul>
+                                                </li>
+                                            <?php endforeach; ?>
+
+                                        </ul>
+                                    </div>
+
+                                    <div class="bottomPart">
+                                        <div class="double">
+                                            <h5>Sous-total</h5>
+                                            <p><?= number_format(floatval($commande["prix_totale"]) - 7 , 3 , "," , " ") ?> Dt</p>
+                                        </div>
+                                        <div class="double">
+                                            <h5>Livraison</h5>
+                                            <p>7,000 Dt</p>
+                                        </div>
+                                        <hr>
+                                        <div class="double">
+                                            <h3>Total</h3>
+                                            <h3><?= number_format($commande["prix_totale"] , 3 , "," , " ") ?> Dt</h3>
+                                        </div>
+                                    </div>
+    </div>
     <script src="script.js"></script>
+
 </body>
 </html>

@@ -98,6 +98,14 @@
             $stmt->execute([$totale]);
             return $stmt->fetchAll(PDO::FETCH_BOTH);
         }
+
+
+        public function nbreDeventeParJour(int $jour){
+            $query = 'select count(*) from commande where date_commande between date_format(curdate() - INTERVAL $jour day,"%Y-%m-%d 00:00:00") and date_format(curdate() - INTERVAL 11 $jour,"%Y-%m-%d 23:59:59") ;';
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$jour, $jour]);
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
     }
 
 

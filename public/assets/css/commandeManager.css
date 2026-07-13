@@ -460,7 +460,8 @@ img{
     color: var(--green);
 }
 
-.commandeManagerBottomPart .table-part td:last-child ul a.croit-rouge{
+.commandeManagerBottomPart .table-part td:last-child ul a.croit-rouge,
+.commandeTrashLink{
     background-color: var(--red-glass);
     color: var(--red);  
 }
@@ -525,4 +526,168 @@ img{
     background-color: var(--blue) !important;
     border-color: var(--blue) !important;
     color: white;
+}
+
+
+
+/* ################################################################################### */
+/* ################################################################################### */
+/* ############ Partie eli feha pop up ll donnée ta3 el commande ##################### */
+/* ################################################################################### */
+/* ################################################################################### */
+
+
+/* ######################### */
+/* ######################### */
+/* ######################### */
+/* partie commande container */
+/* ######################### */
+/* ######################### */
+/* ######################### */
+
+
+.commandeContainer{
+    width: 70%;
+    max-width: 700px;
+    background-color: var(--gray-50);
+    display: none;
+    flex-direction: column;
+    gap: 1em;
+    border-radius: 1em;
+    height: fit-content;
+    margin: 4em auto;
+    padding: 3em;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    left: 50%;
+    z-index: 602;
+    transform: translateX(-50%);
+}
+
+
+
+.commandeContainer .topPart{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.commandeContainer .topPart > div:first-child > div{
+    display: flex;
+    gap: 1em;
+    margin-bottom: 0.15em;
+}
+
+.commandeContainer .topPart > div:first-child p{
+    color:var(--gray-500);
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.commandeContainer .topPart > div:last-child p{color: var(--gray-600);}
+.commandeContainer .topPart > div:last-child span{
+    font-weight: bold;
+    color: black;
+    font-size: 15px;
+}
+
+/* parite liste des article  */
+.listArticles{
+    margin-top: 1.5em;
+}
+.listArticles > p {
+    font-size: 13px;
+    color:var(--gray-700);
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+
+.articleContainer li ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.35em;
+    border-radius: 0.5em;
+    border: 1px solid var(--gray-200);
+    background-color: var(--gray-100);
+    padding: 0.5em 2em;
+}
+.articleContainer li ul li{font-size: 13px;font-weight: 500;}
+.articleContainer li ul li:first-of-type {
+    flex-basis: 300px;
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+}
+
+.articleContainer li ul li:first-of-type .text{
+    all: unset;
+}
+
+.articleContainer li ul li:first-of-type img{
+    width: 50px;
+    height: 50px;
+}
+
+.bottomPart .double{
+    display: flex;
+    padding: 0.15em 0.5em;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bottomPart hr{
+    border-color: #eee;
+    height: 2px;
+    margin: 1em auto;
+}
+
+
+
+
+
+ .commandeContainer .statutCommande{
+    font-size: 11px !important;
+    padding: 0 1.25em;
+    border-radius: 1em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ######################### */
+/* ######################### */
+/* ######################### */
+/* reglage coleur statutPart */
+/* ######################### */
+/* ######################### */
+/* ######################### */
+
+.commandeContainer .statutLivree
+{
+    background-color: var(--green-glass) !important;
+    color: var(--green);
+}
+
+.commandeContainer .statutAnnulee{
+    background-color: var(--red-glass);
+    color: var(--red) !important;  
+}
+.commandeContainer .statutExpediee{
+    background-color: var(--blue-glass);
+    color: var(--blue) !important;
+}
+
+
+.commandeContainerOverlay{
+    position: absolute;
+    top:0;
+    left: 0;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    width: 100%;
+    height: 100%;
+    z-index: 601;
+    background-color: #0000002e;
 }

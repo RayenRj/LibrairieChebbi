@@ -44,13 +44,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commandes Manager</title>
+    <title>Commandes Manager | Librairie Chebbi</title>
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         />      
     <link rel="stylesheet" href="../assets/css/commandeManager.css">
     <link rel="stylesheet" href="../assets/css/packManager.css">
+    <link rel="stylesheet" href="../assets/css/bonLivraison.css">
 </head>
 <body>
     <?php include("../includes/header.php"); ?>
@@ -301,7 +302,13 @@
                                 <?php endif; ?>
                                 
                             </td>
-                            <td><p><?= $row["date_commande"]?></p></td>
+                            <td>
+                                <p>
+                                    <?= substr($row["date_commande"] , 0 , strpos($row["date_commande"]," ")+1)?> 
+                                    <br>
+                                    <?= substr($row["date_commande"] , strpos($row["date_commande"]," ")+ 1 )?>
+                                </p>
+                            </td>
                             <td>
                                 <ul>
                                     <?php if($statut == "attente" ): ?>
@@ -312,17 +319,17 @@
                                     <?php if($statut == "livrée"): ?>
                                         <a href="#" class="print" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-print"></i></li></a>
                                         <a href="#" class="eye" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-eye"></i></li></a>
-                                        <a href="#" class="croit-rouge commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
+                                        <a href="#" class="commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
                                     <?php endif; ?>
                                     <?php if($statut == "annulée"): ?>
                                         <a href="#" class="eye" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-eye"></i></li></a> 
-                                        <a href="#" class="croit-rouge commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
+                                        <a href="#" class="commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
                                     <?php endif; ?>
                                     <?php if($statut == "confirmée"): ?>
                                         <a href="#" class="truck" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-truck"></i></li></a>
                                         <a href="#" class="print" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-print"></i></li></a>
                                         <a href="#" class="eye" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-eye"></i></li></a> 
-                                        <a href="#" class="croit-rouge commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
+                                        <a href="#" class="commandeTrashLink" data-id="<?= $row["id_commande"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
                                     <?php endif; ?>
                                     
                                 </ul>
@@ -390,8 +397,85 @@
 
 
             </div>
+
+
+
+
         </section>
     </div>
+        
+    <div class="bonLivraisonContainer" >
+                
+                <!-- <div class="print-actions">
+                    <button class="btn-print" onclick="window.print()">🖨️ Imprimer la Commande</button>
+                </div> -->
+
+                <div class="header-label">
+                    <div>
+                        <h1>Bon de Livraison</h1>
+                        <p>À coller sur le colis</p>
+                    </div>
+                    <div class="text-right">
+                        <strong>N° de Commande :</strong> #CMD-20260709<br>
+                        <strong>Date :</strong> 09 Juillet 2026
+                    </div>
+                </div>
+
+                <div class="address-grid">
+                    <!-- Expéditeur (Commerce) -->
+                    <div class="address-box">
+                        <h3>📦 EXPÉDITEUR (COMMERCE)</h3>
+                        <p>
+                            <strong>Librairie Chebbi</strong><br>
+                            Médina Jadida, Ben Arous<br>
+                            13 Av. de la République, Ben Arous, Tunisie<br>
+                            Tél: +216 22 000 000
+                        </p>
+                    </div>
+                    
+                    <!-- Destinataire (Client) -->
+                    <div class="address-box client">
+                        <h3>👤 DESTINATAIRE (CLIENT)</h3>
+                        <p></p>
+                    </div>
+                </div>
+
+                <!-- Détails des Articles -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Article / Référence</th>
+                            <th class="text-center">Quantité</th>
+                            <th class="text-center">Prix Unitaire</th>
+                            <th class="text-center">Sous-Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <!-- Total -->
+                <div class="total-section">
+                    <div class="total-box">
+                        <p style="margin-top:0;">Frais de livraison: 7.000 TND</p>
+                        <h3>Total à payer : <span>71.500</span> DT</h3>
+                    </div>
+                </div>
+
+    </div>
+
+        <div class="commandeContainerOverlay" hidden></div>
+        
+        <div class="commandeContainer" >
+            <div class="topPart"></div>
+                    
+            <div class="listArticles">
+                <p>Articles Commandés</p>
+                <ul class="articleContainer"></ul>
+            </div>
+
+            <div class="bottomPart"></div>
+        </div>
+  
     <script src="/assets/js/commandeManager.js"></script>
 </body>
 </html>

@@ -183,6 +183,9 @@
             </div>
 
             <div class="bottom-chart">
+
+
+            
                 <div class="pie">
                     <h3>Ventes des packs</h3>
                     <div>
@@ -194,22 +197,7 @@
                             </div>
                         </div>
                         <ul class="legend">
-                                <li>
-                                    <h5>Primaire</h5>
-                                    <p>52% (589)</p>
-                                </li>
-                                <li>
-                                    <h5>Collége</h5>
-                                    <p>52% (589)</p>
-                                </li>
-                                <li>
-                                    <h5>Secondaire</h5>
-                                    <p>52% (589)</p>
-                                </li>
-                                <li>
-                                    <h5>Bac</h5>
-                                    <p>52% (589)</p>
-                                </li>
+
                         </ul>
 
                         

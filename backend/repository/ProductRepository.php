@@ -350,5 +350,24 @@
             return  $stmt->execute($params);
         }
         
+
+
+
+        public function nbreDeventeParJour(int $jour){
+            $query = "select count(*) from commande where date_commande between date_format(curdate() - INTERVAL $jour day,'%Y-%m-%d 00:00:00') and date_format(curdate() - INTERVAL $jour day ,'%Y-%m-%d 23:59:59') ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
+
+
+       public function nombreDeVentePourChaquePack(){
+            $stmt = $this->db->prepare("select `type` , sum(quantite) as `nombreVente`
+                                        from pack p , ligne_commande lc
+                                        where id_pack = id_produit
+                                        group by p.`type`;");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?? null;
+       }
     }
 ?>

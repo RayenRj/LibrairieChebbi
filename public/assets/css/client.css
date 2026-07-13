@@ -477,3 +477,75 @@ body{
     color: var(--blue);
 }
 
+/* ######################### */
+/* ######################### */
+/* ######################### */
+/* reglage partie historique vide */
+/* ######################### */
+/* ######################### */
+/* ######################### */
+
+
+
+.empty-history-container {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 20px;
+    border-radius: 12px;
+    margin: 40px auto;
+    max-width: 500px;
+
+}
+
+        /* Style pour l'icône / logo */
+.empty-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 24px;
+    color: #9ca3af; /* Gris clair */
+}
+
+        /* Style pour le texte principal */
+.empty-text {
+    font-size: 1rem; /* 20px */
+    font-weight: 500;
+    color: #374151; /* Gris foncé */
+    margin-bottom: 30px;
+}
+
+        /* Style pour le bouton */
+.start-shopping-btn {
+    background-color: var(--yellow-dark); /* La couleur que tu as demandée */
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px; /* Bords légèrement arrondis */
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    color: black;
+}
+
+.start-shopping-btn i{
+    font-size: 13px;
+}
+
+        /* Effet au survol du bouton */
+.start-shopping-btn:hover {
+    background-color:   var(--yellow); /* Bleu un peu plus foncé au survol */
+    transform: translateY(-2px); /* Petit effet de soulèvement */
+}
+
+
+.start-shopping-btn:hover > i{
+    position: relative;
+    left: 2px;
+}

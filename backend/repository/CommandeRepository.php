@@ -332,7 +332,7 @@
             $query = "select * from commande where id_commande = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id_commande]);
-            return $stmt->fetch(PDO::FETCH_BOTH);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         public function getCommandeByIdClient(int $idClient) : ?array{
             $query = "select * from commande where id_client = ? ;";

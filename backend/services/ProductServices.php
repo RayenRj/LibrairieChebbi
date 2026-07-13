@@ -9,6 +9,7 @@ include_once(__DIR__ . "/../exception/QuantityException.php");
 include_once(__DIR__ . "/../models/Product.php");
 include_once(__DIR__ . "/../exception/IdentifiantInvalideException.php");
 
+
 class ProductServices{
     private ProductRepository $productRepo;
     public function __construct(){
@@ -175,7 +176,19 @@ class ProductServices{
 
     public function getAllMarque(){return $this->productRepo->getAllMarque();}
     public function getAllCategorie(){return $this->productRepo->getAllMarque();}
+
+
+    public function nombreDeVenteParJour(int $jour){
+        if(!($jour <= 6 && $jour >= 0)){throw new Exception("La valeur de jour doit etre compris entre 1 et 6");}
+        return $this->productRepo->nbreDeventeParJour($jour);
+    }
+
+    public function nombreDeVentePourChaquePack(){
+        return $this->productRepo->nombreDeVentePourChaquePack();
+    }
 }
+
+
 
 
 

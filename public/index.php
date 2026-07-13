@@ -52,6 +52,8 @@ error_reporting(E_ALL);
     $route->add("GET", "/api/articles/ventes/categories" , "ProductController" , "nbreDeVentePourChaqueCategorieCeMois");
     $route->add("GET","/api/products/{id}","ProductController","getProductById");
     $route->add("PATCH","/api/articles/remise/{id}","ProductController","addRemise");
+    $route->add("GET","/api/venteParJour/{id}","ProductController","nombreDeVenteParJour");
+    $route->add("GET","/api/venteParCategorie","ProductController","nombreDeVentePourChaqueCategorie");
 
 
 
@@ -74,8 +76,9 @@ error_reporting(E_ALL);
     $route->add("PATCH","/api/users/deletAdmin/{id}","ClientController","removeAdmin");
     $route->add("DELETE","/api/users/deleteClient/{id}","ClientController","deleteClient");
     $route->add("GET","/api/users", "ClientController" , "getAllUsers");
-    $route->add("GET","/api/users/logout", "ClientController" , "logOut");
     $route->add("GET","/api/users/isClientLoggedIn", "ClientController" , "isClientLoggedIn");
+    $route->add("GET","/api/users/logout", "ClientController" , "logOut");
+    $route->add("GET","/api/users/user/{id}", "ClientController" , "getClientByIdentifier");
 
 
     //=========> commande Routes <=======
@@ -84,6 +87,9 @@ error_reporting(E_ALL);
     $route->add("PATCH" , "/api/commandes/confirme/{id}", "CommandeController","confirmeCommande");
     $route->add("PATCH" , "/api/commandes/annule/{id}", "CommandeController","annuleeCommande");
     $route->add("PATCH" , "/api/commandes/livre/{id}", "CommandeController","livreeCommande");
+    $route->add("PATCH" , "/api/commandes/livre/{id}", "CommandeController","livreeCommande");
+    $route->add("GET" , "/api/commandes/{id}", "CommandeController","getCommandeById");
+    $route->add("GET" , "/api/commandes/{id}/articles", "CommandeController","getCommandeArticles");
 
 
 

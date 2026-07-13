@@ -237,6 +237,58 @@
                 return;
             }  
         }
+        // done
+        public function nombreDeVenteParJour($request){
+            try{
+                $param = $request["params"];
+                $result = $this->productServices->nombreDeVenteParJour(intval($param[0]));
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Deleting product successfully", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }  
+        }
+
+
+        public function nombreDeVentePourChaqueCategorie($request){
+            try{
+                $result = $this->productServices->nombreDeVentePourChaquePack();
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Deleting product successfully", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }  
+        }
 
 }
 

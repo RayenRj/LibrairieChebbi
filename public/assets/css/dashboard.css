@@ -312,6 +312,7 @@ img{
     text-align: center;
     width: fit-content;
     height: fit-content;
+    z-index: 15;
 }
 
 .bottom-chart .pie .legend{
@@ -528,3 +529,9 @@ img{
 /* =============================================== */
 /* =============NE9SA PARTIE DASHBOARD============== */
 /* =============================================== */
+
+
+
+#pie-chart{
+    z-index: 22;
+}
