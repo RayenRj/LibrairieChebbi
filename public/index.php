@@ -75,6 +75,7 @@ error_reporting(E_ALL);
     $route->add("DELETE","/api/users/deleteClient/{id}","ClientController","deleteClient");
     $route->add("GET","/api/users", "ClientController" , "getAllUsers");
     $route->add("GET","/api/users/logout", "ClientController" , "logOut");
+    $route->add("GET","/api/users/isClientLoggedIn", "ClientController" , "isClientLoggedIn");
 
 
     //=========> commande Routes <=======

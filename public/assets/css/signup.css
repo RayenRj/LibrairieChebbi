@@ -33,14 +33,21 @@
     --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
     --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
     --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
 
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus{
+    -webkit-box-shadow: 0 0 0px 100px white inset;
 }
 
 .before-signup{
     position: absolute;
     top:0;
     left: 0;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     width: 100%;
     height: 100%;
     z-index: 601;

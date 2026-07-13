@@ -1,7 +1,6 @@
 let close = document.querySelector(".dismiss.button");
 let popup = document.querySelector("div.popup");
 let confimerCommandeButton = document.querySelector(".btn-confirmation");
-let cartCount = document.querySelector(".cartCount");
 let delegationContainer = document.querySelector("#delegation");
 let gouvernoratContainer = document.querySelector("#gouvernorat");
 

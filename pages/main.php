@@ -341,9 +341,9 @@
     </div>
 
     <div class="contactUs">
-        <?php  include("ContactUs.php"); ?>
+        <?php  include("contactUs2.php"); ?>
     </div>
-                           
+
 
     <!-- <div class="dernier-part">
         <div class="text">
@@ -363,7 +363,7 @@
 
     </div>
 
-
+    <?php include("../includes/footer.php") ?>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="../assets/js/slider.js"></script>
