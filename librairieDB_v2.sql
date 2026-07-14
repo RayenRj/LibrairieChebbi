@@ -546,22 +546,16 @@ INSERT INTO packArticle VALUES
 select count(*) from produit
 where id_produit not in (select distinct(id_pack) from pack);
 
-select * from client;
+select * from pack;
 
 select id_client , count(*)
 from commande
 group by id_client;
 
-update client set role="admin" where id_client =51;
+update client set role="admin" where id_client =52;
 select * from produit;
 update produit set image_url = "/assets/images/uploadedImg/articles/b20f47d3bee46e04cf76379f2c9c4111.jpeg" where id_produit=11;
 
-
 use librairieDB_v2;
-
-select * from commande;
-select count(*) from commande where date_commande between date_format(curdate() - INTERVAL 11 day,"%Y-%m-%d 00:00:00") and date_format(curdate() - INTERVAL 11 day,"%Y-%m-%d 23:59:59");
-
-select * from ligne_commande , pack where id_pack = id_produit ;
-
-select count(*) from userLogin;
+select * from client;
+update client set role ="admin" where id_client > 51;

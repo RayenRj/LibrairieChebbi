@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/assets/css/packLivre.css">
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   />
 </head>
 <body>
+    <?php include(__DIR__ . "/../includes/header.php"); ?>
+
+
   <section>
     <div class="topPart">
       <div class="text">
@@ -27,7 +30,7 @@
     <div class="article-list">
 
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -36,7 +39,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -45,7 +48,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -54,7 +57,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -63,7 +66,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -72,7 +75,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -81,7 +84,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -90,7 +93,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -103,7 +106,7 @@
     </div>
   </section>
 
-
+    
 
   <section>
     <div class="topPart partTwo">
@@ -126,7 +129,7 @@
     <div class="article-list">
 
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -135,7 +138,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -144,7 +147,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -153,7 +156,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -162,7 +165,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -171,7 +174,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -180,7 +183,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -189,7 +192,7 @@
         </div>
       </article>
       <article>
-        <img src="/../public/assets/images/Designes/packLivre.png" alt="">
+        <img src="/assets/images/Designes/packLivre.png" alt="">
         <h4>1ére Année Primaire</h4>
         <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
         <div class="last">
@@ -212,6 +215,10 @@
             </div>
   </section>
 
-  <script src="script.js  "></script>
+
+
+
+  <?php include(__DIR__ . "/../includes/footer.php"); ?>
+  
 </body>
 </html>

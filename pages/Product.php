@@ -80,7 +80,7 @@
                     <p class="n-review">(24 Reviews)</p>
                 </div>
                 <div class="prix">
-                    <h3><?= $product->getPrix() ?> </h3>
+                    <h3><?= number_format($product->getPrix() , 3 , "." , " ") ?> </h3>
                     <p>DT</p>
                 </div>
                 <p class="description">
