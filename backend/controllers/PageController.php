@@ -21,6 +21,8 @@
         public function test(){require(PATH . "tes.php");}
         public function productPack(){require(PATH . "product_pack.php");}
         public function clientPage(){require(PATH . "PageClient.php");}
+        public function packLivrePage(){require(PATH . "PackLivre.php");}
+        public function ParascolairePage(){require(PATH . "Parascolaire.php");}
 
     }
 

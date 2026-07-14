@@ -74,7 +74,8 @@ window.addEventListener("load",async function name(params) {
   let result2 = await response2.json()
   let data2 = result2.data;
   var html ="";
-  if (data2!== null){
+  
+  if (data2!== null && data2.length!==0){
     // le cas ou il ya des vente
     let pourcentage =[];
     let somme= 0;
@@ -112,6 +113,7 @@ window.addEventListener("load",async function name(params) {
     }
   }
 
+  console.log("data2:" ,data2)
  legendVentePack.innerHTML = html;
 
   let doughnut = new Chart(document.querySelector("#pie-chart"),{
