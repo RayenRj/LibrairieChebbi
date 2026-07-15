@@ -559,3 +559,135 @@ update produit set image_url = "/assets/images/uploadedImg/articles/b20f47d3bee4
 use librairieDB_v2;
 select * from client;
 update client set role ="admin" where id_client > 51;
+
+
+
+
+
+
+-- ==========================================================
+-- TABLE PRODUIT
+-- ==========================================================
+
+CREATE TABLE produit (
+    id_produit INT AUTO_INCREMENT PRIMARY KEY,
+
+    code_barre VARCHAR(50) UNIQUE,
+    libelle VARCHAR(255) NOT NULL,
+
+    prix DECIMAL(10,2) NOT NULL,
+    remise DECIMAL(5,2) DEFAULT 0,
+
+    image_url VARCHAR(255),
+
+    description TEXT,
+
+    rating DECIMAL(3,2) DEFAULT 0,
+    nombre_rater INT DEFAULT 0,
+
+    categorie VARCHAR(100),
+    marque VARCHAR(100),
+
+    quantite_stock INT DEFAULT 0,
+
+    date_ajout DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+-- ==========================================================
+-- TABLE SAC
+-- ==========================================================
+
+CREATE TABLE sac (
+
+    id_produit INT PRIMARY KEY,
+
+    genre ENUM('Garçon','Fille','Mixte'),
+
+    niveau_scolaire ENUM(
+        'Préscolaire',
+        '1ère Primaire',
+        '2ème Primaire',
+        '3ème Primaire',
+        '4ème Primaire',
+        '5ème Primaire',
+        '6ème Primaire',
+        '7ème Base',
+        '8ème Base',
+        '9ème Base',
+        '1ère Secondaire',
+        '2ème Secondaire',
+        '3ème Secondaire',
+        '4ème Secondaire'
+    ),
+
+    couleur VARCHAR(50),
+
+    matiere VARCHAR(100),
+
+    roulettes BOOLEAN DEFAULT FALSE,
+
+    nombre_compartiments INT,
+
+    CONSTRAINT fk_sac_produit
+        FOREIGN KEY (id_produit)
+        REFERENCES produit(id_produit)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+
+-- ==========================================================
+-- TABLE LIVRE
+-- ==========================================================
+
+CREATE TABLE livre (
+
+    id_produit INT PRIMARY KEY,
+
+    niveau_scolaire ENUM(
+        'Préscolaire',
+        '1ère Primaire',
+        '2ème Primaire',
+        '3ème Primaire',
+        '4ème Primaire',
+        '5ème Primaire',
+        '6ème Primaire',
+        '7ème Base',
+        '8ème Base',
+        '9ème Base',
+        '1ère Secondaire',
+        '2ème Secondaire',
+        '3ème Secondaire',
+        '4ème Secondaire'
+    ),
+
+    CONSTRAINT fk_livre_produit
+        FOREIGN KEY (id_produit)
+        REFERENCES produit(id_produit)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+
+-- ==========================================================
+-- TABLE PARASCOLAIRE
+-- ==========================================================
+
+CREATE TABLE parascolaire (
+
+    id_produit INT PRIMARY KEY,
+
+    type_parascolaire VARCHAR(100),
+
+    collection VARCHAR(100),
+
+    CONSTRAINT fk_parascolaire_livre
+        FOREIGN KEY (id_produit)
+        REFERENCES livre(id_produit)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
