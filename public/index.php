@@ -41,8 +41,8 @@ error_reporting(E_ALL);
     $route->add("GET", "/test" , "PageController","test");
     $route->add("GET", "/packs/pack" , "PageController","productPack");
     $route->add("GET", "/client" , "PageController","clientPage");
-    $route->add("GET", "/pack/livres" , "PageController","packLivrePage");
-    $route->add("GET", "/pack/livres/parascolaire" , "PageController","ParascolairePage");
+    $route->add("GET", "/packs/livres" , "PageController","packLivrePage");
+    $route->add("GET", "/packs/livres/parascolaire" , "PageController","ParascolairePage");
 
     //=========> Product Routes <=======
     $route->add("POST","/api/articles","ProductController","addProduct");
