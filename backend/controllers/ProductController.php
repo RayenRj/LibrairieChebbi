@@ -290,6 +290,32 @@
             }  
         }
 
+        public function searchBar($request){
+            try{
+                $data = $request["body"]["data"];
+                $result = $this->productServices->searchBar($data);
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Searching", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
+
 }
 
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Parascolaire | Librairie Chebbi</title>
   <link rel="stylesheet" href="/assets/css/packLivre.css">
   <link
     rel="stylesheet"
@@ -18,16 +18,15 @@
   <section>
     <div class="topPart partTwo">
       <div class="text">
-        <h2>Tous les livres</h2>
-        <p>Découvrez notre collection compléte de livres scolaires .</p>
+        <h2>Tous les livres Parascolaire</h2>
+        <p>Découvrez notre collection compléte de livres parascolaires .</p>
       </div>
       <div>
         <input type="text" name="libelle" id="" placeholder="libellé du livre...">
+        <!-- remplissage avec js -->
+        <select name="anneeScolaire" class="anneeScolaire"></select>
         <select name="anneeScolaire" id="">
-          <option value="">-- Sélectionnez une année --</option>
-        </select>
-        <select name="anneeScolaire" id="">
-          <option value="">-- Sélectionnez une année --</option>
+          <option value="">-- Sélectionnez La collection --</option>
         </select>
         <button type="submit">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -129,6 +128,6 @@
 
 
   <?php include(__DIR__ . "/../includes/footer.php"); ?>
-  
+  <script src="/assets/js/packLivre.js"></script>
 </body>
 </html>

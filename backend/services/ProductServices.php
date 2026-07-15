@@ -186,6 +186,11 @@ class ProductServices{
     public function nombreDeVentePourChaquePack(){
         return $this->productRepo->nombreDeVentePourChaquePack();
     }
+
+
+    public function searchBar(string $data){
+        return $this->productRepo->searchBar($data);
+    }
 }
 
 
