@@ -124,7 +124,7 @@ section .topPart select{
 /* styling article */
 section .article-list{
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(275px , 1fr));
+    grid-template-columns: repeat(auto-fill,minmax(250px , 1fr));
     gap: 2em;
     margin-top: 2em;
 }
@@ -152,19 +152,19 @@ article:hover{
 
 section .article-list article img{
     width: 100%;
-    height: 300px;
+    height: 250px;
     object-fit: contain;
     border-radius: 1em;
     aspect-ratio: 1/1;
 }
 
 section .article-list article h4{
-    font-size: 1.25rem;
-    margin: 1.55em auto 0;
+    font-size: 1.15rem;
+    margin: 1em auto 0;
     width: 90%;
 }
 .nombreDisponible{
-    font-size: 0.9em;
+    font-size: 0.85em;
     margin: 0.25em auto 0;
     width: 90%;
     display: flex;
@@ -181,8 +181,8 @@ article .last{
 }
 
 article .prix{
-    font-weight: 600;
-    font-size: 1.25em;
+    font-weight: 700;
+    font-size: 1.2em;
 }
 
 article button{
