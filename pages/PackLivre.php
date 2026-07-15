@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Livre scolaire | Librairie Chebbi</title>
   <link rel="stylesheet" href="/assets/css/packLivre.css">
   <link
     rel="stylesheet"
@@ -21,9 +21,8 @@
         <p>Choisissez l'année scolaire pour découvrir les packs de livres correspondants.</p>
       </div>
       <div>
-        <select name="anneeScolaire" id="">
-          <option value="">-- Sélectionnez une année --</option>
-        </select>
+        <select name="anneeScolaire" class="anneeScolaire"></select>
+        <!-- remplissage avec js -->
       </div>
     </div>
 
@@ -116,7 +115,7 @@
       </div>
       <div>
         <input type="text" name="libelle" id="" placeholder="libellé du livre...">
-        <select name="anneeScolaire" id="">
+        <select name="anneeScolaire" class="anneeScolaire" >
           <option value="">-- Sélectionnez une année --</option>
         </select>
         <button type="submit">
@@ -219,6 +218,6 @@
 
 
   <?php include(__DIR__ . "/../includes/footer.php"); ?>
-  
+  <script src="/assets/js/packLivre.js"></script>
 </body>
 </html>

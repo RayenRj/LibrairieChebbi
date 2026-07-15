@@ -369,5 +369,11 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?? null;
        }
+
+
+
+       public function searchBar(string $data){
+        $query = "";
+       }
     }
 ?>

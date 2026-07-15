@@ -91,10 +91,10 @@ section .topPart{
 
 section .topPart h2{
     position: relative;
-    font-size: 2em;
+    font-size: 1.6em;
 }
 section .topPart p{
-    font-size: 1em;
+    font-size: 0.885em;
 }
 section .topPart h2::before{
     position: absolute;
@@ -114,8 +114,8 @@ section .topPart select{
     font-weight: 500;
     border: 2px solid #eee;
     border-radius: 0.25em;
-    font-size: 1em;
-    height: 45px;
+    font-size: 14px;
+    height: 40px;
 }
 
 
@@ -217,7 +217,7 @@ section .partTwo button[type="submit"]{
     cursor: pointer;
     background-color: var(--blue);
     color: white;
-    height: 45px;
+    height: 40px;
     width: fit-content;
     min-width: 150px;
 
@@ -235,9 +235,10 @@ section .partTwo input[type="text"]{
     border-radius: 0.5em;
     border: 2px solid #eee;
     outline: none;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     padding: 10px 15px;
+    height: 40px;
 }
 
 section .partTwo div:last-child{
