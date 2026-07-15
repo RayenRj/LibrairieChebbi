@@ -6,14 +6,14 @@
     <title>Document</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
 </head>
 <body>
     <footer>
         <div class="container-footer">
             <div class="part-one">
                 <div class="colonne">
-                    <img src="../assets/images/footer/img1.png" alt="">
+                    <img src="/assets/images/footer/img1.png" alt="">
                     <p>Notre librairie en ligne spécialisée dans la fourniture scolaire et de bureau .
                         Qualité, choix et prix au rendez-vous!
                     </p>
@@ -119,14 +119,14 @@
             <hr>
             <div class="part-two">
                 <div class="image">
-                    <img src="../assets/images/footer/img2.png" alt="">
+                    <img src="/assets/images/footer/img2.png" alt="">
                 </div>
                 <div class="textContainer">
                     <h3>&copy; Librairie Chebbi . Tous droits réservés.  </h3>
                     <p>Concu avec ❤️ en Tunisie</p>
                 </div>
                 <div class="image">
-                    <img src="../assets/images/footer/img2.png" alt="">
+                    <img src="/assets/images/footer/img2.png" alt="">
                 </div>
             </div>
 

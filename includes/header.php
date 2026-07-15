@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Librairie Chebbi</title>
-    <link rel="icon" type="image/png" href="../assets/images/logo/logo1.png">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/signup.css">
-    <link rel="stylesheet" href="../assets/css/signin.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="/assets/css/signup.css">
+    <link rel="stylesheet" href="/assets/css/signin.css">
 </head>
 <body>
     
@@ -21,7 +21,7 @@
     <header>
         <div class="left-part">
             <div class="logo">
-                <img src="../assets/images/logo/logo2.png"  alt="logo">
+                <img src="/assets/images/logo/logo2.png"  alt="logo">
             </div>  
             <div class="categories">
                 <button>📦 Categories ▾</button>
@@ -29,7 +29,8 @@
                     <li><a href="/main">⭐ <span>main</span></a></li>
                     <li><a href="/products">🛍️ <span>All Products</span></a></li>
                     <li><a href="/packs">📦 <span>Nos Packs</span></a></li>
-                    <li><a href="/products">📚 <span>Books</span></a></li>
+                    <li><a href="/packs/livres">📚 <span>Livres</span></a></li>
+                    <li><a href="/packs/livres/parascolaire">📚 <span>Parascolaires</span></a></li>
                     <li><a href="/collections">🎒 <span>School Bags</span></a></li>
                     <li><a href="/products">✏️ <span>Writing Tools</span></a></li>
                     <li><a href="/products">📐 <span>Geometry Tools</span></a></li>
@@ -205,8 +206,8 @@
         
     </div>
     <!--end of sign in part-->
-    <script src="../assets/js/header_script.js"></script>
-    <script src="../assets/js/signUp.js"></script>
+    <script src="/assets/js/header_script.js"></script>
+    <script src="/assets/js/signUp.js"></script>
     <script src="/assets/js/signIn.js"></script>
 </body>
 </html>
