@@ -12,6 +12,7 @@
 </head>
 <body>
     <?php include(__DIR__ . "/../includes/header.php"); ?>
+
     
 
   <section>
@@ -22,6 +23,9 @@
       </div>
       <div>
         <input type="text" name="libelle" id="" placeholder="libellé du livre...">
+        <select name="anneeScolaire" id="">
+          <option value="">-- Sélectionnez une année --</option>
+        </select>
         <select name="anneeScolaire" id="">
           <option value="">-- Sélectionnez une année --</option>
         </select>
@@ -120,6 +124,8 @@
                 <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
             </div>
   </section>
+
+
 
 
   <?php include(__DIR__ . "/../includes/footer.php"); ?>
