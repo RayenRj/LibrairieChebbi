@@ -155,7 +155,7 @@ class ProductServices{
     }
     //done
     public function stockFaible(){
-        return $this->productRepo->stockElevee();
+        return $this->productRepo->stockFaible();
     }
     //done
     public function nombreDeVenteParMois(int $month , int $year){

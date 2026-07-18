@@ -1,5 +1,11 @@
 let anneeScolaireSelect = document.querySelectorAll(".anneeScolaire")
-
+let  addToCartButton = document.querySelectorAll("article button");
+function getLocalStorageArticlesList(){
+    let cartTableString = localStorage.getItem("cartTable");
+    var cartTable = [];
+    if(cartTableString !== null){cartTable = JSON.parse(cartTableString)}
+    return cartTable
+}
 const sectionsEtude = [
     // Primaire
     { value: "1-primaire", label: "1ère année primaire" },
@@ -48,4 +54,42 @@ anneeScolaireSelect.forEach(select =>{
         html +=  `<option value="${obj["value"]}">${obj["label"]}</option>`
     }
     select.innerHTML = html;
+})
+
+///////////////////////////////////
+///////////////////////////////////
+///////////////////////////////////
+///////// reglage ll button eli fl pack article /////////
+///////////////////////////////////
+///////////////////////////////////
+///////////////////////////////////
+//done
+addToCartButton.forEach(button =>{
+    button.addEventListener("click",async function(event){
+        event.preventDefault();
+        let produitId = button.dataset.idproduit
+        let table = getLocalStorageArticlesList();
+        if(table == [] ||table == null){
+            localStorage.setItem("cartTable", JSON.stringify({
+                idproduit : produitId,
+                quantity : 1
+            }))
+        }else{
+            for(let i=0 ; i<table.length ; i++){
+                if(table[i].idproduit == produitId){
+                    table[i].quantity += 1;
+                }
+                localStorage.setItem("cartTable" , JSON.stringify(table));
+                return;
+            }
+            table.push({
+                idproduit: produitId,
+                quantity:1
+            })
+            localStorage.setItem("cartTable" , JSON.stringify(table));
+            return;
+        }
+
+        
+    })
 })

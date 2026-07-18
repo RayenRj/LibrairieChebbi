@@ -79,7 +79,7 @@ window.addEventListener("load",async function(){
     let beforeLast_tr = `
                     <tr>
                         <td colspan="4"  class="total-payer">Total a payer</td>
-                        <td id="totalAmount">${totale}dt</td>
+                        <td id="totalAmount">${totale.toFixed(3)}dt</td>
                         <td></td>
                     </tr>
     `
