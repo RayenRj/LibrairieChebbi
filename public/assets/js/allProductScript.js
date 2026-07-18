@@ -1,6 +1,6 @@
 let addCartButtonList = document.querySelectorAll(".addCartButton");
 let articleContainer = document.querySelector(".articles")
-
+let emptyHeart = document.querySelectorAll(".fa-regular.fa-heart")
 
 function getLocalStorageArticlesList(){
     let cartTableString = localStorage.getItem("cartTable");
@@ -46,6 +46,30 @@ addCartButtonList.forEach(button => {
         )
     })
 })
+
+console.log(emptyHeart)
+emptyHeart.forEach(heart =>{
+    heart.addEventListener("mouseover", _ =>{
+        console.log(heart)
+        heart.classList.remove("fa-regular");
+        heart.classList.add("fa-solid")
+        heart.style.color = "red"
+    });
+
+    heart.addEventListener("mouseout",_=>{
+        heart.classList.add("fa-regular");
+        heart.classList.remove("fa-solid")
+        heart.style.color = "";
+    });
+
+    heart.addEventListener("click",(event)=>{
+        event.preventDefault();
+        heart.classList.toggle("fa-regular")
+        heart.classList.toggle("fa-solid")
+    })
+})
+
+
 
 
 

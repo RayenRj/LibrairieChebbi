@@ -496,13 +496,15 @@ INSERT INTO userLogin (id_client, loginAt) VALUES (20, '2026-09-21 15:40:00');
 -- ############################################################################################
 -- Vérifications utiles (reprises du script de base)
 -- ############################################################################################
-update client set role="admin" where id_client =52;
+update client set role="admin" where id_client =21;
 use librairieDB_v2;
 -- drop database librairieDB_v2;
 
 
 
-select * from client
+select * from produit;
+
+select count(*) from produit where quantite_stock between 6 and 20;
 
 
 

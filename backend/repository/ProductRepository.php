@@ -40,13 +40,13 @@
             return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
         public function stockMoyen(){
-            $query = "select count(*) from {$this->tName} where quantite_stock <= 20 and quantite_stock > 5 ;" ;
+            $query = "select count(*) from {$this->tName} where quantite_stock between 6 and 20;" ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
         public function stockFaible(){
-            $query = "select count(*) from {$this->tName} where quantite_stock > 1 and quantite_stock <= 5;" ;
+            $query = "select count(*) from {$this->tName} where quantite_stock between 1 and 5;" ;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_NUM)[0];
@@ -371,9 +371,53 @@
        }
 
 
-
+        // partie search bar : ne9sa el partie eli feha les sac wl7ajet lokhrin
        public function searchBar(string $data){
-        $query = "";
+        $query = "  SELECT * from produit 
+                    where id_produit like ? or libelle like ? or prix like ? or description like ? or categorie like ? or marque like ? ";
+
+        $stmt = $this->db->prepare("$query");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+       }
+
+        // teb3in table packLive and parascolaire
+       public function findPackLivre(int $limit , int $offset){
+        $query = "select * from produit p , pack pa where id_produit = id_pack and type='livre' Limit $limit offset $offset";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+       }
+
+       public function findLivreScolaire(string $libelle , string $niveauScolaire , int $limit , int $offset){
+        $query = "SELECT * from livre l , produit p where p.id_produit = l.id_produit and libelle like ? and niveau_scolaire = ? LIMIT $limit offset $offset ;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(["%$libelle%" , $niveauScolaire]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+       }
+       public function numberOfLineOffindLivreScolaire(string $libelle, string $niveauScolaire , int $limit , int $offset){
+        $query = "SELECT count(*) from livre l , produit p where p.id_produit = l.id_produit and libelle like ? and niveau_scolaire = ? ;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(["%$libelle%", $niveauScolaire]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+       }
+
+
+       public function findParascolaire(string $libelle, string $niveauScolaire , string $collection , int $limit , int $offset){
+        $query = "SELECT * from parascolaire p , livre l , produit pr 
+                    where p.id_produit = l.id_produit and p.id_produit = pr.id_produit
+                    and libelle like ? and niveau_scolaire = ? and collection= ? LIMIT $limit OFFSET $offset ;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(["%$libelle%" , $niveauScolaire , $collection ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+       }
+       public function numberOfLineFindParascolaire(string $libelle, string $niveauScolaire , string $collection){
+        $query = "SELECT count(*) from parascolaire p , livre l , produit pr 
+                    where p.id_produit = l.id_produit and p.id_produit = pr.id_produit
+                    and libelle like ? and niveau_scolaire = ? and collection= ? ;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(["%$libelle%" , $niveauScolaire , $collection ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
        }
     }
 ?>
