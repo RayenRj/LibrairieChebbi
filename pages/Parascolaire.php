@@ -1,3 +1,42 @@
+<?php
+  require_once(__DIR__ . "/../backend/services/ProductServices.php");
+  $service = new ProductServices();
+
+
+
+  $libelle = isset($_GET["libelle"]) ? $_GET["libelle"] : "";
+  $niveau = isset($_GET["niveau"]) ? $_GET["niveau"] : "";
+  $collection = isset($_GET["collection"]) ? $_GET["collection"] : "";
+  $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+  $limit = isset($_GET["limit"]) ? $_GET["limit"] : 12;
+  
+
+  $liste_parascolaire = $service->findParascolaire($libelle , $niveau ,$collection , $limit , $page);
+  
+  $number_of_line = $service->numberOfLineFindParascolaire($libelle ,$niveau , $collection);
+
+
+
+    $nombre_totale_page = ceil($nombre_row_totale / $limit);
+    function calculDePourcentage($currentMonthValue , $lastMonthValue){
+        $x = $currentMonthValue - $lastMonthValue;
+        if($lastMonthValue==0){return 100;} 
+        return ($x * 100)/$lastMonthValue;
+    }
+
+    // getting the query element chaque fois
+    $query_array= [];
+    foreach($_GET as $key=>$val){
+        if($key !== "page")
+        $query_array[] = "$key=$val";
+        
+    } 
+    $query_string = implode("&", $query_array) ?? "";
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

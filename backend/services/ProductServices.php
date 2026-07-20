@@ -191,6 +191,16 @@ class ProductServices{
     public function searchBar(string $data){
         return $this->productRepo->searchBar($data);
     }
+
+
+    public function findParascolaire(string $libelle, string $niveauScolaire , string $collection , int $limit , int $page){
+        $offset =($page - 1) * $limit;
+        return $this->productRepo->findParascolaire($libelle , $niveauScolaire , $collection , $limit,$offset);
+    }
+
+    public function numberOfLineFindParascolaire(string $libelle, string $niveauScolaire , string $collection){
+        return $this->productRepo->numberOfLineFindParascolaire( $libelle,  $niveauScolaire , $collection);
+    }
 }
 
 

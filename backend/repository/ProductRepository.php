@@ -405,19 +405,67 @@
 
        public function findParascolaire(string $libelle, string $niveauScolaire , string $collection , int $limit , int $offset){
         $query = "SELECT * from parascolaire p , livre l , produit pr 
-                    where p.id_produit = l.id_produit and p.id_produit = pr.id_produit
-                    and libelle like ? and niveau_scolaire = ? and collection= ? LIMIT $limit OFFSET $offset ;";
+                    where p.id_produit = l.id_produit and p.id_produit = pr.id_produit";
+        $params = [];
+        $query_data = [];
+        if(!empty($libelle)){
+            $query_data[] = "libelle like ?";
+            $params[] = "%$libelle%";
+        }
+
+        if(!empty($niveauScolaire)){
+            $query_data[] = "niveau_scolaire = ?";
+            $params[] = $niveauScolaire;
+        }
+        if(!empty($collection)){
+            $query_data[] = "collection = ?";
+            $params[] = $collection;
+        }
+
+        if(empty($query_data)){
+            $query .= " LIMIT $limit offset $offset";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+
+        $query .= " AND " . implode(" AND " , $query_data) . " LIMIT $limit offset $offset";
         $stmt = $this->db->prepare($query);
-        $stmt->execute(["%$libelle%" , $niveauScolaire , $collection ]);
+        $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
        }
+       
        public function numberOfLineFindParascolaire(string $libelle, string $niveauScolaire , string $collection){
         $query = "SELECT count(*) from parascolaire p , livre l , produit pr 
-                    where p.id_produit = l.id_produit and p.id_produit = pr.id_produit
-                    and libelle like ? and niveau_scolaire = ? and collection= ? ;";
+                    where p.id_produit = l.id_produit and p.id_produit = pr.id_produit";
+        $params = [];
+        $query_data = [];
+        if(!empty($libelle)){
+            $query_data[] = "libelle like ?";
+            $params[] = "%$libelle%";
+        }
+
+        if(!empty($niveauScolaire)){
+            $query_data[] = "niveau_scolaire = ?";
+            $params[] = $niveauScolaire;
+        }
+        if(!empty($collection)){
+            $query_data[] = "collection = ?";
+            $params[] = $collection;
+        }
+
+        if(empty($query_data)){
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
+        
+
+        $query .= " AND " . implode(" AND " , $query_data) ;
         $stmt = $this->db->prepare($query);
-        $stmt->execute(["%$libelle%" , $niveauScolaire , $collection ]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_NUM)[0];
        }
     }
 ?>
