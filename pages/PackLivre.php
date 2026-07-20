@@ -2,11 +2,6 @@
   include_once(__DIR__ . "/../backend/services/ProductServices.php");
   $service_product = new ProductServices();
 
-  if(!isset($_SESSION["userId"])){
-    header("Location: /main");
-    exit;
-  }
-
   // Information : ne9sa torbet partie el repository bl services w t implementi el be9i fl php
 
 
