@@ -8,21 +8,15 @@
   $niveau = isset($_GET["niveau"]) ? $_GET["niveau"] : "";
   $collection = isset($_GET["collection"]) ? $_GET["collection"] : "";
   $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-  $limit = isset($_GET["limit"]) ? $_GET["limit"] : 12;
+  $limit = isset($_GET["limit"]) ? $_GET["limit"] : 16;
   
 
   $liste_parascolaire = $service->findParascolaire($libelle , $niveau ,$collection , $limit , $page);
   
-  $number_of_line = $service->numberOfLineFindParascolaire($libelle ,$niveau , $collection);
-
-
+  $nombre_row_totale = $service->numberOfLineFindParascolaire($libelle ,$niveau , $collection);
 
     $nombre_totale_page = ceil($nombre_row_totale / $limit);
-    function calculDePourcentage($currentMonthValue , $lastMonthValue){
-        $x = $currentMonthValue - $lastMonthValue;
-        if($lastMonthValue==0){return 100;} 
-        return ($x * 100)/$lastMonthValue;
-    }
+
 
     // getting the query element chaque fois
     $query_array= [];
@@ -55,112 +49,91 @@
     
 
   <section>
-    <div class="topPart partTwo">
-      <div class="text">
-        <h2>Tous les livres Parascolaire</h2>
-        <p>Découvrez notre collection compléte de livres parascolaires .</p>
-      </div>
-      <div>
-        <input type="text" name="libelle" id="" placeholder="libellé du livre...">
-        <!-- remplissage avec js -->
-        <select name="anneeScolaire" class="anneeScolaire"></select>
-        <select name="anneeScolaire" id="">
-          <option value="">-- Sélectionnez La collection --</option>
-        </select>
-        <button type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            Rechercher
-        </button>
-      </div>
+    <form action="" id="formParascolaire">
+      <div class="topPart partTwo">
+        <div class="text">
+          <h2>Tous les livres Parascolaire</h2>
+          <p>Découvrez notre collection compléte de livres parascolaires .</p>
+        </div>
+        <div>
+          <input type="text" name="libelle" id="" placeholder="libellé du livre..." value="<?= $libelle ?>">
+          <!-- remplissage avec js -->
+          <select name="anneeScolaire" class="anneeScolaire"></select>
+          <select name="collection" id="collection_parascolaire">
+              <option value="">-- Choisir une collection --</option>
+          </select>
+          <button type="submit" class="submitButton">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              Rechercher
+          </button>
+        </div>
+      </form>
     </div>
 
     <div class="article-list">
-
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      
+      <?php foreach($liste_parascolaire as $parascolaire): ?>
+        <article>
+          <a href="/products/product?idproduit=<?= $parascolaire["id_produit"] ?>">
+            <img src="<?= $parascolaire["image_url"] ?>" alt="">
+            <h4><?= $parascolaire["libelle"] ?></h4>
+            <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $parascolaire["quantite_stock"] ?> Packs disponibles</p>
+            <div class="last">
+              <p class="prix"><?= number_format($parascolaire["prix"], 3 , "," ," ") ?> DT</p>
+              <button type="button" data-idproduit="<?= $parascolaire["id_produit"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
+            </div>
+          </a>
+        </article>
+      <?php endforeach; ?>
       
     </div>
-            <div class="pagination">
-                <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
-                <a href="#" class="pagination-selected">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#" id="three-dots">...</a>
-                <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
-            </div>
+
+    
+
+
+
+    <!-- partie eli feha pagination -->
+                <div class="bottom">
+                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min($page * $limit  , $nombre_row_totale) ?> sur <?= $nombre_row_totale ?> commandes</p>
+                    <div class="pagination">
+                        <!-- before -->
+                        <?php if($page > 1) : ?>
+                            <a  href="/packs/livres/parascolaire?page=<?= $page - 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php else : ?>
+                            <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php endif; ?>
+
+
+
+                        <?php if($page> 3):?>
+                            <a href="#" id="three-dots">...</a>
+                        <?php endif; ?>
+
+
+                        <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
+                            <a href="/packs/livres/parascolaire?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#"><?= $i ?></a>
+                        <?php endfor; ?>
+
+                        <!-- current page -->
+                        <a href="#" class="pagination-selected"><?= $page ?></a>
+                        <?php for($i=$page +1  ; $i <= min($page + 2 , $nombre_totale_page) ; $i++):?>
+                            <a href="/packs/livres/parascolaire?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#"><?= $i ?></a>
+                        <?php endfor; ?> 
+                        
+                        <!-- three dots after -->
+                        <?php if(($nombre_totale_page - $page)> 2): ?>
+                            <a href="#" id="three-dots" data-value = <?= $i ?>>...</a>
+                        <?php endif; ?>
+
+                        <!-- after -->
+                        <?php if($page < $nombre_totale_page) : ?>
+                            <a href="/packs/livres/parascolaire?page=<?= $page + 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php else : ?>
+                             <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
   </section>
 
 

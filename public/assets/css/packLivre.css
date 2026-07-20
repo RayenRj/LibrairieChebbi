@@ -129,9 +129,9 @@ section .article-list{
     margin-top: 2em;
 }
 
-
-section .article-list article{
+section .article-list article a{
     /* border: 2px solid var(--gray-300); */
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -144,18 +144,20 @@ section .article-list article{
     cursor: pointer;
 }
 
-article:hover{
+article:hover > a{
     transform: translateY(-6px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 
 section .article-list article img{
-    width: 100%;
-    height: 250px;
+    width: 90%;
+    max-height: 175px;
     object-fit: contain;
     border-radius: 1em;
     aspect-ratio: 1/1;
+    margin: auto;
+    margin-bottom: 1em;
 }
 
 section .article-list article h4{

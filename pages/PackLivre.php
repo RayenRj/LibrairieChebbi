@@ -39,76 +39,70 @@
     <div class="article-list">
 
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </article>
-      <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       
       
@@ -138,78 +132,94 @@
     <div class="article-list">
 
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
       <article>
-        <img src="/assets/images/Designes/packLivre.png" alt="">
-        <h4>1ére Année Primaire</h4>
-        <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
-        <div class="last">
-          <p class="prix">3.500 DT</p>
-          <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <a href="">
+          <img src="/assets/images/Designes/packLivre.png" alt="">
+          <h4>1ére Année Primaire</h4>
+          <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> 5 Packs disponibles</p>
+          <div class="last">
+            <p class="prix">3.500 DT</p>
+            <button type="button"><i class="fa-solid fa-cart-plus"></i></button>
+          </div>
+        </a>
       </article>
-      
+
       
     </div>
             <div class="pagination">

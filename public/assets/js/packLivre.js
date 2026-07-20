@@ -1,5 +1,6 @@
 let anneeScolaireSelect = document.querySelectorAll(".anneeScolaire")
 let  addToCartButton = document.querySelectorAll("article button");
+var cart = document.querySelector(".cartCount");
 function getLocalStorageArticlesList(){
     let cartTableString = localStorage.getItem("cartTable");
     var cartTable = [];
@@ -48,6 +49,94 @@ const sectionsEtude = [
     { value: "bac-sport", label: "Bac Sport" }
 ];
 
+
+const collectionsParascolaires = [
+    "Kounouz Ennajeh",
+    "Kounouz Education",
+    "Al Moutafawik",
+    "Al Moutamayez",
+    "Al Mourchid",
+    "Al Wadhih",
+    "Al Manhal",
+    "Al Mofid",
+    "Al Najeh",
+    "Al Irtiqa",
+    "Al Imtiaz",
+    "Al Tamyouz",
+    "Al Tafaouq",
+    "Al Ibdae",
+    "Al Ibtikar",
+    "Al Moubdi",
+    "Al Moubarak",
+    "Al Raed",
+    "Al Oustadh",
+    "Al Qimma",
+    "Al Hikma",
+    "Al Amal",
+    "Al Fajr",
+    "Mes Productions",
+    "Premier Pas",
+    "Objectif Réussite",
+    "Objectif Bac",
+    "Objectif Excellence",
+    "Réussir",
+    "Excellence",
+    "Excellence Plus",
+    "Révision Express",
+    "Fiches de Révision",
+    "Révision Complète",
+    "Révision Finale",
+    "Mon Cahier",
+    "Mon Premier Cahier",
+    "Mon Premier Livre",
+    "Série Concours",
+    "Série Bac",
+    "Série Pilote",
+    "Série Excellence",
+    "Série Réussite",
+    "Série Premium",
+    "Série Performance",
+    "Le Complet Résolu",
+    "Le Guide",
+    "Le Guide Complet",
+    "Le Guide du Bac",
+    "Le Prof",
+    "Le Coach",
+    "Top Niveau",
+    "Top Révision",
+    "Top Maths",
+    "Top Sciences",
+    "Top Français",
+    "Top Anglais",
+    "Top Informatique",
+    "100% Réussite",
+    "100% Bac",
+    "100% Maths",
+    "100% Sciences",
+    "100% Français",
+    "100% Anglais",
+    "Bac Success",
+    "Bac Plus",
+    "Bac Excellence",
+    "Bac Facile",
+    "Cap Réussite",
+    "Cap Excellence",
+    "Cap sur le Bac",
+    "Réussite Plus",
+    "Maths Faciles",
+    "Maths Expert",
+    "Physique Expert",
+    "Chimie Expert",
+    "SVT",
+    "Français Plus",
+    "Anglais Plus",
+    "Allemand Plus",
+    "Espagnol Plus",
+    "Arabe Plus",
+    "Informatique Plus",
+    "Autre"
+];
+
 anneeScolaireSelect.forEach(select =>{
     let html = `<option value="">-- Sélectionnez une année --</option>`
     for(let obj of sectionsEtude){
@@ -69,7 +158,7 @@ addToCartButton.forEach(button =>{
         event.preventDefault();
         let produitId = button.dataset.idproduit
         let table = getLocalStorageArticlesList();
-        if(table == [] ||table == null){
+        if(table == [] || table == null){
             localStorage.setItem("cartTable", JSON.stringify({
                 idproduit : produitId,
                 quantity : 1
@@ -78,14 +167,17 @@ addToCartButton.forEach(button =>{
             for(let i=0 ; i<table.length ; i++){
                 if(table[i].idproduit == produitId){
                     table[i].quantity += 1;
+                    localStorage.setItem("cartTable" , JSON.stringify(table));
+                    return;
                 }
-                localStorage.setItem("cartTable" , JSON.stringify(table));
-                return;
             }
             table.push({
                 idproduit: produitId,
                 quantity:1
             })
+
+            cart.textContent= parseInt(cart.textContent) + 1;
+
             localStorage.setItem("cartTable" , JSON.stringify(table));
             return;
         }
@@ -93,3 +185,32 @@ addToCartButton.forEach(button =>{
         
     })
 })
+
+
+
+let formParascolaire = document.querySelector("#formParascolaire");
+let searchButton = document.querySelector(".submitButton")
+searchButton.addEventListener("click",function(event){
+    event.preventDefault();
+    console.log(searchButton)
+    var formData = new FormData(formParascolaire);
+    var query = ""
+    for(var[key , val] of formData.entries()){
+        if(val !==""){
+            query += `${key}=${val}&`;
+        }
+    }
+    if(query!==""){query = query.slice(0,-1)}
+    window.location.href = `/packs/livres/parascolaire?${query}`;
+
+})
+
+
+// partie el collection 
+var collection_parascolaire  = document.querySelector("#collection_parascolaire");
+let htmlString = "<option value=''>-- Choisir une collection --</option>"
+for(let i = 0 ; i< collectionsParascolaires.length ; i++){
+    htmlString += `<option value="${collectionsParascolaires[i]}">${collectionsParascolaires[i]}</option>`
+}
+collection_parascolaire.innerHTML=htmlString
+
