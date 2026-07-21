@@ -40,7 +40,7 @@
         }
 
         // recherche + pagination
-        public function recherchePack(string $nom, string $niveau , string $statut , int $limit , int $pagination){
+        public function recherchePack(string $nom, string $niveau , string $statut ,string $type , string $anneeScolaire, int $limit , int $pagination){
             $query =    "select pr.id_produit , pr.libelle , p.type , pr.prix , (select count(*) from packArticle pa where pa.id_pack = p.id_pack) as nbreArticleTotal , pr.quantite_stock , pr.image_url , pr.description
                         from produit pr , pack p 
                         where pr.id_produit = p.id_pack ";
@@ -49,7 +49,7 @@
             $allNiveau = ["primaire", "college","secondaire","bac"];
             $param=[];
             if (in_array($niveau, $allNiveau)){
-                $query .= " AND p.type = ? ";
+                $query .= " AND p.categorie = ? ";
                 $param[] = $niveau;
             }
             if(!empty($nom)){
@@ -62,6 +62,10 @@
                 }else{
                     $query .= " AND pr.quantite_stock = 0 " ;
                 }
+            }
+            if(!empty($anneeScolaire)){
+                $query .= " AND pr.libelle like ? ";
+                $param[] = "%$nom%";
             }
             $pagination = max($pagination , 1);
             $limit = max($limit , 1);
@@ -275,9 +279,23 @@
         }
         //chercher pack par id
         public function getPackByType(string $type){
-            $query = "SELECT id_produit , type , image_url , prix , libelle from produit p , pack pa where id_produit = id_pack and type = ? ;";
+            $query = "SELECT id_produit , type , image_url , prix , libelle from produit p , pack pa where id_produit = id_pack and pa.categorie = ? ;";
             $stmt= $this->db->prepare($query);
             $stmt->execute([$type]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
+        public function getPackLivre(string $annee){
+            $query = "SELECT * from pack p , produit pr where p.id_pack = pr.id_produit and type = 'livre' ";
+            $params = [];
+            if(!empty($annee)){
+                $query .= "annee_scolaire = ? ";
+                $params[] = $annee;
+            }
+
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($params);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }

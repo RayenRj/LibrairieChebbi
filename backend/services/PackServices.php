@@ -153,6 +153,11 @@
             $image_url = "/assets/images/uploadedImg/packImg/" . $newName;
             return $this->packRepo->createNewPack($data , $prix , $niveau , $libelle, $quantite, $image_url , $remise , $description);
         }
+
+
+        public function getPackLivre(string $annee){
+            return $this->packRepo->getPackLivre($annee);
+        }
     }
 
 ?> 

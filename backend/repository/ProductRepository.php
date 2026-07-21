@@ -382,7 +382,7 @@
        }
 
         // teb3in table packLive and parascolaire
-       public function findPackLivre(int $limit , int $offset){
+       public function findPackLivre(string $annee,int $limit , int $offset ){
         $query = "select * from produit p , pack pa where id_produit = id_pack and type='livre' Limit $limit offset $offset";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
@@ -390,16 +390,57 @@
        }
 
        public function findLivreScolaire(string $libelle , string $niveauScolaire , int $limit , int $offset){
-        $query = "SELECT * from livre l , produit p where p.id_produit = l.id_produit and libelle like ? and niveau_scolaire = ? LIMIT $limit offset $offset ;";
+        $query = "SELECT * from livre l , produit p where p.id_produit = l.id_produit and p.id_produit not in (select distinct(id_produit) from parascolaire) ";
+        $params = [];
+        $query_data = [];
+        if(!empty($libelle)){
+            $query_data[] = "libelle like ?";
+            $params[] = "%$libelle%";
+        }
+
+        if(!empty($niveauScolaire)){
+            $query_data[] = "niveau_scolaire = ?";
+            $params[] = $niveauScolaire;
+        }
+
+        if(empty($query_data)){
+            $query .= " LIMIT $limit offset $offset";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+
+        $query .= " AND " . implode(" AND " , $query_data) . " LIMIT $limit offset $offset";
         $stmt = $this->db->prepare($query);
-        $stmt->execute(["%$libelle%" , $niveauScolaire]);
+        $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
        }
-       public function numberOfLineOffindLivreScolaire(string $libelle, string $niveauScolaire , int $limit , int $offset){
-        $query = "SELECT count(*) from livre l , produit p where p.id_produit = l.id_produit and libelle like ? and niveau_scolaire = ? ;";
+       public function numberOfLinesfindLivreScolaire(string $libelle , string $niveauScolaire){
+        $query = "SELECT count(*) from livre l , produit p where p.id_produit = l.id_produit and p.id_produit not in (select distinct(id_produit) from parascolaire) ";
+        $params = [];
+        $query_data = [];
+        if(!empty($libelle)){
+            $query_data[] = "libelle like ?";
+            $params[] = "%$libelle%";
+        }
+
+        if(!empty($niveauScolaire)){
+            $query_data[] = "niveau_scolaire = ?";
+            $params[] = $niveauScolaire;
+        }
+
+        if(empty($query_data)){
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_NUM)[0];
+        }
+        
+
+        $query .= " AND " . implode(" AND " , $query_data) ;
         $stmt = $this->db->prepare($query);
-        $stmt->execute(["%$libelle%", $niveauScolaire]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_NUM)[0];
        }
 
 

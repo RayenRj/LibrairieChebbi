@@ -96,14 +96,16 @@ CREATE TABLE parascolaire (
 -- ==========================================================
 -- TABLE PACK : pack est un produit
 -- ==========================================================
+
 create table pack(
 	id_pack int ,
-    type varchar(255) check (type in ("primaire", "secondaire" , "bac", "college")),
-
+    `type` varchar(255) check (type in ("livre","fourniture")),
+	categorie varchar(255) check(categorie in ("primaire","college","secondaire","bac")),
+    annee_scolaire varchar(255),
     primary key(id_pack),
     foreign key (id_pack) references produit(id_produit) on delete cascade on update cascade
 );
-
+show columns from pack;
 -- ==========================================================
 -- TABLE PACKARTICLE
 -- ==========================================================
@@ -321,47 +323,29 @@ INSERT INTO parascolaire (id_produit, type_parascolaire, collection) VALUES (39,
 INSERT INTO parascolaire (id_produit, type_parascolaire, collection) VALUES (40, 'Annales', 'Hachette');
 
 -- ---------------- PRODUIT + PACK (20 lignes) ----------------
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (41, 'PCK000041', 'Pack scolaire Primaire #1', 189.49, 5, '/assets/images/uploadedImg/packImg/lettres.png', 'Pack complet regroupant fournitures et livres pour le cycle primaire.', 4.56, 4, 'Pack', 'SchoolPack', 73);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (42, 'PCK000042', 'Pack scolaire Secondaire #2', 195.88, 20, '/assets/images/uploadedImg/packImg/secondaire.png', 'Pack complet regroupant fournitures et livres pour le cycle secondaire.', 4.2, 3, 'Pack', 'SchoolPack', 46);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (43, 'PCK000043', 'Pack scolaire College #3', 306.45, 15, '/assets/images/uploadedImg/packImg/64e40814acc4075fe1a5bf58b49bea1f.png', 'Pack complet regroupant fournitures et livres pour le cycle college.', 4.86, 37, 'Pack', 'SchoolPack', 22);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (44, 'PCK000044', 'Pack scolaire Bac #4', 312.65, 20, '/assets/images/uploadedImg/packImg/908853e94a13574e3b588fafb68b7722.png', 'Pack complet regroupant fournitures et livres pour le cycle bac.', 4.07, 0, 'Pack', 'SchoolPack', 65);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (45, 'PCK000045', 'Pack scolaire Primaire #5', 167.54, 15, '/assets/images/uploadedImg/packImg/lettres.png', 'Pack complet regroupant fournitures et livres pour le cycle primaire.', 4.78, 53, 'Pack', 'SchoolPack', 73);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (46, 'PCK000046', 'Pack scolaire Secondaire #6', 229.84, 20, '/assets/images/uploadedImg/packImg/secondaire.png', 'Pack complet regroupant fournitures et livres pour le cycle secondaire.', 4.7, 57, 'Pack', 'SchoolPack', 48);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (47, 'PCK000047', 'Pack scolaire College #7', 216.84, 10, '/assets/images/uploadedImg/packImg/64e40814acc4075fe1a5bf58b49bea1f.png', 'Pack complet regroupant fournitures et livres pour le cycle college.', 4.15, 1, 'Pack', 'SchoolPack', 69);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (48, 'PCK000048', 'Pack scolaire Bac #8', 177.29, 15, '/assets/images/uploadedImg/packImg/908853e94a13574e3b588fafb68b7722.png', 'Pack complet regroupant fournitures et livres pour le cycle bac.', 4.59, 53, 'Pack', 'SchoolPack', 79);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (49, 'PCK000049', 'Pack scolaire Primaire #9', 328.98, 20, '/assets/images/uploadedImg/packImg/lettres.png', 'Pack complet regroupant fournitures et livres pour le cycle primaire.', 4.3, 58, 'Pack', 'SchoolPack', 70);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (50, 'PCK000050', 'Pack scolaire Secondaire #10', 243.79, 0, '/assets/images/uploadedImg/packImg/secondaire.png', 'Pack complet regroupant fournitures et livres pour le cycle secondaire.', 3.63, 27, 'Pack', 'SchoolPack', 37);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (51, 'PCK000051', 'Pack scolaire College #11', 315.28, 5, '/assets/images/uploadedImg/packImg/64e40814acc4075fe1a5bf58b49bea1f.png', 'Pack complet regroupant fournitures et livres pour le cycle college.', 3.58, 24, 'Pack', 'SchoolPack', 61);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (52, 'PCK000052', 'Pack scolaire Bac #12', 144.93, 10, '/assets/images/uploadedImg/packImg/908853e94a13574e3b588fafb68b7722.png', 'Pack complet regroupant fournitures et livres pour le cycle bac.', 4.01, 56, 'Pack', 'SchoolPack', 68);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (53, 'PCK000053', 'Pack scolaire Primaire #13', 162.25, 15, '/assets/images/uploadedImg/packImg/lettres.png', 'Pack complet regroupant fournitures et livres pour le cycle primaire.', 3.88, 5, 'Pack', 'SchoolPack', 80);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (54, 'PCK000054', 'Pack scolaire Secondaire #14', 94.94, 20, '/assets/images/uploadedImg/packImg/secondaire.png', 'Pack complet regroupant fournitures et livres pour le cycle secondaire.', 3.58, 60, 'Pack', 'SchoolPack', 64);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (55, 'PCK000055', 'Pack scolaire College #15', 148.2, 0, '/assets/images/uploadedImg/packImg/64e40814acc4075fe1a5bf58b49bea1f.png', 'Pack complet regroupant fournitures et livres pour le cycle college.', 4.67, 41, 'Pack', 'SchoolPack', 25);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (56, 'PCK000056', 'Pack scolaire Bac #16', 286.0, 5, '/assets/images/uploadedImg/packImg/908853e94a13574e3b588fafb68b7722.png', 'Pack complet regroupant fournitures et livres pour le cycle bac.', 3.8, 1, 'Pack', 'SchoolPack', 99);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (57, 'PCK000057', 'Pack scolaire Primaire #17', 129.52, 5, '/assets/images/uploadedImg/packImg/lettres.png', 'Pack complet regroupant fournitures et livres pour le cycle primaire.', 4.21, 7, 'Pack', 'SchoolPack', 92);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (58, 'PCK000058', 'Pack scolaire Secondaire #18', 336.32, 15, '/assets/images/uploadedImg/packImg/secondaire.png', 'Pack complet regroupant fournitures et livres pour le cycle secondaire.', 4.55, 49, 'Pack', 'SchoolPack', 67);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (59, 'PCK000059', 'Pack scolaire College #19', 133.53, 20, '/assets/images/uploadedImg/packImg/64e40814acc4075fe1a5bf58b49bea1f.png', 'Pack complet regroupant fournitures et livres pour le cycle college.', 4.95, 45, 'Pack', 'SchoolPack', 34);
-INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES (60, 'PCK000060', 'Pack scolaire Bac #20', 292.13, 5, '/assets/images/uploadedImg/packImg/908853e94a13574e3b588fafb68b7722.png', 'Pack complet regroupant fournitures et livres pour le cycle bac.', 4.95, 6, 'Pack', 'SchoolPack', 94);
-INSERT INTO pack (id_pack, type) VALUES (41, 'primaire');
-INSERT INTO pack (id_pack, type) VALUES (42, 'secondaire');
-INSERT INTO pack (id_pack, type) VALUES (43, 'college');
-INSERT INTO pack (id_pack, type) VALUES (44, 'bac');
-INSERT INTO pack (id_pack, type) VALUES (45, 'primaire');
-INSERT INTO pack (id_pack, type) VALUES (46, 'secondaire');
-INSERT INTO pack (id_pack, type) VALUES (47, 'college');
-INSERT INTO pack (id_pack, type) VALUES (48, 'bac');
-INSERT INTO pack (id_pack, type) VALUES (49, 'primaire');
-INSERT INTO pack (id_pack, type) VALUES (50, 'secondaire');
-INSERT INTO pack (id_pack, type) VALUES (51, 'college');
-INSERT INTO pack (id_pack, type) VALUES (52, 'bac');
-INSERT INTO pack (id_pack, type) VALUES (53, 'primaire');
-INSERT INTO pack (id_pack, type) VALUES (54, 'secondaire');
-INSERT INTO pack (id_pack, type) VALUES (55, 'college');
-INSERT INTO pack (id_pack, type) VALUES (56, 'bac');
-INSERT INTO pack (id_pack, type) VALUES (57, 'primaire');
-INSERT INTO pack (id_pack, type) VALUES (58, 'secondaire');
-INSERT INTO pack (id_pack, type) VALUES (59, 'college');
-INSERT INTO pack (id_pack, type) VALUES (60, 'bac');
+-- ---------------- PACK (20 lignes avec la nouvelle structure) ----------------
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (41, 'fourniture', 'primaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (42, 'fourniture', 'secondaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (43, 'fourniture', 'college', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (44, 'fourniture', 'bac', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (45, 'fourniture', 'primaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (46, 'fourniture', 'secondaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (47, 'fourniture', 'college', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (48, 'fourniture', 'bac', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (49, 'fourniture', 'primaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (50, 'fourniture', 'secondaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (51, 'fourniture', 'college', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (52, 'fourniture', 'bac', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (53, 'fourniture', 'primaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (54, 'fourniture', 'secondaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (55, 'fourniture', 'college', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (56, 'fourniture', 'bac', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (57, 'fourniture', 'primaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (58, 'fourniture', 'secondaire', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (59, 'fourniture', 'college', NULL);
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (60, 'fourniture', 'bac', NULL);
 
+select * from pack;
 -- ---------------- PACKARTICLE (>=20 lignes) ----------------
 INSERT INTO packArticle (id_pack, id_produit, quantite) VALUES (41, 1, 1);
 INSERT INTO packArticle (id_pack, id_produit, quantite) VALUES (41, 30, 2);
@@ -493,26 +477,114 @@ INSERT INTO userLogin (id_client, loginAt) VALUES (18, '2026-07-19 13:18:00');
 INSERT INTO userLogin (id_client, loginAt) VALUES (19, '2026-08-20 14:29:00');
 INSERT INTO userLogin (id_client, loginAt) VALUES (20, '2026-09-21 15:40:00');
 
+	
+
+INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES
+(90, '9782753111190', 'Manuel de Mathématiques - 1ère Primaire', 12.50, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Livre scolaire officiel pour la 1ère année', 4.5, 12, 'Livre Scolaire', 'CNP', 150),
+(91, '9782753111191', 'Livre de Lecture Arabe - 1ère Primaire', 11.00, 5, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Apprentissage de l''alphabet et lecture de base', 4.8, 34, 'Livre Scolaire', 'CNP', 200),
+(92, '9782753111192', 'Livre de Français - 2ème Primaire', 14.20, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Initiation à la langue française', 4.2, 18, 'Livre Scolaire', 'Hatier', 80),
+(93, '9782753111193', 'Éveil Scientifique - 2ème Primaire', 10.50, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Découverte du monde et de la nature', 4.0, 8, 'Livre Scolaire', 'CNP', 120),
+(94, '9782753111194', 'Let''s Learn English - 3ème Primaire', 15.00, 10, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Premier manuel d''anglais', 4.9, 45, 'Livre Scolaire', 'Oxford', 90),
+(95, '9782753111195', 'Mathématiques Avancées - 3ème Primaire', 13.80, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Exercices et problèmes mathématiques', 4.4, 22, 'Livre Scolaire', 'CNP', 110),
+(96, '9782753111196', 'Histoire et Géo - 4ème Primaire', 16.50, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Histoire de la Tunisie et géographie de base', 4.1, 15, 'Livre Scolaire', 'CNP', 75),
+(97, '9782753111197', 'Grammaire Française - 4ème Primaire', 14.00, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Règles de grammaire et conjugaison', 4.6, 29, 'Livre Scolaire', 'Nathan', 60),
+(98, '9782753111198', 'Littérature Arabe - 5ème Primaire', 12.90, 5, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Textes choisis et poésie', 4.7, 31, 'Livre Scolaire', 'CNP', 140),
+(99, '9782753111199', 'Sciences de la Vie - 5ème Primaire', 15.20, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Biologie et environnement', 4.3, 19, 'Livre Scolaire', 'CNP', 100),
+(100, '9782753111200', 'Préparation Concours Maths - 6ème Primaire', 18.00, 15, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Annales pour le concours de la 6ème', 4.9, 150, 'Parascolaire', 'Sigmaths', 300),
+(101, '9782753111201', 'Informatique et TIC - 6ème Primaire', 11.50, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Initiation à l''ordinateur et programmation par blocs', 4.0, 11, 'Livre Scolaire', 'CNP', 65),
+(102, '9782753111202', 'Mathématiques Algèbre - 7ème Base', 17.50, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Nouveau programme du collège', 4.5, 42, 'Livre Scolaire', 'CNP', 210),
+(103, '9782753111203', 'Sciences Physiques - 7ème Base', 16.80, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Introduction à la physique et chimie', 4.2, 27, 'Livre Scolaire', 'CNP', 130),
+(104, '9782753111204', 'SVT - 8ème Base', 18.20, 5, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Sciences de la vie et de la terre', 4.6, 38, 'Livre Scolaire', 'CNP', 115),
+(105, '9782753111205', 'English Practice - 8ème Base', 19.00, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Cahier d''activités et leçons', 4.4, 21, 'Livre Scolaire', 'Cambridge', 95),
+(106, '9782753111206', 'Préparation BEM Maths - 9ème Base', 22.00, 20, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Exercices corrigés pour le diplôme de base', 4.8, 88, 'Parascolaire', 'Oxygène', 250),
+(107, '9782753111207', 'Expression Écrite - 9ème Base', 14.50, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Techniques de rédaction en français', 4.1, 14, 'Livre Scolaire', 'Nathan', 50),
+(108, '9782753111208', 'Syntaxe Arabe - 1ère Secondaire', 16.00, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Livre de grammaire approfondie (Nahw)', 4.3, 17, 'Livre Scolaire', 'CNP', 105),
+(109, '9782753111209', 'Algorithmique - 1ère Secondaire', 20.50, 10, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Bases de la programmation et algorithmes', 4.7, 56, 'Livre Scolaire', 'CNP', 140),
+(110, '9782753111210', 'Mathématiques (Section Sciences) - 2ème Secondaire', 24.00, 5, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Analyse et géométrie dans l''espace', 4.5, 63, 'Livre Scolaire', 'CNP', 180),
+(111, '9782753111211', 'Physique Chimie - 2ème Secondaire', 23.50, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Mécanique et réactions chimiques', 4.4, 49, 'Livre Scolaire', 'CNP', 160),
+(112, '9782753111212', 'Philosophie Générale - 3ème Secondaire', 21.00, 0, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Introduction aux concepts philosophiques', 4.8, 72, 'Livre Scolaire', 'Hatier', 90),
+(113, '9782753111213', 'Génétique et Évolution - 3ème Secondaire', 25.00, 15, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Programme SVT section sciences expérimentales', 4.6, 81, 'Livre Scolaire', 'CNP', 200),
+(114, '9782753111214', 'Annales Bac Maths - 4ème Secondaire', 28.50, 25, 'https://images.epagine.fr/158/9782753111158_1_75.jpg', 'Sujets corrigés du baccalauréat tunisien', 4.9, 210, 'Parascolaire', 'Sigmaths', 400);
+
+
+INSERT INTO livre (id_produit, niveau_scolaire, matiere) VALUES
+(90, '1ère Primaire', 'Mathématiques'),
+(91, '1ère Primaire', 'Arabe'),
+(92, '2ème Primaire', 'Français'),
+(93, '2ème Primaire', 'Sciences'),
+(94, '3ème Primaire', 'Anglais'),
+(95, '3ème Primaire', 'Mathématiques'),
+(96, '4ème Primaire', 'Histoire-Géo'),
+(97, '4ème Primaire', 'Français'),
+(98, '5ème Primaire', 'Arabe'),
+(99, '5ème Primaire', 'Sciences'),
+(100, '6ème Primaire', 'Mathématiques'),
+(101, '6ème Primaire', 'Informatique'),
+(102, '7ème Base', 'Mathématiques'),
+(103, '7ème Base', 'Physique'),
+(104, '8ème Base', 'Sciences'),
+(105, '8ème Base', 'Anglais'),
+(106, '9ème Base', 'Mathématiques'),
+(107, '9ème Base', 'Français'),
+(108, '1ère Secondaire', 'Arabe'),
+(109, '1ère Secondaire', 'Informatique'),
+(110, '2ème Secondaire', 'Mathématiques'),
+(111, '2ème Secondaire', 'Physique'),
+(112, '3ème Secondaire', 'Philosophie'),
+(113, '3ème Secondaire', 'Sciences'),
+(114, '4ème Secondaire', 'Mathématiques');
+
+select * from produit;
+-- ###########################################################################################
+-- ajouter des pack de type livre 
+INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES 
+(110, 'PCKL00110', 'Pack Livres Scolaires - 1-primaire', 45.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 1-primaire.', 4.5, 12, 'Pack', 'SchoolPack', 50),
+(111, 'PCKL00111', 'Pack Livres Scolaires - 2-primaire', 48.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-primaire.', 4.2, 8, 'Pack', 'SchoolPack', 45),
+(112, 'PCKL00112', 'Pack Livres Scolaires - 3-primaire', 52.30, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-primaire.', 4.7, 20, 'Pack', 'SchoolPack', 60),
+(113, 'PCKL00113', 'Pack Livres Scolaires - 4-primaire', 55.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 4-primaire.', 4.1, 5, 'Pack', 'SchoolPack', 30),
+(114, 'PCKL00114', 'Pack Livres Scolaires - 5-primaire', 58.90, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 5-primaire.', 4.8, 35, 'Pack', 'SchoolPack', 70),
+(115, 'PCKL00115', 'Pack Livres Scolaires - 6-primaire', 62.00, 15, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 6-primaire.', 4.9, 50, 'Pack', 'SchoolPack', 85),
+(116, 'PCKL00116', 'Pack Livres Scolaires - 7-base', 75.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 7-base.', 4.3, 14, 'Pack', 'SchoolPack', 40),
+(117, 'PCKL00117', 'Pack Livres Scolaires - 8-base', 82.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 8-base.', 4.6, 22, 'Pack', 'SchoolPack', 55),
+(118, 'PCKL00118', 'Pack Livres Scolaires - 9-base', 89.90, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 9-base.', 4.8, 41, 'Pack', 'SchoolPack', 90),
+(119, 'PCKL00119', 'Pack Livres Scolaires - 1-secondaire', 95.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 1-secondaire.', 4.4, 18, 'Pack', 'SchoolPack', 35),
+(120, 'PCKL00120', 'Pack Livres Scolaires - 2-sciences', 105.50, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-sciences.', 4.5, 27, 'Pack', 'SchoolPack', 48),
+(121, 'PCKL00121', 'Pack Livres Scolaires - 2-informatique', 102.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-informatique.', 4.7, 15, 'Pack', 'SchoolPack', 25),
+(122, 'PCKL00122', 'Pack Livres Scolaires - 3-math', 115.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-math.', 4.9, 60, 'Pack', 'SchoolPack', 100),
+(123, 'PCKL00123', 'Pack Livres Scolaires - 3-economie', 108.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-economie.', 4.2, 11, 'Pack', 'SchoolPack', 30),
+(124, 'PCKL00124', 'Pack Livres Scolaires - 3-technique', 112.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-technique.', 4.6, 24, 'Pack', 'SchoolPack', 42),
+(125, 'PCKL00125', 'Pack Livres Scolaires - bac-math', 135.00, 15, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-math.', 4.9, 85, 'Pack', 'SchoolPack', 120),
+(126, 'PCKL00126', 'Pack Livres Scolaires - bac-sciences', 130.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-sciences.', 4.8, 70, 'Pack', 'SchoolPack', 110),
+(127, 'PCKL00127', 'Pack Livres Scolaires - bac-informatique', 125.50, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-informatique.', 4.7, 45, 'Pack', 'SchoolPack', 65),
+(128, 'PCKL00128', 'Pack Livres Scolaires - bac-technique', 128.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-technique.', 4.6, 38, 'Pack', 'SchoolPack', 50),
+(129, 'PCKL00129', 'Pack Livres Scolaires - bac-lettres', 118.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-lettres.', 4.4, 21, 'Pack', 'SchoolPack', 40);
+-- ###########################################################################################
 -- ############################################################################################
 -- Vérifications utiles (reprises du script de base)
 -- ############################################################################################
 update client set role="admin" where id_client =21;
-use librairieDB_v2;
+
 -- drop database librairieDB_v2;
 
 
 
+use librairieDB_v2;
 select * from produit;
-
+show tables;
+select * from parascolaire;
+select * from livre;
+show columns from pack;
+select * from livre l , produit p , parascolaire para where l.id_produit = p.id_produit and para.id_produit = l.id_produit;
 select count(*) from produit where quantite_stock between 6 and 20;
 
 
+SELECT * from livre l , produit p where p.id_produit = l.id_produit and p.id_produit not in (select distinct(id_produit) from parascolaire); 
 
+select * from livre;
 
+select * from pack;
+update pack set categorie = "";
 
-
-
-
-
+select * from pack;
 
 

@@ -201,6 +201,14 @@ class ProductServices{
     public function numberOfLineFindParascolaire(string $libelle, string $niveauScolaire , string $collection){
         return $this->productRepo->numberOfLineFindParascolaire( $libelle,  $niveauScolaire , $collection);
     }
+
+    public function findLivreScolaire(string $libelle , string $niveauScolaire , int $limit , int $page){
+        $offset = ($page - 1) * $limit;
+        return $this->productRepo->findLivreScolaire($libelle, $niveauScolaire , $limit ,$offset);
+    }
+    public function numberOfLinesfindLivreScolaire(string $libelle , string $niveauScolaire){
+        return $this->productRepo->numberOfLinesfindLivreScolaire($libelle, $niveauScolaire);
+    }
 }
 
 

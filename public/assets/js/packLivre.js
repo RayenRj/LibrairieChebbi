@@ -1,6 +1,11 @@
 let anneeScolaireSelect = document.querySelectorAll(".anneeScolaire")
-let  addToCartButton = document.querySelectorAll("article button");
+let addToCartButton = document.querySelectorAll("article button");
+
+let face = document.querySelectorAll(".face")
 var cart = document.querySelector(".cartCount");
+
+
+
 function getLocalStorageArticlesList(){
     let cartTableString = localStorage.getItem("cartTable");
     var cartTable = [];
@@ -212,5 +217,9 @@ let htmlString = "<option value=''>-- Choisir une collection --</option>"
 for(let i = 0 ; i< collectionsParascolaires.length ; i++){
     htmlString += `<option value="${collectionsParascolaires[i]}">${collectionsParascolaires[i]}</option>`
 }
+
+if(collection_parascolaire !== null){
 collection_parascolaire.innerHTML=htmlString
+}
+
 
