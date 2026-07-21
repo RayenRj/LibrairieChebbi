@@ -58,7 +58,7 @@
         <div>
           <input type="text" name="libelle" id="" placeholder="libellé du livre..." value="<?= $libelle ?>">
           <!-- remplissage avec js -->
-          <select name="anneeScolaire" class="anneeScolaire"></select>
+          <select name="anneeScola  ire" class="anneeScolaire"></select>
           <select name="collection" id="collection_parascolaire">
               <option value="">-- Choisir une collection --</option>
           </select>
