@@ -72,12 +72,13 @@
         <div class="box">
           <div class="containerBackFlip">
               <div class="face">
-                <img src="<?= $pack["image_url"] ?>" alt="">
-              </div>
-              <div class="back">
-                <article>
-                  <a href="/packs/pack?idPack=<?=$pack["id_pack"] ?>">
-                    <img src="<?= $pack["image_url"] ?>" alt="" class="packImage">
+                <img src="<?= $pack["image_url"] ?>" alt="" class="packImage">
+                
+                </div>
+                <div class="back">
+                  <article>
+                    <a href="/packs/pack?idPack=<?=$pack["id_pack"] ?>">
+                    <img src="/assets/images/Designes/packLivre3.png" alt="">
                     <h4><?= $pack["libelle"] ?></h4>
                     <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $pack["quantite_stock"] ?> Packs disponibles</p>
                     <div class="last">
