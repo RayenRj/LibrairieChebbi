@@ -223,3 +223,14 @@ collection_parascolaire.innerHTML=htmlString
 }
 
 
+
+// reglage ll height wl width ta3 packs
+let facePart = document.querySelectorAll(".containerBackFlip .face")
+
+
+facePart.forEach(face=>{
+    face.style.height = (face.nextElementSibling.children[0].getBoundingClientRect().height) + "px";
+    let img = face.children[0]
+    img.style.height = "100%";
+    
+})
