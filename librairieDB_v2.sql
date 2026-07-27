@@ -538,26 +538,50 @@ select * from produit;
 -- ###########################################################################################
 -- ajouter des pack de type livre 
 INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES 
-(110, 'PCKL00110', 'Pack Livres Scolaires - 1-primaire', 45.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 1-primaire.', 4.5, 12, 'Pack', 'SchoolPack', 50),
-(111, 'PCKL00111', 'Pack Livres Scolaires - 2-primaire', 48.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-primaire.', 4.2, 8, 'Pack', 'SchoolPack', 45),
-(112, 'PCKL00112', 'Pack Livres Scolaires - 3-primaire', 52.30, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-primaire.', 4.7, 20, 'Pack', 'SchoolPack', 60),
-(113, 'PCKL00113', 'Pack Livres Scolaires - 4-primaire', 55.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 4-primaire.', 4.1, 5, 'Pack', 'SchoolPack', 30),
-(114, 'PCKL00114', 'Pack Livres Scolaires - 5-primaire', 58.90, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 5-primaire.', 4.8, 35, 'Pack', 'SchoolPack', 70),
-(115, 'PCKL00115', 'Pack Livres Scolaires - 6-primaire', 62.00, 15, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 6-primaire.', 4.9, 50, 'Pack', 'SchoolPack', 85),
-(116, 'PCKL00116', 'Pack Livres Scolaires - 7-base', 75.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 7-base.', 4.3, 14, 'Pack', 'SchoolPack', 40),
-(117, 'PCKL00117', 'Pack Livres Scolaires - 8-base', 82.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 8-base.', 4.6, 22, 'Pack', 'SchoolPack', 55),
-(118, 'PCKL00118', 'Pack Livres Scolaires - 9-base', 89.90, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 9-base.', 4.8, 41, 'Pack', 'SchoolPack', 90),
-(119, 'PCKL00119', 'Pack Livres Scolaires - 1-secondaire', 95.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 1-secondaire.', 4.4, 18, 'Pack', 'SchoolPack', 35),
-(120, 'PCKL00120', 'Pack Livres Scolaires - 2-sciences', 105.50, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-sciences.', 4.5, 27, 'Pack', 'SchoolPack', 48),
-(121, 'PCKL00121', 'Pack Livres Scolaires - 2-informatique', 102.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-informatique.', 4.7, 15, 'Pack', 'SchoolPack', 25),
-(122, 'PCKL00122', 'Pack Livres Scolaires - 3-math', 115.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-math.', 4.9, 60, 'Pack', 'SchoolPack', 100),
-(123, 'PCKL00123', 'Pack Livres Scolaires - 3-economie', 108.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-economie.', 4.2, 11, 'Pack', 'SchoolPack', 30),
-(124, 'PCKL00124', 'Pack Livres Scolaires - 3-technique', 112.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-technique.', 4.6, 24, 'Pack', 'SchoolPack', 42),
-(125, 'PCKL00125', 'Pack Livres Scolaires - bac-math', 135.00, 15, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-math.', 4.9, 85, 'Pack', 'SchoolPack', 120),
-(126, 'PCKL00126', 'Pack Livres Scolaires - bac-sciences', 130.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-sciences.', 4.8, 70, 'Pack', 'SchoolPack', 110),
-(127, 'PCKL00127', 'Pack Livres Scolaires - bac-informatique', 125.50, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-informatique.', 4.7, 45, 'Pack', 'SchoolPack', 65),
-(128, 'PCKL00128', 'Pack Livres Scolaires - bac-technique', 128.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-technique.', 4.6, 38, 'Pack', 'SchoolPack', 50),
-(129, 'PCKL00129', 'Pack Livres Scolaires - bac-lettres', 118.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-lettres.', 4.4, 21, 'Pack', 'SchoolPack', 40);
+(200, 'PCKL00200', 'Pack Livres Scolaires - 1-primaire', 45.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 1-primaire.', 4.5, 12, 'Pack', 'SchoolPack', 50),
+(201, 'PCKL00201', 'Pack Livres Scolaires - 2-primaire', 48.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-primaire.', 4.2, 8, 'Pack', 'SchoolPack', 45),
+(202, 'PCKL00202', 'Pack Livres Scolaires - 3-primaire', 52.30, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-primaire.', 4.7, 20, 'Pack', 'SchoolPack', 60),
+(203, 'PCKL00203', 'Pack Livres Scolaires - 4-primaire', 55.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 4-primaire.', 4.1, 5, 'Pack', 'SchoolPack', 30),
+(204, 'PCKL00204', 'Pack Livres Scolaires - 5-primaire', 58.90, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 5-primaire.', 4.8, 35, 'Pack', 'SchoolPack', 70),
+(205, 'PCKL00205', 'Pack Livres Scolaires - 6-primaire', 62.00, 15, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 6-primaire.', 4.9, 50, 'Pack', 'SchoolPack', 85),
+(206, 'PCKL00206', 'Pack Livres Scolaires - 7-base', 75.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 7-base.', 4.3, 14, 'Pack', 'SchoolPack', 40),
+(207, 'PCKL00207', 'Pack Livres Scolaires - 8-base', 82.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 8-base.', 4.6, 22, 'Pack', 'SchoolPack', 55),
+(208, 'PCKL00208', 'Pack Livres Scolaires - 9-base', 89.90, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 9-base.', 4.8, 41, 'Pack', 'SchoolPack', 90),
+(209, 'PCKL00209', 'Pack Livres Scolaires - 1-secondaire', 95.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 1-secondaire.', 4.4, 18, 'Pack', 'SchoolPack', 35),
+(210, 'PCKL00210', 'Pack Livres Scolaires - 2-sciences', 105.50, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-sciences.', 4.5, 27, 'Pack', 'SchoolPack', 48),
+(211, 'PCKL00211', 'Pack Livres Scolaires - 2-informatique', 102.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-informatique.', 4.7, 15, 'Pack', 'SchoolPack', 25),
+(212, 'PCKL00212', 'Pack Livres Scolaires - 3-math', 115.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-math.', 4.9, 60, 'Pack', 'SchoolPack', 100),
+(213, 'PCKL00213', 'Pack Livres Scolaires - 3-economie', 108.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-economie.', 4.2, 11, 'Pack', 'SchoolPack', 30),
+(214, 'PCKL00214', 'Pack Livres Scolaires - 3-technique', 112.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-technique.', 4.6, 24, 'Pack', 'SchoolPack', 42),
+(215, 'PCKL00215', 'Pack Livres Scolaires - bac-math', 135.00, 15, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-math.', 4.9, 85, 'Pack', 'SchoolPack', 120),
+(216, 'PCKL00216', 'Pack Livres Scolaires - bac-sciences', 130.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-sciences.', 4.8, 70, 'Pack', 'SchoolPack', 110),
+(217, 'PCKL00217', 'Pack Livres Scolaires - bac-informatique', 125.50, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-informatique.', 4.7, 45, 'Pack', 'SchoolPack', 65),
+(218, 'PCKL00218', 'Pack Livres Scolaires - bac-technique', 128.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-technique.', 4.6, 38, 'Pack', 'SchoolPack', 50),
+(219, 'PCKL00219', 'Pack Livres Scolaires - bac-lettres', 118.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-lettres.', 4.4, 21, 'Pack', 'SchoolPack', 40);
+
+
+
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (200, 'livre', 'primaire', '1-primaire');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (201, 'livre', 'primaire', '2-primaire');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (202, 'livre', 'primaire', '3-primaire');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (203, 'livre', 'primaire', '4-primaire');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (204, 'livre', 'primaire', '5-primaire');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (205, 'livre', 'primaire', '6-primaire');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (206, 'livre', 'college', '7-base');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (207, 'livre', 'college', '8-base');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (208, 'livre', 'college', '9-base');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (209, 'livre', 'secondaire', '1-secondaire');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (210, 'livre', 'secondaire', '2-sciences');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (211, 'livre', 'secondaire', '2-informatique');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (212, 'livre', 'secondaire', '3-math');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (213, 'livre', 'secondaire', '3-economie');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (214, 'livre', 'secondaire', '3-technique');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (215, 'livre', 'bac', 'bac-math');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (216, 'livre', 'bac', 'bac-sciences');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (217, 'livre', 'bac', 'bac-informatique');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (218, 'livre', 'bac', 'bac-technique');
+INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (219, 'livre', 'bac', 'bac-lettres');
+select * from produit;
 -- ###########################################################################################
 -- ############################################################################################
 -- Vérifications utiles (reprises du script de base)
