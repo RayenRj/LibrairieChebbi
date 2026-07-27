@@ -71,10 +71,10 @@
                     <div class="list-categorie list">
                         <ul>
                             <li>
-                                <div>
+                                <div> 
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="ecriture">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -86,7 +86,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="papeterie">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -98,7 +98,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="classement">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -110,7 +110,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="geometrie">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -122,7 +122,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="coupe et collage">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -134,7 +134,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="dessin et arts">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -146,19 +146,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Dessin et arts
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="sacs et accessoires">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -170,7 +158,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="calcul et sciences"> 
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -182,7 +170,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="numerique">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -194,7 +182,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="livres pedagogiques"> 
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -206,7 +194,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="fournitures de bureau">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -218,7 +206,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="autres">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -239,16 +227,26 @@
                         </div>
                         <i class="fa-solid fa-angle-down"></i>
                     </div>
-                    <div>
+                    <div class="prixContentContainer">
                         <div>
-                            <input type="range" name="" id="range1" value="0" step="10">
+                            <span class="prixHeading">Prix Max</span>
+                            <div>
+                                <input type="range" name="" id="range1" value="0" step="0.5">
+                                <div class="prixInput">
+                                    <span contenteditable="true" id="prixMax">0</span> <span>Dt</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="prixHeading">Prix Min</span>
+                            <div>
+                                <input type="range" name="" id="range2" value="0" step="0.5">
+                                <div class="prixInput">
+                                    <span contenteditable="true" id="prixMin">0</span> <span> Dt</span>
+                                </div>
+                            </div>
+                        </div>
 
-                        </div>
-                        <div>
-                            <div><span>0</span> <span>dt</span></div>
-                            -
-                            <div><span>50</span> <span>dt</span></div>
-                        </div>
                     </div>
                 </div>
                 <div class="marque">
@@ -265,7 +263,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="bic">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -277,7 +275,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="maped">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -289,7 +287,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="stabilo">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -301,7 +299,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="faber-castell">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -313,7 +311,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="staedtler">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -325,7 +323,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="pilot">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -337,7 +335,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="pelikan">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -349,7 +347,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="carioca">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -361,7 +359,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="schneider">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -373,7 +371,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="milan">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -385,7 +383,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="jovi">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -397,7 +395,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="canson">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -409,7 +407,7 @@
                                 <div>
                                     <div class="content">
                                         <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked>
+                                            <input id="ch1" type="checkbox" checked value="autres">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -432,13 +430,15 @@
                     <div>
                         <div class="content">
                             <label class="checkBox">
-                                <input id="ch1" type="checkbox" checked>
+                                <input id="stockCheck" type="checkbox" checked >
                                 <div class="transition"></div>
                             </label>
                         </div>
                         en stock uniquement
                         <!-- <label for="ch1"> En stock uniquement</label> -->
                     </div>
+
+                    
                 </div>
             </form>
         </aside>
