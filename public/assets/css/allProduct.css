@@ -141,23 +141,18 @@ ul{list-style-type: none;}
     font-weight: 500;
 }
 
-
-.prix div:last-child div input[type="range"]{
+/* partie el prix */
+.prix input[type="range"]{
     width: 100%;
     color: var(--blue);
     background: var(--blue);
     accent-color: var(--blue);
 }
 
-
-.prix > div:last-child > div:last-child{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-top: 2em;
-    align-items: center;
+.prix .heading{
+    margin-bottom: 1.25em;
 }
-.prix > div:last-child > div:last-child div{
+.prix .prixInput{
     background-color: var(--gray-200);
     border-radius: 10px;
     width: 70px;
@@ -168,6 +163,28 @@ ul{list-style-type: none;}
     font-size: 13px;
     font-weight: bold;
     padding: 0.5em 1em;
+    gap: 0.5em;
+    
+    
+}
+.prix .prixHeading{
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: -10px;
+    
+
+}
+
+.prix .prixContentContainer  > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.prix .prixContentContainer > div > div{
+    display: flex;
+    gap: 1em;
 }
 
 .filter .heading input[type="reset"]{

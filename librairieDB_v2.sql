@@ -323,6 +323,30 @@ INSERT INTO parascolaire (id_produit, type_parascolaire, collection) VALUES (39,
 INSERT INTO parascolaire (id_produit, type_parascolaire, collection) VALUES (40, 'Annales', 'Hachette');
 
 -- ---------------- PRODUIT + PACK (20 lignes) ----------------
+select * from pack;
+-- ---------------- PRODUIT + PACK (20 lignes) ----------------
+INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock) VALUES 
+(41, 'PCKL00110', 'Pack Livres Scolaires - 1-primaire', 45.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 1-primaire.', 4.5, 12, 'Pack', 'SchoolPack', 50),
+(42, 'PCKL00111', 'Pack Livres Scolaires - 2-primaire', 48.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-primaire.', 4.2, 8, 'Pack', 'SchoolPack', 45),
+(43, 'PCKL00112', 'Pack Livres Scolaires - 3-primaire', 52.30, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-primaire.', 4.7, 20, 'Pack', 'SchoolPack', 60),
+(44, 'PCKL00113', 'Pack Livres Scolaires - 4-primaire', 55.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 4-primaire.', 4.1, 5, 'Pack', 'SchoolPack', 30),
+(45, 'PCKL00114', 'Pack Livres Scolaires - 5-primaire', 58.90, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 5-primaire.', 4.8, 35, 'Pack', 'SchoolPack', 70),
+(46, 'PCKL00115', 'Pack Livres Scolaires - 6-primaire', 62.00, 15, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 6-primaire.', 4.9, 50, 'Pack', 'SchoolPack', 85),
+(47, 'PCKL00116', 'Pack Livres Scolaires - 7-base', 75.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 7-base.', 4.3, 14, 'Pack', 'SchoolPack', 40),
+(48, 'PCKL00117', 'Pack Livres Scolaires - 8-base', 82.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 8-base.', 4.6, 22, 'Pack', 'SchoolPack', 55),
+(49, 'PCKL00118', 'Pack Livres Scolaires - 9-base', 89.90, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 9-base.', 4.8, 41, 'Pack', 'SchoolPack', 90),
+(50, 'PCKL00119', 'Pack Livres Scolaires - 1-secondaire', 95.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 1-secondaire.', 4.4, 18, 'Pack', 'SchoolPack', 35),
+(51, 'PCKL00120', 'Pack Livres Scolaires - 2-sciences', 105.50, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-sciences.', 4.5, 27, 'Pack', 'SchoolPack', 48),
+(52, 'PCKL00121', 'Pack Livres Scolaires - 2-informatique', 102.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 2-informatique.', 4.7, 15, 'Pack', 'SchoolPack', 25),
+(53, 'PCKL00122', 'Pack Livres Scolaires - 3-math', 115.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-math.', 4.9, 60, 'Pack', 'SchoolPack', 100),
+(54, 'PCKL00123', 'Pack Livres Scolaires - 3-economie', 108.50, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-economie.', 4.2, 11, 'Pack', 'SchoolPack', 30),
+(55, 'PCKL00124', 'Pack Livres Scolaires - 3-technique', 112.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour 3-technique.', 4.6, 24, 'Pack', 'SchoolPack', 42),
+(56, 'PCKL00125', 'Pack Livres Scolaires - bac-math', 135.00, 15, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-math.', 4.9, 85, 'Pack', 'SchoolPack', 120),
+(57, 'PCKL00126', 'Pack Livres Scolaires - bac-sciences', 130.00, 10, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-sciences.', 4.8, 70, 'Pack', 'SchoolPack', 110),
+(58, 'PCKL00127', 'Pack Livres Scolaires - bac-informatique', 125.50, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-informatique.', 4.7, 45, 'Pack', 'SchoolPack', 65),
+(59, 'PCKL00128', 'Pack Livres Scolaires - bac-technique', 128.00, 0, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-technique.', 4.6, 38, 'Pack', 'SchoolPack', 50),
+(60, 'PCKL00129', 'Pack Livres Scolaires - bac-lettres', 118.00, 5, '/assets/images/Designes/packLivre.png', 'Ensemble des manuels officiels pour bac-lettres.', 4.4, 21, 'Pack', 'SchoolPack', 40);
+
 -- ---------------- PACK (20 lignes avec la nouvelle structure) ----------------
 INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (41, 'fourniture', 'primaire', NULL);
 INSERT INTO pack (id_pack, type, categorie, annee_scolaire) VALUES (42, 'fourniture', 'secondaire', NULL);
@@ -591,24 +615,10 @@ update client set role="admin" where id_client =21;
 -- drop database librairieDB_v2;
 
 
-
-use librairieDB_v2;
-select * from produit;
 show tables;
-select * from parascolaire;
-select * from livre;
-show columns from pack;
-select * from livre l , produit p , parascolaire para where l.id_produit = p.id_produit and para.id_produit = l.id_produit;
-select count(*) from produit where quantite_stock between 6 and 20;
+use librairieDB_v2;
+
+select * from pack pa , ligne_commande lc , commande c where lc.id_commande = c.id_commande and lc.id_produit = pa.id_pack;
 
 
-SELECT * from livre l , produit p where p.id_produit = l.id_produit and p.id_produit not in (select distinct(id_produit) from parascolaire); 
-
-select * from livre;
-
-select * from pack;
-update pack set categorie = "";
-
-select * from pack;
-
-
+select * from commande;
