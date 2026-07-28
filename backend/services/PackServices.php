@@ -22,12 +22,12 @@
 
 
         // recher Article avec filtrage 
-        public function recherchePack(string $nom, string $niveau , string $statut , int $limit , int $pagination){
+        public function recherchePack(string $nom, string $niveau , string $statut,string $type,string $anneeScolaire , int $limit , int $pagination){
             if(!in_array($niveau , ["primaire", "college","secondaire","bac" ,""])){throw new Exception("Le niveau scolaire de cette pack est invalide!");}
             if(!in_array($statut,["actif", "rupture",""])){throw new Exception("La statut de cette pack est invalide");}
             if($pagination < 1){throw new Exception("La page doit etre >= 1");}
             if($limit < 1){throw new Exception("la limit doit etre > 1");}
-            return $this->packRepo->recherchePack($nom, $niveau , $statut , $limit, $pagination);
+            return $this->packRepo->recherchePack($nom, $niveau , $statut, $type,$anneeScolaire , $limit, $pagination);
         }
         public function nbreRowRecherchePack(string $nom, string $niveau , string $statut){
             if(!in_array($niveau , ["primaire", "college","secondaire","bac" ,""])){throw new Exception("Le niveau scolaire de cette pack est invalide!");}
