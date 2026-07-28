@@ -7,14 +7,14 @@
     $prixMax = isset($_GET["prixMax"]) ? floatval($_GET["prixMax"]) : 0;
     $prixMin = isset($_GET["prixMin"]) ? floatval($_GET["prixMin"]) : 0;
     $id = isset($_GET["id"]) ? $_GET["id"] : "";
-
+    $marque = isset($_GET["marque"]) ? $_GET["marque"] : "";
 
     $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
     $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 10;
 
 
-    $list_des_article_filtrée = $productService->rechercherArticle($categorie , $libelle , $prixMax , $prixMin , "" , "" , $limit , $page);
-    $nombre_de_ligne_list_des_article_filtrée = $productService->nombreLigneRechercherArticle($categorie , $libelle , $prixMax , $prixMin , "" , "" , $limit , $page);
+    $list_des_article_filtrée = $productService->rechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , "" , "" , $limit , $page);
+    $nombre_de_ligne_list_des_article_filtrée = $productService->nombreLigneRechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , "" , "" , $limit , $page);
 
     $nombre_page_totale = intval(ceil($nombre_de_ligne_list_des_article_filtrée / $limit));
     

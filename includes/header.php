@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/css/header.css">
     <link rel="stylesheet" href="/assets/css/signup.css">
     <link rel="stylesheet" href="/assets/css/signin.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
 </head>
 <body>
     
@@ -39,7 +40,7 @@
                 </ul>
             </div>
             <div class="search">
-                <form action="" method="GET">
+                <form action="" method="GET" id="searchBar">
                     <div class="input-container">
                         <span>🔍︎</span>
                         <input type="search" placeholder="Search school supplies..." id="search">

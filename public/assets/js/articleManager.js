@@ -103,7 +103,7 @@ window.addEventListener("load", async function(event){
                     ];
 
 
-    let chartValues = new Array(values.length).fill(0);
+    let chartValues = new Array(values.length).fill(1);
     for(let cat of dataList){
         chartValues[values.indexOf(cat.categorie)] = parseInt(cat.nombreVente);
     }

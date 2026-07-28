@@ -137,17 +137,42 @@
         // #######################
         // partie recherche : contient paginaation
         // #######################
-        public function rechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
+        public function rechercherArticle(string $categorie , string $libelle ,string $marque, float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
             $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.prix , p.description from {$this->tName} p  where 1=1 and id_produit not in (select distinct(id_pack) from pack) ";
             $param = [];
             $categorie = mb_strtolower(trim($categorie));
+            $marque = mb_strtolower(trim($marque));
             $stock = mb_strtolower(trim($stock));
             $trie = mb_strtolower(trim($trie));
-            $trie_list=["id article" => "p.id_produit", "libellé" => "p.libelle" ,"prix unitaire" => "prix_unitaire" , "stock" => "p.quantite_stock" , "nombre de vente" => "nombreVente"];
-            if ($categorie !== ""){
-                $query .= "AND categorie = ? ";
-                $param[] = $categorie;
+            $trie_list=["id article" => "p.id_produit", "libellé" => "p.libelle" ,"prix unitaire" => "prix_unitaire" , "stock" => "p.quantite_stock" , "nombre de vente" => "nombreVente","marque"=>"marque"];
+            
+            if(strpos($categorie , "$")!== false){
+                $categorie = explode("$",$categorie);
+                $placeholders = implode(",",array_fill(0,count($categorie),"?"));
+                $query .= "AND categorie in ($placeholders) " ;
+                foreach($categorie as $cat){$param[] = $cat;}
+            }else{
+                if ($categorie !== ""){
+                    $query .= "AND categorie = ? ";
+                    $param[] = $categorie;
+                }
             }
+            if(strpos($marque , "$")!== false){
+                $marque = explode("$",$marque);
+                $placeholders = implode(",",array_fill(0,count($marque),"?"));
+                $query .= "AND marque in ($placeholders) " ;
+                foreach($marque as $mark){
+                    $param[] = $mark;
+                }
+            }else{
+                if ($marque !== ""){
+                    $query .= "AND marque = ? ";
+                    $param[] = $marque;
+                }
+            }
+            
+            
+            
             if(!empty($libelle)){
                 $query .= "AND libelle LIKE ? ";
                 $param[] = "%$libelle%";
@@ -175,6 +200,7 @@
             else if($stock == "stock moyen"){$query .= "AND p.quantite_stock between 6 and 19 ";}
             else if($stock == "stock faible"){$query .= "AND p.quantite_stock between 1 and 5 ";}
             else if($stock == "repture de stock"){$query .= "AND p.quantite_stock = 0 ";}
+            else if($stock == "disponible"){$query .= "AND p.quantite_stock > 0 ";}
             
             $trie= $trie_list[$trie] ?? "prix_unitaire";
 
@@ -185,11 +211,13 @@
             $query .= " LIMIT $limit OFFSET $offset ;";
             
             $stmt = $this->db->prepare($query);
+            
             $stmt->execute($param);
+
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         // retourne le nombre totale de ligne de la recherche d'article
-        public function nombreLigneRechercherArticle(string $categorie , string $libelle , float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
+        public function nombreLigneRechercherArticle(string $categorie , string $libelle,string $marque , float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
             $query = "SELECT count(*) from produit p  where ";
             $param = [];
             $queryList = [" p.id_produit not in (select distinct(id_pack) from pack) "];
@@ -200,6 +228,34 @@
                 $queryList[] = "categorie = ?";
                 $param[] = $categorie;
             }
+
+
+            if(strpos($categorie , "$")!== false){
+                $categorie = explode("$",$categorie);
+                $placeholders = implode(",",array_fill(0,count($categorie),"?"));
+                $queryList[] = "categorie in ($placeholders) " ;
+                foreach($categorie as $cat){$param[] = $cat;}
+            }else{
+                if ($categorie !== ""){
+                    $queryList[] = "categorie = ? ";
+                    $param[] = $categorie;
+                }
+            }
+            if(strpos($marque , "$")!== false){
+                $marque = explode("$",$marque);
+                $placeholders = implode(",",array_fill(0,count($marque),"?"));
+                $queryList[] = "marque in ($placeholders) " ;
+                foreach($marque as $mark){
+                    $param[] = $mark;
+                }
+            }else{
+                if ($marque !== ""){
+                    $queryList[] = "marque = ? ";
+                    $param[] = $marque;
+                }
+            }
+            
+            
             if(!empty($libelle)){
                 $queryList[] = "libelle LIKE ?";
                 $param[] = "%$libelle%";
@@ -227,7 +283,7 @@
             else if($stock == "stock moyen"){$queryList[] ="p.quantite_stock between 6 and 19";}
             else if($stock == "stock faible"){$queryList[] ="p.quantite_stock between 1 and 5";}
             else if($stock == "repture de stock"){$queryList[] = "p.quantite_stock = 0";}
-            
+            else if($stock == "disponible"){$queryList[] .= "p.quantite_stock > 0 ";}
            
             if(sizeof($queryList)<= 1){
                 $query = "select count(*) from produit where id_produit not in (select distinct(id_pack) from pack);";
@@ -236,6 +292,7 @@
                 $query .= implode(" AND " , $queryList);
             }
             
+
             $stmt = $this->db->prepare($query);
             $stmt->execute($param);
             return $stmt->fetch(PDO::FETCH_NUM)[0] ?? 0;

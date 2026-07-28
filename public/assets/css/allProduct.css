@@ -128,6 +128,7 @@ ul{list-style-type: none;}
     justify-content: space-between;
     margin-top: 7px;
 }
+
 .list ul li div,
 .disponibility div:last-child{
     display: flex;
@@ -206,7 +207,7 @@ ul{list-style-type: none;}
 }
 
 .disponibility{
-    padding-bottom: 1.5em;
+    padding-bottom: 0.35em;
 }
 
 
@@ -392,7 +393,7 @@ main .pagination > a{
   clear: both;
 }
 
-.checkBox {
+.checkBoxLabel {
   display: block;
   cursor: pointer;
   width: 12px;
@@ -404,7 +405,7 @@ main .pagination > a{
   box-shadow: 0px 0px 0px 2px var(--blue);
 }
 
-.checkBox div {
+.checkBoxLabel div {
   width: 60px;
   height: 60px;
   background-color: var(--blue);
@@ -415,12 +416,12 @@ main .pagination > a{
   z-index: 100;
 }
 
-.checkBox input[type=checkbox]:checked + div {
+.checkBoxLabel input[type=checkbox]:checked + div {
   left: -10px;
   top: -10px;
 }
 
-.checkBox input[type=checkbox] {
+.checkBoxLabel input[type=checkbox] {
   position: absolute;
   left: 50px;
   visibility: hidden;
@@ -428,4 +429,31 @@ main .pagination > a{
 
 .transition {
   transition: 300ms ease;
+}
+
+
+
+#buttonFiltrer{
+    width: 100%;
+    margin: 1.5em auto 1.5em;
+    background-color: var(--blue);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0.65em 1.25em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: 0.2s all ease-in-out;
+}
+
+#buttonFiltrer:hover{
+    background-color: #3372d7;
+}
+
+#buttonFiltrer:active{
+    background-color: #699cef;
+}
+.disponibility .content{
+    margin-left: 40px !important;
+    width: fit-content;
 }

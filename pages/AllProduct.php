@@ -9,17 +9,22 @@
     $prixMax = isset($_GET["prixMax"]) ? floatval($_GET["prixMax"]) : 0;
     $prixMin = isset($_GET["prixMin"]) ? floatval($_GET["prixMin"]) : 0;
     $trie = isset($_GET["trie"]) ? $_GET["trie"] : "";
+    $marque = isset($_GET["marque"]) ? $_GET["marque"] : "";
     $stock = isset($_GET["stock"]) ? $_GET["stock"] : "";
     $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
     $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 15;
 
-    $liste_des_produit= $product_services->rechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);
-    $nombre_de_produit = $product_services->nombreLigneRechercherArticle($categorie , $libelle , $prixMax , $prixMin , $stock , $trie , $limit , $page);
+    $liste_des_produit= $product_services->rechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie , $limit , $page);
+    $nombre_de_produit = $product_services->nombreLigneRechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie , $limit , $page);
     $nombre_page_totale = intval(ceil($nombre_de_produit / $limit));
 
 
     $query_array= [];
-    foreach($_GET as $key=>$val){$query_array[] = "$key=$val";} 
+    foreach($_GET as $key=>$val){
+        if($key!=="page"){
+            $query_array[] = "$key=$val";
+        }
+    } 
     $query_string = implode("&", $query_array) ?? "";
 
     $list_of_categories= $product_services->getAllCategorie();
@@ -42,6 +47,7 @@
     <link rel="stylesheet" href="/librairie/LibrairieChebbi/assets/css/allProduct.css"> -->
     <link rel="stylesheet" href="../assets/css/output.css">
     <link rel="stylesheet" href="../assets/css/allProduct.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
 </head>
 <body>
     <?php include "../includes/header.php" ?>
@@ -73,7 +79,7 @@
                             <li>
                                 <div> 
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="ecriture">
                                             <div class="transition"></div>
                                         </label>
@@ -85,7 +91,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="papeterie">
                                             <div class="transition"></div>
                                         </label>
@@ -97,7 +103,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="classement">
                                             <div class="transition"></div>
                                         </label>
@@ -109,7 +115,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="geometrie">
                                             <div class="transition"></div>
                                         </label>
@@ -121,7 +127,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="coupe et collage">
                                             <div class="transition"></div>
                                         </label>
@@ -133,7 +139,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="dessin et arts">
                                             <div class="transition"></div>
                                         </label>
@@ -145,8 +151,8 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
-                                            <input id="ch1" type="checkbox" checked value="sacs et accessoires">
+                                        <label class="checkBoxLabel">
+                                            <input id="ch1" type="checkbox" checked value="Sac">
                                             <div class="transition"></div>
                                         </label>
                                     </div>
@@ -157,7 +163,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="calcul et sciences"> 
                                             <div class="transition"></div>
                                         </label>
@@ -169,7 +175,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="numerique">
                                             <div class="transition"></div>
                                         </label>
@@ -181,7 +187,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="livres pedagogiques"> 
                                             <div class="transition"></div>
                                         </label>
@@ -193,7 +199,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="fournitures de bureau">
                                             <div class="transition"></div>
                                         </label>
@@ -205,7 +211,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="autres">
                                             <div class="transition"></div>
                                         </label>
@@ -231,9 +237,9 @@
                         <div>
                             <span class="prixHeading">Prix Max</span>
                             <div>
-                                <input type="range" name="" id="range1" value="0" step="0.5">
+                                <input type="range" max="200" name="" id="range1" value="0" step="0.5">
                                 <div class="prixInput">
-                                    <span contenteditable="true" id="prixMax">0</span> <span>Dt</span>
+                                    <span contenteditable="true" max="200" id="prixMax">0</span> <span>Dt</span>
                                 </div>
                             </div>
                         </div>
@@ -262,7 +268,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="bic">
                                             <div class="transition"></div>
                                         </label>
@@ -274,7 +280,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="maped">
                                             <div class="transition"></div>
                                         </label>
@@ -286,7 +292,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="stabilo">
                                             <div class="transition"></div>
                                         </label>
@@ -298,7 +304,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="faber-castell">
                                             <div class="transition"></div>
                                         </label>
@@ -310,7 +316,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="staedtler">
                                             <div class="transition"></div>
                                         </label>
@@ -322,7 +328,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="pilot">
                                             <div class="transition"></div>
                                         </label>
@@ -334,7 +340,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="pelikan">
                                             <div class="transition"></div>
                                         </label>
@@ -346,7 +352,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="carioca">
                                             <div class="transition"></div>
                                         </label>
@@ -358,7 +364,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="schneider">
                                             <div class="transition"></div>
                                         </label>
@@ -370,7 +376,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="milan">
                                             <div class="transition"></div>
                                         </label>
@@ -382,7 +388,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="jovi">
                                             <div class="transition"></div>
                                         </label>
@@ -394,7 +400,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="canson">
                                             <div class="transition"></div>
                                         </label>
@@ -406,7 +412,7 @@
                             <li>
                                 <div>
                                     <div class="content">
-                                        <label class="checkBox">
+                                        <label class="checkBoxLabel">
                                             <input id="ch1" type="checkbox" checked value="autres">
                                             <div class="transition"></div>
                                         </label>
@@ -429,14 +435,17 @@
                     </div>
                     <div>
                         <div class="content">
-                            <label class="checkBox">
-                                <input id="stockCheck" type="checkbox" checked >
+                            <label class="checkBoxLabel">
+                                <input id="stockCheck" type="checkbox" checked>
                                 <div class="transition"></div>
                             </label>
+                            en stock uniquement
                         </div>
-                        en stock uniquement
                         <!-- <label for="ch1"> En stock uniquement</label> -->
                     </div>
+                    <button type="button" id="buttonFiltrer">
+                       Filtrer 
+                    </button>
 
                     
                 </div>
@@ -450,12 +459,12 @@
                 <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min($page * $limit  , $nombre_de_produit) ?> sur <?= $nombre_de_produit ?> Articles</p>
                 <div>
                     Trier par 
-                    <select name="" id="">
+                    <select name="" id="trie">
                         <option value="" selected>none</option>
-                        <option value="">Popularity</option>
-                        <option value="">prix</option>
-                        <option value="">nom</option>
-                        <option value="">type</option>
+                        <option value="libellé">libellé</option>
+                        <option value="marque">marque</option>
+                        <option value="prix unitaire">prix unitaire</option>
+                        <!-- <option value="stock">stock</option> -->
                     </select>
                 </div>
             </div>
@@ -489,7 +498,7 @@
                     <div class="pagination">
                         <!-- before -->
                         <?php if($page > 1) : ?>
-                            <a  href="/products?page=<?= $page - 1 ?>#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                            <a  href="/products?page=<?= $page - 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
                         <?php else : ?>
                             <a href="#formFiltrage" id="prev"><i class="fa-solid fa-angle-left"></i></a>
                         <?php endif; ?>
@@ -502,13 +511,13 @@
 
 
                         <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
-                            <a href="/products?page=<?= $i ?>#formFiltrage"><?= $i ?></a>
+                            <a href="/products?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage"><?= $i ?></a>
                         <?php endfor; ?>
 
                         <!-- current page -->
                         <a href="#" class="pagination-selected"><?= $page ?></a>
                         <?php for($i=$page +1  ; $i <= min($page + 2 , $nombre_page_totale) ; $i++):?>
-                            <a href="/products?page=<?= $i ?>#formFiltrage"><?= $i ?></a>
+                            <a href="/products?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage"><?= $i ?></a>
                         <?php endfor; ?> 
                                     
                             
@@ -518,7 +527,7 @@
 
                         <!-- after -->
                         <?php if($page < $nombre_page_totale) : ?>
-                            <a href="/products?page=<?= $page + 1 ?>#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                            <a href="/products?page=<?= $page + 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
                         <?php else : ?>
                              <a href="#formFiltrage" id="post"><i class="fa-solid fa-angle-right"></i></a>
                         <?php endif; ?>

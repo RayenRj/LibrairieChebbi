@@ -8,6 +8,7 @@ main.order{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    z-index: 1123;
 }
 .card-order {
   overflow: hidden;
@@ -17,6 +18,7 @@ main.order{
   max-width: 290px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   background-color: #fff;
+  
 }
 
 .dismiss {
@@ -146,4 +148,5 @@ main.order{
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(5px);
+    z-index: 1122;
 }

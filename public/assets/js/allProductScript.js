@@ -8,7 +8,30 @@ let range1 = document.querySelector("#range1")
 let range2 = document.querySelector("#range2")
 let prixMax = document.querySelector("#prixMax")
 let prixMin = document.querySelector("#prixMin")
+let buttonFiltrer = document.querySelector("#buttonFiltrer")
+let searchForm = document.querySelector("#searchBar")
+let selectTrie = document.querySelector("#trie")
 
+
+selectTrie.addEventListener("change",()=>{
+    let value = selectTrie.value;
+    console.log(value)
+    if(window.location.search.indexOf("trie") === -1){
+        window.location.search =  `${window.location.search}&trie=${value}`;
+    }else{
+        console.log(`window.location.search.slice(0,window.location.search.indexOf("&trie="))}&trie=${value}`)
+        window.location.search =  `${window.location.search.slice(0,window.location.search.indexOf("&trie="))}&trie=${value}`;
+    }
+
+})
+
+
+searchForm.addEventListener("submit",function(event){
+    event.preventDefault();
+    console.log("submitted");
+    let searchBar = document.querySelector("#searchBar #search");
+    window.location.href=`/products?libelle=${searchBar.value.toLowerCase()}`
+})
 
 //////////////////////////////////
 //////////////////////////////////
@@ -17,18 +40,19 @@ let prixMin = document.querySelector("#prixMin")
 //////////////////////////////////
 //////////////////////////////////
 //////////////////////////////////
+
 let categorieStr= "";
 let marqueStr="";
 let enStock = false;
+
 stock.addEventListener("click",()=>{enStock = !enStock})
 categorieLinks.forEach(button =>{
     button.addEventListener("click", function(){
         if(!button.checked){
             categorieStr += button.value + "$"
-            console.log(categorieStr)
+
         }else{
             categorieStr = categorieStr.slice(0,categorieStr.indexOf(button.value)) + categorieStr.slice(categorieStr.indexOf(button.value) + button.value.length + 1)
-            console.log(categorieStr)
         }
     })
 })
@@ -42,16 +66,44 @@ marqueLinks.forEach(button=>{
     button.addEventListener("click",function(){
         if(!button.checked){
             marqueStr += button.value + "$"
-            console.log(marqueStr)
         }else{
             marqueStr = marqueStr.slice(0,marqueStr.indexOf(button.value)) + marqueStr.slice(marqueStr.indexOf(button.value) + button.value.length + 1)
-            console.log(marqueStr)
         }
 })
 })
 
+buttonFiltrer.addEventListener("click",function(event){
+    let queryText="";
+    if(marqueStr !== ""){
+        queryText += `marque=${marqueStr.slice(0,-1)}&`;
+        marqueStr="";
+    }
+    if(categorieStr !==""){
+        queryText += `categorie=${categorieStr.slice(0,-1)}&`;
+        categorieStr = "";
+    }
+
+    if(enStock){
+        queryText += "stock=disponible&";
+    }
 
 
+    if(parseFloat(prixMax.textContent)!=0 && parseFloat(prixMin.textContent) !=0){
+        max = Math.max(prixMax.textContent, prixMin.textContent);
+        min = Math.min(prixMax.textContent, prixMin.textContent);
+        queryText += `prixMax=${max}&prixMin=${min}&`;
+    }else if(parseFloat(prixMax.textContent) !==0){queryText += `prixMax=${parseFloat(prixMax.textContent)}&`;}
+    else if(parseFloat(prixMin.textContent) !=0){queryText += `prixMin=${parseFloat(prixMin.textContent)}&`}
+    if(queryText) queryText = queryText.slice(0,-1);
+
+
+    console.log(queryText)
+    window.location.href=`/products?${queryText}`;
+})
+
+////////////////////////////////////
+////////////////////////////////////
+////////////////////////////////////
 
 
 
@@ -76,7 +128,6 @@ addCartButtonList.forEach(button => {
         }else{
             var cartTable = [];
         }
-        console.log(cartTable)
         let idProduct = element.dataset.idproduit;
         let exist = 0;
         for(let i =0 ; i<cartTable.length ; i++){        
@@ -92,7 +143,6 @@ addCartButtonList.forEach(button => {
                     quantity :1
             });
         }
-        console.log(cartTable)
         localStorage.setItem(
             "cartTable",
             JSON.stringify(cartTable)
@@ -100,10 +150,8 @@ addCartButtonList.forEach(button => {
     })
 })
 
-console.log(emptyHeart)
 emptyHeart.forEach(heart =>{
     heart.addEventListener("mouseover", _ =>{
-        console.log(heart)
         heart.classList.remove("fa-regular");
         heart.classList.add("fa-solid")
         heart.style.color = "red"

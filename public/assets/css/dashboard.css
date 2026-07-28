@@ -200,7 +200,7 @@ img{
     border: 2px solid #eee;
     border-radius: 1em;
     padding: 2em;
-    width: 40%;
+    width: 50%;
 }
 
 .top-chart .left h3{
@@ -210,7 +210,7 @@ img{
 
 .top-chart .right{
     border-radius: 1em;
-    width: 59%;
+    width: 50%;
     border: 2px solid #eee;
 }
 .top-chart .right .top-part{
@@ -586,4 +586,8 @@ img{
 .zeroRepture{
     background-color: var(--blue-glass) !important; 
     color: var(--blue) !important;
+}
+
+#evolution_vente{
+    height: 100%;
 }
