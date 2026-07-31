@@ -2,17 +2,25 @@
     require_once(__DIR__ . "/../backend/services/ClientServices.php");
     require_once(__DIR__ . "/../backend/models/Client.php");
     require_once(__DIR__ . "/../backend/services/CommandeServices.php");
+    $services_client = new ClientServices();
+    $services_commande = new CommandeServices();
     if(!isset($_SESSION["userId"])){
         header("Location: /main");
         exit;
     }
-    $services_client = new ClientServices();
-    $services_commande = new CommandeServices();
-    $clientId = intval($_SESSION["userId"]);
-    $client_data = $services_client->getClientById($clientId);
+
+    if(isset($_SESSION["googleID"])){
+        $client_data = $services_client->searchClientsByEmail($_SESSION["clientEmail"]);
+    }else{
+
+        $clientId = intval($_SESSION["userId"]);
+        $client_data = $services_client->getClientById($clientId);
+    }
+
+
     $client = new Client(
         $client_data["nom"],
-        $client_data["prenom"],
+        $client_data["prenom"] ?? "",
         $client_data["tel"],
         $client_data["email"],
         $client_data["password"],

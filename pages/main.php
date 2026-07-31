@@ -3,9 +3,7 @@
     $product_service = new ProductServices();
 
     $list_all_product = $product_service->getAllProduct(9,1);
-
-
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">

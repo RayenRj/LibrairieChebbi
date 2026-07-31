@@ -72,10 +72,10 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
         public function searchClientsByEmail(string $email){
-            $query = "select * from client where email like '%?%' ;";
+            $query = "select * from client where email like ? ;";
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$email]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
+            $stmt->execute(["%$email%"]);
+            return $stmt->fetch(PDO::FETCH_NUM)[0] ?: null;
         }
         public function searchClientsByTel(string $tel){
             $query = "select * from client where tel like '%?%' ;";

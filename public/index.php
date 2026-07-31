@@ -43,6 +43,8 @@ error_reporting(E_ALL);
     $route->add("GET", "/client" , "PageController","clientPage");
     $route->add("GET", "/packs/livres" , "PageController","packLivrePage");
     $route->add("GET", "/packs/livres/parascolaire" , "PageController","ParascolairePage");
+    $route->add("GET", "/google-callback" , "PageController","callbackPage");
+    $route->add("GET", "/google-login" , "PageController","logInPage");
 
     //=========> Product Routes <=======
     $route->add("POST","/api/articles","ProductController","addProduct");

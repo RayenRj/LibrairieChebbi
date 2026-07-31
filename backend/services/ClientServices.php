@@ -8,6 +8,7 @@
         public function __construct(){
             $this->clientRepo = new ClientRepository();
         }
+        
 
 
         //done
@@ -28,6 +29,10 @@
             $password_hash = $client['password'];
             if(password_verify($password , $password_hash)){return $client;}
             return false;
+        }
+
+        public function searchClientsByEmail($email){
+            return $this->clientRepo->searchClientsByEmail($email);
         }
         //done
         public function getAllClients() : array{
