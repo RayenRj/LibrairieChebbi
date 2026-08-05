@@ -31,6 +31,7 @@
             return false;
         }
 
+        
         public function searchClientsByEmail($email){
             return $this->clientRepo->searchClientsByEmail($email);
         }
@@ -54,8 +55,8 @@
             $email = trim($email);
             if(empty($nom)){throw new Exception("Nom est vide!");}
             if(empty($prenom)){throw new Exception("Prenom est vide!");}
-            if(empty($tel) || !preg_match("/^[0-9]{8,15}$/", $tel)){throw new Exception("numero telephone est vide!");}
-            if(empty($password) || strlen($password) < 6){throw new Exception("password est invalide!");}
+            // if(empty($tel) || !preg_match("/^[0-9]{8,15}$/", $tel)){throw new Exception("numero telephone est vide!");}
+            // if(empty($password) || strlen($password) < 6){throw new Exception("password est invalide!");}
             if(empty($email) || !filter_var($email , FILTER_VALIDATE_EMAIL)){throw new Exception("Email est invalide!");}
             $password_hash = password_hash($password , PASSWORD_DEFAULT);
             $client = new Client($nom , $prenom , $tel , $email , $password_hash , "client", "");
@@ -123,6 +124,9 @@
             return $this->clientRepo->nombreDeLigneSearchClient($idClient , $nom , $prenom , $email , $tel);
         }
 
+        public function getClietIdByEmail($email){
+            return $this->clientRepo->getClietIdByEmail($email);
+        }
 
     }
 ?>

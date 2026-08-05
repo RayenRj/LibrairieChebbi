@@ -1,6 +1,7 @@
 <?php 
-echo "Hello";
-require __DIR__ ."/../vendor/autoload.php";
+require_once __DIR__ ."/../vendor/autoload.php";
+require_once __DIR__ . "/../backend/services/ClientServices.php";
+$service_client = new ClientServices();
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
 if(!isset($_GET["state"]) || $_GET["state"] !== $_SESSION["oauth2state"]){
@@ -31,14 +32,21 @@ if($payload){
     $email = $payload["email"];
     $name = $payload["name"];
 
+    if($service_client->isEmailTaken($email)===false){
+        $client = $service_client->createClient(explode(" ",$name)[0] ,explode(" ",$name)[1],"",$email,  "" );      
+    }
+
+
+    $_SESSION["userId"] = $service_client->getClietIdByEmail($email);
     $_SESSION["googleID"] = $googleId;
-    $_SESSION["userId"] = $googleId;
     $_SESSION["clientEmail"] = $email;
     $_SESSION["role"] = "client";
-    $_SESSION["nom"]= explode(" ",$name)[0];
-    $_SESSION["prenom"] = explode(" ",$name)[1];
-    header("Location: /main");
+    $_SESSION["firstName"]= explode(" ",$name)[0];
+    $_SESSION["lastName"] = explode(" ",$name)[1];
 
+
+    echo $_SESSION["clientEmail"] . " " . $_SESSION["firstName"] . " " . $_SESSION["lastName"];
+    header("Location: /main");
 }else{
     exit("invalid ID Token");
 }

@@ -60,9 +60,9 @@
                 <li><a href="/panier" id="cart">🛒 cart<span class="cartCount">0</span></a></li>
             </ul>
         </div>
-
-        <div class="responsive" hidden>
-            <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-bars"></i>
+        <div class="responsive">
+            
             
             <i class="fa-solid fa-x"></i>
             <div class="list">

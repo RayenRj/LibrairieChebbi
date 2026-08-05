@@ -9,7 +9,7 @@
         exit;
     }
 
-    if(isset($_SESSION["googleID"])){
+    if(isset($_SESSION["userId"])){
         $client_data = $services_client->searchClientsByEmail($_SESSION["clientEmail"]);
     }else{
 
@@ -19,17 +19,17 @@
 
 
     $client = new Client(
-        $client_data["nom"],
-        $client_data["prenom"] ?? "",
-        $client_data["tel"],
-        $client_data["email"],
-        $client_data["password"],
-        $client_data["role"],
+        $client_data["nom"] ?? $_SESSION["nom"],
+        $client_data["prenom"] ?? $_SESSION["prenom"],
+        $client_data["tel"] ?? "",
+        $client_data["email"] ?? $_SESSION["clientEmail"],
+        $client_data["password"] ?? "",
+        $client_data["role"] ?? $_SESSION["role"],
         $client_data["addresse"] ?? ""
     );
 
 
-    $liste_commande = $services_commande->getCommandeByClient($clientId);
+    $liste_commande = $services_commande->getCommandeByClient($_SESSION["userId"]);
 ?>
 
 <!DOCTYPE html>

@@ -75,7 +75,7 @@
             $query = "select * from client where email like ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute(["%$email%"]);
-            return $stmt->fetch(PDO::FETCH_NUM)[0] ?: null;
+            return $stmt->fetch(PDO::FETCH_BOTH) ?: null;
         }
         public function searchClientsByTel(string $tel){
             $query = "select * from client where tel like '%?%' ;";
@@ -226,6 +226,16 @@
             $stmt->execute($params);
             return $stmt->fetch(PDO::FETCH_NUM)[0];
         }
+        public function getClietIdByEmail(string $email){
+            $query = "select id_client from client where email = ? ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$email]);
+            return $stmt->fetch(PDO::FETCH_ASSOC)["id_client"] ?: null;
+        }
+
+
     }
+
+
 
 ?>

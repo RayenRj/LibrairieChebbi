@@ -54,19 +54,21 @@
 
             
             <div>
-                <div>
-                    <input type="text" name="" id="" placeholder="Rechercher...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-                <div>
-                    <select name="" id="criteres">
-                        <option value="">Email</option>
-                        <option value="">ID</option>
-                        <option value="">Nom</option>
-                        <option value="">Prénom</option>
-                    </select>
-                    <!-- <i class="fa-solid fa-caret-down"></i> -->
-                </div>
+                <form action="" id="userForm">
+                    <div>
+                        <input type="text" name="data" id="utilisateurData" placeholder="Rechercher...">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div>
+                        <select name="critere" id="criteres">
+                            <option value="email">Email</option>
+                            <option value="id_client">ID Client</option>
+                            <option value="nom">Nom</option>
+                            <option value="prenom">Prénom</option>
+                        </select>
+                        <!-- <i class="fa-solid fa-caret-down"></i> -->
+                    </div>
+                </form>
             </div>
         </div>
 

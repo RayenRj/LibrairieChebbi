@@ -37,3 +37,14 @@ deleteClient.forEach(button =>{
         }
     })
 })
+
+
+/// partie search 
+let form = document.querySelector("#userForm");
+form.addEventListener("submit",function(event){
+    event.preventDefault();
+    let data = document.querySelector("#data").value.toLowerCase();
+    let critere = document.querySelector("#criteres");
+
+    window.location.search = `${critere}=${data}`;
+})

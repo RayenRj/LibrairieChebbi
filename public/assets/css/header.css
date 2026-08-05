@@ -312,10 +312,11 @@ header .part-two ul li a{
 .responsive{
   width: fit-content;
   background-color: var(--white);
-  background-color: var(--gray-300);
+  background-color: var(--gray-100);
   border-radius: 10px;
-  position: relative;
-  top: 500px;
+  position: absolute;
+  top: 100%;
+  right: 0;
 }
 .responsive i{
   position: absolute;
@@ -328,7 +329,7 @@ header .part-two ul li a{
   display: flex;
   flex-flow: column nowrap;
   list-style-type: none;
-  text-align: center;
+  text-align: left;
   padding: 2em;
 }
 .responsive div ul li{
@@ -352,7 +353,7 @@ hr{
 /* responsive part */
 
 .fa-bars,.responsive{
-  display: none;
+  display: visible;
 }
 
 /* Mobile S */
@@ -513,3 +514,77 @@ button.buttonGoogle:hover {
   transform: scale(1.02);
 }
 
+/* responsive */
+@media(max-width:600px){
+  header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0em 10vw;
+  }
+  .left-part .categories,
+  .part-two{
+    display: none;
+  }
+  .search{
+    position: absolute;
+    top: 100%;
+    padding-top: 1em;
+    width: 100%;
+    left: 0;
+    padding-bottom: 1em;
+    background-color: var(--gray-100);
+
+  }
+
+    header .left-part .search .input-container {
+        width: 80%;
+        
+        padding: 0em;
+        position: relative;
+        margin: auto;
+    }
+
+  header .left-part .search .input-container input {
+        height: 40px;
+        width: 100%;
+        border-radius: 2em;
+        border: 1.5px solid var(--gray-200);
+        padding: 1em;
+        padding-left: 45px;
+        padding-right: 1em;
+        background-color: var(--gray-300);
+        margin: auto;
+        position: relative;
+        top: unset;
+        left: unset;
+    }
+  
+    .responsive{
+      width: 65%;
+      background-color: var(--white);
+      background-color: rgba(190, 195, 213, 0.437);
+      border-radius: 10px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      backdrop-filter: blur(10px);
+    }
+
+    .responsive i {
+        position: absolute;
+        right: 35px;
+        top: 35px;
+        font-size: 18px !important;
+        color: rgb(134, 10, 10);
+    }
+}
+
+@media(min-width:600px){
+  i.fa-bars,
+  .responsive{
+    display: none;
+  }
+
+
+
+}
