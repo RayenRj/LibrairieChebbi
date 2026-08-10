@@ -3,9 +3,13 @@
     $product_service = new ProductServices();
 
     $list_all_product = $product_service->getAllProduct(9,1);
+<<<<<<< HEAD
 
 
 ?>
+=======
+?> 
+>>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
 
 <!DOCTYPE html>
 <html lang="en">

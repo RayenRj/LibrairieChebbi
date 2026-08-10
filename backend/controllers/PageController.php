@@ -23,6 +23,9 @@
         public function clientPage(){require(PATH . "PageClient.php");}
         public function packLivrePage(){require(PATH . "PackLivre.php");}
         public function ParascolairePage(){require(PATH . "Parascolaire.php");}
+        public function callbackPage(){require(PATH . "googleCallback.php");}
+        public function logInPage(){require(PATH . "google-login.php");}
+        
 
     }
 

@@ -620,5 +620,6 @@ use librairieDB_v2;
 
 select * from pack pa , ligne_commande lc , commande c where lc.id_commande = c.id_commande and lc.id_produit = pa.id_pack;
 
-
+select * from produit;
 select * from commande;
+

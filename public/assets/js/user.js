@@ -36,4 +36,18 @@ deleteClient.forEach(button =>{
             }
         }
     })
+<<<<<<< HEAD
+=======
+})
+
+
+/// partie search 
+let form = document.querySelector("#userForm");
+form.addEventListener("submit",function(event){
+    event.preventDefault();
+    let data = document.querySelector("#data").value.toLowerCase();
+    let critere = document.querySelector("#criteres");
+
+    window.location.search = `${critere}=${data}`;
+>>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
 })

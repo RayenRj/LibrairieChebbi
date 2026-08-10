@@ -1,0 +1,9 @@
+/node_modules/
+node_modules/
+
+/vendor/
+composer.*
+readme.md
+
+client_secret*.json
+.env
