@@ -1,8 +1,8 @@
 let addCartButtonList = document.querySelectorAll(".addCartButton");
 let articleContainer = document.querySelector(".articles")
 let emptyHeart = document.querySelectorAll(".fa-regular.fa-heart")
-let categorieLinks = document.querySelectorAll(".list-categorie .checkBox input[type='checkbox']")
-let marqueLinks = document.querySelectorAll(".list-marque .checkBox input[type='checkbox']")
+let categorieLinks = document.querySelectorAll(".list-categorie .checkBoxLabel input[type='checkbox']")
+let marqueLinks = document.querySelectorAll(".list-marque .checkBoxLabel input[type='checkbox']")
 let stock = document.querySelector("#stockCheck");
 let range1 = document.querySelector("#range1")
 let range2 = document.querySelector("#range2")
@@ -15,7 +15,7 @@ let selectTrie = document.querySelector("#trie")
 
 selectTrie.addEventListener("change",()=>{
     let value = selectTrie.value;
-    console.log(value)
+
     if(window.location.search.indexOf("trie") === -1){
         window.location.search =  `${window.location.search}&trie=${value}`;
     }else{
@@ -66,6 +66,7 @@ marqueLinks.forEach(button=>{
     button.addEventListener("click",function(){
         if(!button.checked){
             marqueStr += button.value + "$"
+            console.log(marqueStr)
         }else{
             marqueStr = marqueStr.slice(0,marqueStr.indexOf(button.value)) + marqueStr.slice(marqueStr.indexOf(button.value) + button.value.length + 1)
         }
@@ -97,7 +98,6 @@ buttonFiltrer.addEventListener("click",function(event){
     if(queryText) queryText = queryText.slice(0,-1);
 
 
-    console.log(queryText)
     window.location.href=`/products?${queryText}`;
 })
 

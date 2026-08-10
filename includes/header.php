@@ -27,15 +27,15 @@
             <div class="categories">
                 <button>📦 Categories ▾</button>
                 <ul class="dropdown-menu">
-                    <li><a href="/main">⭐ <span>main</span></a></li>
-                    <li><a href="/products">🛍️ <span>All Products</span></a></li>
-                    <li><a href="/packs">📦 <span>Nos Packs</span></a></li>
-                    <li><a href="/packs/livres">📚 <span>Livres</span></a></li>
+                    <li><a href="/main">⭐ <span>Page Accueil</span></a></li>
+                    <li><a href="/products">🛍️ <span>Tous Produits</span></a></li>
+                    <li><a href="/packs">📦 <span>Les Packs</span></a></li>
+                    <li><a href="/packs/livres">📚 <span>Livre Pédagogique</span></a></li>
                     <li><a href="/packs/livres/parascolaire">📚 <span>Parascolaires</span></a></li>
-                    <li><a href="/collections">🎒 <span>School Bags</span></a></li>
-                    <li><a href="/products">✏️ <span>Writing Tools</span></a></li>
-                    <li><a href="/products">📐 <span>Geometry Tools</span></a></li>
-                    <li><a href="/games">🧸 <span>jouets</span></a></li>
+                    <li><a href="/collections">🎒 <span>Sac a Dos</span></a></li>
+                    <li><a href="/products">✏️ <span>Ecritures</span></a></li>
+                    <li><a href="/products">📐 <span>Outils Geometries</span></a></li>
+                    <li><a href="/games">🧸 <span>Jouet</span></a></li>
                     <li><a href="/products">🔮 <span>Autres Accessories</span></a></li>
                 </ul>
             </div>
