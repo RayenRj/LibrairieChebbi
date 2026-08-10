@@ -529,16 +529,16 @@ button.buttonGoogle:hover {
   transform: scale(1.02);
 }
 
-<<<<<<< HEAD
-=======
 /* responsive */
-@media(max-width:600px){
+@media(max-width:800px){
   header{
-    display: flex;
-    justify-content: space-between;
-    padding: 0em 10vw;
+    display: none;
   }
-  .left-part .categories,
+
+  header.responsiveHeader{
+    display: flex;
+  }
+  /* .left-part .categories,
   .part-two{
     display: none;
   }
@@ -593,16 +593,17 @@ button.buttonGoogle:hover {
         top: 35px;
         font-size: 18px !important;
         color: rgb(134, 10, 10);
-    }
+    } */
 }
 
-@media(min-width:600px){
-  i.fa-bars,
-  .responsive{
+@media(min-width:800px){
+  header{
+    display: flex;
+  }
+
+  header.responsiveHeader{
     display: none;
   }
 
 
-
 }
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825

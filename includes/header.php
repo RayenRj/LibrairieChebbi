@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/css/header.css">
     <link rel="stylesheet" href="/assets/css/signup.css">
     <link rel="stylesheet" href="/assets/css/signin.css">
+    <link rel="stylesheet" href="/assets/css/responsiveHeader.css">
     <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
 </head>
 <body>
@@ -19,7 +20,7 @@
     <!-- ######## start of partie header #########-->
     <!-- ######################################### -->
     <!-- ######################################### -->
-    <header>
+    <header hidden>
         <div class="left-part">
             <div class="logo">
                 <img src="/assets/images/logo/logo2.png"  alt="logo">
@@ -60,32 +61,163 @@
                 <li><a href="/panier" id="cart">🛒 cart<span class="cartCount">0</span></a></li>
             </ul>
         </div>
-        <i class="fa-solid fa-bars"></i>
-        <div class="responsive">
-            
-            
-            <i class="fa-solid fa-x"></i>
-            <div class="list">
-                <ul>
-                    <li><a href="">📚 <span>Books</span></a></li>
-                    <li><a href="">🎒 <span>School Bags</span></a></li>
-                    <li><a href="">✏️ <span>Writing Tools</span></a></li>
-                    <li><a href="">📐 <span>Geometry Tools</span></a></li>
-                    <li><a href="">🔮 <span>Accessories</span></a></li>
-                    <li><a href="">🛍️ <span>All products</span></a></li>
-                    <li><a href="">🛍️ <span>jouets</span></a></li>
-                </ul>
-            </div>
-            <hr>
-            <div class="button-list">
-                <ul>
-                    <li><a href="">Login</a></li>
-                    <li><a href="">sign-up</a></li>
-                    <li><a href="">Log out</a></li>
-                </ul>
-            </div>
-        </div>
     </header>
+
+    <!-- responsive header -->
+  <header class="responsiveHeader">
+    <div class="bars">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="logo">
+      <img src="/assets/images/logo/logo2.png" alt="">
+    </div>
+
+    <form action="">
+      <div class="search">
+          <input type="search" name="" id="" placeholder="Rechercher Fourniture scholaires....">
+          <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+    </form>
+
+    <div class="user">
+      <i class="fa-regular fa-user"></i>
+    </div>
+
+    <div class="cart">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="count">15</span>
+    </div>
+  </header>
+
+  <div class="Listoverlay"></div>
+  <!-- partie eli feha el list responsive -->
+  <div class="list">
+    <i class="fa-solid fa-x close"></i>
+    <img src="/assets/images/logo/logo2.png" alt="">
+    <ul class="dropdown-menu">
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-house"></i>
+              </div>
+              <span>Page Accueil</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-border-all"></i>
+              </div>
+              <span>Tous Produits</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-cube"></i>
+              </div>
+              <span>Les Packs</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-book"></i>
+              </div>
+              <span>Livres Pédagogiques</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-book-open"></i>
+              </div>
+              <span>Parascolaires</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-suitcase"></i>
+              </div>
+              <span>Sac à dos</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-pen"></i>
+              </div>
+              <span>Ecritures</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-compass-drafting"></i>
+              </div>
+              <span>Outils Geometriques</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-chess"></i>
+              </div>
+              <span>Jouets</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/main">
+            <div class="iconText">
+              <div class="iconDiv">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <span>Autres Accessoires</span>
+            </div>
+            <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </li>
+
+    </ul>
+    <hr>
+    <div class="button-list">
+        <ul>
+            <li id="sign-in-button"><a href="" >Log in</a></li>
+            <li id="sign-up-button"><a href="" >Sign up</a></li>
+            <li id="log_out-button"><a href="" ><i class="fa-solid fa-right-from-bracket"></i><span>Log out</span></a></li>
+        </ul>
+    
+        
+    </div>
+  </div>
     <!--end of partie header-->
 
     <!-- ######################################### -->

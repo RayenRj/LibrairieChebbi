@@ -7,6 +7,8 @@ let beforeSignUp = document.querySelector(".before-signup");
 let body = document.body;
 let logOutButton = document.querySelector("#log_out");
 
+let bars = document.querySelector("#");
+
 
 
 let cartCount = document.querySelector(".cartCount");

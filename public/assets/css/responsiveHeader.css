@@ -333,24 +333,24 @@ p{font-size: 13px;}
 }
 
 
-#sign-in{background-color: var(--blue);}
-#sign-in a{color: white;}
+#sign-in-button{background-color: var(--blue);}
+#sign-in-button a{color: white;}
 
 
 
-#sign-up{background-color: var(--yellow-deep);}
-#sign-up a{color:black;}
+#sign-up-button{background-color: var(--yellow-deep);}
+#sign-up-button a{color:black;}
 
 
 
-#log_out{
+#log_out-button{
     background-color: var(--red-glass);
     display: flex;
     align-items: center;
     justify-content: center;
 }
-#log_out i{margin-right: 0.75em;}
-#log_out a{color:var(--red);}
+#log_out-button i{margin-right: 0.75em;}
+#log_out-button a{color:var(--red);}
 
 
 .Listoverlay{
@@ -362,4 +362,5 @@ p{font-size: 13px;}
     width: 100%;
     height: 100%;
     z-index: 506;
+    display: none;
 }
