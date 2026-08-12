@@ -6,15 +6,28 @@ let beforeSignIn = document.querySelector(".before-signin");
 let beforeSignUp = document.querySelector(".before-signup");
 let body = document.body;
 let logOutButton = document.querySelector("#log_out");
+let bars = document.querySelector("#barMenu");
+// let bars = document.querySelector("#");
 
-let bars = document.querySelector("#");
-
-
+let list = document.querySelector(".listMenu");
+let responsiveOverlay = document.querySelector(".Listoverlay");
+let closeList = document.querySelectorAll(".closeList")
 
 let cartCount = document.querySelector(".cartCount");
 
+bars.addEventListener("click",function(){
+    list.style.display = "flex";
+    responsiveOverlay.style.display= "block";
+
+})
 
 
+closeList.forEach(close =>{
+    close.addEventListener("click",function(){
+        list.style.display="none";
+        responsiveOverlay.style.display="none";
+    })
+})
 
 function getLocalStorageArticlesList(){
     let cartTableString = localStorage.getItem("cartTable");

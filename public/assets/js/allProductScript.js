@@ -1,13 +1,8 @@
 let addCartButtonList = document.querySelectorAll(".addCartButton");
 let articleContainer = document.querySelector(".articles")
 let emptyHeart = document.querySelectorAll(".fa-regular.fa-heart")
-<<<<<<< HEAD
 let categorieLinks = document.querySelectorAll(".list-categorie .checkBoxLabel input[type='checkbox']")
 let marqueLinks = document.querySelectorAll(".list-marque .checkBoxLabel input[type='checkbox']")
-=======
-let categorieLinks = document.querySelectorAll(".list-categorie .checkBox input[type='checkbox']")
-let marqueLinks = document.querySelectorAll(".list-marque .checkBox input[type='checkbox']")
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
 let stock = document.querySelector("#stockCheck");
 let range1 = document.querySelector("#range1")
 let range2 = document.querySelector("#range2")
@@ -20,11 +15,6 @@ let selectTrie = document.querySelector("#trie")
 
 selectTrie.addEventListener("change",()=>{
     let value = selectTrie.value;
-<<<<<<< HEAD
-
-=======
-    console.log(value)
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
     if(window.location.search.indexOf("trie") === -1){
         window.location.search =  `${window.location.search}&trie=${value}`;
     }else{
@@ -75,10 +65,6 @@ marqueLinks.forEach(button=>{
     button.addEventListener("click",function(){
         if(!button.checked){
             marqueStr += button.value + "$"
-<<<<<<< HEAD
-            console.log(marqueStr)
-=======
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
         }else{
             marqueStr = marqueStr.slice(0,marqueStr.indexOf(button.value)) + marqueStr.slice(marqueStr.indexOf(button.value) + button.value.length + 1)
         }
@@ -110,10 +96,6 @@ buttonFiltrer.addEventListener("click",function(event){
     if(queryText) queryText = queryText.slice(0,-1);
 
 
-<<<<<<< HEAD
-=======
-    console.log(queryText)
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
     window.location.href=`/products?${queryText}`;
 })
 

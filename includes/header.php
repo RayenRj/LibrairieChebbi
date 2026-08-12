@@ -65,8 +65,8 @@
 
     <!-- responsive header -->
   <header class="responsiveHeader">
-    <div class="bars">
-      <i class="fa-solid fa-bars"></i>
+    <div class="bars" id="barMenu">
+      <i class="fa-solid fa-bars" ></i>
     </div>
     <div class="logo">
       <img src="/assets/images/logo/logo2.png" alt="">
@@ -89,10 +89,10 @@
     </div>
   </header>
 
-  <div class="Listoverlay"></div>
+  <div class="Listoverlay closeList"></div>
   <!-- partie eli feha el list responsive -->
-  <div class="list">
-    <i class="fa-solid fa-x close"></i>
+  <div class="listMenu">
+    <i class="fa-solid fa-x closeList"></i>
     <img src="/assets/images/logo/logo2.png" alt="">
     <ul class="dropdown-menu">
         <li>

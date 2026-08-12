@@ -160,10 +160,10 @@ p{font-size: 13px;}
 
 /* reglage style de liste */
 
-.list{
-    
-    position: relative;
+.listMenu{
+    position:absolute   ;
     background-color: white;
+    height: 100dvh;
     width: 70%;
     z-index: 501;
     padding: 1em 1.5em 1.5em;
@@ -172,13 +172,15 @@ p{font-size: 13px;}
     gap: 1em;
     backdrop-filter: blur(10px);
     padding-top: 30px;
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
+    /* border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px; */
     z-index: 507;
     max-width: 350px;
-    display: none; 
+    display: none;
+    justify-content: flex-start;
 }
-.list .close{
+
+.listMenu .close{
     position: absolute;
     color:black;
     left: 25px;
@@ -189,7 +191,7 @@ p{font-size: 13px;}
     font-weight: bold;
 }
 
-.list .dropdown-menu li a{
+.listMenu .dropdown-menu li a{
     margin-bottom: 0.5em;
     display: flex;
     flex-direction: row;
@@ -217,11 +219,11 @@ p{font-size: 13px;}
 .iconDiv i{
     font-size: 13px;
 }
-.list .dropdown-menu .fa-angle-right{
+.listMenu .dropdown-menu .fa-angle-right{
     font-size: 12px;
     color: var(--gray-800);
 }
-.list .dropdown-menu li .iconDiv{
+.listMenu .dropdown-menu li .iconDiv{
     background-color: rgba(255, 166, 0, 0.184);
     height: 30px;
     width: 30px;
@@ -231,87 +233,87 @@ p{font-size: 13px;}
     border-radius: 0.5em;
     color: orange;
 }
-.list > img{
+.listMenu > img{
     width: 150px;
-    margin:auto
+    margin:0px auto;
 }
 
 
 
 /* partie colors */
 /* first one */
-.list .dropdown-menu li:first-of-type a{
+.listMenu .dropdown-menu li:first-of-type a{
     background-color: rgba(255, 166, 0, 0.128);
 }
-.list .dropdown-menu li:first-of-type span{
+.listMenu .dropdown-menu li:first-of-type span{
     color: orange;
 }
 
 /* 1 — Blue */
-.list .dropdown-menu li:nth-child(7) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(7) .iconDiv {
     background: rgba(59, 130, 246, 0.12);
     color: #2563eb;
 }
 
 
 /* 2 — Violet */
-.list .dropdown-menu li:nth-child(2) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(2) .iconDiv {
     background: rgba(139, 92, 246, 0.13);
     color: #7c3aed;
 }
 
 
 /* 3 — Amber */
-.list .dropdown-menu li:nth-child(3) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(3) .iconDiv {
     background: rgba(245, 158, 11, 0.14);
     color: #b7791f;
 }
 
 
 /* 4 — Green */
-.list .dropdown-menu li:nth-child(4) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(4) .iconDiv {
     background: rgba(34, 197, 94, 0.12);
     color: #16a34a;
 }
 
 
 /* 5 — Cyan */
-.list .dropdown-menu li:nth-child(5) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(5) .iconDiv {
     background: rgba(6, 182, 212, 0.13);
     color: #0891b2;
 }
 
 
 /* 6 — Pink */
-.list .dropdown-menu li:nth-child(6) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(6) .iconDiv {
     background: rgba(236, 72, 153, 0.12);
     color: #db2777;
 }
 
 
 /* 7 — Orange */
-.list .dropdown-menu li:nth-child(8) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(8) .iconDiv {
     background: rgba(249, 115, 22, 0.13);
     color: #ea580c;
 }
 
 
 /* 8 — Teal */
-.list .dropdown-menu li:nth-child(9) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(9) .iconDiv {
     background: rgba(20, 184, 166, 0.13);
     color: #0f766e;
 }
 
 
 /* 9 — Red */
-.list .dropdown-menu li:nth-child(10) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(10) .iconDiv {
     background: rgba(239, 68, 68, 0.11);
     color: #dc2626;
 }
 
 
 /* 10 — Indigo */
-.list .dropdown-menu li:nth-child(11) .iconDiv {
+.listMenu .dropdown-menu li:nth-child(11) .iconDiv {
     background: rgba(99, 102, 241, 0.13);
     color: #4f46e5;
 }
@@ -360,7 +362,7 @@ p{font-size: 13px;}
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100dvh;
     z-index: 506;
     display: none;
 }
