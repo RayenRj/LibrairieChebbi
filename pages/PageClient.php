@@ -2,28 +2,12 @@
     require_once(__DIR__ . "/../backend/services/ClientServices.php");
     require_once(__DIR__ . "/../backend/models/Client.php");
     require_once(__DIR__ . "/../backend/services/CommandeServices.php");
-<<<<<<< HEAD
-=======
     $services_client = new ClientServices();
     $services_commande = new CommandeServices();
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
     if(!isset($_SESSION["userId"])){
         header("Location: /main");
         exit;
     }
-<<<<<<< HEAD
-    $services_client = new ClientServices();
-    $services_commande = new CommandeServices();
-    $clientId = intval($_SESSION["userId"]);
-    $client_data = $services_client->getClientById($clientId);
-    $client = new Client(
-        $client_data["nom"],
-        $client_data["prenom"],
-        $client_data["tel"],
-        $client_data["email"],
-        $client_data["password"],
-        $client_data["role"],
-=======
 
     if(isset($_SESSION["userId"])){
         $client_data = $services_client->searchClientsByEmail($_SESSION["clientEmail"]);
@@ -41,16 +25,11 @@
         $client_data["email"] ?? $_SESSION["clientEmail"],
         $client_data["password"] ?? "",
         $client_data["role"] ?? $_SESSION["role"],
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
         $client_data["addresse"] ?? ""
     );
 
 
-<<<<<<< HEAD
-    $liste_commande = $services_commande->getCommandeByClient($clientId);
-=======
     $liste_commande = $services_commande->getCommandeByClient($_SESSION["userId"]);
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
 ?>
 
 <!DOCTYPE html>

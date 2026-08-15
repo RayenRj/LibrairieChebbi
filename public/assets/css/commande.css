@@ -449,7 +449,8 @@ fieldset .bottom-part .with-label select{
 
 @media (max-width:800px) {
     .part-commande-bottom {
-        flex-direction: column;
+        flex-direction: column-reverse;
+        gap: 2em;
     }
     .part-commande-bottom .part-commande-coordonne {
         width: 100%;
@@ -498,10 +499,57 @@ fieldset .bottom-part .with-label select{
     }
 
     .commande hr {
-        width: 100px;
-        border-color: var(--gray-300);
-        border-width: 1px;
+        width: 100%;
+        border-color: var(--gray-200);
+        border-width: 0.5px;
     }
+    .btn-confirmation {
+        padding: 0.35rem 1rem;
+        font-size: 12px;
+    }
+    .commande fieldset .button-confirmation {
+        margin-top: 2em;
+    }
+    .part-commande-resume .aide, .part-commande-resume main {
+        border-radius: 0.5em;
+        border: 2px solid var(--border-gray);
+        padding: 2em 1em;
+        margin-bottom: 1em;
+    }
+    .part-commande-resume main .articles article div img {
+        height: 50px;
+        width: 50px;
+        border-radius: 0.5em;
+    }
+    .part-commande-resume .articles .txt .nom-produit {
+        font-weight: bold;
+        font-size: 12px;
+        overflow: hidden;
+    }
+
+     .part-commande-resume main .articles article .prix {
+        font-weight: bold;
+        font-size: 12px;
+        min-width: 65px;
+    }
+    .part-commande-resume main .articles article div .txt {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        padding-right: 0.25em;
+    }
+    .part-commande-resume .articles .txt .quantite {
+        font-size: 11px;
+        color: var(--gray-500);
+        margin-top: -0.5em;
+    }
+
+    .part-commande-resume .totale> div .prix-bleu {
+        font-weight: 700;
+        color: var(--blue);
+        font-size: 17px;
+    }
+    div.aide{display: none !important;}
 }
 
 @media (max-width:600px) {
