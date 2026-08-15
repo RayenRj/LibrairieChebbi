@@ -361,14 +361,18 @@ hr{
   font-size: 25px;
 }
 
+
+.signin-part{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 100dvh;
+}
 /* responsive part */
 
 .fa-bars,.responsive{
-<<<<<<< HEAD
   display: none;
-=======
-  display: visible;
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
 }
 
 /* Mobile S */
@@ -538,62 +542,12 @@ button.buttonGoogle:hover {
   header.responsiveHeader{
     display: flex;
   }
-  /* .left-part .categories,
-  .part-two{
-    display: none;
+
+  body{
+    max-width: 100dvw !important;
+    width: 100dvw !important;
+    overflow-x: hidden;
   }
-  .search{
-    position: absolute;
-    top: 100%;
-    padding-top: 1em;
-    width: 100%;
-    left: 0;
-    padding-bottom: 1em;
-    background-color: var(--gray-100);
-
-  }
-
-    header .left-part .search .input-container {
-        width: 80%;
-        
-        padding: 0em;
-        position: relative;
-        margin: auto;
-    }
-
-  header .left-part .search .input-container input {
-        height: 40px;
-        width: 100%;
-        border-radius: 2em;
-        border: 1.5px solid var(--gray-200);
-        padding: 1em;
-        padding-left: 45px;
-        padding-right: 1em;
-        background-color: var(--gray-300);
-        margin: auto;
-        position: relative;
-        top: unset;
-        left: unset;
-    }
-  
-    .responsive{
-      width: 65%;
-      background-color: var(--white);
-      background-color: rgba(190, 195, 213, 0.437);
-      border-radius: 10px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      backdrop-filter: blur(10px);
-    }
-
-    .responsive i {
-        position: absolute;
-        right: 35px;
-        top: 35px;
-        font-size: 18px !important;
-        color: rgb(134, 10, 10);
-    } */
 }
 
 @media(min-width:800px){
@@ -607,3 +561,26 @@ button.buttonGoogle:hover {
 
 
 }
+
+
+@media(max-width:500px){
+  .choose {
+      height: 100%;
+      width: 80dvw !important;
+  }
+
+
+    .signin , .signup {
+      height: fit-content !important;
+      width: fit-content !important;
+      padding: 1.5em 0.5em 3em;
+  }
+
+  button.buttonGoogle {
+    font-size: 11px !important;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+  }
+}
+
+

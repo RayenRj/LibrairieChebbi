@@ -93,15 +93,19 @@ main.contact .first-part{
 main.contact .double{
     display: flex;
     flex-direction: row;
-    gap: 2em;
-    margin-top: 1em;
+    gap: 4%;
+    
     margin-bottom: 1em;
+    flex-wrap: wrap;
 }
 main.contact .double > div{
-    width: 100%;
+    width: 48%;
+    min-width: 200px;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    flex-grow: 1;
+    margin-top: 0.5em;
 }
 
 main.contact .double > div> label,
@@ -286,3 +290,89 @@ main.contact .double > div> input:focus,
 
 }
 
+@media (max-width:800px) {
+    main.contact {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 1em;
+        padding: 1em !important;
+        margin-bottom: 3em;
+        width: 100dvw;
+    }
+
+    main.contact .first-part {
+        background-color: var(--gray-100);
+        width: 100%;
+        padding: 2em;
+    }
+    .dernier-part {
+        width: 100%;
+        background-color: var(--gray-100);
+        padding: 3em;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .second-part {
+    width: 100% !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    }
+
+    main.contact .double {
+        display: flex;
+        flex-direction: row;
+        gap: 4%;
+        flex-wrap: wrap;
+        margin-top: 0;
+    }
+
+    .dernier-part form input[type="email"] {
+
+        width: calc(100% - 100px);
+        height: 45px;
+        padding: 1em 2em;
+        border-radius: 0.5em;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        outline: none;
+        border: 1px solid var(--border-gray);
+        font-size: 14px;
+        margin-top: 1px;
+    }
+
+    .dernier-part form{
+        width: 70%;
+        margin: 2em auto 0em;
+    }
+
+}
+
+@media (max-width:650px) {
+    
+    .dernier-part form{
+        width: 90%;
+        margin: 2em auto 0em;
+    }
+
+    .dernier-part {
+        padding: 3em 1em;
+    }
+    .dernier-part h2{
+        font-size: 1.1em;
+    }
+
+    .dernier-part .text {
+        display: flex;
+        gap: 1em;
+        align-items: center;
+        margin-right: 0;
+    }
+
+    
+}

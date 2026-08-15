@@ -632,7 +632,7 @@ article:hover {
 
 }
 
-@media (max-width:400px){
+@media (max-width:500px){
     /* reglage header de chaque container de pack */
     .packs-container .text h2 {
         font-weight: bold;
@@ -642,4 +642,125 @@ article:hover {
     .packs-container .text img {
         height: 10vw;
     }
+    body.pack .text {
+        max-width: 45%;
+        margin-top: 0.2em !important;
+    }
+    
+}
+
+
+
+
+
+
+/* Reglage S7i7 du responsive */
+@media(max-width:800px){
+    .image-container{
+        width: 100dvw !important;
+        /* min-height: 30dvh; */
+        height: 35dvh !important;
+    }
+    .regulateur-header-imageContainer-espace{
+        padding-top: 65px;
+    }
+    body.pack .image-container img{
+        border-radius: 0;
+    }
+
+    .packs-part{
+        width: 100dvw;
+    }
+    /* reglage pack container */
+    .packs-container main {
+        grid-template-columns: repeat(auto-fill, minmax(200px , 1fr));
+        gap: 0.5em;
+        padding: 0.75em;
+    }
+    .packs-container .text h2 {
+        font-weight: bold;
+        font-size: 1.25em;
+        width: 100%;
+    }
+
+
+
+    .packs-container main article .image img {
+        height: 20 0px;
+        width: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+        border: none;
+    }
+
+
+    body.pack .text h1 {
+        font-size: 1.75em;
+    }
+    body.pack .text p {
+        margin-top: 1.5em;
+        font-size: 0.55em;
+    }
+    body.pack .button a {
+        padding: 0.55em 0.75em;
+        font-size: 0.6em;
+    }
+    body.pack .button a:last-child {
+        display: none;
+    }
+}
+
+@media(max-width:500px){
+    .packs-container main {
+        grid-template-columns: repeat(auto-fill, minmax(125px , 1fr));
+        gap: 0.5em;
+        padding: 0.75em;
+    }
+
+
+    .packs-container main {
+        grid-template-columns: repeat(auto-fill, minmax(150px , 1fr));
+        gap: 0.5em;
+        padding: 0.75em;
+    }
+    .packs-container main article .image {
+        max-height: 200px !important;
+    }
+    .packs-container main article .text-pack {
+    margin: 0.5em 0.2em;
+}
+    .packs-container main article .text-pack p:last-of-type {
+        color: var(--blue);
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 0.25em;
+    }
+    .packs-container main article {
+        padding: 0.75em 0.5em;
+        border-radius: 10px;
+    }
+    .packs-container main article .button-pack {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column-reverse;
+        gap: 0.15em;
+        margin-bottom: 0.25em;
+    }
+
+    .packs-container main article .button-pack a {
+        border-radius: 5px;
+    }
+    .packs-container main article .text-pack h2 {
+        font-weight: 600;
+        font-size: 15px;
+    }
+    .packs-container main article .text-pack p:first-of-type {
+        font-size: 11px;
+        color: var(--gray-600);
+        margin-top: -2.5px;
+    }
+    .packs-container {
+        padding: 1em 0.25em;
+        border-radius: 0;
+}
 }

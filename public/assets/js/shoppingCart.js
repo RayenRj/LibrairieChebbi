@@ -54,11 +54,13 @@ window.addEventListener("load",async function(){
                             </div>
                         </td>
                         <td class="td-quantite">
+                            <div>
                             <button class="minusQuantityButton">-</button>
                             <input type="number" data-idproduit="${result.data.id_produit}" class="quantiteInput"  value="${article.quantity}">
                             <button class="plusQuantityButton">+</button>
+                            </div>
                         </td>
-                        <td>
+                        <td class="prixUnitaire">
                             <span class="prix-unitaire">${result.data.prix} dt</span>
                         </td>
                         <td>
@@ -76,10 +78,16 @@ window.addEventListener("load",async function(){
         totale += article.quantity * result.data.prix
     }
 
+    // let beforeLast_tr = `
+    //                 <tr>
+    //                     <td colspan="5"  class="total-payer">Total a payer</td>
+    //                     <td id="totalAmount">${totale.toFixed(3)}dt</td>
+    //                     <td></td>
+    //                 </tr>
     let beforeLast_tr = `
                     <tr>
-                        <td colspan="4"  class="total-payer">Total a payer</td>
-                        <td id="totalAmount">${totale.toFixed(3)}dt</td>
+                        <td colspan="5"  class="total-payer">Total a payer:  <span id="totalAmount">${totale.toFixed(3)} Dt</span></td>
+                        
                         <td></td>
                     </tr>
     `
@@ -202,10 +210,11 @@ tbody.addEventListener("click",async function(event){
             window.location.href = `/commande?total=${total}`;
         }else if(response.success && !response.data){
             SignInCard.removeAttribute("hidden");
+            SignInCard.style.top =window.scrollY + "px";
             body.style.maxHeight= "100vdh";
             body.style.overflow="hidden";
         }else{
-            alert(response.message)
+            alert(response.message);
         }
     }
 })

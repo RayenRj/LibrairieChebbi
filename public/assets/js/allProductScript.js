@@ -12,7 +12,6 @@ let buttonFiltrer = document.querySelector("#buttonFiltrer")
 let searchForm = document.querySelector("#searchBar")
 let selectTrie = document.querySelector("#trie")
 
-
 selectTrie.addEventListener("change",()=>{
     let value = selectTrie.value;
     if(window.location.search.indexOf("trie") === -1){
@@ -136,6 +135,7 @@ addCartButtonList.forEach(button => {
         }
         if(!exist){
             cartCount.textContent = parseFloat(cartCount.textContent) + 1
+            responsiveCartCount.textContent = parseFloat(responsiveCartCount.textContent) + 1
             cartTable.push({
                 idproduit : idProduct,
                     quantity :1

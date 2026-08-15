@@ -239,7 +239,7 @@ main.product{
     transition: 0.3s;
 }
 
-.product .top .wishlist{
+/* .product .top .wishlist{
     width: 100%;
     height: 40px;
     border-radius: 5px;
@@ -248,10 +248,51 @@ main.product{
     justify-content: center;
     align-items: center;
     gap: 0.5em;
-    font-size: 15px;
+    font-size: 13px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.075);
     transition: 0.3s;
+    color: var(--red);
+    background-color: #f8a5a538;
+    font-weight: 600;
+} */
+
+
+/* test */
+.product .top .wishlist {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+
+    background: rgba(255, 77, 90, 0.08);
+    color: #ff3f4f;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: all 0.25s ease;
 }
+
+.product .top .wishlist:hover {
+    background: #ff3f4f;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.product .top .wishlist i {
+    transition: transform 0.25s ease;
+}
+
+.product .top .wishlist:hover i {
+    transform: scale(1.2);
+}
+/* test */
 
 
 .product .top .article-buttons form a:hover,
@@ -352,3 +393,149 @@ section.bottom.packTable{
 }
 
 
+@media (max-width:800px) {
+    main.product {
+        padding: calc(2em + 65px) 6vw 2em 6vw;
+        width: 100dvw;
+    }
+    .product .top {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1em;
+        
+    }
+    .product .top .image-part {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .product .top .image-part img {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.75em;
+        max-width: 70vw;
+    }
+
+    .product .top .text-part {
+        width: 90dvw;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        background-color: #eeeeee5d;
+        padding: 3em;
+        border-radius: 1em;
+        min-height: fit-content;
+    }
+
+
+    section.bottom.packTable {
+        width: 95dvw;
+        margin: auto;
+        border-radius: 1em;
+        
+        padding: 1em;
+        background-color: white;
+        /* box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); */
+        margin-bottom: 3em;
+    }
+    .packTable table thead th:first-child {
+        text-align: left;
+        padding-left: 3em;
+    }
+    .packTable table tbody tr td {
+        text-align: center;
+        padding: 0.5em 0.25em;
+        font-size: 13px;
+        font-weight: 500;
+    }
+        .packTable table thead th {
+        background-color: var(--gray-100);
+        padding: 0.25em 0.75em;
+        font-size: 13px;
+    }
+        section.bottom.packTable h3 {
+        text-transform: capitalize;
+        font-size: 16px;
+    }
+        .packTable table tbody tr td:first-of-type {
+        display: flex;
+        gap: 1em;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 1em;
+    }
+}
+
+@media (max-width:500px) {
+    .product .top .image-part img {
+        max-width: 85vw;
+    }
+       .product .top .text-part {
+        width: 100dvw;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        background-color: #eeeeee5d;
+        padding: 2em 1.5em;
+        border-radius: 0em;
+        min-height: fit-content;
+    }
+
+    .product .article-buttons .numbers input {
+        max-width: 100px;
+        width: auto;
+    }
+    .product .top .article-buttons form {
+        gap: 0.75em;
+        
+    }
+    .product .path {
+        display: flex;
+        align-items: center;
+        row-gap: 0em;
+        column-gap: 0.5em;
+        font-size: 11px;
+        color: var(--gray-600);
+        margin-bottom: 2em;
+        flex-wrap: wrap;
+    }
+
+
+    main.product {
+        padding: calc(2em + 65px) 6vw 2em 6vw;
+    }
+    section.bottom.packTable {
+            width: 95dvw;
+            margin: 0;
+            margin-left: 02.5dvw;
+            border-radius: 1em;
+            padding: 0em;
+            background-color: white;
+            /* box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); */
+            margin-bottom: 3em;
+            overflow-x: hidden;
+    }
+
+    .packTable table tbody tr td:first-of-type img {
+        height: 45px;
+        width:45px;
+        object-fit: cover;
+    }
+
+
+    .packTable table th:nth-child(2) ,
+    .packTable table tbody tr td:nth-child(2),
+    .packTable table th:nth-child(3) ,
+    .packTable table tbody tr td:nth-child(3){
+        display: none;
+    }
+    .packTable table {
+        max-width: 95dvw !important;
+        margin: 0;
+        border-collapse: collapse;
+        overflow: hidden;
+    }
+
+}

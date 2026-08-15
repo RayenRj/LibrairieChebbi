@@ -205,7 +205,9 @@ th, td {
 
 
 
-
+#totalAmount{
+    font-weight: 600;
+}
 
 
 
@@ -304,10 +306,10 @@ th, td {
 
 
 
-.td-quantite{
+.td-quantite > div{
     display: flex;
     gap: 0;
-    height: 164.8px;
+    /* height: 164.8px; */
     justify-content: center;
     align-items: center;
 }
@@ -362,4 +364,156 @@ th, td {
 .last-tr > td{
     text-align: right;
     border-bottom: none;
+}
+
+
+
+@media (max-width:800px) {
+    aside div {
+        display: flex;
+        width: 100%;
+        padding: 2em 2em 1em;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    main.article-existe table {
+        margin: auto;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 15px;
+        width: 90%;
+        min-width: 450px;
+        z-index: -1;
+    }
+    main.article-existe table tr th {
+        text-align: left;
+        font-size: clamp(12px , 50vw , 14px);
+        padding: 10px 0 10px 10px;
+    }
+
+    th:last-child, td:last-child:not(.last-tr > td){
+        padding: 0;
+        padding-left: 1em;
+    }
+    td{
+        font-size: 13px;
+        max-height: 80px;
+    }
+
+    .td-quantite button {
+        height: 30px;
+        width: 25px;
+        font-size: 10px;
+    }
+
+    .quantiteInput {
+        width: 30px;
+        height: 30px;
+    }
+    .button-commande {
+        margin-bottom: 2em;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        background-color: var(--blue);
+        padding: 0.7em 1.75em;
+        border-radius: 0.5em;
+    }
+    .img {
+        height: 100px;
+        min-width: 100px;
+        object-fit: contain;
+    }
+    table{
+        max-width: 100dvw;
+    }
+
+}
+
+
+
+@media(max-width:500px){
+    .td-delete{
+        width: fit-content;
+    }
+    .img {
+        height: 50px;
+        min-width: 50px;
+        object-fit: contain;
+    }
+    th, td {
+        border-bottom: 1px solid #ddd;
+        padding: 0.75em 0.5em;
+        max-height: 80px;
+
+    }
+    #totalAmount{
+        padding-right: 0;
+    }
+    .last-tr td{
+        max-height: 80px !important;
+        padding: 2em;
+     }
+    .cta span {
+        font-size: 13px;
+        font-weight: bold;
+    }   
+    aside div h1 {
+        font-size: 18px;
+        font-weight: 500;
+        width: fit-content;
+    }
+
+    aside div {
+        width: 100dvw;
+        padding: 0.75em;
+    }
+
+    main.article-existe {
+        width: 100dvw;
+        height: fit-content;
+        margin-top: 3em;
+        margin-bottom: 5em;
+        padding: unset;
+    }
+
+    .prixUnitaire{
+        display: none;
+    }
+
+
+    .button-commande {
+        margin-bottom: 2em;
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        background-color: var(--blue);
+        padding: 0.45em 1.25em;
+        border-radius: 0.5em;
+    }
+    th:last-child{display: none;}
+
+    main.article-existe table {
+        min-width: unset ;
+        width: 100dvw !important;
+        max-width: 100dvw !important;
+        overflow: hidden !important;
+    }
+    #totalAmount + td{
+        display: none;
+    }
+    th{font-size: 13px !important;}
+
+    .delete {
+    width: 30px;
+    height: 30px;
+    }
+    #totalAmount , .total-payer{padding-left: 1em !important;}
+
+    .cta:before {
+        width: 100%;
+        height: 30px;
+    }
+
 }

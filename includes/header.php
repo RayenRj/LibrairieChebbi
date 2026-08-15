@@ -20,7 +20,7 @@
     <!-- ######## start of partie header #########-->
     <!-- ######################################### -->
     <!-- ######################################### -->
-    <header hidden>
+    <header>
         <div class="left-part">
             <div class="logo">
                 <img src="/assets/images/logo/logo2.png"  alt="logo">
@@ -83,16 +83,16 @@
       <i class="fa-regular fa-user"></i>
     </div>
 
-    <div class="cart">
+    <a   href="/panier" class="cart">
       <i class="fa-solid fa-cart-shopping"></i>
-      <span class="count">15</span>
-    </div>
+      <span class="count" id="responsiveCount">0</span>
+    </a>
   </header>
 
   <div class="Listoverlay closeList"></div>
   <!-- partie eli feha el list responsive -->
   <div class="listMenu">
-    <i class="fa-solid fa-x closeList"></i>
+    <i class="fa-solid fa-x closeList close"></i>
     <img src="/assets/images/logo/logo2.png" alt="">
     <ul class="dropdown-menu">
         <li>
@@ -107,7 +107,7 @@
           </a>
         </li>
         <li>
-          <a href="/main">
+          <a href="/products">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-border-all"></i>
@@ -118,7 +118,7 @@
           </a>
         </li>
         <li>
-          <a href="/main">
+          <a href="/packs">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-cube"></i>
@@ -129,7 +129,7 @@
           </a>
         </li>
         <li>
-          <a href="/main">
+          <a href="/packs/livres">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-book"></i>
@@ -140,7 +140,7 @@
           </a>
         </li>
         <li>
-          <a href="/main">
+          <a href="/packs/livres/parascolaire">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-book-open"></i>
@@ -151,7 +151,7 @@
           </a>
         </li>
         <li>
-          <a href="/main">
+          <a href="/collections">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-suitcase"></i>
@@ -162,7 +162,7 @@
           </a>
         </li>
         <li>
-          <a href="/main">
+          <a href="/products?categorie=ecritures">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-pen"></i>
@@ -173,7 +173,7 @@
           </a>
         </li>
         <li>
-          <a href="/main">
+          <a href="/products?categorie=geometriques">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-compass-drafting"></i>
@@ -184,7 +184,7 @@
           </a>
         </li>
         <li>
-          <a href="/main">
+          <a href="/games">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-chess"></i>
@@ -195,7 +195,7 @@
           </a>
         </li>
         <li>
-          <a href="/main">
+          <a href="/products?categorie=autres">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-star"></i>

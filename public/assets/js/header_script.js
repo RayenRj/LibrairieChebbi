@@ -8,6 +8,7 @@ let body = document.body;
 let logOutButton = document.querySelector("#log_out");
 let bars = document.querySelector("#barMenu");
 // let bars = document.querySelector("#");
+let responsiveCartCount = document.querySelector("#responsiveCount");
 
 let list = document.querySelector(".listMenu");
 let responsiveOverlay = document.querySelector(".Listoverlay");
@@ -18,6 +19,16 @@ let cartCount = document.querySelector(".cartCount");
 bars.addEventListener("click",function(){
     list.style.display = "flex";
     responsiveOverlay.style.display= "block";
+    responsiveOverlay.style.top = window.scrollY + "px";
+    list.style.top = window.scrollY + "px";
+    // body.style.overflowY = "hidden";
+    console.log(list.offsetHeight)
+    const maxScroll = list.offsetHeight;
+    window.addEventListener("scroll",()=>{
+        if(window.scrollY > maxScroll){
+            window.scrollTo(0,maxScroll);
+        }
+    })
 
 })
 
@@ -26,6 +37,7 @@ closeList.forEach(close =>{
     close.addEventListener("click",function(){
         list.style.display="none";
         responsiveOverlay.style.display="none";
+        body.style.overflowY= "auto";
     })
 })
 
@@ -38,6 +50,7 @@ function getLocalStorageArticlesList(){
 
 
 cartCount.textContent = getLocalStorageArticlesList().length ;
+responsiveCartCount.textContent = getLocalStorageArticlesList().length ;
 
 
 
@@ -85,11 +98,18 @@ let switchSignIn = document.querySelector("#switchSignIn");
 switchSignUp.addEventListener("click", (event)=>{
     SignInCard.setAttribute("hidden","");
     SignUpCard.removeAttribute("hidden");
+    console.log(window.scrollY);
+    SignUpCard.style.top = window.scrollY + "px";
+    body.style.overflow = "hidden";
+    body.style.maxHeight = "100dvh";
+    body.style.maxWidth = "100dvw";
 })
 
 switchSignIn.addEventListener("click", (event)=>{
     SignUpCard.setAttribute("hidden","");
     SignInCard.removeAttribute("hidden");
+    SignInCard.style.top = window.scrollY + "px";
+    console.log(window.scrollY);
 })
 
 

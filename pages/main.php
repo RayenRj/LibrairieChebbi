@@ -272,7 +272,7 @@
                                 <li class="card-item swiper-slide">
                                     <a href="/products/product?idproduit=<?= $product["id_produit"] ?>" class="card-link ">
                                         <img class="card-image" src="<?= $product["image_url"] ?>" alt="">
-                                        <p class="badge">S<?= $product["libelle"] ?></p>
+                                        <p class="badge"><?= $product["libelle"] ?></p>
                                         <h2 class="card-title"><?= $product["prix"] ?> <span>dt</span></h2>
                                         <div class="rating-container">
                                             <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">

@@ -59,14 +59,14 @@
                         <th>Item</th>
                         <th>Description</th>
                         <th id="th-quantite">Quantité</th>
-                        <th>Prix unitaire</th>
+                        <th class="prixUnitaire">Prix unitaire</th>
                         <th>Prix total</th>
                         <th></th>
                         <th ></th>
                     </tr>
                 </thead>
+                <tbody id="panierTableBody">
                 <form action="">
-                    <tbody id="panierTableBody">
                         <!-- <tr>
                             <td>
                                 <img class="img" height="100%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeS3q_huspsyYhjSywSAX6YM38s7q89QSwug&s" alt="">
@@ -97,11 +97,11 @@
                         </tr> -->
 
 
-                    </tbody>
+                    </form>
+                </tbody>
                 </table>
 
 
-                </form>
 
 
 

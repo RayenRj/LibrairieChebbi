@@ -31,6 +31,7 @@ new Swiper('.card-wrapper', {
   },
   breakpoints:{
     0 : {slidesPerView:1},
+    350:{slidesPerView:2},
     550 : {slidesPerView:3},
     950 : {slidesPerView:4},
     1150 : {slidesPerView:5},
