@@ -17,19 +17,16 @@ let closeList = document.querySelectorAll(".closeList")
 let cartCount = document.querySelector(".cartCount");
 
 bars.addEventListener("click",function(){
-    list.style.display = "flex";
     responsiveOverlay.style.display= "block";
     responsiveOverlay.style.top = window.scrollY + "px";
-    list.style.top = window.scrollY + "px";
-    // body.style.overflowY = "hidden";
-    console.log(list.offsetHeight)
-    const maxScroll = list.offsetHeight;
-    window.addEventListener("scroll",()=>{
-        if(window.scrollY > maxScroll){
-            window.scrollTo(0,maxScroll);
-        }
-    })
-
+    list.style.display = "flex";
+    const scrollY =  window.scrollY
+    document.body.dataset.scrollY = scrollY;
+    document.body.style.position = "fixed"
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right ="0";
+    document.body.style.overflow ="hidden";
 })
 
 
@@ -38,6 +35,15 @@ closeList.forEach(close =>{
         list.style.display="none";
         responsiveOverlay.style.display="none";
         body.style.overflowY= "auto";
+
+        let scrollY = parseFloat(document.body.dataset.scrollY || 0);
+        document.body.style.position = ""
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right ="";
+        document.body.style.overflow ="";
+
+        window.scrollTo(0,scrollY);
     })
 })
 
