@@ -3,7 +3,8 @@
 
     require_once(__DIR__ . "/Repository.php");
     require_once(__DIR__ . "/../models/Product.php");
-    class ProductRepository extends Repository{
+    require_once(__DIR__ . "/../interface/ProductInterface.php");
+    class ProductRepository extends Repository implements IProductRepository{
         private string $tName = "produit";
         public function __construct(){parent::__construct();}
 
@@ -284,7 +285,7 @@
             else if($stock == "stock faible"){$queryList[] ="p.quantite_stock between 1 and 5";}
             else if($stock == "repture de stock"){$queryList[] = "p.quantite_stock = 0";}
             else if($stock == "disponible"){$queryList[] .= "p.quantite_stock > 0 ";}
-           
+
             if(sizeof($queryList)<= 1){
                 $query = "select count(*) from produit where id_produit not in (select distinct(id_pack) from pack);";
                 $param=[];
@@ -565,5 +566,112 @@
         $stmt->execute($params);
         return $stmt->fetch(PDO::FETCH_NUM)[0];
        }
+
+
+
+
+
+
+
+    //    partie games
+    public function getAllGames($libelle , $genre , $limit , $offset){
+        $query = "select p.* , genre from produit p , games g where g.id_game = p.id_produit ";
+        $params = [];
+        $queryList= [];
+        $genre = mb_strtolower($genre);
+        if(!in_array($genre,["garcon","fille","mixte"])){throw new Exception("Genre de jouet est invalide");}
+        if(!empty($libelle)){
+            $params[] = "%$libelle%";
+            $queryList[] = "libelle like ?";
+        }
+
+        if(!empty($genre)){
+            $params[] = $genre;
+            $queryList[] = "genre like ?";
+        }
+
+        if(!empty($params)){
+            $query .= " AND " . implode(" AND " , $queryList);
+        }
+        $query .= " limit $limit offset $offset";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
     }
+
+    public function numberOfRowsAllGames($libelle , $genre){
+        $query = "select count(*) from produit p , games g where g.id_game = p.id_produit ";
+        $params = [];
+        $queryList= [];
+        $genre = mb_strtolower($genre);
+        if(!in_array($genre,["garcon","fille","mixte"])){throw new Exception("Genre de jouet est invalide");}
+        if(!empty($libelle)){
+            $params[] = "%$libelle%";
+            $queryList[] = "libelle like ?";
+        }
+
+        if(!empty($genre)){
+            $params[] = $genre;
+            $queryList[] = "genre like ?";
+        }
+
+        if(!empty($params)){
+            $query .= " AND " . implode(" AND " , $queryList);
+        }
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_NUM)[0] ?: 0;
+    }   
+
+
+
+    public function getAllCollection($type,$genre , $limit , $offset){
+        $query = "select p.* , s.* from produit p, collection s where p.id_produit = s.id_produit ";
+        $param= [];
+        $queryTable = [];
+        
+        if(!empty($type)){
+            $queryTable[] = "type=?";
+            $param[] = $type;
+        }
+
+        if(!empty($genre)){
+            $queryTable[] = "genre=?";
+            $param[] = $genre;
+        }
+
+        if(!empty($param)){
+            $query .= " AND " . implode(" AND " ,$queryTable);
+        }
+
+        $query .= " LIMIT $limit offset $offset ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($param);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+    }
+    public function numberOfRowGetAllCollection($type, $genre){
+        $query = "select count(*) from produit p, collection s where p.id_produit = s.id_produit ";
+        $param= [];
+        
+        if(!empty($type)){
+            $queryTable[] = "type=?";
+            $param[] = $type;
+        }
+
+        if(!empty($genre)){
+            $queryTable[] = "genre=?";
+            $param[] = $genre;
+        }
+
+        if(!empty($param)){
+            $query .= " AND " . implode(" AND " ,$queryTable);
+        }
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($param);
+        return $stmt->fetch(PDO::FETCH_NUM)[0] ?: 0;
+
+    }
+} 
 ?>

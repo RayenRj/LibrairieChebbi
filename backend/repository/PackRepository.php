@@ -290,7 +290,7 @@
             $query = "SELECT * from pack p , produit pr where p.id_pack = pr.id_produit and type = 'livre' ";
             $params = [];
             if(!empty($annee)){
-                $query .= "annee_scolaire = ? ";
+                $query .= " AND annee_scolaire = ? ";
                 $params[] = $annee;
             }
 

@@ -1,3 +1,28 @@
+<?php
+    require_once(__DIR__ . "/../backend/services/ProductServices.php");
+    $product_service = new ProductServices();
+    $type = isset($_GET["type"]) ? $_GET["type"] : "";
+    $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 8;
+    $genre = isset($_GET["genre"]) ? $_GET["genre"] : "";
+    // -------------------------------------------------------------------------------
+    $collectionListe = $product_service->getAllCollection($type,$genre , $page , $limit);
+    $nombre_row_totale = $product_service->numberOfRowGetAllCollection($type,$genre);
+    // -------------------------------------------------------------------------------
+
+
+
+    $nombre_totale_page = ceil($nombre_row_totale / $limit);
+    
+    $query_array= [];
+    foreach($_GET as $key=>$val){
+        if($key !== "page")
+        $query_array[] = "$key=$val";
+        
+    } 
+    $query_string = implode("&", $query_array) ?? "";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,12 +67,11 @@
 
             <div class="top">
                 <div>
-                    <ul>       
-                        <li><a href="" class="selected">Tous</a></li>
-                        <li><a href="">Sac à dos</a></li>
-                        <li><a href="">Trousses</a></li>
-                        <li><a href="">Paniers</a></li>
-                        <li><a href="">Cartable à roulettes</a></li>                
+                    <ul class="typeSac">       
+                        <li data-value="" ><a href="" class="selected" >Tous</a></li>
+                        <li data-value="sac a dos"><a href="">Sac à dos</a></li>
+                        <li data-value="trousse"><a href="">Trousses</a></li>
+                        <li data-value="panier"><a href="">Paniers</a></li>
                     </ul>
                 </div>
                 <div>
@@ -59,22 +83,28 @@
                     </select>
                 </div>
             </div>
+            <div class="gender-buttons">
+                <button class="gender-btn gender-garcon" data-value="garçon">👦🏻 Garçon</button>
+                <button class="gender-btn gender-fille" data-value="fille">👧🏻 Fille</button>
+                <button class="gender-btn gender-mixte" data-value="mixte">👦🏻👧🏻 Mixte</button>
+            </div>
 
 
             <section class="article-container"> 
+                <?php foreach($collectionListe as $collection): ?>
                     <article>
                         <span class="new" hidden>Nouveau</span>
                         <span class="best-seller" >Best seller</span>
                         <span class="repture" hidden>repture de stock</span>
-                        <img src="https://spacenet.tn/302027-large_default/sac-a-dos-scolaire-noir.jpg" alt="">
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
+                        <img src="<?= $collection["image_url"] ?>" alt="">
+                        <h4><?= $collection["libelle"] ?>=</h4>
                         <div class="rating">
                             <i class="fa-solid fa-star"></i>
                             <p class="rating-number">4.8</p>
                             <p class="number-of-poeple">(120)</p>
                         </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
+                        <h3 class="price"><?= number_format($collection["prix"],3,","," ") ?> DT</h3>
+                        <a href="" class="button" data-idproduit="<?= $collection["id_produit"] ?>">
                             <i class="fa-solid fa-cart-shopping"></i>
                             Ajouter au panier
                         </a>
@@ -82,333 +112,50 @@
                             <i class="fa-regular fa-heart"></i>
                         </a>
                     </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://spacenet.tn/302029-large_default/sac-a-dos-scolaire-gris.jpg" alt="Building Blocks">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLJr7bgavj_hI3LgbaphFX3iwiZRdmP6u-AnNo6FGt5bhz0KNWYmun2MYc&s=10" alt="Teddy Bear">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZjZ-RihcgMhjjyF-XlDl_DZxDr2ynyPOTe6t6HOWMP51Vb2RGPq0sXEo&s=10" alt="Toy Train">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://spacenet.tn/198447-large_default/sac-a-dos-pour-pc-portable-156-bleu.jpg" alt="Puzzle Game">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC0GMk8H8-785W0jOFQlfbSSkis3iSBfARwmCUXVu6c4i4FYgsDslw_LI&s=10" alt="Remote Control Car">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://sig-shop.tn/wp-content/uploads/2023/03/Sac-A-Dos-LENOVO-CASUAL-B210-15.6-NOIR-sigshop.jpg" alt="Doll House">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuok5taHb-kfV0EjSLDsnd13-9oL-dmr-cluR8-dzHUA&s=10" alt="Educational Toy">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" hidden>Best seller</span>
-                        <span class="repture" >repture de stock</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvs4loKPAuTCCMCLtslb2fJmsPgVgUCjsdOqcM07DJtyvTGCosD2WlpGA&s=10" alt="Educational Toy">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" >Nouveau</span>
-                        <span class="best-seller" hidden>Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://rosace.com.tn/uploads/articles/1757925122.jpg" alt="Doll House">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn5PGWbpRr0SLSXsKrxAmbaj6fhBTGVN-1CbPJAfndfQ&s" alt="">
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://katanga.fr/16267-large_default/sac-a-dos-vaega.jpg" alt="Building Blocks">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://omiz.com.tn/uploads/articles/1756113172.webp" alt="Teddy Bear">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvs4loKPAuTCCMCLtslb2fJmsPgVgUCjsdOqcM07DJtyvTGCosD2WlpGA&s=10" alt="Educational Toy">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" hidden>Best seller</span>
-                        <span class="repture" >repture de stock</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvs4loKPAuTCCMCLtslb2fJmsPgVgUCjsdOqcM07DJtyvTGCosD2WlpGA&s=10" alt="Educational Toy">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" >Nouveau</span>
-                        <span class="best-seller" hidden>Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShI9B7JQf4cmSCnRCv8xdkp-NZtzgxr-0bnd8TSmkMpfUqO5aUfheiaAo&s=10" alt="Doll House">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
+                <?php endforeach; ?>
             </section>
 
-            <div class="pagination" hidden>
-                <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
-                <a href="#" class="pagination-selected">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#" id="three-dots">...</a>
-                <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
-            </div>
+                    <div class="pagination">
+                        <!-- before -->
+                        <?php if($page > 1) : ?>
+                            <a  href="/collections?page=<?= $page - 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php else : ?>
+                            <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php endif; ?>
+
+
+
+
+                        <?php if($page> 3):?>
+                            <a href="#" id="three-dots">...</a>
+                        <?php endif; ?>
+
+
+                        <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
+                            <a href="/collections?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#"><?= $i ?></a>
+                        <?php endfor; ?>
+
+                        <!-- current page -->
+                        <a href="#" class="pagination-selected"><?= $page ?></a>
+
+
+
+                        <?php for($i=$page +1  ; $i <= min($page + 2 , $nombre_totale_page) ; $i++):?>
+                            <a href="/collections?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#"><?= $i ?></a>
+                        <?php endfor; ?> 
+                                    
+                            
+                        <?php if(($nombre_totale_page - $page)> 2): ?>
+                            <a href="#" id="three-dots" data-value = <?= $i ?>>...</a>
+                        <?php endif; ?>
+
+                        <!-- after -->
+                        <?php if($page < $nombre_totale_page) : ?>
+                            <a href="/collections?page=<?= $page + 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php else : ?>
+                             <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php endif; ?>
+                    </div>
 
         </div>
         </div>
@@ -418,5 +165,6 @@
 
 
     <?php include("../includes/footer.php"); ?>
+    <script src="/assets/js/collection.js"></script>
 </body>
 </html>

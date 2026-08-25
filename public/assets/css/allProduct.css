@@ -383,7 +383,17 @@ main .pagination > a{
 
 
 
-
+.responsiveAside{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100dvw;
+    background-color: rgba(0, 0, 0, 0.039);
+    backdrop-filter: blur(15px);
+    z-index: 800;
+    display: none;
+}
 
 
 /* check box design */
@@ -458,15 +468,38 @@ main .pagination > a{
     width: fit-content;
 }
 
+/* button filtrage */
+
+.filterButton{
+    padding: 0.5em 1.5em;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 0.5em;
+    background-color: var(--blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75em;
+    cursor: pointer;
+}
+
+
+@media (min-width:800px){
+    .filterButton{
+        display: none;
+    }
+}
 
 @media(max-width:800px){
     body{
         background-color: var(--gray-100);
     }
-    aside{display: none;}
+
     main{
         width: 100dvw;
         margin: 65px 0px 0px;
+        padding: 2em 1em;
     }
 
     .articles {
@@ -479,6 +512,42 @@ main .pagination > a{
         gap: 20px;
         margin-top: 2em;
         place-items: left;
+    }
+
+    .trieDiv{display: none;}
+
+
+    /* reglage ll sidebar fl cas ta3 responsive */
+        
+    aside{
+        display: none;
+        min-height: fit-content !important;
+        border-radius: 10px;
+        width: 65%;
+        min-width: 325px;
+        max-width: 90dvw;
+        position: absolute;
+        margin: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 801;
+        border-radius: 10px;
+        overflow: initial;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.12);
+        overflow-y: scroll;
+        scrollbar-width: none;
+        height: 90dvh;
+    }
+    aside::-webkit-scrollbar{
+        display:none;
+    }
+    aside form{
+        width: 100%;
+        height: 100%;
+    }
+    .filter, .category, .prix, .marque, .disponibility{
+        width: 100%;
+        border-radius: 0px;
     }
 }
 
@@ -548,14 +617,14 @@ main .pagination > a{
         font-weight: 500;
     }
 
-    main .pagination {
+    .pagination {
         width: fit-content;
         margin: 2.5em auto 0em;
         display: flex;
         gap: 0.45em;
     }
 
-    main .pagination > a {
+    .pagination > a {
         padding: 0.35em 0.85em;
         border-radius: 0.25em;
         border: 2px solid #d3d3d35d;
@@ -567,5 +636,12 @@ main .pagination > a{
     #prev, #post {
         background-color: white;
         font-size: 14px;
+    }
+    .filterButton {
+        padding: 0.35em 1.15em;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 0.5em;
+        gap: 0.5em;
     }
 }

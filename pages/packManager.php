@@ -13,7 +13,6 @@
     $anneeScolaire = $_GET["anneeScolaire"] ?? "" ;
     $list_of_packs_filtred= $packService->recherchePack($nom_pack , $niveau , $statut,$type, $anneeScolaire , $limit , $page);
     $nombre_row_totale= $packService->nbreRowRecherchePack($nom_pack , $niveau , $statut);
-
     $nombre_totale_page = ceil($nombre_row_totale / $limit);
     function calculDePourcentage($currentMonthValue , $lastMonthValue){
         $x = $currentMonthValue - $lastMonthValue;
@@ -22,8 +21,6 @@
     }
 
 
-
-        
     $query_array= [];
     foreach($_GET as $key=>$val){
         if($key !== "page")

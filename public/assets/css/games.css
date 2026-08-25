@@ -407,9 +407,9 @@ box-shadow:
     border-radius: 50%;
 
 }
-.article-container article > .new ,
-.article-container article > .best-seller,
-.article-container article > .repture
+.article-container article .new ,
+.article-container article .best-seller,
+.article-container article .repture
 {
     position: absolute;
     top: 27px;
@@ -423,10 +423,10 @@ box-shadow:
     border-radius: 1em;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
-.article-container article > .repture{
+.article-container article .repture{
     background-color: var(--yellow-deep);
 }
-.article-container article > .best-seller{
+.article-container article .best-seller{
     background-color: var(--green);
 }
 
@@ -464,4 +464,56 @@ box-shadow:
     background-color: var(--blue) !important;
     border-color: var(--blue) !important;
     color: white;
+}
+
+@media (max-width:700px) {
+   .links,.main-part, .cards-container{
+    display: none !important;
+   }
+    .partie-articles .article-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5em;
+        max-width: 100dvw;
+        overflow-x: hidden;
+        margin:0px auto;
+    }
+    .header h1{
+        font-size:clamp(14px, 13vw , 1.25em)
+    }
+    .header p{font-size: 12px !important;}
+}
+
+
+@media (max-width:500px) {
+        .pagination {
+        width: fit-content;
+        margin: 2.5em auto 0em;
+        display: flex;
+        gap: 0.45em;
+    }
+
+    .pagination > a {
+        padding: 0.35em 0.85em;
+        border-radius: 0.25em;
+        border: 2px solid #d3d3d35d;
+        text-align: center;
+        align-content: center;
+        font-weight: 600;
+        font-size: 13px;
+    }
+    #prev, #post {
+        background-color: white;
+        font-size: 14px;
+    }
+    .partie-articles .header select {
+        padding: 0.7em 2.6em 0.7em 1em;
+        border-radius: 0.35em;
+        border: 1px solid;
+        border-color: #eee;
+        color: var(--gray-800);
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 12px;
+    }
 }

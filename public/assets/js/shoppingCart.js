@@ -130,8 +130,8 @@ let minusQuantityButtonList = document.querySelectorAll(".minusQuantityButton");
 
 tbody.addEventListener("click",async function(event){
     if(event.target.classList.contains("plusQuantityButton")){
-        let prixUnitaire = event.target.parentElement.nextElementSibling.firstElementChild;
-        let totalAmount = event.target.parentElement.nextElementSibling.nextElementSibling.firstElementChild;
+        let prixUnitaire = event.target.parentElement.parentElement.nextElementSibling.firstElementChild;
+        let totalAmount = event.target.parentElement.parentElement.nextElementSibling.nextElementSibling.firstElementChild;
         let globalTotalAmount = document.querySelector("#totalAmount");
         event.preventDefault();
         let quantity = event.target.previousElementSibling
@@ -153,8 +153,8 @@ tbody.addEventListener("click",async function(event){
 
 
     if(event.target.classList.contains("minusQuantityButton")){
-        let prixUnitaire = event.target.parentElement.nextElementSibling.firstElementChild;
-        let totalAmount = event.target.parentElement.nextElementSibling.nextElementSibling.firstElementChild;
+        let prixUnitaire = event.target.parentElement.parentElement.nextElementSibling.firstElementChild;
+        let totalAmount = event.target.parentElement.parentElement.nextElementSibling.nextElementSibling.firstElementChild;
         let globalTotalAmount = document.querySelector("#totalAmount");
         event.preventDefault();
 

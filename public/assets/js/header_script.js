@@ -2,10 +2,13 @@ let SignInCard = document.querySelector(".signin-part");
 let SignUpCard = document.querySelector(".signup-part");
 let SignInButton = document.querySelector("#sign-in");
 let SignUpButton = document.querySelector("#sign-up");
+let SignInButtonRes = document.querySelector("#sign-in-button");
+let SignUpButtonRes = document.querySelector("#sign-up-button");
 let beforeSignIn = document.querySelector(".before-signin");
 let beforeSignUp = document.querySelector(".before-signup");
 let body = document.body;
 let logOutButton = document.querySelector("#log_out");
+let logOutButtonRes = document.querySelector("#log_out-button");
 let bars = document.querySelector("#barMenu");
 // let bars = document.querySelector("#");
 let responsiveCartCount = document.querySelector("#responsiveCount");
@@ -80,12 +83,35 @@ SignUpButton.addEventListener("click",()=>{
     body.style.overflow="hidden";
 })
 
-beforeSignIn.addEventListener("click",()=>{
+// responsive button
+SignInButtonRes.addEventListener("click",(event)=>{
+    event.preventDefault();
+    SignInCard.removeAttribute("hidden");
+    body.style.maxHeight= "100vdh";
+    body.style.overflow="hidden";
+    console.log("clicked");
+
+})
+
+SignUpButtonRes.addEventListener("click",(event)=>{
+    event.preventDefault();
+    SignUpCard.removeAttribute("hidden");
+    body.style.maxHeight= "100vdh";
+    body.style.overflow="hidden";
+    console.log("clicked")
+    
+
+})
+/////////////////////////
+
+beforeSignIn.addEventListener("click",(event)=>{
+    event.preventDefault();
     SignInCard.setAttribute("hidden","");
     body.style.overflow="";
 
 })
-beforeSignUp.addEventListener("click",()=>{
+beforeSignUp.addEventListener("click",(event)=>{
+    event.preventDefault();
     SignUpCard.setAttribute("hidden","");
     body.style.overflow="";
 
@@ -121,6 +147,16 @@ switchSignIn.addEventListener("click", (event)=>{
 
 // partie log out + remove session
 logOutButton.addEventListener("click", async function(event){
+    event.preventDefault()
+    let response = await fetch("/api/users/logout");
+    let result = await response.json();
+    if(result.success){
+        window.location.href = "/main";
+    }else{
+        alert(result.message);
+    }
+})
+logOutButtonRes.addEventListener("click", async function(event){
     event.preventDefault()
     let response = await fetch("/api/users/logout");
     let result = await response.json();

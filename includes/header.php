@@ -79,9 +79,9 @@
       </div>
     </form>
 
-    <div class="user">
-      <i class="fa-regular fa-user"></i>
-    </div>
+    <a href="/client" class="user" <?= !isset($_SESSION["userId"]) ? "hidden" : "" ?>>
+      <i class="fa-regular fa-user" ></i>
+    </a>
 
     <a   href="/panier" class="cart">
       <i class="fa-solid fa-cart-shopping"></i>
@@ -210,9 +210,9 @@
     <hr>
     <div class="button-list">
         <ul>
-            <li id="sign-in-button"><a href="" >Log in</a></li>
-            <li id="sign-up-button"><a href="" >Sign up</a></li>
-            <li id="log_out-button"><a href="" ><i class="fa-solid fa-right-from-bracket"></i><span>Log out</span></a></li>
+            <li id="sign-in-button" <?= isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="" >Log in</a></li>
+            <li id="sign-up-button" <?= isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="" >Sign up</a></li>
+            <li id="log_out-button" <?= !isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="" ><i class="fa-solid fa-right-from-bracket"></i><span>Log out</span></a></li>
         </ul>
     
         

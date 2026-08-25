@@ -14,7 +14,6 @@
 
   $pack_list = $service_pack->getPackLivre($annee);
   $liste_livre = $service->findLivreScolaire($libelle , $niveau , $limit , $page);
-  
   $nombre_row_totale = $service->numberOfLinesfindLivreScolaire($libelle ,$niveau);
 
     $nombre_totale_page = ceil($nombre_row_totale / $limit);
@@ -59,11 +58,10 @@
       </div>
       <div>
         <select name="anneeScolaire" class="anneeScolaire"></select>
-        <button type="submit" class="submitButton">
+        <button type="submit" class="submitButtonTop">
             <i class="fa-solid fa-magnifying-glass"></i>
             Rechercher
         </button>
-        <!-- remplissage avec js -->
       </div>
     </div>
 
@@ -106,8 +104,8 @@
       </div>
       <form action="" id="formLivre">
       <div>
-        <input type="text" name="libelle" id="" placeholder="libellé du livre...">
-        <select name="anneeScolaire" class="anneeScolaire" >
+        <input type="text" name="libelle" id="" placeholder="libellé du livre..." value="<?= isset($_GET["libelle"]) ? $_GET["libelle"] : "" ?>">
+        <select name="niveau" class="anneeScolaire" >
           <option value="">-- Sélectionnez une année --</option>
         </select>
         <button type="submit" class="submitButton">
@@ -136,7 +134,6 @@
     </div>
     <!-- partie eli feha pagination -->
                 <div class="bottom">
-                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min($page * $limit  , $nombre_row_totale) ?> sur <?= $nombre_row_totale ?> commandes</p>
                     <div class="pagination">
                         <!-- before -->
                         <?php if($page > 1) : ?>

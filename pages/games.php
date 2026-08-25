@@ -1,3 +1,23 @@
+<?php 
+    require_once(__DIR__ . "/../backend/services/ProductServices.php");
+    $product_service = new ProductServices();
+    $libelle = isset($_GET["libelle"]) ? $_GET["libelle"] : "";
+    $genre = isset($_GET["genre"]) ? $_GET["genre"] : "mixte";
+    $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 8;
+    $gamesList = $product_service->getAllGames($libelle , $genre , $page , $limit);
+    $nombre_row_totale = $product_service->numberOfRowsAllGames($libelle , $genre);
+    $nombre_totale_page = ceil($nombre_row_totale / $limit);
+
+    $query_array= [];
+    foreach($_GET as $key=>$val){
+        if($key !== "page")
+        $query_array[] = "$key=$val";
+    } 
+    $query_string = implode("&", $query_array) ?? "";
+
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,246 +97,99 @@
             <div class="header">
                 <div>
                     <h1>Tous les Jouets</h1>
-                    <p>120 produits</p>
+                    <p><?= $nombre_row_totale ?> produits</p>
                 </div>
                 <div>
-                    <select name="" id="">
-                        <option value="" selected disabled>Plus populaire</option>
+                    <select name="genre" id="genre">
+                        <option value="" selected>Tous les Jouets</option>
+                        <option value="garcon">Garçon</option>
+                        <option value="fille">Fille</option>
+                        <option value="mixte">Mixte</option>
                     </select>
                     <i class="fa-solid fa-caret-down"></i>
                 </div>
             </div>
 
             <section class="article-container">
+                <?php foreach($gamesList as $game): ?>
                     <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://spacenet.tn/38916-large_default/voiture-ranger-jouet-garcons-filles.jpg" alt="">
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
+                        <a href="/products/product?idproduit=<?= $game["id_produit"] ?>">
+                            <span class="new" hidden>Nouveau</span>
+                            <span class="best-seller" >Best seller</span>
+                            <span class="repture" hidden>repture de stock</span>
+                            <img src="<?= $game["image_url"] ?>" alt="">
+                            <h4><?= $game["libelle"] ?></h4>
+                            <div class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                <p class="rating-number">4.8</p>
+                                <p class="number-of-poeple">(120)</p>
+                            </div>
+                            <h3 class="price"><?= number_format($game["prix"],3,","," ") ?> DT</h3>
+                        </a>
+                        <a href="" class="button" data-idproduit=<?= $game["id_produit"] ?>>
                             <i class="fa-solid fa-cart-shopping"></i>
                             Ajouter au panier
                         </a>
                         <a href="" class="wishlist">
                             <i class="fa-regular fa-heart"></i>
                         </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600" alt="Building Blocks">
 
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
                     </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=600" alt="Teddy Bear">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600" alt="Toy Train">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600" alt="Puzzle Game">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://images.unsplash.com/photo-1608889825103-eb5ed706fc64?w=600" alt="Remote Control Car">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://images.unsplash.com/photo-1558877385-81a1c7e67d72?w=600" alt="Doll House">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://images.unsplash.com/photo-1575223970966-76ae61ee7838?w=600" alt="Educational Toy">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" hidden>Best seller</span>
-                        <span class="repture" >repture de stock</span>
-                        <img src="https://images.unsplash.com/photo-1575223970966-76ae61ee7838?w=600" alt="Educational Toy">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-                    <article>
-                        <span class="new" >Nouveau</span>
-                        <span class="best-seller" hidden>Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
-                        <img src="https://images.unsplash.com/photo-1558877385-81a1c7e67d72?w=600" alt="Doll House">
-
-                        <h4>Voiture Télécommandée Tout-terrain</h4>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <p class="rating-number">4.8</p>
-                            <p class="number-of-poeple">(120)</p>
-                        </div>
-                        <h3 class="price">49.900 DT</h3>
-                        <a href="" class="button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            Ajouter au panier
-                        </a>
-                        <a href="" class="wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </article>
-
+                <?php endforeach; ?>
                     
             </section>
 
-            <div class="pagination">
-                <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
-                <a href="#" class="pagination-selected">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#" id="three-dots">...</a>
-                <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
-            </div>
+                    <div class="pagination">
+                        <!-- before -->
+                        <?php if($page > 1) : ?>
+                            <a  href="/games?page=<?= $page - 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php else : ?>
+                            <a href="#" id="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <?php endif; ?>
+
+
+
+
+                        <?php if($page> 3):?>
+                            <a href="#" id="three-dots">...</a>
+                        <?php endif; ?>
+
+
+                        <?php for($i=max(1 , $page - 2) ; $i < $page ; $i++):?>
+                            <a href="/games?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#packs"><?= $i ?></a>
+                        <?php endfor; ?>
+
+                        <!-- current page -->
+                        <a href="#" class="pagination-selected"><?= $page ?></a>
+
+
+
+                        <?php for($i=$page +1  ; $i <= min($page + 2 , $nombre_totale_page) ; $i++):?>
+                            <a href="/games?page=<?= $i ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#packs"><?= $i ?></a>
+                        <?php endfor; ?> 
+                                    
+                            
+                        <?php if(($nombre_totale_page - $page)> 2): ?>
+                            <a href="#" id="three-dots" data-value = <?= $i ?>>...</a>
+                        <?php endif; ?>
+
+                        <!-- after -->
+                        <?php if($page < $nombre_totale_page) : ?>
+                            <a href="/games?page=<?= $page + 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php else : ?>
+                             <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                        <?php endif; ?>
+                    </div>
 
         </div>
 
     </div>
 
 
+
+
     <?php include("../includes/footer.php"); ?>
+
+    <script src="/assets/js/games.js"></script>
 </body>
 </html>

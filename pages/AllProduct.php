@@ -52,6 +52,7 @@
 <body>
     <?php include "../includes/header.php" ?>
     <section>
+        <span class="responsiveAside"></span>
         <aside>
             <form action="">
                 <div class="filter">
@@ -457,7 +458,7 @@
         <main>
             <div class="information">
                 <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min($page * $limit  , $nombre_de_produit) ?> sur <?= $nombre_de_produit ?> Articles</p>
-                <div>
+                <div class="trieDiv">
                     Trier par 
                     <select name="" id="trie">
                         <option value="" selected>none</option>
@@ -467,6 +468,7 @@
                         <!-- <option value="stock">stock</option> -->
                     </select>
                 </div>
+                <button class="filterButton"><i class="fa-solid fa-sliders"></i> Filtrer</button>
             </div>
 
             <!--phase des articles-->

@@ -312,18 +312,11 @@ header .part-two ul li a{
 .responsive{
   width: fit-content;
   background-color: var(--white);
-<<<<<<< HEAD
-  background-color: var(--gray-300);
-  border-radius: 10px;
-  position: relative;
-  top: 500px;
-=======
   background-color: var(--gray-100);
   border-radius: 10px;
   position: absolute;
   top: 100%;
   right: 0;
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
 }
 .responsive i{
   position: absolute;
@@ -336,11 +329,7 @@ header .part-two ul li a{
   display: flex;
   flex-flow: column nowrap;
   list-style-type: none;
-<<<<<<< HEAD
-  text-align: center;
-=======
   text-align: left;
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
   padding: 2em;
 }
 .responsive div ul li{
@@ -361,8 +350,7 @@ hr{
   font-size: 25px;
 }
 
-
-.signin-part{
+.signup-part, .signin-part{
   position: absolute;
   top: 0;
   width: 100%;
@@ -548,6 +536,7 @@ button.buttonGoogle:hover {
     width: 100dvw !important;
     overflow-x: hidden;
   }
+
 }
 
 @media(min-width:800px){
@@ -558,6 +547,7 @@ button.buttonGoogle:hover {
   header.responsiveHeader{
     display: none;
   }
+
 
 
 }

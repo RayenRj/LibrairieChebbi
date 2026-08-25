@@ -198,6 +198,7 @@ main > img:nth-of-type(4){
 .partie-articles div.top ul{
     display: flex;
     gap: 0.75em;
+
 }
 .partie-articles div.top ul li a{
     padding: 0.5em 1em;
@@ -205,6 +206,9 @@ main > img:nth-of-type(4){
     font-size: 13px;
     font-weight: 500;
     border: 1px solid #eee;
+}
+.partie-articles div.top ul li a:hover{
+    background-color: var(--gray-100);
 }
 
 .partie-articles div.top ul li a.selected{
@@ -426,4 +430,175 @@ box-shadow:
     background-color: var(--blue) !important;
     border-color: var(--blue) !important;
     color: white;
+}
+
+
+
+
+
+/* gender */
+
+.gender-buttons {
+    display: flex;
+    gap: 0.5em;
+    margin-bottom: 1.75em;
+    margin-top: 0.85em;
+}
+
+.gender-btn {
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 0.5em 1.2em;
+    border-radius: 0.35em;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* 👦 Garçon */
+.gender-garcon {
+    background: rgba(59, 130, 246, 0.20);
+    color: #2563eb;
+    border-color: rgba(59, 130, 246, 0.35);
+}
+
+.gender-garcon:hover {
+    background: rgba(59, 130, 246, 0.32);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.20);
+}
+
+/* 👧 Fille */
+.gender-fille {
+    background: rgba(244, 114, 182, 0.20);
+    color: #db2777;
+    border-color: rgba(244, 114, 182, 0.35);
+}
+
+.gender-fille:hover {
+    background: rgba(244, 114, 182, 0.32);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(244, 114, 182, 0.20);
+}
+
+/* 👦👧 Mixte */
+.gender-mixte {
+    background: linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.20),
+        rgba(244, 114, 182, 0.20)
+    );
+
+    color: #7c3aed;
+    border-color: rgba(139, 92, 246, 0.30);
+}
+
+.gender-mixte:hover {
+    background: linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.32),
+        rgba(244, 114, 182, 0.32)
+    );
+
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.18);
+}
+
+/* Click */
+.gender-btn:active {
+    transform: scale(0.96);
+}
+
+
+
+
+
+@media (max-width:800px) {
+    .collection main{
+        display: none;
+    }
+    .partie-articles div.top div:last-child {
+        display: none;
+    }
+    .partie-articles div.top ul{
+        display: flex;
+        gap: 0.35em;
+        flex-wrap: wrap;
+        row-gap: 1em;
+        
+    }
+    .partie-articles div.top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.75em;
+        gap: 1em;
+    }
+
+    .partie-articles .article-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+        gap: 2em;
+        width: 100%;
+        margin: auto;
+    }
+}
+
+/* @media (max-width:500px) {
+    .partie-articles div.top {
+        flex-direction: column;
+    }
+    .partie-articles div.top div:last-child{display: none;}
+    .partie-articles {
+        margin-top: 2em !important;
+    }
+    .partie-articles .article-container {
+        display: grid;
+        place-items: center;
+        grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+        gap: 1em;
+    }
+} */
+
+
+
+
+@media (max-width:500px) {
+    .pagination {
+        width: fit-content;
+        margin: 2.5em auto 0em;
+        display: flex;
+        gap: 0.45em;
+    }
+
+    .pagination > a {
+        padding: 0.35em 0.85em;
+        border-radius: 0.25em;
+        border: 2px solid #d3d3d35d;
+        text-align: center;
+        align-content: center;
+        font-weight: 600;
+        font-size: 13px;
+    }
+    #prev, #post {
+        background-color: white;
+        font-size: 14px;
+    }
+
+    .partie-articles div.top {
+        flex-direction: column;
+    }
+    .partie-articles div.top div:last-child{display: none;}
+    .partie-articles {
+        margin-top: 2em !important;
+    }
+    .partie-articles .article-container {
+        display: grid;
+        place-items: center;
+        grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+        gap: 1em;
+    }
 }

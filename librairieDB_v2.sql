@@ -21,9 +21,10 @@ CREATE TABLE produit (
 -- ==========================================================
 -- TABLE SAC : sac est un produit
 -- ==========================================================
-CREATE TABLE sac (
+CREATE TABLE collection (
     id_produit INT PRIMARY KEY,
-    genre ENUM('Garçon','Fille','Mixte'),
+    genre ENUM('garçon','fille','mixte'),
+    type ENUM('panier','trousse','sac a dos','sac a chariot' , 'chariot'),
     niveau_scolaire ENUM(
         'Préscolaire',
         '1ère Primaire',
@@ -171,7 +172,15 @@ create table userLogin(
     foreign key(id_client) references client(id_client)
 );
 
+-- ==========================================================
+-- TABLE Games LOGIN
+-- ==========================================================
+create table games(
+	id_game int primary key references produit(id_produit),
+    genre varchar(255) default "mixte" not null
+);
 
+use librairiedb_v2;
 -- ==========================================================
 -- TRIGGER before_insert_into_ligne_commande
 -- ==========================================================
@@ -612,14 +621,131 @@ select * from produit;
 -- ############################################################################################
 update client set role="admin" where id_client =21;
 
--- drop database librairieDB_v2;
+
+-- ============================================
+-- Données de test : produit (20 nouvelles lignes - uniquement des jeux)
+-- ============================================
+INSERT INTO produit
+(id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock)
+VALUES
+(221, 'GM0000021', 'FIFA 25',                       69.900, 5, 'https://picsum.photos/seed/fifa25/400',       'Jeu vidéo de football FIFA 25',                4.60, 48, 'jeux', 'EA Sports',    18),
+(222, 'GM0000022', 'Minecraft',                     34.900, 0, 'https://picsum.photos/seed/minecraft2/400',   'Jeu bac à sable de construction',              4.90, 90, 'jeux', 'Mojang',       25),
+(223, 'GM0000023', 'GTA V',                         49.900, 0, 'https://picsum.photos/seed/gta5b/400',        'Jeu action-aventure en monde ouvert',          4.80, 132,'jeux', 'Rockstar',     14),
+(224, 'GM0000024', 'Mario Kart 8 Deluxe',           39.900, 0, 'https://picsum.photos/seed/mariokart2/400',   'Jeu de course avec personnages Nintendo',      4.85, 97, 'jeux', 'Nintendo',     20),
+(225, 'GM0000025', 'Just Dance 2025',               44.900, 3, 'https://picsum.photos/seed/justdance2/400',   'Jeu de danse et rythme',                       4.30, 44, 'jeux', 'Ubisoft',      16),
+(226, 'GM0000026', 'Barbie Dreamhouse Adventures',  29.900, 0, 'https://picsum.photos/seed/barbiegame2/400',  'Jeu de vie et aventures Barbie',               4.20, 10, 'jeux', 'Gameloft',     11),
+(227, 'GM0000027', 'Call of Duty Modern Warfare',   74.900, 0, 'https://picsum.photos/seed/cod1/400',         'Jeu de tir à la première personne',            4.50, 210,'jeux', 'Activision',   9),
+(228, 'GM0000028', 'The Sims 4',                    39.900, 5, 'https://picsum.photos/seed/sims4/400',        'Simulation de vie quotidienne',                4.40, 76, 'jeux', 'EA',           22),
+(229, 'GM0000029', 'Animal Crossing New Horizons',  49.900, 0, 'https://picsum.photos/seed/animalcrossing/400','Jeu de vie sur une île paradisiaque',         4.90, 150,'jeux', 'Nintendo',     19),
+(230, 'GM0000030', 'Fortnite Battle Pass',          19.900, 0, 'https://picsum.photos/seed/fortnite1/400',    'Jeu de survie et construction en ligne',       4.10, 300,'jeux', 'Epic Games',   50),
+(231, 'GM0000031', 'League of Legends Skin Pack',   14.900, 0, 'https://picsum.photos/seed/lol1/400',         'Pack de skins pour jeu de stratégie en ligne', 4.00, 180,'jeux', 'Riot Games',   60),
+(232, 'GM0000032', 'Super Mario Odyssey',           39.900, 0, 'https://picsum.photos/seed/mario1/400',       'Jeu de plateforme avec Mario',                 4.90, 120,'jeux', 'Nintendo',     17),
+(233, 'GM0000033', 'Zelda Tears of the Kingdom',    59.900, 0, 'https://picsum.photos/seed/zelda1/400',       'Jeu d’aventure et exploration',                4.95, 210,'jeux', 'Nintendo',     13),
+(234, 'GM0000034', 'Overwatch 2',                    0.000, 0, 'https://picsum.photos/seed/overwatch1/400',   'Jeu de tir en équipe free-to-play',            4.20, 95, 'jeux', 'Blizzard',     40),
+(235, 'GM0000035', 'Roblox Robux Pack',              9.900, 0, 'https://picsum.photos/seed/roblox1/400',      'Pack de monnaie virtuelle Roblox',             4.00, 400,'jeux', 'Roblox Corp',  100),
+(236, 'GM0000036', 'Candy Crush Boost Pack',         4.900, 0, 'https://picsum.photos/seed/candycrush1/400',  'Pack de boosts pour puzzle mobile',            3.90, 60, 'jeux', 'King',         80),
+(237, 'GM0000037', 'Gran Turismo 7',                 64.900, 0,'https://picsum.photos/seed/gt7/400',          'Simulation de course automobile',              4.70, 55, 'jeux', 'Sony',         12),
+(238, 'GM0000038', 'Pokemon Écarlate',               54.900, 0,'https://picsum.photos/seed/pokemon1/400',     'Jeu de rôle et capture de créatures',          4.80, 175,'jeux', 'Nintendo',     15),
+(239, 'GM0000039', 'Assassin''s Creed Mirage',       49.900, 5,'https://picsum.photos/seed/assassin1/400',    'Jeu d’aventure et infiltration',               4.30, 70, 'jeux', 'Ubisoft',      10),
+(240, 'GM0000040', 'Tetris Effect Connected',        29.900, 0,'https://picsum.photos/seed/tetris1/400',      'Jeu de puzzle classique revisité',             4.60, 30, 'jeux', 'Enhance',      28);
+
+-- ============================================
+-- Données de test : games (20 lignes, une par produit ci-dessus)
+-- ============================================
+INSERT INTO games (id_game, genre) VALUES
+(221, 'mixte'),   -- FIFA 25
+(222, 'garcon'),  -- Minecraft
+(223, 'garcon'),  -- GTA V
+(224, 'mixte'),   -- Mario Kart 8 Deluxe
+(225, 'mixte'),   -- Just Dance 2025
+(226, 'fille'),   -- Barbie Dreamhouse Adventures
+(227, 'garcon'),  -- Call of Duty Modern Warfare
+(228, 'mixte'),   -- The Sims 4
+(229, 'mixte'),   -- Animal Crossing New Horizons
+(230, 'garcon'),  -- Fortnite Battle Pass
+(231, 'garcon'),  -- League of Legends Skin Pack
+(232, 'mixte'),   -- Super Mario Odyssey
+(233, 'mixte'),   -- Zelda Tears of the Kingdom
+(234, 'garcon'),  -- Overwatch 2
+(235, 'mixte'),   -- Roblox Robux Pack
+(236, 'fille'),   -- Candy Crush Boost Pack
+(237, 'garcon'),  -- Gran Turismo 7
+(238, 'mixte'),   -- Pokemon Écarlate
+(239, 'garcon'),  -- Assassin's Creed Mirage
+(240, 'mixte');   -- Tetris Effect Connected
+
+-- ==========================================================
+-- DONNEES DE TEST : PRODUIT (id 300 -> 320)
+-- ==========================================================
+
+INSERT INTO produit (id_produit, code_barre, libelle, prix, remise, image_url, description, rating, nombre_rater, categorie, marque, quantite_stock, date_ajout) VALUES
+(300, 'BC0000000300', 'Sac à dos Explorer Bleu', 89.900, 10.00, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62', 'Sac à dos résistant avec plusieurs compartiments', 4.50, 120, 'Sacs à dos', 'Eastpak', 35, '2025-01-10 09:00:00'),
+(301, 'BC0000000301', 'Cartable Roulettes Licorne', 129.900, 0.00, 'https://images.unsplash.com/photo-1596462502278-27bfdc403348', 'Cartable à roulettes pour fille avec motif licorne', 4.80, 95, 'Sacs à chariot', 'Jeune Premier', 20, '2025-01-11 09:00:00'),
+(302, 'BC0000000302', 'Trousse Scolaire Simple', 19.900, 5.00, 'https://images.unsplash.com/photo-1512909006721-3d6018887383', 'Trousse simple compartiment', 4.10, 60, 'Trousses', 'Générique', 80, '2025-01-12 09:00:00'),
+(303, 'BC0000000303', 'Panier Scolaire Préscolaire', 39.900, 0.00, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62', 'Panier léger pour enfants du préscolaire', 4.30, 40, 'Paniers', 'Générique', 50, '2025-01-13 09:00:00'),
+(304, 'BC0000000304', 'Sac à dos Sport Garçon', 99.900, 15.00, 'https://images.unsplash.com/photo-1547949003-9792a18a2645', 'Sac à dos robuste pour le sport et l\'école', 4.40, 75, 'Sacs à dos', 'Nike', 25, '2025-01-14 09:00:00'),
+(305, 'BC0000000305', 'Chariot Scolaire XL', 149.900, 0.00, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62', 'Chariot scolaire grande capacité', 4.60, 30, 'Chariots', 'Générique', 15, '2025-01-15 09:00:00'),
+(306, 'BC0000000306', 'Sac à dos Mixte Gris', 79.900, 5.00, 'https://images.unsplash.com/photo-1491637639811-60e2756cbb93', 'Sac à dos unisexe couleur grise', 4.20, 50, 'Sacs à dos', 'Adidas', 40, '2025-01-16 09:00:00'),
+(307, 'BC0000000307', 'Trousse Double Compartiment', 24.900, 0.00, 'https://images.unsplash.com/photo-1512909006721-3d6018887383', 'Trousse avec deux compartiments', 4.00, 33, 'Trousses', 'Générique', 70, '2025-01-17 09:00:00'),
+(308, 'BC0000000308', 'Cartable Superman', 119.900, 10.00, 'https://images.unsplash.com/photo-1596462502278-27bfdc403348', 'Cartable à roulettes motif super-héros', 4.70, 88, 'Sacs à chariot', 'Jeune Premier', 18, '2025-01-18 09:00:00'),
+(309, 'BC0000000309', 'Sac à dos Primaire Rose', 69.900, 0.00, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62', 'Sac à dos rose pour filles du primaire', 4.35, 55, 'Sacs à dos', 'Générique', 45, '2025-01-19 09:00:00'),
+(310, 'BC0000000310', 'Panier Maternelle Ourson', 34.900, 0.00, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62', 'Panier léger motif ourson', 4.25, 20, 'Paniers', 'Générique', 30, '2025-01-20 09:00:00'),
+(311, 'BC0000000311', 'Sac à dos Secondaire Noir', 109.900, 20.00, 'https://images.unsplash.com/photo-1491637639811-60e2756cbb93', 'Sac à dos élégant pour lycéens', 4.55, 65, 'Sacs à dos', 'Eastpak', 28, '2025-01-21 09:00:00'),
+(312, 'BC0000000312', 'Trousse Motif Étoiles', 22.900, 0.00, 'https://images.unsplash.com/photo-1512909006721-3d6018887383', 'Trousse compacte motif étoiles', 4.15, 41, 'Trousses', 'Générique', 60, '2025-01-22 09:00:00'),
+(313, 'BC0000000313', 'Chariot Léger Bleu Marine', 139.900, 0.00, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62', 'Chariot scolaire léger et solide', 4.45, 22, 'Chariots', 'Générique', 12, '2025-01-23 09:00:00'),
+(314, 'BC0000000314', 'Sac à dos Base Vert', 74.900, 5.00, 'https://images.unsplash.com/photo-1547949003-9792a18a2645', 'Sac à dos coloré pour cycle de base', 4.30, 48, 'Sacs à dos', 'Générique', 38, '2025-01-24 09:00:00'),
+(315, 'BC0000000315', 'Cartable Princesse Rose', 124.900, 0.00, 'https://images.unsplash.com/photo-1596462502278-27bfdc403348', 'Cartable à roulettes motif princesse', 4.75, 90, 'Sacs à chariot', 'Jeune Premier', 16, '2025-01-25 09:00:00'),
+(316, 'BC0000000316', 'Sac à dos Mixte Camouflage', 84.900, 0.00, 'https://images.unsplash.com/photo-1491637639811-60e2756cbb93', 'Sac à dos motif camouflage unisexe', 4.20, 37, 'Sacs à dos', 'Adidas', 33, '2025-01-26 09:00:00'),
+(317, 'BC0000000317', 'Trousse Cuir Simili', 29.900, 0.00, 'https://images.unsplash.com/photo-1512909006721-3d6018887383', 'Trousse en simili cuir robuste', 4.05, 27, 'Trousses', 'Générique', 55, '2025-01-27 09:00:00'),
+(318, 'BC0000000318', 'Panier Préscolaire Voiture', 37.900, 0.00, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62', 'Panier motif voiture pour garçon', 4.20, 19, 'Paniers', 'Générique', 25, '2025-01-28 09:00:00'),
+(319, 'BC0000000319', 'Sac à dos Secondaire Bordeaux', 114.900, 10.00, 'https://images.unsplash.com/photo-1547949003-9792a18a2645', 'Sac à dos couleur bordeaux pour lycéens', 4.60, 70, 'Sacs à dos', 'Eastpak', 24, '2025-01-29 09:00:00'),
+(320, 'BC0000000320', 'Chariot Compact Rouge', 134.900, 0.00, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62', 'Chariot scolaire compact et pratique', 4.40, 29, 'Chariots', 'Générique', 14, '2025-01-30 09:00:00');
 
 
-show tables;
+-- ==========================================================
+-- DONNEES DE TEST : COLLECTION (id_produit 300 -> 320)
+-- ==========================================================
+
+INSERT INTO collection (id_produit, genre, type, niveau_scolaire, couleur, marque, matiere, roulettes, nombre_compartiments) VALUES
+(300, 'garçon', 'sac a dos', '6ème Primaire', 'Bleu', 'Eastpak', 'Polyester', FALSE, 3),
+(301, 'fille', 'sac a chariot', '2ème Primaire', 'Rose', 'Jeune Premier', 'Polyester renforcé', TRUE, 4),
+(302, 'mixte', 'trousse', '4ème Primaire', 'Noir', 'Générique', 'Toile', FALSE, 1),
+(303, 'mixte', 'panier', 'Préscolaire', 'Jaune', 'Générique', 'Tissu coton', FALSE, 1),
+(304, 'garçon', 'sac a dos', '1ère Secondaire', 'Noir/Rouge', 'Nike', 'Nylon', FALSE, 3),
+(305, 'mixte', 'chariot', '7ème Base', 'Gris', 'Générique', 'Polyester rigide', TRUE, 5),
+(306, 'mixte', 'sac a dos', '9ème Base', 'Gris', 'Adidas', 'Polyester', FALSE, 2),
+(307, 'fille', 'trousse', '3ème Primaire', 'Violet', 'Générique', 'Toile', FALSE, 2),
+(308, 'garçon', 'sac a chariot', '1ère Primaire', 'Bleu/Rouge', 'Jeune Premier', 'Polyester renforcé', TRUE, 4),
+(309, 'fille', 'sac a dos', '5ème Primaire', 'Rose', 'Générique', 'Polyester', FALSE, 2),
+(310, 'mixte', 'panier', 'Préscolaire', 'Marron', 'Générique', 'Tissu coton', FALSE, 1),
+(311, 'garçon', 'sac a dos', '4ème Secondaire', 'Noir', 'Eastpak', 'Nylon', FALSE, 3),
+(312, 'fille', 'trousse', '2ème Primaire', 'Bleu ciel', 'Générique', 'Toile', FALSE, 1),
+(313, 'mixte', 'chariot', '8ème Base', 'Bleu marine', 'Générique', 'Polyester rigide', TRUE, 4),
+(314, 'garçon', 'sac a dos', '9ème Base', 'Vert', 'Générique', 'Polyester', FALSE, 3),
+(315, 'fille', 'sac a chariot', '3ème Primaire', 'Rose', 'Jeune Premier', 'Polyester renforcé', TRUE, 4),
+(316, 'mixte', 'sac a dos', '2ème Secondaire', 'Kaki', 'Adidas', 'Nylon', FALSE, 2),
+(317, 'garçon', 'trousse', '6ème Primaire', 'Marron', 'Générique', 'Simili cuir', FALSE, 2),
+(318, 'garçon', 'panier', 'Préscolaire', 'Rouge', 'Générique', 'Tissu coton', FALSE, 1),
+(319, 'garçon', 'sac a dos', '3ème Secondaire', 'Bordeaux', 'Eastpak', 'Polyester', FALSE, 3),
+(320, 'mixte', 'chariot', '1ère Secondaire', 'Rouge', 'Générique', 'Polyester rigide', TRUE, 4);
+
+
+
+
+
+
+select * from produit p , collection c where p.id_produit = c.id_produit;
+
+-- find du données de teste 
+
+show columns from sac;
 use librairieDB_v2;
 
 select * from pack pa , ligne_commande lc , commande c where lc.id_commande = c.id_commande and lc.id_produit = pa.id_pack;
 
 select * from produit;
 select * from commande;
+select * from games;
+select count(*) from games;	
 
+use librairiedb_v2;

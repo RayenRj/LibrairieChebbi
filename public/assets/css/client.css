@@ -93,11 +93,8 @@ body{
     min-height: calc(100vh);
 }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
 .card{
     background-color: white;
     display: flex;
@@ -553,9 +550,6 @@ body{
 .start-shopping-btn:hover > i{
     position: relative;
     left: 2px;
-<<<<<<< HEAD
-}
-=======
 }
 
 
@@ -587,13 +581,14 @@ body{
     }
 }
 
-@media(max-width:750px){
+@media(max-width:800px){
     .container{
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr 1fr;
-        grid-template-areas: 
-        "pers" "info" "history";
-        gap: 2em;
+        grid-template-areas: "pers" "info" "history";
+        gap: 1em;
+        padding-top: 90px !important;
+        
     }
     .container main:first-child{grid-area: pers;margin-bottom: 2em;}
     .container main:nth-child(2){grid-area: info;}
@@ -605,4 +600,3 @@ body{
 }
 
 
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825

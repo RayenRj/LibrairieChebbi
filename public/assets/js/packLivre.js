@@ -1,6 +1,5 @@
 let anneeScolaireSelect = document.querySelectorAll(".anneeScolaire")
 let addToCartButton = document.querySelectorAll("article button");
-
 let face = document.querySelectorAll(".face")
 var cart = document.querySelector(".cartCount");
 
@@ -143,7 +142,7 @@ const collectionsParascolaires = [
 ];
 
 anneeScolaireSelect.forEach(select =>{
-    let html = `<option value="">-- Sélectionnez une année --</option>`
+    let html = `<option value="" >-- Sélectionnez une année --</option>`
     for(let obj of sectionsEtude){
         html +=  `<option value="${obj["value"]}">${obj["label"]}</option>`
     }
@@ -182,7 +181,8 @@ addToCartButton.forEach(button =>{
             })
 
             cart.textContent= parseInt(cart.textContent) + 1;
-
+            responsiveCartCount.textContent= parseInt(responsiveCartCount.textContent) + 1;
+            
             localStorage.setItem("cartTable" , JSON.stringify(table));
             return;
         }
@@ -193,21 +193,19 @@ addToCartButton.forEach(button =>{
 
 
 
-let formParascolaire = document.querySelector("#formParascolaire");
-let searchButton = document.querySelector(".submitButton")
+let formParascolaire = document.querySelector("#formLivre");
+let searchButton = document.querySelector("section .submitButton")
+
+// search eli 3al ktob fl lekher
 searchButton.addEventListener("click",function(event){
     event.preventDefault();
-    console.log(searchButton)
     var formData = new FormData(formParascolaire);
-    var query = ""
+    let url = new URLSearchParams(window.location.search);
     for(var[key , val] of formData.entries()){
-        if(val !==""){
-            query += `${key}=${val}&`;
-        }
+        if(val !==""){url.set(key,val)}
+        else {url.delete(key)}
     }
-    if(query!==""){query = query.slice(0,-1)}
-    window.location.href = `/packs/livres/parascolaire?${query}`;
-
+    window.location.search = url.toString();    
 })
 
 
@@ -218,19 +216,46 @@ for(let i = 0 ; i< collectionsParascolaires.length ; i++){
     htmlString += `<option value="${collectionsParascolaires[i]}">${collectionsParascolaires[i]}</option>`
 }
 
-if(collection_parascolaire !== null){
-collection_parascolaire.innerHTML=htmlString
-}
+if(collection_parascolaire !== null){collection_parascolaire.innerHTML=htmlString}
 
 
 
 // reglage ll height wl width ta3 packs
 let facePart = document.querySelectorAll(".containerBackFlip .face")
 
-
 facePart.forEach(face=>{
     face.style.height = (face.nextElementSibling.children[0].getBoundingClientRect().height) + "px";
     let img = face.children[0]
     img.style.height = "100%";
-    
 })
+
+
+
+// awl bouton fl page packs/livres
+let buttonSubmit1 = document.querySelector(".submitButtonTop")
+buttonSubmit1.addEventListener("click",function(event){
+    event.preventDefault();
+    let selectVal = document.querySelector(".anneeScolaire").value
+    let url = new URLSearchParams(window.location.search);
+    if(selectVal == "" ){
+        url.delete("anneeScolaire");
+    }else{
+        url.set("anneeScolaire",selectVal);
+    }
+    window.location.search= url.toString();
+})
+
+
+
+
+
+// partie remplissagge automatique des select lors du chargement de la page
+let urlSearch = new URLSearchParams(window.location.search);
+let anneeScolaire = urlSearch.get("anneeScolaire") ?? "";
+let niveau = urlSearch.get("niveau") ?? "";
+console.log(document.querySelectorAll(".anneeScolaire")[1].value)
+console.log(niveau)
+document.querySelectorAll(".anneeScolaire")[0].value = anneeScolaire;
+document.querySelectorAll(".anneeScolaire")[1].value = niveau;
+console.log(document.querySelectorAll(".anneeScolaire")[1].value)
+// fin de cette partie -----------------------------------------------------

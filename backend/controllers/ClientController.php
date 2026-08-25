@@ -18,6 +18,7 @@
                     $_SESSION["firstName"]= $user["prenom"];
                     $_SESSION["lastName"]= $user["nom"];
                     $_SESSION["role"] = $user["role"];
+                    $_SESSION["clientEmail"] = $body["email"];
                 }
                 $response = [
                     "success" => true,
@@ -89,6 +90,8 @@
                 $_SESSION["userId"] = $this->clientServices->lastInsertedId();
                 $_SESSION["firstName"] = $body["firstName"];
                 $_SESSION["lastName"] = $body["lastName"];
+                $_SESSION["clientEmail"] = $body["email"];
+
                 $response = [
                     "success" => true,
                     "message" => "Client Created successfully",

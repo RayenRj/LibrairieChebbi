@@ -12,6 +12,9 @@ let buttonFiltrer = document.querySelector("#buttonFiltrer")
 let searchForm = document.querySelector("#searchBar")
 let selectTrie = document.querySelector("#trie")
 
+
+
+
 selectTrie.addEventListener("change",()=>{
     let value = selectTrie.value;
     if(window.location.search.indexOf("trie") === -1){
@@ -20,9 +23,7 @@ selectTrie.addEventListener("change",()=>{
         console.log(`window.location.search.slice(0,window.location.search.indexOf("&trie="))}&trie=${value}`)
         window.location.search =  `${window.location.search.slice(0,window.location.search.indexOf("&trie="))}&trie=${value}`;
     }
-
 })
-
 
 searchForm.addEventListener("submit",function(event){
     event.preventDefault();
@@ -30,7 +31,6 @@ searchForm.addEventListener("submit",function(event){
     let searchBar = document.querySelector("#searchBar #search");
     window.location.href=`/products?libelle=${searchBar.value.toLowerCase()}`
 })
-
 //////////////////////////////////
 //////////////////////////////////
 //////////////////////////////////
@@ -38,7 +38,6 @@ searchForm.addEventListener("submit",function(event){
 //////////////////////////////////
 //////////////////////////////////
 //////////////////////////////////
-
 let categorieStr= "";
 let marqueStr="";
 let enStock = false;
@@ -113,7 +112,12 @@ function getLocalStorageArticlesList(){
 cartCount.textContent = getLocalStorageArticlesList().length ;
 
 
-
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+//////////////// Reglage ll boutton add to list /////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 addCartButtonList.forEach(button => {
     button.addEventListener("click",function(event){
         event.preventDefault();
@@ -148,6 +152,14 @@ addCartButtonList.forEach(button => {
     })
 })
 
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+///////////// Reglage ll wishlist heart ////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 emptyHeart.forEach(heart =>{
     heart.addEventListener("mouseover", _ =>{
         heart.classList.remove("fa-regular");
@@ -169,6 +181,49 @@ emptyHeart.forEach(heart =>{
 })
 
 
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+///////////// Reglage ll filter button  ////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+let filterButton = document.querySelector(".filterButton");
+let aside = document.querySelector("aside");
+let responsiveAsideOverlay = document.querySelector(".responsiveAside")
+console.log(aside)
+filterButton.addEventListener("click",function(event){
+    let scrollY = window.scrollY
+
+    aside.style.display = "flex";
+    responsiveAsideOverlay.style.display = "initial";
+    responsiveAsideOverlay.style.top = scrollY + "px";
+    aside.style.top =`calc(${window.scrollY}px + 5dvh)`;
+    document.body.dataset.scrollY= scrollY;
+    document.body.style.maxHeight="100dvh";
+    document.body.style.position="fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right ="0";
+    document.body.style.overflow = "hidden";
+})
+
+responsiveAsideOverlay.addEventListener("click",function(){
+    let scrollY = parseFloat(document.body.dataset.scrollY || 0 )
+    aside.style.display = "";
+    responsiveAsideOverlay.style.display = "";
+    aside.style.top = "";
+    aside.style.display = "";
+    responsiveAsideOverlay.style.display = "";
+    responsiveAsideOverlay.style.top ="";
+    document.body.style.maxHeight="";
+    document.body.style.position="";
+    document.body.style.top = ``;
+    document.body.style.left = "";
+    document.body.style.right ="";
+    document.body.style.overflow = "";
+    window.scrollTo(0,scrollY)
 
 
-
+})

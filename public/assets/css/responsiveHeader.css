@@ -82,6 +82,7 @@ p{font-size: 13px;}
     position: fixed;
     background-color: var(--white);
     height: 65px;
+    overflow: hidden;
 
 }
 

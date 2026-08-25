@@ -27,6 +27,7 @@ error_reporting(E_ALL);
     $route->add("GET", "/contactus" , "PageController","contactUsPage");
     $route->add("GET", "/games" , "PageController","gamesPage");
     $route->add("GET", "/main" , "PageController","mainPage");
+    $route->add("GET", "/" , "PageController","mainPage");
     $route->add("GET", "/packs" , "PageController","packPage");
     $route->add("GET", "/products/product" , "PageController","articlePage");
     $route->add("GET", "/dashboard/commandes" , "PageController","CommandeManagerPage");

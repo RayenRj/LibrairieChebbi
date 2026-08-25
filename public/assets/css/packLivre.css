@@ -11,6 +11,11 @@
     font-family: "Poppins", sans-serif;
 }
 
+*:active{
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
 
 :root{
     --yellow: #FFDD57;
@@ -136,6 +141,7 @@ section .article-list{
 section .article-list article a{
     /* border: 2px solid var(--gray-300); */
     height: 100%;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -211,6 +217,7 @@ article button:hover{
 
 
 /* styling the button rechercher */
+
 
 .topPart button[type="submit"]{
     margin-left: 0.5em;
@@ -351,3 +358,124 @@ section .pagination > a{
 .back{transform: rotateY(180deg);}
 .box{width: fit-content;cursor: pointer;}
 .box:hover .containerBackFlip{transform: rotateY(-180deg);}
+
+
+
+/* media part */
+
+@media (max-width:800px){
+    section .article-list article h4{
+        max-height: 52px;
+        overflow: hidden;
+        height: 52px;
+    }
+    section:first-of-type {
+        padding-top: 80px !important;
+    }
+    section .topPart h2 {
+        position: relative;
+        font-size: 1.3em;
+    }
+
+    section .topPart p {
+        font-size: 0.75em;
+    }
+    section {
+        padding: 1em !important;
+        width: 100%;
+        max-width: 100dvw;
+        background-color: #eee;
+    }
+
+    section .article-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+        gap: 1em;
+        margin-top: 1rem;
+        place-content: center;
+        place-items: center;
+    }
+    section .topPart {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1.25em;
+    flex-direction: column;
+    padding: 1em;
+}
+section .partTwo div:last-child {
+    display: flex;
+    gap: 0.75em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+    
+section .partTwo div:last-child select, section .partTwo div:last-child input,section .partTwo button[type="submit"], .topPart button[type="submit"]{flex-grow: 1;}
+section .partTwo div:last-child select, section .partTwo div:last-child input{
+    background-color: white;
+}
+    .topPart div:last-child{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+    }
+    .topPart div:last-child select{flex-grow: 1;flex-basis: 50%;background-color: white;}
+    .topPart div:last-child button{
+        flex-grow: 1;flex-basis: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.35em ;
+    }
+}
+
+
+@media (max-width:500px) {
+    section .article-list article a {
+        padding: 0.75rem 0.5rem;
+    }
+    section .article-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+        gap: 1em;
+        margin: 1rem auto;
+        place-content: center;
+        place-items: center; 
+    }
+    section .article-list article h4 {
+        font-size: 1rem;
+        text-align: left;
+        margin: 0.75em auto 0;
+        width: 90%;
+        max-width: 270px;
+        max-height: 50px;
+        height: 50px;
+        overflow: hidden;
+    }
+    article .prix {
+    font-weight: 700;
+    font-size: 1rem;
+}
+    article button {
+        background-color: var(--yellow-dark);
+        color: white;
+        padding: 0.5rem 0.75rem;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        font-size: 0.85rem;
+        border-radius: 0.25rem;
+        transition: 0.5s all ease;
+    }
+
+    .nombreDisponible {
+        font-size: 0.65rem;
+        margin: 0.25rem auto 0;
+        width: 95%;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        color: var(--gray-700);
+    }
+}

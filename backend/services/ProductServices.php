@@ -209,6 +209,34 @@ class ProductServices{
     public function numberOfLinesfindLivreScolaire(string $libelle , string $niveauScolaire){
         return $this->productRepo->numberOfLinesfindLivreScolaire($libelle, $niveauScolaire);
     }
+
+
+    // partie teb3a el games uri
+    public function getAllGames($libelle , $genre , $page , $limit){
+        $offset = ($page -1) * $limit;
+        return $this->productRepo->getAllGames($libelle , $genre , $limit , $offset);
+    }
+    public function numberOfRowsAllGames($libelle , $genre){
+        return $this->productRepo->numberOfRowsAllGames($libelle , $genre);
+    }
+
+    // get list of all collection
+    public function getAllCollection($type ,$genre, $page , $limit){
+        $offset = ($page - 1 ) * $limit;
+        $type = mb_strtolower($type);
+        $genre = mb_strtolower($genre);
+        if(!in_array($genre,["fille","garçon","mixte",""])){throw new Exception("Le Genre dans la partie sac est invalide!!");}
+        if(!in_array($type, ["","sac a dos","panier","trousse","sac a chariot","chariot"])){throw new Exception("Le type est invalide !");}
+        return $this->productRepo->getAllCollection($type,$genre,$limit,$offset);
+    }
+    // get the number of raw total of all collection
+    public function numberOfRowGetAllCollection($type,$genre){
+        $type = mb_strtolower($type);
+        $genre = mb_strtolower($genre);
+        if(!in_array($genre,["fille","garçon","mixte",""])){throw new Exception("Le Genre dans la partie sac est invalide!!");}
+        if(!in_array($type, ["","sac a dos","panier","trousse","sac a chariot","chariot"])){throw new Exception("Le type est invalide !");}
+        return $this->productRepo->numberOfRowGetAllCollection($type,$genre);
+    }
 }
 
 

@@ -49,7 +49,7 @@
     
 
   <section>
-    <form action="" id="formParascolaire">
+    <form id="formLivre">
       <div class="topPart partTwo">
         <div class="text">
           <h2>Tous les livres Parascolaire</h2>
@@ -58,7 +58,7 @@
         <div>
           <input type="text" name="libelle" id="" placeholder="libellé du livre..." value="<?= $libelle ?>">
           <!-- remplissage avec js -->
-          <select name="anneeScola  ire" class="anneeScolaire"></select>
+          <select name="anneeScolaire" class="anneeScolaire"></select>
           <select name="collection" id="collection_parascolaire">
               <option value="">-- Choisir une collection --</option>
           </select>
@@ -93,7 +93,6 @@
 
     <!-- partie eli feha pagination -->
                 <div class="bottom">
-                    <p>Affichage de <?= (($page - 1) * $limit ) +1  ?> à <?= min($page * $limit  , $nombre_row_totale) ?> sur <?= $nombre_row_totale ?> commandes</p>
                     <div class="pagination">
                         <!-- before -->
                         <?php if($page > 1) : ?>
