@@ -343,5 +343,6 @@
     <script src="/assets/js/header_script.js"></script>
     <script src="/assets/js/signUp.js"></script>
     <script src="/assets/js/signIn.js"></script>
+
 </body>
 </html>

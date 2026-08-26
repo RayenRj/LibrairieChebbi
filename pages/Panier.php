@@ -8,6 +8,21 @@
     <link rel="stylesheet" href="../assets/css/panier.css">
 </head>
 <body>
+    <div id="page-loader" role="status" aria-live="polite">
+        <div class="loader-spinner" aria-hidden="true"></div>
+        <div class="loader-brand">Librairie <span>Chebbi</span></div>
+    </div>
+    
+
+
+
+    <!-- page content -->
+
+    <div id="page-content">
+
+
+
+
     <?php include "../includes/header.php" ?>
 
     <aside>
@@ -108,6 +123,7 @@
             </div>
         </section>
     </main>
+    </div>
     <?php include("../includes/footer.php"); ?>
     <script src="../assets/js/shoppingCart.js"></script>
 </body>

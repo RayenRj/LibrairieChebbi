@@ -592,7 +592,7 @@ img{
     height: 100%;
 }
 
-@media (max-width:1800px) {
+/* @media (max-width:1800px) {
     .top-chart {
         display: flex;
         flex-direction: column;
@@ -611,4 +611,4 @@ img{
         border: 2px solid #eee;
         margin: 2em auto;
     }
-}
+} */

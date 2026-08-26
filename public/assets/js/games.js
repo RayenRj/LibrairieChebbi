@@ -12,7 +12,6 @@ genreList.value = genreVal
 // changement de genre
 genreList.addEventListener("change",function(){
     let genre = genreList.value
-    console.log(genre)
     if(genre==""){
         window.location.search =""
         return;
@@ -27,7 +26,6 @@ button.forEach(button =>{
     button.addEventListener("click",function(event){
         event.preventDefault();
         let element = event.target == button.firstElementChild ? event.target.parentElement : event.target;
-        console.log(element);
         let cartTableString = localStorage.getItem("cartTable");
 
         if(cartTableString !== null){

@@ -368,6 +368,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="../assets/js/slider.js"></script>
-
+<script src="/assets/js/popUpAddToCart.js"></script>
 </body>
 </html>

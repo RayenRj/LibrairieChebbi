@@ -37,6 +37,16 @@
     <link rel="stylesheet" href="../assets/css/order.css">
 </head>
 <body>
+    <!-- partie loading -->
+    <div id="page-loader" role="status" aria-live="polite">
+        <div class="loader-spinner" aria-hidden="true"></div>
+        <div class="loader-brand">Librairie <span>Chebbi</span></div>
+    </div>
+    <!-- fin du partie loading -->
+
+
+    <div id="page-content">
+    <!-- debut du partie content -->
     <?php include("../includes/header.php") ?>
     <div class="container">
         <div class="commande">
@@ -252,6 +262,7 @@
 
 
     <?php include("../includes/footer.php") ?>
+     </div>
     <script src="../assets/js/commande.js"></script>
 </body>
 </html>

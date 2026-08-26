@@ -87,6 +87,7 @@ error_reporting(E_ALL);
     $route->add("GET","/api/users/isClientLoggedIn", "ClientController" , "isClientLoggedIn");
     $route->add("GET","/api/users/logout", "ClientController" , "logOut");
     $route->add("GET","/api/users/user/{id}", "ClientController" , "getClientByIdentifier");
+    $route->add("POST","/api/users/update", "ClientController" , "updateClient");
 
 
     //=========> commande Routes <=======

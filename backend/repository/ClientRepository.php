@@ -102,21 +102,26 @@
                 $query .= " tel = ?  , ";
                 $params[] = $data["tel"];
             }
-            if (isset($data["email"])){
-                $query .= " email = ? , ";
-                $params[] = $data["email"];
-            }
+            // if (isset($data["email"])){
+            //     $query .= " email = ? , ";
+            //     $params[] = $data["email"];
+            // }
             if (isset($data["password"])){
                 $query .= " password = ? , ";
-                $params[] = $data["password"];
+                $params[] = password_hash($data["password"],PASSWORD_DEFAULT);
             }
             if(isset($data["role"])){
                 $query .= " role = ? , ";
                 $params[] = $data["role"];
             }
+            if(isset($data["addresse"])){
+                $query .= " addresse = ? , ";
+                $params[] = $data["addresse"];
+            }
             if(empty($params)){return false;}
             $query = substr($query , 0 , -2) . " where id_client = ? ";
             $params[] = $id;
+            
             $stmt = $this->db->prepare($query);
             return $stmt->execute($params); 
         }

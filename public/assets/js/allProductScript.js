@@ -228,6 +228,8 @@ responsiveAsideOverlay.addEventListener("click",function(){
 
 
 // empty button fl container 
-emptyPartButton.addEventListener("click",function(){
-    window.location.search = "";
-})
+if(emptyPartButton){
+    emptyPartButton.addEventListener("click",function(){
+        window.location.search = "";
+    })
+}

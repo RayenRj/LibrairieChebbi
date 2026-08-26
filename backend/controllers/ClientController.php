@@ -319,7 +319,7 @@
                 $response = [
                     "success" => true,
                     "message" => "Client updated successfully",
-                    "data" => $this->clientServices->modifyClient($request["body"]["idClient"],$request["body"]),
+                    "data" => $this->clientServices->updateClient($request["body"]["idClient"],$request["body"]),
                     "error" => null
                 ];
                 echo json_encode($response);

@@ -92,7 +92,7 @@
 
             <section class="article-container"> 
                 <?php foreach($collectionListe as $collection): ?>
-                    <article>
+                    <article data-idproduit="<?= $collection["id_produit"] ?>">
                         <span class="new" hidden>Nouveau</span>
                         <span class="best-seller" >Best seller</span>
                         <span class="repture" hidden>repture de stock</span>
@@ -103,8 +103,9 @@
                             <p class="rating-number">4.8</p>
                             <p class="number-of-poeple">(120)</p>
                         </div>
+                        
                         <h3 class="price"><?= number_format($collection["prix"],3,","," ") ?> DT</h3>
-                        <a href="" class="button" data-idproduit="<?= $collection["id_produit"] ?>">
+                        <a href="" class="button addToCartBtn" data-idproduit="<?= $collection["id_produit"] ?>" data-name="<?= $collection["libelle"] ?>" data-price="<?= $collection["prix"] ?>">
                             <i class="fa-solid fa-cart-shopping"></i>
                             Ajouter au panier
                         </a>
@@ -163,8 +164,9 @@
 
     </div>
 
-
+    <div id="toast-region"></div>
     <?php include("../includes/footer.php"); ?>
+    <script src="/assets/js/popUpAddToCart.js"></script>
     <script src="/assets/js/collection.js"></script>
 </body>
 </html>

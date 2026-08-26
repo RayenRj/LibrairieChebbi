@@ -1,7 +1,7 @@
-let addButton = document.querySelectorAll(".price .button")
+let addButton = document.querySelectorAll("article .button")
 let typeList = document.querySelectorAll(".typeSac li")
 let genderButtons = document.querySelectorAll(".gender-buttons button")
-
+let articles = document.querySelectorAll("article")
 let url = new URLSearchParams(window.location.search);
 let typeInUrl = url.get("type") ?? "";
 
@@ -87,5 +87,14 @@ genderButtons.forEach(button=>{
             url.set("genre",data);
         }
         window.location.search = url.toString();
+    })
+})
+
+
+articles.forEach(article =>{
+    article.addEventListener("click",function(event){
+        event.preventDefault();
+        if(event.target.classList.contains("button") || event.target.classList.contains("fa-heart") || event.target.classList.contains("wishlist")) return;
+        window.location.href =`/products/product?idproduit=${parseFloat(article.dataset.idproduit)}`
     })
 })

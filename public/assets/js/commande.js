@@ -4,6 +4,20 @@ let confimerCommandeButton = document.querySelector(".btn-confirmation");
 let delegationContainer = document.querySelector("#delegation");
 let gouvernoratContainer = document.querySelector("#gouvernorat");
 
+// Loading part script
+// en tout début de fichier, avec vos autres let
+const MIN_DURATION = 500;
+const loaderStart = performance.now();
+
+function finishLoader(){
+    const loader = document.getElementById('page-loader');
+    if(!loader) return;
+    const elapsed = performance.now() - loaderStart;
+    const wait = Math.max(0, MIN_DURATION - elapsed);
+    setTimeout(() => loader.classList.add('done'), wait);
+}
+// end of loading part
+
 const gouvernorats = {
   "Ariana": [
     "Ariana Ville", "Cité Ettadhamen", "Kalâat El Andalous", "La Soukra",
@@ -236,6 +250,8 @@ window.addEventListener("load",async function(event){
                             </article>
         `;
     }
+
+  finishLoader()   // <-- ajouté ici
 
 })
 

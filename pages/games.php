@@ -126,7 +126,7 @@
                             </div>
                             <h3 class="price"><?= number_format($game["prix"],3,","," ") ?> DT</h3>
                         </a>
-                        <a href="" class="button" data-idproduit=<?= $game["id_produit"] ?>>
+                        <a href="" class="button addToCartBtn" data-idproduit ="<?= $game["id_produit"] ?>" data-name="<?= $game["libelle"] ?>" data-price="<?= $game["prix"] ?>" ?>
                             <i class="fa-solid fa-cart-shopping"></i>
                             Ajouter au panier
                         </a>
@@ -184,12 +184,13 @@
         </div>
 
     </div>
+    <div id="toast-region"></div>
 
 
 
 
     <?php include("../includes/footer.php"); ?>
-
     <script src="/assets/js/games.js"></script>
+    <script src="/assets/js/popUpAddToCart.js"></script>
 </body>
 </html>

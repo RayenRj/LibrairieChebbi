@@ -228,9 +228,9 @@ body{
 /* reglage ll input ta3 mot de passe */
 .passwordIcon{
     position: absolute;
-    right: 0;
+    right: 5px;
     display: flex;
-    top: 0;
+    top: 3px;
     height: 35px;
     width: 35px;
     align-items: center;
@@ -239,7 +239,8 @@ body{
     font-size: 13px;
     cursor: pointer;
 }
-.mps input{padding-right: 32px !important;}
+
+.mps input{padding-right: 36px !important;}
 
 
 .secondCard .text ,
@@ -552,7 +553,7 @@ body{
     left: 2px;
 }
 
-
+#clientForm{width: 100%;}
 /* partie responsive  */
 @media (max-width : 1450px) {
     .thirdCard .card article input[type="checkbox"]:checked + div.commandeContainer {
@@ -566,7 +567,7 @@ body{
 @media(max-width:1350px){
     .container{
         grid-template-columns: 1fr 3fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: auto auto;
         grid-template-areas: 
         "pers info"
         "history history";
@@ -584,7 +585,7 @@ body{
 @media(max-width:800px){
     .container{
         grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr 1fr;
+        grid-template-rows: repeat(3,auto);
         grid-template-areas: "pers" "info" "history";
         gap: 1em;
         padding-top: 90px !important;
@@ -600,3 +601,120 @@ body{
 }
 
 
+@media (max-width:500px) {
+    .container {
+        width: 92.5dvw !important;
+        margin: 0em auto !important ;
+        padding-top: calc(3em + 40px) !important;
+        gap: 0.5em !important;
+    }
+    .thirdCard{
+        max-width: 95dvw;
+        margin: 0.5em auto 5em !important;
+        height: fit-content;
+    }
+    .thirdCard .card{
+        max-width: 100%;
+        padding: 0.25em;
+    }
+
+    .thirdCard .card label {
+        padding: 0.35em;
+        width: 100%;
+        display: block;
+        cursor: pointer;
+    }
+    .thirdCard .card label ul li {
+        font-size: 11px;
+    }
+    .thirdCard .card label ul li:nth-child(3) {
+        color: black;
+        font-size: 11px;
+        font-weight: 600;
+    }
+    .thirdCard .card label ul {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        height: 100%;
+        gap:0.5em;
+    }
+
+
+    .thirdCard .card article input[type="checkbox"]:checked + div.commandeContainer {
+        margin: 0.5em 0.15em;
+        padding: 0.5em;
+    }
+
+    .articleContainer li ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.25em;
+        border-radius: 0.5em;
+        border: 1px solid var(--gray-200);
+        background-color: var(--gray-100);
+        padding: 0.25em 0.75em;
+    }
+    .articleContainer li ul li {
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .articleContainer li ul li:first-of-type {
+        flex-basis: initial;
+        display: flex;
+        width: 225px;
+        max-width: 225px;
+        overflow: hidden;
+        gap: 0.5em;
+        align-items: center;
+        flex-grow: 1;
+
+    }
+    .articleContainer li ul li:nth-child(2){
+        padding-right: 1em;
+    }
+    .bottomPart .double h3{
+        font-size: 0.9em;
+    }
+    .articleContainer li ul li:first-of-type img {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        margin-right: 0.45em;
+    }
+
+    .thirdCard .card article:hover{
+        border: 2px solid var(--yellow-dark);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: scale(1.005);
+        border-radius: 0.25em;
+
+    }
+    .commandeContainer .topPart > div:first-child p {
+        color: var(--gray-500);
+        font-weight: 500;
+        font-size: 10px;
+    }
+    .commandeContainer .topPart > div:last-child p {
+        color: var(--gray-600);
+        font-size: 11px;
+    }
+    .commandeContainer .topPart > div:last-child span {
+        font-weight: bold;
+        font-size: 12px;
+    }
+    .thirdCard .statutCommande {
+        font-size: 10px;
+        padding: 0 1em;
+        border-radius: 1em;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    
+}

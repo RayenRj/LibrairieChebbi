@@ -79,6 +79,7 @@
                     <p>Gérez vos informations personnelles</p>
                 </div>
                 <div class="card">
+                <form action="" id="clientForm">
                     <ul>
                         <li>
                             <section>
@@ -93,7 +94,7 @@
                             <section>
                                 <p>Prénom</p>
                                 <div>
-                                    <input type="text" name="nom" id="" placeholder="Tapez votre prenom ..." value="<?= $client->getPrenom() ?>">
+                                    <input type="text" name="prenom" id="" placeholder="Tapez votre prenom ..." value="<?= $client->getPrenom() ?>">
                                     <div class="icon"><i class="fa-regular fa-user"></i></div>
                                 </div>
                             </section>
@@ -102,18 +103,18 @@
                             <section>
                                 <p>Email</p>
                                 <div>
-                                    <input type="email" name="nom" id="" placeholder="Tapez votre email ..." value="<?= $client->getEmail() ?>">
+                                    <input type="email" disabled id="" placeholder="Tapez votre email ..." value="<?= $client->getEmail() ?>">
                                     <div class="icon"><i class="fa-regular fa-envelope"></i></div>
                                 </div>
                             </section>
                         </li>
                         <li>
                             <section class="mps">
-                                <p>Mot de passe</p>
+                                <p>Nouveau Mot de passe</p>
                                 <div>
-                                    <input type="password" name="nom" id="" placeholder="Tapez votre mot de passe ..." value="<?= $client->getPassword() ?>">
+                                    <input type="password" name="password" id="passwordInput" placeholder="Tapez votre mot de passe ..." value="">
                                     <div class="icon"><i class="fa-solid fa-lock"></i></div>
-                                    <div class="passwordIcon"><i class="fa-regular fa-eye-slash"></i></div>
+                                    <div class="passwordIcon"><i class="fa-solid fa-eye"></i></div>
 
                                 </div>
                             </section>
@@ -122,7 +123,7 @@
                             <section>
                                 <p>Adresse</p>
                                 <div>
-                                    <input type="text" name="nom" id="" placeholder="Tapez votre adresse ..." value="<?= $client->getAdresse() ?>">
+                                    <input type="text" name="addresse" id="" placeholder="Tapez votre adresse ..." value="<?= $client->getAdresse() ?>">
                                     <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
                                 </div>
                             </section>
@@ -131,16 +132,16 @@
                             <section>
                                 <p>Numéro de téléphone</p>
                                 <div>
-                                    <input type="text" name="nom" id="" placeholder="Tapez votre numero de telephone ..." value="<?= $client->getTel() ?>">
+                                    <input type="text" name="tel" id="" placeholder="Tapez votre numero de telephone ..." value="<?= $client->getTel() ?>">
                                     <div class="icon"><i class="fa-solid fa-phone"></i></div>
                                 </div>
                             </section>
                         </li>
                         <li>
-                            <button class="saveModification"><i class="fa-regular fa-floppy-disk"></i> Enregistrer les modifications</button>
+                            <button class="saveModification" data-idclient="<?= $_SESSION["userId"] ?>"><i class="fa-regular fa-floppy-disk"></i> Enregistrer les modifications</button>
                         </li>
                     </ul>
-
+                </form>
                 </div>
             </div>
         </main>

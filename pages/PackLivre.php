@@ -81,7 +81,7 @@
                     <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $pack["quantite_stock"] ?> Packs disponibles</p>
                     <div class="last">
                       <p class="prix"><?= number_format($pack["prix"],3,",", " ") ?> DT</p>
-                      <button type="button" data-idproduit="<?= $pack["id_pack"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
+                      <button type="button" data-idproduit="<?= $pack["id_pack"] ?>" class="addToCartBtn" data-name="<?= $pack["libelle"] ?>" data-price="<?= $pack["prix"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
                     </div>  
                   </a>
                 </article>
@@ -125,7 +125,7 @@
             <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $parascolaire["quantite_stock"] ?> Packs disponibles</p>
             <div class="last">
               <p class="prix"><?= number_format($parascolaire["prix"], 3 , "," ," ") ?> DT</p>
-              <button type="button" data-idproduit="<?= $parascolaire["id_produit"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
+              <button type="button" data-idproduit="<?= $parascolaire["id_produit"] ?>"  class="addToCartBtn" data-name="<?= $parascolaire["libelle"] ?>" data-price="<?= $parascolaire["prix"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </a>
         </article>
@@ -177,8 +177,9 @@
 
 
 
-
   <?php include(__DIR__ . "/../includes/footer.php"); ?>
+  <div id="toast-region"></div>
   <script src="/assets/js/packLivre.js"></script>
+  <script src="/assets/js/popUpAddToCart.js"></script>
 </body>
 </html>

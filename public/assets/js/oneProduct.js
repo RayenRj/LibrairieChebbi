@@ -54,4 +54,6 @@ addToCart.addEventListener("click",function(event){
     localStorage.setItem("cartTable", JSON.stringify(table));
     console.log(cartCount.textContent)
     cartCount.textContent = parseInt(cartCount.textContent) + 1 ;
+    responsiveCartCount.textContent = parseFloat(responsiveCartCount.textContent) + 1
+
 })

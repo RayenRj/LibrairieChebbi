@@ -515,6 +515,15 @@ box-shadow:
 
 
 
+/* reglage outline article */
+article{
+    -webkit-tap-highlight-color: transparent;
+}
+article:active{
+    background-color: none;
+}
+
+
 
 
 @media (max-width:800px) {

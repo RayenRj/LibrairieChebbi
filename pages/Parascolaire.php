@@ -79,7 +79,7 @@
             <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $parascolaire["quantite_stock"] ?> Packs disponibles</p>
             <div class="last">
               <p class="prix"><?= number_format($parascolaire["prix"], 3 , "," ," ") ?> DT</p>
-              <button type="button" data-idproduit="<?= $parascolaire["id_produit"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
+              <button type="button" data-idproduit="<?= $parascolaire["id_produit"] ?>" class="addToCartBtn" data-name="<?= $parascolaire["libelle"] ?>" data-price="<?= $parascolaire["prix"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
             </div>
           </a>
         </article>
@@ -127,7 +127,7 @@
                         <?php if($page < $nombre_totale_page) : ?>
                             <a href="/packs/livres/parascolaire?page=<?= $page + 1 ?><?= $query_string !== "" ? "&" . $query_string : "" ?>#" id="post"><i class="fa-solid fa-angle-right"></i></a>
                         <?php else : ?>
-                             <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
+                            <a href="#" id="post"><i class="fa-solid fa-angle-right"></i></a>
                         <?php endif; ?>
 
                     </div>
@@ -139,6 +139,8 @@
 
 
   <?php include(__DIR__ . "/../includes/footer.php"); ?>
+  <div id="toast-region"></div>
   <script src="/assets/js/packLivre.js"></script>
+  <script src="/assets/js/popUpAddToCart.js"></script>
 </body>
 </html>

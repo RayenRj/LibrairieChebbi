@@ -499,7 +499,7 @@ use function PHPSTORM_META\type;
                                 <?= $product["prix"] ?> Dt
                             </p>
                         </a>
-                        <button class="addCartButton" data-idproduit ="<?= $product["id_produit"] ?>"><span>🛒</span> Ajouter au panier</button>
+                        <button class="addCartButton addToCartBtn" data-idproduit ="<?= $product["id_produit"] ?>" data-name="<?= $product["libelle"] ?>" data-price="<?= $product["prix"] ?>"><span>🛒</span> Ajouter au panier</button>
                     </article>
                 <?php endforeach; ?>
             </div>
@@ -549,9 +549,9 @@ use function PHPSTORM_META\type;
                 </div>
         </main>
     </section>
-
+    <div id="toast-region"></div>
     <?php include("../includes/footer.php"); ?>
-
     <script src="/assets/js/allProductScript.js"></script>
+    <script src="/assets/js/popUpAddToCart.js"></script>
 </body>
 </html>

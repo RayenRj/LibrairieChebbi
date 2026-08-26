@@ -13,6 +13,23 @@
 
 
 :root{
+    /* teb3a el pop up */
+    --paper:#F6F1E7;
+    --paper-card:#FFFDF8;
+    --ink:#1E2A42;
+    --ink-soft:#4A5570;
+    --stamp-red:#B23A2E;
+    --stamp-red-dark:#8A2C22;
+    --gold:#C99A3D;
+    --muted:#8A8375;
+    --line:#DCD5C4;
+    --font-display:'Fraunces', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+
+
+
+
     --yellow: #FFDD57;
     --yellow-light: #FFF6C2;
     --yellow-dark: #F0C800;
@@ -126,7 +143,7 @@ header .left-part .categories ul{
     position: absolute;
     background-color: #ffffff;
     border: 1px solid var(--gray-300);
-    width: 210px;
+    width: 220px;
     border-radius: 12px;
     padding: 0.5em;
     display: none;
@@ -444,6 +461,7 @@ hr{
 
   header img{
     width: 120px;
+    min-width: 80px;
     object-fit: contain;
     cursor: pointer;
   }
@@ -575,4 +593,143 @@ button.buttonGoogle:hover {
   }
 }
 
+
+
+
+/* ############################################################# */
+/* ############################################################# */
+/* ############################################################# */
+/* ############################################################# */
+/* ############################################################# */
+/* ############################################################# */
+  
+  /* Toast stack */
+  #toast-region{
+    position:fixed;
+    bottom:24px;
+    right:24px;
+    display:flex;
+    flex-direction:column-reverse;
+    gap:12px;
+    z-index:1000;
+    pointer-events:none;
+  }
+
+  .toast{
+    pointer-events:auto;
+    width:320px;
+    background:var(--paper-card);
+    border:1px solid var(--ink);
+    border-radius:3px;
+    box-shadow:3px 4px 0 rgba(30,42,66,0.12);
+    display:flex;
+    overflow:hidden;
+    transform:translateX(380px);
+    opacity:0;
+    transition:transform 0.38s cubic-bezier(.2,.8,.25,1), opacity 0.3s ease;
+  }
+  .toast.show{
+    transform:translateX(0);
+    opacity:1;
+  }
+  .toast.hide{
+    transform:translateX(380px);
+    opacity:0;
+  }
+  .toast-perf{
+    width:16px;
+    flex-shrink:0;
+    background-image: radial-gradient(circle, var(--paper) 2.6px, transparent 2.6px);
+    background-size: 16px 14px;
+    background-position: center;
+    border-right:1px dashed var(--line);
+  }
+  .toast-body{
+    flex:1;
+    padding:14px 14px 12px 12px;
+    position:relative;
+  }
+  .toast-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:8px;
+  }
+  .toast-eyebrow{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:1px;
+    color:var(--muted);
+    text-transform:uppercase;
+  }
+  .toast-title{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:15.5px;
+    margin:2px 0 4px;
+    line-height:1.25;
+  }
+  .toast-detail{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .toast-close{
+    background:none;
+    border:none;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1;
+    cursor:pointer;
+    padding:2px;
+  }
+  .toast-close:hover{color:var(--ink);}
+  .stamp{
+    position:absolute;
+    top:10px;
+    right:14px;
+    font-family:var(--font-mono);
+    font-weight:500;
+    font-size:10.5px;
+    color:var(--stamp-red);
+    border:1.5px solid var(--stamp-red);
+    border-radius:3px;
+    padding:2px 6px;
+    letter-spacing:0.5px;
+    transform:rotate(6deg);
+    opacity:0;
+  }
+  .toast.show .stamp{
+    animation:stampIn 0.4s 0.15s cubic-bezier(.3,1.4,.5,1) forwards;
+  }
+  @keyframes stampIn{
+    0%{opacity:0; transform:rotate(6deg) scale(1.6);}
+    100%{opacity:1; transform:rotate(6deg) scale(1);}
+  }
+  .toast-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px;
+    padding-top:8px;
+    border-top:1px dashed var(--line);
+  }
+  .toast-total{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .toast-total b{color:var(--ink); font-weight:600;}
+  .toast-cta{
+    font-family:var(--font-body);
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--stamp-red);
+    text-decoration:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+  }
+  .toast-cta:hover{text-decoration:underline;}
 
