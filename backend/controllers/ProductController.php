@@ -48,7 +48,11 @@
                                                                 floatval($body["remise"]) ?? 0 , 
                                                                 $body["description"],
                                                                 $image,
-                                                                $body["codeBarre"]);
+                                                                $body["codeBarre"],
+                                                                $body["anneeScolaire"] ?? null,
+                                                                $body["genre"] ?? null,
+                                                                $body["collection"] ?? null,
+                                                                $body["typeCollection"] ?? null);
                 $response = [
                     "success" => true,
                     "numberOfLine" => null,
@@ -106,6 +110,7 @@
         ///////////////////////////////////////////////////
         ///////////////////////////////////////////////////
         //done
+
         public function rechercherArticle($request){
             try{
                 $query = $request["query"];
@@ -264,7 +269,6 @@
             }  
         }
 
-
         public function nombreDeVentePourChaqueCategorie($request){
             try{
                 $result = $this->productServices->nombreDeVentePourChaquePack();
@@ -315,6 +319,7 @@
                 return;
             }
         }
+
 
 }
 

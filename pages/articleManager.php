@@ -542,7 +542,7 @@
                         <div>
                             <label>Categorie</label>
                             <div>
-                                <select id="categorie" name="categorie" required>
+                                <select id="categorie" class="selectCategoriePopUp" name="categorie" required>
                                     <option value="">-- Sélectionnez une catégorie --</option>
                                     <option value="ecriture">Écriture</option>
                                     <option value="papeterie">Papeterie</option>
@@ -550,16 +550,21 @@
                                     <option value="geometrie">Géométrie</option>
                                     <option value="coupe_collage">Coupe et collage</option>
                                     <option value="dessin_arts">Dessin et arts</option>
-                                    <option value="sacs_accessoires">Sacs et accessoires</option>
+                                    <option value="sac">Sacs et accessoires</option>
                                     <option value="calcul_sciences">Calcul et sciences</option>
                                     <option value="numerique">Numérique</option>
                                     <option value="livres_pedagogiques">Livres pédagogiques</option>
+                                    <option value="parascolaire">Parascolaire</option>
+                                    <option value="jouet">jouet</option>
+                                    <option value="panier">Panier</option>
+                                    <option value="trousse">Trousse</option>
                                     <option value="fournitures_bureau">Fournitures de bureau</option>
                                     <option value="others">Others</option>
                                 </select>
                                 <i class="fa-regular fa-folder-open"></i>
                             </div>
                         </div>
+
                         <div>
                             <label>Marque</label>
                             <div>
@@ -600,8 +605,24 @@
                             </div>
                         </div>
                     </div>
-
-
+                        <div class="singleGenre">
+                            <label for="">Dediée pour</label>
+                            <select name="genre" id="genre">
+                                <option value="" selected>-- Choisir le genre --</option>
+                                <option value="mixte">Mixte</option>
+                                <option value="garcon">Garçon</option>
+                                <option value="fille">Fille</option>
+                            </select>
+                        </div>
+                    
+                    <div class="singleAnneeParascolaireLivre">
+                        <label for="">Choisir L'année Scolaire</label>
+                        <select name="anneeScolaire" id="anneeScolaire"></select>
+                    </div>
+                    <div class="singleCollectionParascolaire">
+                        <label for="">Choisir la Collection</label>
+                        <select name="collection" id="collection_parascolaire"></select>
+                    </div>
                     <div class="single">
                         <label for="">Remise (%)</label>
                         <div>

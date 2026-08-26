@@ -60,6 +60,9 @@ error_reporting(E_ALL);
     $route->add("GET","/api/venteParJour/{id}","ProductController","nombreDeVenteParJour");
     $route->add("GET","/api/venteParCategorie","ProductController","nombreDeVentePourChaqueCategorie");
 
+    $route->add("GET","/api/articles/collection","ProductController","");
+    $route->add("GET","/api/articles/game","ProductController","");
+    $route->add("GET","/api/articles/livre","ProductController","");
 
 
 

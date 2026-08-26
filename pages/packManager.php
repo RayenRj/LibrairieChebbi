@@ -363,6 +363,7 @@
                                 <option value="college">Collége</option>
                                 <option value="secondaire">Secondaire</option>
                                 <option value="bac">Bac</option>
+                                <option value="livre">Pack De Livres Seulement</option>
 
                             </select>
                             <i class="fa-regular fa-folder-open"></i>

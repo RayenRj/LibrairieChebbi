@@ -11,7 +11,7 @@ let prixMin = document.querySelector("#prixMin")
 let buttonFiltrer = document.querySelector("#buttonFiltrer")
 let searchForm = document.querySelector("#searchBar")
 let selectTrie = document.querySelector("#trie")
-
+let emptyPartButton = document.querySelector(".emptyContainer button")
 
 
 
@@ -92,13 +92,11 @@ buttonFiltrer.addEventListener("click",function(event){
     }else if(parseFloat(prixMax.textContent) !==0){queryText += `prixMax=${parseFloat(prixMax.textContent)}&`;}
     else if(parseFloat(prixMin.textContent) !=0){queryText += `prixMin=${parseFloat(prixMin.textContent)}&`}
     if(queryText) queryText = queryText.slice(0,-1);
-
-
     window.location.href=`/products?${queryText}`;
 })
 
 ////////////////////////////////////
-////////////////////////////////////
+//////////////// end ///////////////
 ////////////////////////////////////
 
 
@@ -192,7 +190,6 @@ emptyHeart.forEach(heart =>{
 let filterButton = document.querySelector(".filterButton");
 let aside = document.querySelector("aside");
 let responsiveAsideOverlay = document.querySelector(".responsiveAside")
-console.log(aside)
 filterButton.addEventListener("click",function(event){
     let scrollY = window.scrollY
 
@@ -226,4 +223,11 @@ responsiveAsideOverlay.addEventListener("click",function(){
     window.scrollTo(0,scrollY)
 
 
+})
+
+
+
+// empty button fl container 
+emptyPartButton.addEventListener("click",function(){
+    window.location.search = "";
 })

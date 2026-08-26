@@ -87,7 +87,7 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre){
+        public function createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre, $anneescolaire , $genre , $collection , $typeCollection){
             $query = "INSERT INTO produit (libelle , prix,quantite_stock,categorie, marque , remise, description, image_url , code_barre ) values (?,?,?,?,?,?,?,?,?) ;";
             $stmt = $this->db->prepare($query);
             return $stmt->execute([$libelle , $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre]);

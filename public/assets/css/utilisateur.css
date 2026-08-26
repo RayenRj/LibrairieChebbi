@@ -111,10 +111,15 @@ img{
     align-items: center;
 }
 
-.users .heading-text div:last-child > div{
+.users .heading-text div:last-child div{
     position: relative;
 } 
-.users .heading-text div:last-child > div:first-child input{
+#userForm{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+.users .heading-text div:last-child div:first-child input{
     width: 300px;
     min-width: 200px;
     height: 35px;
@@ -123,10 +128,10 @@ img{
     padding: 1em 2.2em;
     font-size: 14px;
 }
-.users .heading-text div:last-child > div:first-child input:focus{
+.users .heading-text div:last-child div:first-child input:focus{
     outline: 1px solid var(--blue);
 }
-.users .heading-text div:last-child > div:first-child i{
+.users .heading-text div:last-child div:first-child i{
     position: absolute;
     left: 12px;
     top: 50%;
@@ -135,7 +140,7 @@ img{
 }
 
 
-.users .heading-text div:last-child > div:last-child select{
+.users .heading-text div:last-child div:last-child select{
     border: 2px solid #eee;
     height: 35px;
     width: 150px;
@@ -145,7 +150,7 @@ img{
     cursor: pointer;
     border-radius: 0.35em;
 }
-.users .heading-text div:last-child > div:last-child select:focus{
+.users .heading-text div:last-child div:last-child select:focus{
     outline:  1px solid var(--blue);
 }
 

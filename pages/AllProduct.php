@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
     require_once(__DIR__ . "/../backend/services/ProductServices.php");
 
     $product_services = new ProductServices();
@@ -13,7 +16,6 @@
     $stock = isset($_GET["stock"]) ? $_GET["stock"] : "";
     $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
     $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 15;
-
     $liste_des_produit= $product_services->rechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie , $limit , $page);
     $nombre_de_produit = $product_services->nombreLigneRechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie , $limit , $page);
     $nombre_page_totale = intval(ceil($nombre_de_produit / $limit));
@@ -471,6 +473,15 @@
                 <button class="filterButton"><i class="fa-solid fa-sliders"></i> Filtrer</button>
             </div>
 
+            <?php if(empty($liste_des_produit)): ?>
+                <div class="emptyContainer">
+                    <img src="/assets/images/noproduct.png" alt="">
+                    <h2>Aucun produit trouvé</h2>
+                    <p>Désolé, aucun produit ne correspond à votre recherche ou à votre sélection pour le moment</p>
+                    <button><i class="fa-solid fa-magnifying-glass"></i>Voir tous les produit</button>
+                </div>
+
+            <?php else:?>
             <!--phase des articles-->
             <div class="articles">
                 <?php foreach($liste_des_produit as $product):?>
@@ -493,7 +504,7 @@
                 <?php endforeach; ?>
             </div>
 
-
+            <?php endif;?>
 
                 <!-- el partie eli feha el pagination -->
                 <div class="bottom">

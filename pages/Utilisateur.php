@@ -54,21 +54,6 @@
 
             
             <div>
-<<<<<<< HEAD
-                <div>
-                    <input type="text" name="" id="" placeholder="Rechercher...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-                <div>
-                    <select name="" id="criteres">
-                        <option value="">Email</option>
-                        <option value="">ID</option>
-                        <option value="">Nom</option>
-                        <option value="">Prénom</option>
-                    </select>
-                    <!-- <i class="fa-solid fa-caret-down"></i> -->
-                </div>
-=======
                 <form action="" id="userForm">
                     <div>
                         <input type="text" name="data" id="utilisateurData" placeholder="Rechercher...">
@@ -84,7 +69,6 @@
                         <!-- <i class="fa-solid fa-caret-down"></i> -->
                     </div>
                 </form>
->>>>>>> 0f9756d5dbf91bc0b9ba4de46df3d1ac2a245825
             </div>
         </div>
 

@@ -1,11 +1,145 @@
 
 let firstChart = document.querySelector("#chart1");
 let secondeChart = document.querySelector("#chart2");
+let categorieSelect = document.querySelector(".selectCategoriePopUp")
 const months = [
   "Janvier", "Février", "Mars", "Avril",
   "Mai", "Juin", "Juillet", "Août",
   "Septembre", "Octobre", "Novembre", "Décembre"
 ];
+
+const sectionsEtude = [
+    // Primaire
+    { value: "1-primaire", label: "1ère année primaire" },
+    { value: "2-primaire", label: "2ème année primaire" },
+    { value: "3-primaire", label: "3ème année primaire" },
+    { value: "4-primaire", label: "4ème année primaire" },
+    { value: "5-primaire", label: "5ème année primaire" },
+    { value: "6-primaire", label: "6ème année primaire" },
+
+    // Collège
+    { value: "7-base", label: "7ème année de base" },
+    { value: "8-base", label: "8ème année de base" },
+    { value: "9-base", label: "9ème année de base" },
+
+    // Lycée - Tronc commun
+    { value: "1-secondaire", label: "1ère année secondaire" },
+
+    // 2ème secondaire
+    { value: "2-lettres", label: "2ème année Lettres" },
+    { value: "2-economie", label: "2ème année Économie et Gestion" },
+    { value: "2-sciences", label: "2ème année Sciences Expérimentales" },
+    { value: "2-informatique", label: "2ème année Informatique" },
+
+    // 3ème secondaire
+    { value: "3-lettres", label: "3ème année Lettres" },
+    { value: "3-economie", label: "3ème année Économie et Gestion" },
+    { value: "3-sciences", label: "3ème année Sciences Expérimentales" },
+    { value: "3-math", label: "3ème année Mathématiques" },
+    { value: "3-technique", label: "3ème année Technique" },
+    { value: "3-informatique", label: "3ème année Informatique" },
+    { value: "3-sport", label: "3ème année Sport" },
+
+    // Bac
+    { value: "bac-lettres", label: "Bac Lettres" },
+    { value: "bac-economie", label: "Bac Économie et Gestion" },
+    { value: "bac-sciences", label: "Bac Sciences Expérimentales" },
+    { value: "bac-math", label: "Bac Mathématiques" },
+    { value: "bac-technique", label: "Bac Technique" },
+    { value: "bac-informatique", label: "Bac Informatique" },
+    { value: "bac-sport", label: "Bac Sport" }
+];
+
+
+const collectionsParascolaires = [
+    "Kounouz Ennajeh",
+    "Kounouz Education",
+    "Al Moutafawik",
+    "Al Moutamayez",
+    "Al Mourchid",
+    "Al Wadhih",
+    "Al Manhal",
+    "Al Mofid",
+    "Al Najeh",
+    "Al Irtiqa",
+    "Al Imtiaz",
+    "Al Tamyouz",
+    "Al Tafaouq",
+    "Al Ibdae",
+    "Al Ibtikar",
+    "Al Moubdi",
+    "Al Moubarak",
+    "Al Raed",
+    "Al Oustadh",
+    "Al Qimma",
+    "Al Hikma",
+    "Al Amal",
+    "Al Fajr",
+    "Mes Productions",
+    "Premier Pas",
+    "Objectif Réussite",
+    "Objectif Bac",
+    "Objectif Excellence",
+    "Réussir",
+    "Excellence",
+    "Excellence Plus",
+    "Révision Express",
+    "Fiches de Révision",
+    "Révision Complète",
+    "Révision Finale",
+    "Mon Cahier",
+    "Mon Premier Cahier",
+    "Mon Premier Livre",
+    "Série Concours",
+    "Série Bac",
+    "Série Pilote",
+    "Série Excellence",
+    "Série Réussite",
+    "Série Premium",
+    "Série Performance",
+    "Le Complet Résolu",
+    "Le Guide",
+    "Le Guide Complet",
+    "Le Guide du Bac",
+    "Le Prof",
+    "Le Coach",
+    "Top Niveau",
+    "Top Révision",
+    "Top Maths",
+    "Top Sciences",
+    "Top Français",
+    "Top Anglais",
+    "Top Informatique",
+    "100% Réussite",
+    "100% Bac",
+    "100% Maths",
+    "100% Sciences",
+    "100% Français",
+    "100% Anglais",
+    "Bac Success",
+    "Bac Plus",
+    "Bac Excellence",
+    "Bac Facile",
+    "Cap Réussite",
+    "Cap Excellence",
+    "Cap sur le Bac",
+    "Réussite Plus",
+    "Maths Faciles",
+    "Maths Expert",
+    "Physique Expert",
+    "Chimie Expert",
+    "SVT",
+    "Français Plus",
+    "Anglais Plus",
+    "Allemand Plus",
+    "Espagnol Plus",
+    "Arabe Plus",
+    "Informatique Plus",
+    "Autre"
+];
+
+
+
 let date= new Date();
 let dateList= [];
 let monthNameList =[];
@@ -94,7 +228,7 @@ window.addEventListener("load", async function(event){
                     "geometrie",
                     "coupe_collage",
                     "dessin_arts",
-                    "sacs_accessoires",
+                    "sac",
                     "calcul_sciences",
                     "numerique",
                     "livres_pedagogiques",
@@ -241,20 +375,45 @@ resetButton.addEventListener("click",function(){
     container.style.backgroundPosition= "";
 })
 
-// partie form
-
+// partie form : ajouter un article
 let addArticleForm = document.querySelector("#addArticleForm");
 
 addArticleForm.addEventListener("submit",async function(event){
     event.preventDefault();
     const formData = new FormData(addArticleForm);
+    // for(let [key,val] of formData.entries()){
+    //     console.log(key , val)
+    // }
+
+    let categorie = formData.get("categorie")
     let response = await fetch("/api/articles",{
         method: "POST", 
         body: formData
     });
     let result = await response.json();
-
-    if(result.success == true){
+    let test= true;
+    if(categorie=="sac"){
+        let response2 = await fetch("/api/articles/collection",{
+            method:"POST",
+            body:formData
+        })
+        let result2 = await response2.json();
+        test = test && result2.success;
+    }else if(categorie == "jouet"){
+        let response2 = await fetch("/api/articles/game",{
+            method:"POST",
+            body:formData
+        })
+        let result2 = await response2.json();
+    }else if(categorie == "livre"){
+        let response2 = await fetch("/api/articles/livre",{
+            method:"POST",
+            body:formData
+        })
+        let result2 = await response2.json();
+        test = test && result2.success;
+    }
+    if(result.success == true && result2.success == true){
         alert("Product added successfully!");
         window.location.reload();
     }else{
@@ -290,7 +449,6 @@ formFilter.addEventListener("submit", function(event){
 })
 
 let deleteArticleButtonList = document.querySelectorAll(".deleteArticleButton")
-console.log(deleteArticleButtonList)
 deleteArticleButtonList.forEach(article =>{
     article.addEventListener("click",async function(event) {
         event.preventDefault();
@@ -304,3 +462,55 @@ deleteArticleButtonList.forEach(article =>{
         else{alert(result.message)}
     })
 })
+
+
+// reglage ll add articles
+let div = document.querySelector(".singleGenre")
+categorieSelect.addEventListener("change",function(){
+    if(categorieSelect.value == "sac" || categorieSelect.value=="jouet" || categorieSelect.value=="panier" || categorieSelect.value=="trousse"){
+        div.style.display = "block"
+    }else{
+        div.style.display = "none"
+    }
+})
+
+// reglagge ll parascolaire
+
+let divPara = document.querySelector(".singleCollectionParascolaire")
+categorieSelect.addEventListener("change",function(){
+    if(categorieSelect.value == "parascolaire"){
+        divPara.style.display = "block"
+    }else{
+        divPara.style.display = "none"
+    }
+})
+
+// reglagge ll parascolaire
+
+let divLivre = document.querySelector(".singleAnneeParascolaireLivre")
+categorieSelect.addEventListener("change",function(){
+    if(categorieSelect.value == "parascolaire" || categorieSelect.value == "livres_pedagogiques"){
+        divLivre.style.display = "block"
+    }else{
+        divLivre.style.display = "none"
+    }
+})
+
+
+// remplissage ll donné wst el select
+let select = document.querySelector("select#anneeScolaire")
+let html = `<option value="" >-- Sélectionnez une année --</option>`
+for(let obj of sectionsEtude){
+        html +=  `<option value="${obj["value"]}">${obj["label"]}</option>`
+}
+select.innerHTML = html;
+
+
+// partie el collection 
+var collection_parascolaire  = document.querySelector("#collection_parascolaire");
+let htmlString = "<option value=''>-- Choisir une collection --</option>"
+for(let i = 0 ; i< collectionsParascolaires.length ; i++){
+    htmlString += `<option value="${collectionsParascolaires[i]}">${collectionsParascolaires[i]}</option>`
+}
+
+if(collection_parascolaire !== null){collection_parascolaire.innerHTML=htmlString}

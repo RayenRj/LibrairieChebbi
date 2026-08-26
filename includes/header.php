@@ -209,11 +209,12 @@
     </ul>
     <hr>
     <div class="button-list">
-        <ul>
-            <li id="sign-in-button" <?= isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="" >Log in</a></li>
-            <li id="sign-up-button" <?= isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="" >Sign up</a></li>
-            <li id="log_out-button" <?= !isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="" ><i class="fa-solid fa-right-from-bracket"></i><span>Log out</span></a></li>
-        </ul>
+        
+          <ul>
+              <li id="sign-in-button" <?= isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="" >Log in</a></li>
+              <li id="sign-up-button" <?= isset($_SESSION["userId"]) ? "hidden" : "" ?>><a href="" >Sign up</a></li>
+              <li id="log_out-button" <?= isset($_SESSION["userId"])==false ? "hidden" : "" ?>><a href="" ><i class="fa-solid fa-right-from-bracket"></i><span>Log out</span></a></li>
+          </ul>
     
         
     </div>

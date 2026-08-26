@@ -36,7 +36,11 @@ interface IProductRepository
         $remise,
         $description,
         $image_url,
-        $codeBarre
+        $codeBarre,
+        $anneescolaire,
+        $genre,
+        $collection ,
+        $typeCollection
     );
 
     public function modifierProduit(
