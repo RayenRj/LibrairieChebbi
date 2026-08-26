@@ -52,7 +52,8 @@
                                                                 $body["anneeScolaire"] ?? null,
                                                                 $body["genre"] ?? null,
                                                                 $body["collection"] ?? null,
-                                                                $body["typeCollection"] ?? null);
+                                                                $body["typeCollection"] ?? null,
+                                                                $body["matiere"] ?? null);
                 $response = [
                     "success" => true,
                     "numberOfLine" => null,

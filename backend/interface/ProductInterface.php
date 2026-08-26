@@ -40,7 +40,8 @@ interface IProductRepository
         $anneescolaire,
         $genre,
         $collection ,
-        $typeCollection
+        $typeCollection,
+        $matiere
     );
 
     public function modifierProduit(

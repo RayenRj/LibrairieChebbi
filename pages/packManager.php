@@ -354,21 +354,30 @@
                             <span>DT</span>
                         </div>
                     </div>
-                    <div>
+                    <div >
                         <label>Type <span class="red">*</span></label>
                         <div>
-                            <select id="categorie" name="type">
+                            <select id="categorie" name="categorie">
                                 <option value="">-- Sélectionnez une le type --</option>
-                                <option value="primaire">Primaire</option>
-                                <option value="college">Collége</option>
-                                <option value="secondaire">Secondaire</option>
-                                <option value="bac">Bac</option>
+                                <option value="primaire">Fourniture - Primaire </option>
+                                <option value="college">Fourniture - Collége</option>
+                                <option value="secondaire">Fourniture - Secondaire</option>
+                                <option value="bac">Fourniture - Bac</option>
                                 <option value="livre">Pack De Livres Seulement</option>
 
                             </select>
                             <i class="fa-regular fa-folder-open"></i>
                         </div>
                     </div>
+                    <div class="anneeScolaireDiv" style="display:none;">
+                        <label>Année Scolaire <span class="red">*</span></label>
+                        <div>
+                            <select id="anneeScolaire" name="anneeScolaire">
+                            </select>
+                            <i class="fa-regular fa-folder-open"></i>
+                        </div>
+                    </div>
+
 
                 </div>
 

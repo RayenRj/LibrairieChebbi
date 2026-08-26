@@ -87,10 +87,32 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre, $anneescolaire , $genre , $collection , $typeCollection){
+        public function createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre, $anneescolaire , $genre , $collection , $typeCollection,$matiere){
             $query = "INSERT INTO produit (libelle , prix,quantite_stock,categorie, marque , remise, description, image_url , code_barre ) values (?,?,?,?,?,?,?,?,?) ;";
             $stmt = $this->db->prepare($query);
-            return $stmt->execute([$libelle , $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre]);
+            $result = $stmt->execute([$libelle , $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre]);
+            $lastInsertedId = $this->db->lastInsertId();
+            if($categorie=="livres_pedagogiques"){ // reglage livres pedagogiques
+                $query= "INSERT into livre(id_produit, niveau_scolaire,matiere) values(?,?,?)";
+                $stmt = $this->db->prepare($query);
+                $result = $result && $stmt->execute([$lastInsertedId, $anneescolaire , $matiere]);
+            }else if($categorie == "parascolaire"){ // reglage parascoalaire
+                $query= "INSERT into livre(id_produit, niveau_scolaire,matiere) values(?,?,?)";
+                $stmt = $this->db->prepare($query);
+                $result = $result && $stmt->execute([$lastInsertedId, $anneescolaire , $matiere]);
+                $query2 = "INSERT into parascolaire values(?,?)";
+                $stmt2 = $this->db->prepare($query2);
+                $result = $result && $stmt2->execute([$lastInsertedId , $collection]);
+            }else if($categorie == "jouet"){ // reglage jouet
+                $query = "INSERT into games values(?,?)";
+                $stmt = $this->db->prepare($query);
+                $result = $result && $stmt->execute([$lastInsertedId , $genre]);
+            }else if(in_array($categorie , ["panier","trousse","sac a chariot","sac a dos"])){ // regalge collection
+                $query = "INSERT into collection values (?,?,?)";
+                $stmt = $this->db->prepare($query);
+                $result = $result && $stmt->execute([$lastInsertedId , $genre , $categorie]);
+            }
+            return $result;
         }
         // end of CRUD function
 

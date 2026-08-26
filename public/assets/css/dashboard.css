@@ -591,3 +591,24 @@ img{
 #evolution_vente{
     height: 100%;
 }
+
+@media (max-width:1800px) {
+    .top-chart {
+        display: flex;
+        flex-direction: column;
+        gap: 1%;
+    }
+    .top-chart .left {
+        border: 2px solid #eee;
+        border-radius: 1em;
+        padding: 2em;
+        width: 60%;
+        margin: 0 auto;
+    }
+    .top-chart .right {
+        border-radius: 1em;
+        width: 90%;
+        border: 2px solid #eee;
+        margin: 2em auto;
+    }
+}

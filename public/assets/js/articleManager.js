@@ -140,6 +140,8 @@ const collectionsParascolaires = [
 
 
 
+
+
 let date= new Date();
 let dateList= [];
 let monthNameList =[];
@@ -382,8 +384,18 @@ addArticleForm.addEventListener("submit",async function(event){
     event.preventDefault();
     const formData = new FormData(addArticleForm);
     // for(let [key,val] of formData.entries()){
-    //     console.log(key , val)
+    //     console.log(key, val)
     // }
+    // for(let [key,val] of formData.entries()){
+    //     if(val.trim() == ""){
+    //         formData.delete(key)
+    //     }
+    // }
+    // for(let [key,val] of formData.entries()){
+    //     console.log(key ,val)
+    // }
+
+
 
     let categorie = formData.get("categorie")
     let response = await fetch("/api/articles",{
@@ -391,29 +403,7 @@ addArticleForm.addEventListener("submit",async function(event){
         body: formData
     });
     let result = await response.json();
-    let test= true;
-    if(categorie=="sac"){
-        let response2 = await fetch("/api/articles/collection",{
-            method:"POST",
-            body:formData
-        })
-        let result2 = await response2.json();
-        test = test && result2.success;
-    }else if(categorie == "jouet"){
-        let response2 = await fetch("/api/articles/game",{
-            method:"POST",
-            body:formData
-        })
-        let result2 = await response2.json();
-    }else if(categorie == "livre"){
-        let response2 = await fetch("/api/articles/livre",{
-            method:"POST",
-            body:formData
-        })
-        let result2 = await response2.json();
-        test = test && result2.success;
-    }
-    if(result.success == true && result2.success == true){
+    if(result.success == true){
         alert("Product added successfully!");
         window.location.reload();
     }else{
@@ -468,7 +458,7 @@ deleteArticleButtonList.forEach(article =>{
 let div = document.querySelector(".singleGenre")
 categorieSelect.addEventListener("change",function(){
     if(categorieSelect.value == "sac" || categorieSelect.value=="jouet" || categorieSelect.value=="panier" || categorieSelect.value=="trousse"){
-        div.style.display = "block"
+        div.style.display = "flex"
     }else{
         div.style.display = "none"
     }
@@ -479,7 +469,7 @@ categorieSelect.addEventListener("change",function(){
 let divPara = document.querySelector(".singleCollectionParascolaire")
 categorieSelect.addEventListener("change",function(){
     if(categorieSelect.value == "parascolaire"){
-        divPara.style.display = "block"
+        divPara.style.display = "flex"
     }else{
         divPara.style.display = "none"
     }
@@ -490,9 +480,13 @@ categorieSelect.addEventListener("change",function(){
 let divLivre = document.querySelector(".singleAnneeParascolaireLivre")
 categorieSelect.addEventListener("change",function(){
     if(categorieSelect.value == "parascolaire" || categorieSelect.value == "livres_pedagogiques"){
-        divLivre.style.display = "block"
+        divLivre.style.display = "flex";
+        document.querySelector(".singleMatiere").style.display = "flex"
+        document.querySelector(".marqueDiv").style.display = "none";
     }else{
         divLivre.style.display = "none"
+        document.querySelector(".marqueDiv").display = "";
+        document.querySelector(".singleMatiere").style.display = ""
     }
 })
 
@@ -514,3 +508,81 @@ for(let i = 0 ; i< collectionsParascolaires.length ; i++){
 }
 
 if(collection_parascolaire !== null){collection_parascolaire.innerHTML=htmlString}
+
+
+
+// remplissage select du matiere 
+const matiereSelect = document.getElementById("matiere");
+
+const matieres = [
+    // Général / commun
+    "Arabe",
+    "Français",
+    "Anglais",
+    "Mathématiques",
+    "Sciences",
+    "Informatique",
+
+    // Primaire
+    "Éducation islamique",
+    "Éducation civique",
+    "Éducation scientifique",
+    "Éducation artistique",
+    "Éducation musicale",
+    "Éducation physique",
+
+    // Collège
+    "Histoire",
+    "Géographie",
+    "Technologie",
+    "Sciences de la vie et de la Terre",
+    "Physique",
+    "Chimie",
+
+    // Secondaire
+    "Philosophie",
+    "Économie",
+    "Gestion",
+    "Droit",
+    "Comptabilité",
+
+    // Section Mathématiques
+    "Mathématiques - Section Mathématiques",
+
+    // Section Sciences expérimentales
+    "Sciences naturelles",
+    "Physique - Section Sciences",
+
+    // Section Technique
+    "Technologie industrielle",
+    "Génie mécanique",
+    "Génie électrique",
+    "Génie civil",
+
+    // Section Informatique
+    "Algorithmique",
+    "Programmation",
+    "Systèmes et réseaux",
+    "Bases de données",
+
+    // Section Économie et Gestion
+    "Économie et statistiques",
+    "Gestion",
+
+    // Section Lettres
+    "Littérature",
+    "Pensée islamique",
+
+    // Langues
+    "Italien",
+    "Allemand",
+    "Espagnol"
+];
+
+matieres.forEach(matiere => {
+    const option = document.createElement("option");
+    option.value = matiere;
+    option.textContent = matiere;
+
+    matiereSelect.appendChild(option);
+});

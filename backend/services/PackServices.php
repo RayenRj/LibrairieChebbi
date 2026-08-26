@@ -132,7 +132,7 @@
          * @param niveau => in ["primaire", "college","secondaire","bac"]
          * @param prix => > 0
          */
-        public function createPack($data, float $prix , $niveau ,string $libelle,int $quantite , $file ,float $remise ,string $description){
+        public function createPack($data, float $prix , string $niveau , string $type ,string $libelle,int $quantite , $file ,float $remise ,string $description ,?string $anneeScolaire){
             if(empty($data)){throw new EmptyDataArray("L'array du donnée est vide!");}
             if($prix < 0){throw new Exception("prix doit etre positif !");}
             $niveau = mb_strtolower($niveau);
@@ -151,7 +151,7 @@
             $destination = $uploadDir . $newName;
             if(!move_uploaded_file($image["tmp_name"],$destination)){throw new Exception("Failed to save the image!!");}
             $image_url = "/assets/images/uploadedImg/packImg/" . $newName;
-            return $this->packRepo->createNewPack($data , $prix , $niveau , $libelle, $quantite, $image_url , $remise , $description);
+            return $this->packRepo->createNewPack($data , $prix , $niveau , $type , $libelle, $quantite, $image_url , $remise , $description , $anneeScolaire);
         }
 
 

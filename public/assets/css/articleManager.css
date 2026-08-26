@@ -749,8 +749,19 @@ div.inputDiv input{
 
 
 
+
+
+.cardContainer > div:nth-child(1) h5 , .cardContainer > div:nth-child(1) i{color:green;}
+.cardContainer > div:nth-child(2) h5,.cardContainer > div:nth-child(2) i{color:var(--yellow-deep);}
+.cardContainer > div:nth-child(3) h5,.cardContainer > div:nth-child(3) i{color:rgb(214, 141, 4);}
+.cardContainer > div:nth-child(4) h5 , .cardContainer > div:nth-child(4) i{color:red;}
+
+
+
+.singleMatiere select,
 .singleCollectionParascolaire select,
-.singleAnneeParascolaireLivre select ,.singleGenre select{
+.singleAnneeParascolaireLivre select ,
+.singleGenre select{
     width: 100%;
     height: 40px;
     border: 2px solid #eee;
@@ -760,20 +771,23 @@ div.inputDiv input{
     font-size: 14px;
     outline: none;
 }
+
+
+.singleMatiere,
 .singleCollectionParascolaire ,
-.singleAnneeParascolaireLivre ,.singleGenre{display: none;margin-top: 1em;}
-
-
-.singleCollectionParascolaire label,
-.singleAnneeParascolaireLivre label, .singleGenre label{
-    font-size: 14px;
-    font-weight: 600;
+.singleAnneeParascolaireLivre ,
+.singleGenre{
+    margin-top: 1em;
+    display: none;
+    flex-direction: column;
+    gap: 0.45em;
 }
 
 
-.cardContainer > div:nth-child(1) h5 , .cardContainer > div:nth-child(1) i{color:green;}
-.cardContainer > div:nth-child(2) h5,.cardContainer > div:nth-child(2) i{color:var(--yellow-deep);}
-.cardContainer > div:nth-child(3) h5,.cardContainer > div:nth-child(3) i{color:rgb(214, 141, 4);}
-.cardContainer > div:nth-child(4) h5 , .cardContainer > div:nth-child(4) i{color:red;}
-
-
+.singleMatiere label,
+.singleCollectionParascolaire label,
+.singleAnneeParascolaireLivre label, 
+.singleGenre label{
+    font-size: 14px;
+    font-weight: 600;
+}

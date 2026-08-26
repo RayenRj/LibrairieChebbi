@@ -212,7 +212,7 @@
         /**
          * @param $data => should be sous la forme [idProduct => quantity]
          */
-        public function createNewPack($data, float $prix , $niveau ,string $libelle,int $quantite ,string $image_url ,float $remise ,string $description) : bool{
+        public function createNewPack($data, float $prix , string $niveau , string $type ,string $libelle,int $quantite ,string $image_url ,float $remise ,string $description , ?string $anneeScolaire = null) : bool{
             $this->db->beginTransaction();
             try{
                 // first query=> table product
@@ -222,10 +222,14 @@
                 if(!$result){throw new Exception("SQL Insertion Error");}
                 $packId = $this->db->lastInsertId();
 
-
-                $query3 = "insert into pack values(?,?)";
+                if($niveau == "livre"){
+                    $aux = null;
+                }else{
+                    $aux = $niveau;
+                }
+                $query3 = "insert into pack(id_pack,type,categorie,annee_scolaire) values(?,?,?,?)";
                 $stmt3 = $this->db->prepare($query3);
-                $result=$stmt3->execute([$packId , $niveau]);
+                $result=$stmt3->execute([$packId , $type,$aux,$anneeScolaire]);
                 if(!$result){throw new Exception("SQL Insertion Error");}
 
 

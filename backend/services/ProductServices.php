@@ -41,7 +41,7 @@ class ProductServices{
         return $this->productRepo->nombreLigneRechercherArticle($categorie , $libelle,$marque, $prixMax,$prixMin , $stock , $trie , $limit,$page);
     }
     //done
-    public function createProduct(string $libelle,float $prixUnitaire,int $quantite ,string $categorie,string $marque,float $remise ,string $description, $file ,?string $codeBarre ="" , ?string $anneescolaire , ?string $genre , ?string $collection , ?string $typeCollection): bool{
+    public function createProduct(string $libelle,float $prixUnitaire,int $quantite ,string $categorie,string $marque,float $remise ,string $description, $file ,?string $codeBarre, ?string $anneescolaire , ?string $genre , ?string $collection , ?string $typeCollection , ?string $matiere): bool{
         if(empty($libelle)){throw new Exception("Libelle de produit ne doit pas etre vide!");}
         if($prixUnitaire<0){throw new Exception("prixUnitaire de produit ne doit pas etre negatif!");}
         if($quantite<0){throw new Exception("quantite de produit ne doit pas etre negatif!");}
@@ -65,7 +65,7 @@ class ProductServices{
         $dest = $upload_dir . $newName;
         $destDB = "/assets/images/uploadedImg/articles/" . $newName; 
         if(!move_uploaded_file($tmp , $dest)){throw new Exception("Image Upload Failed!");}
-        return $this->productRepo->createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $destDB, $codeBarre,$anneescolaire , $genre, $collection , $typeCollection);
+        return $this->productRepo->createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $destDB, $codeBarre,$anneescolaire , $genre, $collection , $typeCollection , $matiere);
     }
     //done
     public function getAllProduct(int $limit , int $page) : array {

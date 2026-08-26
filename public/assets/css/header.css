@@ -126,7 +126,7 @@ header .left-part .categories ul{
     position: absolute;
     background-color: #ffffff;
     border: 1px solid var(--gray-300);
-    width: 130%;
+    width: 210px;
     border-radius: 12px;
     padding: 0.5em;
     display: none;

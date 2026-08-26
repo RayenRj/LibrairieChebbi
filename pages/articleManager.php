@@ -550,12 +550,13 @@
                                     <option value="geometrie">Géométrie</option>
                                     <option value="coupe_collage">Coupe et collage</option>
                                     <option value="dessin_arts">Dessin et arts</option>
-                                    <option value="sac">Sacs et accessoires</option>
                                     <option value="calcul_sciences">Calcul et sciences</option>
                                     <option value="numerique">Numérique</option>
                                     <option value="livres_pedagogiques">Livres pédagogiques</option>
                                     <option value="parascolaire">Parascolaire</option>
                                     <option value="jouet">jouet</option>
+                                    <option value="sac a dos">Sacs a dos</option>
+                                    <option value="sac a chariot">Sacs a chariot</option>
                                     <option value="panier">Panier</option>
                                     <option value="trousse">Trousse</option>
                                     <option value="fournitures_bureau">Fournitures de bureau</option>
@@ -565,10 +566,10 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="marqueDiv">
                             <label>Marque</label>
                             <div>
-                                <select name="marque" id="marque" required>
+                                <select name="marque" id="marque" >
                                     <option value="">-- Choisir une marque --</option>
                                     <option value="BIC">BIC</option>
                                     <option value="Maped">Maped</option>
@@ -622,6 +623,12 @@
                     <div class="singleCollectionParascolaire">
                         <label for="">Choisir la Collection</label>
                         <select name="collection" id="collection_parascolaire"></select>
+                    </div>
+                    <div class="singleMatiere">
+                        <label for="">Choisir la Matiere</label>
+                        <select name="matiere" id="matiere">
+                            <option value="">-- Choisir une matières --</option>
+                        </select>
                     </div>
                     <div class="single">
                         <label for="">Remise (%)</label>

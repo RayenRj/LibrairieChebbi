@@ -37,12 +37,14 @@
                 $data = json_decode($body["articleList"],true);
                 $result = $this->packServices->createPack(  $data,
                                                             floatval($body["prix"]),
-                                                            $body["type"] ,
+                                                            $body["type"],
+                                                            $body["categorie"] ,
                                                             $body["libelle"],
                                                             $body["quantite_stock"],
                                                             $file,
                                                             floatval($body["remise"]) ?? 0,
-                                                            $body["description"]
+                                                            $body["description"],
+                                                            $body["anneeScolaire"] ?? null
                                                             );
                 $response = [
                     "success" => true,
