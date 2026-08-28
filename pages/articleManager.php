@@ -239,6 +239,13 @@
                                 </div>
                             </div>
                             <div>
+                                <p>Code à barre</p>
+                                <div class="inputDiv">
+                                    <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                                    <input type="text" name="code_barre" id="code_barre" placeholder="Ecrire code a barre...">
+                                </div>
+                            </div>
+                            <div>
                                 <p>Prix Max (DT)</p>
                                 <div class="inputDiv">
                                     <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
@@ -300,7 +307,8 @@
                     <table>
                         <thead>
                             <th>ID Article </th>
-                            <th>Libellé</th>
+                            <th>Code a Barre </th>
+                            <th class="libelle">Libellé</th>
                             <th>Prix Unitaire (DT)</th>
                             <th>Remise (DT)</th>
                             <th>Stock</th>
@@ -311,7 +319,8 @@
                         <?php foreach($list_des_article_filtrée as $row): ?>
                         <tr>
                             <td><p><?= $row["id_produit"] ?></p></td>
-                            <td><p><?= $row["libelle"] ?></p></td>
+                            <td><p><?= $row["code_barre"] ?></p></td>
+                            <td class="libelle"><p><?= $row["libelle"] ?></p></td>
                             <td><p><?= $row["prix"]?> <small>DT</small></p></td>
                             <td><p><?= $row["remise"]?> <small>DT</small></p></td>
                             <td><p><?= $row["quantite_stock"] ?></p></td>

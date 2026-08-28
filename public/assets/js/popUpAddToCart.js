@@ -5,16 +5,24 @@ function getLocalStorageArticlesList(){
     if(cartTableString !== null){cartTable = JSON.parse(cartTableString)}
     return cartTable
 }
+
 var table = getLocalStorageArticlesList();
 async function getPrix(idproduit){
     let response = await fetch(`/api/products/${idproduit}`)
     let result = await response.json();
     return result.data["prix"];
 }
+async function getRemise(idproduit){
+    let response = await fetch(`/api/products/${idproduit}`)
+    let result = await response.json();
+  
+    return result.data["remise"] || 0;
+}
+
 async function calcTotaleCart(table){
     let s = 0;
     for(let i =0; i< table.length ; i++){
-        s += parseFloat(await getPrix(table[i].idproduit)) * table[i].quantity;
+        s += parseFloat(await (getPrix(table[i].idproduit))) - parseFloat(await getRemise(table[i].idproduit)) * table[i].quantity;
     }
     return s;
 }

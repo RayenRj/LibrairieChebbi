@@ -2,10 +2,11 @@
     require_once(__DIR__ . "/../backend/services/ProductServices.php");
     $product_service = new ProductServices();
     $libelle = isset($_GET["libelle"]) ? $_GET["libelle"] : "";
-    $genre = isset($_GET["genre"]) ? $_GET["genre"] : "mixte";
+    $genre = isset($_GET["genre"]) ? $_GET["genre"] : "";
     $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 8;
+    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 50;
     $gamesList = $product_service->getAllGames($libelle , $genre , $page , $limit);
+    $today = new DateTime("today");
     $nombre_row_totale = $product_service->numberOfRowsAllGames($libelle , $genre);
     $nombre_totale_page = ceil($nombre_row_totale / $limit);
 
@@ -29,6 +30,8 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
     <link rel="stylesheet" href="../assets/css/games.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
+
 </head>
 <body>
     <?php include("../includes/header.php"); ?>
@@ -112,11 +115,16 @@
 
             <section class="article-container">
                 <?php foreach($gamesList as $game): ?>
+                    <?php $dataAjout = new DateTime($game["date_ajout"]); ?>
                     <article>
                         <a href="/products/product?idproduit=<?= $game["id_produit"] ?>">
-                            <span class="new" hidden>Nouveau</span>
-                            <span class="best-seller" >Best seller</span>
-                            <span class="repture" hidden>repture de stock</span>
+                            <?php if($game["remise"] > 0): ?>
+                                <span class="remise">Remise</span>
+                            <?php elseif($game["quantite_stock"] == 0 ): ?>
+                                <span class="repture" >repture de stock</span>
+                            <?php elseif($today->diff($dataAjout)->days <= 2): ?>
+                                <span class="new">Nouveau</span>
+                            <?php endif; ?>
                             <img src="<?= $game["image_url"] ?>" alt="">
                             <h4><?= $game["libelle"] ?></h4>
                             <div class="rating">
@@ -126,7 +134,7 @@
                             </div>
                             <h3 class="price"><?= number_format($game["prix"],3,","," ") ?> DT</h3>
                         </a>
-                        <a href="" class="button addToCartBtn" data-idproduit ="<?= $game["id_produit"] ?>" data-name="<?= $game["libelle"] ?>" data-price="<?= $game["prix"] ?>" ?>
+                        <a href="" class="button addToCartBtn" data-idproduit ="<?= $game["id_produit"] ?>" data-name="<?= $game["libelle"] ?>" data-price="<?= $game["prix"] - $game["remise"] ?>" ?>
                             <i class="fa-solid fa-cart-shopping"></i>
                             Ajouter au panier
                         </a>

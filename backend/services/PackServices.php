@@ -136,7 +136,7 @@
             if(empty($data)){throw new EmptyDataArray("L'array du donnée est vide!");}
             if($prix < 0){throw new Exception("prix doit etre positif !");}
             $niveau = mb_strtolower($niveau);
-            if(!in_array( $niveau, ["primaire", "college","secondaire","bac"])){throw new Exception("le niveau est invalide!!!");}
+            if(!in_array( $niveau, ["primaire", "college","secondaire","bac","livre"])){throw new Exception("le niveau est invalide!!!");}
             //file handling 
             if(!isset($file["packImage"])){throw new Exception("La pack doit contenir une image");}
             $image = $file["packImage"];

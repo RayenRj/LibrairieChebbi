@@ -182,6 +182,7 @@ packFilterForm.addEventListener("submit", async function(event){
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////// 
+
 let formAddPack = document.querySelector("#addPackForm");
 formAddPack.addEventListener("submit",async function(event){
     event.preventDefault();
@@ -206,20 +207,21 @@ formAddPack.addEventListener("submit",async function(event){
         formData.append("type","livre")
     }
     
+    for(let[key,val] of formData){if(val==""){formData.delete(key)}}
 
-    // console.log(typeof(formData.get("articleList")))
-    // let response = await fetch("/api/packs/createPack",{
-    //     method:"POST", 
-    //     body:formData
-    // })
+    console.log(typeof(formData.get("articleList")))
+    let response = await fetch("/api/packs/createPack",{
+        method:"POST", 
+        body:formData
+    })
 
-    // let result = await response.json();
-    // if(result.success && result.data){
-    //     window.location.reload();
-    //     alert(result.message);
-    // }else{
-    //     alert(result.message)
-    // }
+    let result = await response.json();
+    if(result.success && result.data){
+        window.location.reload();
+        alert(result.message);
+    }else{
+        alert(result.message)
+    }
 
 
 })

@@ -539,3 +539,12 @@ section.bottom.packTable{
     }
 
 }
+
+
+
+.prixOriginal{
+    margin-top: 15px;
+    text-decoration: line-through;
+    color: var(--red);
+    font-size: larger;
+}

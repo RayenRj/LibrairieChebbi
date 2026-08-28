@@ -457,7 +457,7 @@ deleteArticleButtonList.forEach(article =>{
 // reglage ll add articles
 let div = document.querySelector(".singleGenre")
 categorieSelect.addEventListener("change",function(){
-    if(categorieSelect.value == "sac" || categorieSelect.value=="jouet" || categorieSelect.value=="panier" || categorieSelect.value=="trousse"){
+    if(categorieSelect.value == "sac a dos" || categorieSelect.value == "sac a chariot" || categorieSelect.value=="jouet" || categorieSelect.value=="panier" || categorieSelect.value=="trousse"){
         div.style.display = "flex"
     }else{
         div.style.display = "none"

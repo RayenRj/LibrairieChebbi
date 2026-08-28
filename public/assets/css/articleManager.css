@@ -791,3 +791,9 @@ div.inputDiv input{
     font-size: 14px;
     font-weight: 600;
 }
+
+
+th.libelle,
+td.libelle p{
+    text-align: left ;
+}

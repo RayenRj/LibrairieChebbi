@@ -234,7 +234,7 @@
 
 
 
-                $query2 = "insert into packArticle (id_pack ,id_produit , quantite) values ";
+                $query2 = "insert into packArticle(id_pack ,id_produit , quantite) values ";
                 $param=[];
                 $str_array=[];
                 foreach($data as $index => $product){

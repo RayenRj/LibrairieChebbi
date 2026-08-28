@@ -116,7 +116,7 @@
                             <input type="number" id="quantity" value="1">
                             <button id="plusButton" type="button">+</button>
                         </div>
-                        <a href="" class="add-to-cart"  data-idpack="<?= $pack->getPackId()?>" ><i class="fa-solid fa-cart-plus"></i>Add to cart</a>
+                        <a href="" class="add-to-cart addToCartBtn"  data-idpack="<?= $pack->getPackId()?>" data-idproduit ="<?= $pack->getPackId() ?>" data-name="<?= $pack->getLibelle() ?>" data-price="<?= $pack->getPrixTotale() ?>"><i class="fa-solid fa-cart-plus"></i>Add to cart</a>
                     </form>
                 </div>
                 <a href="" class="wishlist"><i class="fa-regular fa-heart"></i>Add to Wishlist</a>
@@ -158,8 +158,10 @@
 
         </section>
 
-
+        <?php include("../includes/footer.php"); ?>
+    <div id="toast-region"></div>
     <script src="../assets/js/oneProduct.js"></script>
-    <?php include("../includes/footer.php"); ?>
+    <script src="/assets/js/popUpAddToCart.js"></script>
+
 </body>
 </html>

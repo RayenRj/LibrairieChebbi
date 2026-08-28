@@ -747,5 +747,30 @@ select * from produit;
 select * from commande;
 select * from games;
 select count(*) from games;	
-
+show tables;
 use librairiedb_v2;
+select * from produit where categorie="autres";	
+
+
+select * from commande where id_commande = 6;
+select * from ligne_commande where id_commande=6;
+select * from collection;
+select prix * 4 from produit where id_produit=17;
+
+show tables;
+select * from pack;
+select * from client;	
+select count(*) from games g , produit p where p.id_produit = g.id_game;
+show columns from games;
+select * from client where id_client = 21;
+
+
+
+select p.* , g.genre from produit p , games g where g.id_game = p.id_produit ;
+
+
+-- remove niveau scolaire marque , couleur roulettes nombre_compartiments 
+alter table collection 
+drop column marque;
+update client set role= "admin" where id_client = 23;
+select count(*) from games;

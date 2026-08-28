@@ -40,6 +40,8 @@
     <title>Profile | Librairie Chebbi</title>
     <link rel="stylesheet" href="/assets/css/client.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
+
 </head>
 <body>
 

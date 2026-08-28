@@ -20,7 +20,7 @@ use function PHPSTORM_META\type;
     $nombre_de_produit = $product_services->nombreLigneRechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie , $limit , $page);
     $nombre_page_totale = intval(ceil($nombre_de_produit / $limit));
 
-
+    $today = new DateTime("today");
     $query_array= [];
     foreach($_GET as $key=>$val){
         if($key!=="page"){
@@ -485,8 +485,18 @@ use function PHPSTORM_META\type;
             <!--phase des articles-->
             <div class="articles">
                 <?php foreach($liste_des_produit as $product):?>
+                    <?php $dataAjout = new DateTime($product["date_ajout"]); ?>
                     <article>
+
                         <a href="/products/product?idproduit=<?= $product["id_produit"] ?>">
+                            <?php if($product["remise"] > 0): ?>
+                                <span class="remise">Remise</span>
+                            <?php elseif($product["quantite_stock"] == 0 ): ?>
+                                <span class="repture" >repture de stock</span>
+                            <?php elseif($today->diff($dataAjout)->days <= 2): ?>
+                                <span class="new">Nouveau</span>
+                            <?php endif; ?>
+
                             <div class="image">
                                 <img src="<?=  $product["image_url"] ?>" alt=""> 
                                 <!-- <img src="https://www.alkirtas.com/65769-large_default/stylo-bille-bic-cristal-soft-pochette-de-10.jpg" alt=""> -->
@@ -495,11 +505,20 @@ use function PHPSTORM_META\type;
                             <p class="title">
                                 <?= $product["libelle"] ?>
                             </p>
+                            <?php if($product["remise"] > 0): ?>
+                            <div class="priceDiscount">
+                                <p class="prixPartieDiscount">
+                                    <?= $product["prix"] - $product["remise"] ?> Dt
+                                </p>
+                                <p class="prixOriginal"><?= $product["prix"] ?> Dt</p>
+                            </div>
+                            <?php else: ?>
                             <p class="price">
                                 <?= $product["prix"] ?> Dt
                             </p>
+                            <?php endif; ?>
                         </a>
-                        <button class="addCartButton addToCartBtn" data-idproduit ="<?= $product["id_produit"] ?>" data-name="<?= $product["libelle"] ?>" data-price="<?= $product["prix"] ?>"><span>🛒</span> Ajouter au panier</button>
+                        <button class="addCartButton addToCartBtn" data-idproduit ="<?= $product["id_produit"] ?>" data-name="<?= $product["libelle"] ?>" data-price="<?= $product["prix"] - $product["remise"] ?>"><span>🛒</span> Ajouter au panier</button>
                     </article>
                 <?php endforeach; ?>
             </div>

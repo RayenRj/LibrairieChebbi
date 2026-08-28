@@ -20,6 +20,8 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
     <link rel="stylesheet" href="../assets/css/pack.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
+
 </head>
 <body class="pack">
     
@@ -91,7 +93,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href="" class="addToCart" data-idpack="<?= $pack["id_produit"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?= $pack["prix"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -123,8 +125,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href="" class="addToCart" data-idpack="<?= $pack["id_produit"] ?>" ><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
-                        </div>
+                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?= $pack["prix"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>                        </div>
                     </article>
                 <?php endforeach; ?>
 
@@ -157,7 +158,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href="" class="addToCart" data-idpack="<?= $pack["id_produit"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?= $pack["prix"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -189,7 +190,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href="" class="addToCart" data-idpack="<?= $pack["id_produit"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?= $pack["prix"] - $pack["remise"]  ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -203,6 +204,13 @@
      
     <?php include("../includes/footer.php"); ?>
 
+
+
+    <div id="toast-region"></div>
+
+
     <script src="/assets/js/pack.js"></script>
+    <script src="/assets/js/popUpAddToCart.js"></script>
+
 </body>
 </html>

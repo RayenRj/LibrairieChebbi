@@ -73,10 +73,10 @@ window.addEventListener("load",async function(){
                             </div>
                         </td>
                         <td class="prixUnitaire">
-                            <span class="prix-unitaire">${(parseFloat(result.data.prix)).toFixed(2)} dt</span>
+                            <span class="prix-unitaire">${(parseFloat(result.data.prix) - parseFloat(result.data.remise)).toFixed(2)} dt</span>
                         </td>
                         <td>
-                            <span class="prix-totale">${(article.quantity * result.data.prix).toFixed(2)}dt</span>
+                            <span class="prix-totale">${(article.quantity * (result.data.prix - result.data.remise)).toFixed(2)}dt</span>
                         </td>
 
                         <td class="td-delete">
@@ -87,7 +87,7 @@ window.addEventListener("load",async function(){
                         </td>
                     </tr>
         `
-        totale += article.quantity * result.data.prix
+        totale += article.quantity * (parseFloat(result.data.prix) - parseFloat(result.data.remise))
     }
 
     // let beforeLast_tr = `
@@ -157,6 +157,7 @@ tbody.addEventListener("click",async function(event){
         let productList = getLocalStorageArticlesList()
         totalAmount.innerHTML = ((quantity.value) * parseFloat(prixUnitaire.textContent)).toFixed(2) + " dt"
         globalTotalAmount.innerHTML = ((parseFloat(globalTotalAmount.innerHTML) + parseFloat(prixUnitaire.textContent))).toFixed(2) + " dt"
+        document.querySelector(".passerCommande").dataset.total = parseFloat(globalTotalAmount.innerHTML);
 
 
 
@@ -182,7 +183,7 @@ tbody.addEventListener("click",async function(event){
             quantity.value = parseInt(quantity.value) - 1
             totalAmount.innerHTML = ((quantity.value) * parseFloat(prixUnitaire.textContent)).toFixed(2) + " dt"
             globalTotalAmount.innerHTML = (parseFloat(globalTotalAmount.innerHTML) - parseFloat(prixUnitaire.textContent)).toFixed(2) + " dt"
-
+            document.querySelector(".passerCommande").dataset.total = parseFloat(globalTotalAmount.innerHTML);
             let productList = getLocalStorageArticlesList()
             for(let i=0 ; i < productList.length ; i++){
                 if(productList[i].idproduit == idProduit){
@@ -220,7 +221,7 @@ tbody.addEventListener("click",async function(event){
     // passer commande button
     if(event.target.classList.contains("passerCommande")){
         event.preventDefault()
-        let total = event.target.dataset.total
+        let total = parseFloat(event.target.dataset.total).toFixed(3)
         let result = await fetch("/api/users/isClientLoggedIn");
         let response = await result.json();
         if(response.success && response.data){
@@ -230,9 +231,7 @@ tbody.addEventListener("click",async function(event){
             SignInCard.style.top =window.scrollY + "px";
             body.style.maxHeight= "100vdh";
             body.style.overflow="hidden";
-        }else{
-            alert(response.message);
-        }
+        }else{alert(response.message);}
     }
 })
 

@@ -246,7 +246,7 @@ window.addEventListener("load",async function(event){
                                         <p class="quantite">x${article.quantity}</p> <!-- from localStore -->
                                     </div>
                                 </div>
-                                <p class="prix">${product.prix * article.quantity} Dt</p>
+                                <p class="prix">${((product.prix - product.remise) * article.quantity).toFixed(3)} Dt</p>
                             </article>
         `;
     }

@@ -10,6 +10,7 @@
     $nombre_row_totale = $product_service->numberOfRowGetAllCollection($type,$genre);
     // -------------------------------------------------------------------------------
 
+    $today = new DateTime("today");
 
 
     $nombre_totale_page = ceil($nombre_row_totale / $limit);
@@ -35,6 +36,7 @@
     />
 
     <link rel="stylesheet" href="../assets/css/collection.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
 </head>
 <body>
 
@@ -92,10 +94,15 @@
 
             <section class="article-container"> 
                 <?php foreach($collectionListe as $collection): ?>
+                    <?php $dataAjout = new DateTime($collection["date_ajout"]); ?>
                     <article data-idproduit="<?= $collection["id_produit"] ?>">
-                        <span class="new" hidden>Nouveau</span>
-                        <span class="best-seller" >Best seller</span>
-                        <span class="repture" hidden>repture de stock</span>
+                            <?php if($collection["remise"] > 0): ?>
+                                <span class="remise">Remise</span>
+                            <?php elseif($collection["quantite_stock"] == 0 ): ?>
+                                <span class="repture" >repture de stock</span>
+                            <?php elseif($today->diff($dataAjout)->days <= 2): ?>
+                                <span class="new">Nouveau</span>
+                            <?php endif; ?>
                         <img src="<?= $collection["image_url"] ?>" alt="">
                         <h4><?= $collection["libelle"] ?>=</h4>
                         <div class="rating">
@@ -105,7 +112,7 @@
                         </div>
                         
                         <h3 class="price"><?= number_format($collection["prix"],3,","," ") ?> DT</h3>
-                        <a href="" class="button addToCartBtn" data-idproduit="<?= $collection["id_produit"] ?>" data-name="<?= $collection["libelle"] ?>" data-price="<?= $collection["prix"] ?>">
+                        <a href="" class="button addToCartBtn" data-idproduit="<?= $collection["id_produit"] ?>" data-name="<?= $collection["libelle"] ?>" data-price="<?= $collection["prix"] -  $collection["remise"] ?>">
                             <i class="fa-solid fa-cart-shopping"></i>
                             Ajouter au panier
                         </a>

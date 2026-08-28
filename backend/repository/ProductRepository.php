@@ -161,7 +161,7 @@
         // partie recherche : contient paginaation
         // #######################
         public function rechercherArticle(string $categorie , string $libelle ,string $marque, float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
-            $query = "SELECT p.id_produit , p.code_barre , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.prix , p.description from {$this->tName} p  where 1=1 and id_produit not in (select distinct(id_pack) from pack) ";
+            $query = "SELECT p.id_produit , p.code_barre , p.date_ajout , p.nombre_rater , p.rating , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.prix , p.description from {$this->tName} p  where 1=1 and id_produit not in (select distinct(id_pack) from pack) ";
             $param = [];
             $categorie = mb_strtolower(trim($categorie));
             $marque = mb_strtolower(trim($marque));
@@ -597,11 +597,11 @@
 
     //    partie games
     public function getAllGames($libelle , $genre , $limit , $offset){
-        $query = "select p.* , genre from produit p , games g where g.id_game = p.id_produit ";
+        $query = "select p.* , g.genre from produit p , games g where g.id_game = p.id_produit ";
         $params = [];
         $queryList= [];
         $genre = mb_strtolower($genre);
-        if(!in_array($genre,["garcon","fille","mixte"])){throw new Exception("Genre de jouet est invalide");}
+        if(!in_array($genre,["garcon","fille","mixte",""])){throw new Exception("Genre de jouet est invalide");}
         if(!empty($libelle)){
             $params[] = "%$libelle%";
             $queryList[] = "libelle like ?";
@@ -628,7 +628,7 @@
         $params = [];
         $queryList= [];
         $genre = mb_strtolower($genre);
-        if(!in_array($genre,["garcon","fille","mixte"])){throw new Exception("Genre de jouet est invalide");}
+        if(!in_array($genre,["garcon","fille","mixte",""])){throw new Exception("Genre de jouet est invalide");}
         if(!empty($libelle)){
             $params[] = "%$libelle%";
             $queryList[] = "libelle like ?";

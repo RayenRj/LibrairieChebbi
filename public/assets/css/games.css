@@ -466,6 +466,54 @@ box-shadow:
     color: white;
 }
 
+
+
+
+/* ///////////////////////////////// */
+/* ///////////////////////////////// */
+/* ///////////////////////////////// */
+/* ///////////////////////////////// */
+
+.article-container article .remise ,
+.article-container article .new ,
+.article-container article .best-seller,
+.article-container article .repture
+{
+    position: absolute;
+    top: 25px;
+    left: 23px;
+    background-color: rgb(230, 84, 84);
+    padding: 0.3em 1.25em;
+    font-size: 10px;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 1em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    z-index: 300;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    user-select: none;
+}
+
+.article-container article .remise{
+    background-color: var(--blue);
+}
+.article-container article .new{
+    background-color: var(--green);
+}
+.article-container article .best-seller{
+    background-color: var(--yellow-dark);
+}
+.article-container article .repture{
+    background-color: var(--red);
+}
+
+
+/* ///////////////////////////////// */
+/* ///////////////////////////////// */
+/* ///////////////////////////////// */
+/* ///////////////////////////////// */
+
 @media (max-width:700px) {
    .links,.main-part, .cards-container{
     display: none !important;
@@ -515,5 +563,16 @@ box-shadow:
         font-weight: 600;
         cursor: pointer;
         font-size: 12px;
+    }
+    .articles article .remise ,
+    .articles article .new ,
+    .articles article .best-seller,
+    .articles article .repture
+    {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        padding: 0.28em 1em;
+        font-size: 9px;
     }
 }

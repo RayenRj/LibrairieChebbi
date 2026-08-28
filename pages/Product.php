@@ -48,13 +48,14 @@
     <?php include("../includes/header.php") ?>
     <main class="product">
         <div class="path">
-            <a href="">Home</a>
+            <a href="/products">Acueil</a>
             <i class="fa-solid fa-angle-right"></i>
-            <a href="">School Supplies</a>
+            <!-- 
+            <a href="">School Supplies</a> -->
             <i class="fa-solid fa-angle-right"></i>
-            <a href="">Notebook</a>
+            <a href="/product?categorie=<?= $product->getCategorie(); ?>"><?= $product->getCategorie(); ?></a>
             <i class="fa-solid fa-angle-right"></i>
-            <a href="">Premium Spiral Netebook A5</a>
+            <a href=""><?= $product->getLibelle(); ?></a>
 
         </div>
         <section class="top">
@@ -80,11 +81,19 @@
                     <p class="n-review">(24 Reviews)</p>
                 </div>
                 <div class="prix">
-                    <h3><?= number_format($product->getPrix() , 3 , "." , " ") ?> </h3>
+                    <?php if($product->getRemise() > 0): ?>
+                    <h3><?= number_format($product->getPrix() - $product->getRemise() , 3 , "." , " ")  ?> </h3>
                     <p>DT</p>
+                    <span class="prixOriginal">
+                        <h6><?= number_format($product->getPrix(), 3 , "." , " ") ?> Dt</h6>
+                    </span>
+                    <?php else:  ?>
+                        <h3><?= number_format($product->getPrix(), 3 , "." , " ")  ?> </h3>
+                        <p>DT</p>
+                    <?php endif; ?>
                 </div>
                 <p class="description">
-                    High-quality spiral notebook with smooth pages, perfect for school , office and personal use
+                    <?= $product->getDescription(); ?>
                 </p>
                 <!-- needs to be filled with php -->
                 <ul class="list-info">
@@ -117,7 +126,7 @@
                             <input type="number" id="quantity" value="1">
                             <button id="plusButton" type="button">+</button>
                         </div>
-                        <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $product->getId() ?>" data-idproduit ="<?=$product->getId() ?>" data-name="<?= $product->getLibelle() ?>" data-price="<?= $product->getPrix() ?>"><i class="fa-solid fa-cart-plus"></i>Add to cart</a>
+                        <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $product->getId() ?>" data-idproduit ="<?=$product->getId() ?>" data-name="<?= $product->getLibelle() ?>" data-price="<?= $product->getPrix() - $product->getRemise() ?>"><i class="fa-solid fa-cart-plus"></i>Add to cart</a>
                     </form>
                 </div>
                 <a href="" class="wishlist"><i class="fa-regular fa-heart"></i>Add to Wishlist</a>

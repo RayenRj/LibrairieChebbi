@@ -6,6 +6,7 @@
     <title>Shoppings</title>
     <link rel="stylesheet" href="../assets/css/output.css">
     <link rel="stylesheet" href="../assets/css/panier.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
 </head>
 <body>
     <div id="page-loader" role="status" aria-live="polite">

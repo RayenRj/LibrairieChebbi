@@ -1,4 +1,4 @@
-let addToCartButton = document.querySelectorAll(".addToCart")
+let addToCartButton = document.querySelectorAll(".add-to-cart")
 
 
 function getLocalStorageArticlesList(){
@@ -7,29 +7,46 @@ function getLocalStorageArticlesList(){
     if(cartTableString !== null){cartTable = JSON.parse(cartTableString)}
     return cartTable
 }
-cartCount.textContent = getLocalStorageArticlesList().length ;
 
 
 
-addToCartButton.forEach(button=>{
-    button.addEventListener("click", function(event){
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+////////// adding pack to cart //////////////////
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+addToCartButton.forEach(button => {
+    button.addEventListener("click",function(event){
         event.preventDefault();
-        let idpack = event.target.dataset.idpack;
-        let cartTable = getLocalStorageArticlesList();
-        for(let article of cartTable){
-            if(article["idproduit"] == idpack){
-                article["quantity"] = 1 + parseInt(article["quantity"])
-                localStorage.setItem("cartTable",JSON.stringify(cartTable))
-                return;
+        let element = event.target == button.firstElementChild ? event.target.parentElement : event.target;
+        let cartTableString = localStorage.getItem("cartTable");
+
+        if(cartTableString !== null){
+            var cartTable = JSON.parse(cartTableString);
+        }else{
+            var cartTable = [];
+        }
+        let idProduct = element.dataset.idproduit;
+        let exist = 0;
+        for(let i =0 ; i<cartTable.length ; i++){        
+            if(cartTable[i].idproduit == idProduct){
+                cartTable[i].quantity += 1;
+                exist = true;
             }
         }
-        cartCount.textContent = parseInt(cartCount.textContent) + 1 ;
-        cartTable.push({
-            idproduit: idpack,
-            quantity: 1
-        });
-        localStorage.setItem("cartTable",JSON.stringify(cartTable))
-        return;
-
+        if(!exist){
+            cartCount.textContent = parseFloat(cartCount.textContent) + 1
+            responsiveCartCount.textContent = parseFloat(responsiveCartCount.textContent) + 1
+            cartTable.push({
+                idproduit : idProduct,
+                    quantity :1
+            });
+        }
+        localStorage.setItem(
+            "cartTable",
+            JSON.stringify(cartTable)
+        )
     })
 })
