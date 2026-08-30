@@ -129,7 +129,7 @@ section .topPart select{
 /* styling article */
 section .article-list{
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(250px , 1fr));
+    grid-template-columns: repeat(auto-fit,minmax(250px , 1fr));
     gap: 30px;
     margin-top: 2rem;
 }
@@ -437,7 +437,7 @@ section .partTwo div:last-child select, section .partTwo div:last-child input{
     }
     section .article-list {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
         gap: 1em;
         margin: 1rem auto;
         place-content: center;

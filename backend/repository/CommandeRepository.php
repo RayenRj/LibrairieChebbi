@@ -52,7 +52,7 @@
     /**
          * *
          * @param string $statut => statut ei bch ta3ml 3leha el filtrage
-         * @return array liste feha les commandes filtrer selon la  critére
+         * @return string liste feha les commandes filtrer selon la  critére
          */
         public function nombreTotaleCommandeCeMois(string $statut){
             $query = "select count(*) from commande where month(date_commande) = month(current_date()) and year(date_commande) = year(curdate()) ";

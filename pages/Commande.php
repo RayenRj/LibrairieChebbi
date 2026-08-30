@@ -17,7 +17,10 @@
         $client_data["email"],
         $client_data["password"],
         $client_data["role"],
-        $client_data["addresse"] ?? ""
+        $client_data["addresse"] ?? "",
+        "",
+        "",
+        false
     );
 
 

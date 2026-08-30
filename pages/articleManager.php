@@ -9,6 +9,7 @@
     }
 
     $categorie = isset($_GET["categorie"]) ? $_GET["categorie"] : "";
+    $codeBarre = isset($_GET["code_barre"]) ? $_GET["code_barre"] : "";
     $libelle = isset($_GET["libelle"]) ? $_GET["libelle"] : "";
     $prixMax = isset($_GET["prixMax"]) ? floatval($_GET["prixMax"]) : 0;
     $prixMin = isset($_GET["prixMin"]) ? floatval($_GET["prixMin"]) : 0;
@@ -19,8 +20,8 @@
     $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 10;
 
     // prix min dima 0
-    $list_des_article_filtrée = $productService->rechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie , $limit , $page);
-    $nombre_de_ligne_list_des_article_filtrée = $productService->nombreLigneRechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie , $limit , $page);
+    $list_des_article_filtrée = $productService->rechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie ,$codeBarre, $limit , $page);
+    $nombre_de_ligne_list_des_article_filtrée = $productService->nombreLigneRechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie ,$codeBarre, $limit , $page);
 
     $nombre_page_totale = intval(ceil($nombre_de_ligne_list_des_article_filtrée / $limit));
     
@@ -50,7 +51,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article Manager</title>
+    <title>Librairie Chebbi | Article Manager</title>
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
+
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -145,58 +148,8 @@
                             <canvas id="chart2"></canvas>
                         </div>
                         <div>
-                            <ul class="firstList chartList">
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Écriture</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Papeterie</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Géométrie</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
-                                    <p>35%</p>
-                                </li>
-                            </ul>
-                            <ul class="lastList chartList">
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
-                                    <p>35%</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa-solid fa-circle"></i> Chaiers</p>
-                                    <p>35%</p>
-                                </li>
-                            </ul>
+                            <ul class="firstList chartList"></ul>
+                            <ul class="lastList chartList"></ul>
                         </div>
                     </div>
                 </div>

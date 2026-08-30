@@ -25,20 +25,20 @@ class ProductServices{
     }
     
     //done
-    public function rechercherArticle(string $categorie , string $libelle ,string $marque, float $prixMax , float $prixMin , string $stock , string $trie , int $limit = 10 , int $page = 0){  
+    public function rechercherArticle(string $categorie , string $libelle ,string $marque, float $prixMax , float $prixMin , string $stock , string $trie ,string $codeBarre, int $limit = 10 , int $page = 1){  
         if(!in_array(strtolower($stock) ,["","stock eleve","stock moyen","stock faible","repture de stock","disponible"])){
             throw new Exception("La valeur du stock est invalide");
         }
-        if(!in_array($trie , ["id article","libellé","prix unitaire","stock","nombre de vente","","marque"])){throw new Exception("Le critére de trie est invalide!");}
-        return $this->productRepo->rechercherArticle($categorie , $libelle,$marque, $prixMax,$prixMin , $stock , $trie , $limit,$page);
+        if(!in_array($trie , ["id article","libellé","prix unitaire","stock","nombre de vente","","marque","code_barre"])){throw new Exception("Le critére de trie est invalide!");}
+        return $this->productRepo->rechercherArticle($categorie , $libelle,$marque, $prixMax,$prixMin , $stock , $trie ,$codeBarre, $limit,$page);
     }
     //done
-    public function nombreLigneRechercherArticle(string $categorie , string $libelle ,string $marque, float $prixMax , float $prixMin , string $stock , string $trie , int $limit = 10 , int $page = 0){
+    public function nombreLigneRechercherArticle(string $categorie , string $libelle ,string $marque, float $prixMax , float $prixMin , string $stock , string $trie , string $codeBarre , int $limit = 10 , int $page = 0){
         if(!in_array(strtolower($stock) ,["","stock eleve","stock moyen","stock faible","repture de stock","disponible"])){
             throw new Exception("La valeur du stock est invalide");
         }
-        if(!in_array($trie , ["id article","libellé","prix unitaire","stock","nombre de vente","","marque"])){throw new Exception("Le critére de trie est invalide!");}
-        return $this->productRepo->nombreLigneRechercherArticle($categorie , $libelle,$marque, $prixMax,$prixMin , $stock , $trie , $limit,$page);
+        if(!in_array($trie , ["id article","libellé","prix unitaire","stock","nombre de vente","","marque","code_barre"])){throw new Exception("Le critére de trie est invalide!");}
+        return $this->productRepo->nombreLigneRechercherArticle($categorie , $libelle,$marque, $prixMax,$prixMin , $stock , $trie ,$codeBarre, $limit,$page);
     }
     //done
     public function createProduct(string $libelle,float $prixUnitaire,int $quantite ,string $categorie,string $marque,float $remise ,string $description, $file ,?string $codeBarre, ?string $anneescolaire , ?string $genre , ?string $collection , ?string $typeCollection , ?string $matiere): bool{
@@ -46,7 +46,7 @@ class ProductServices{
         if($prixUnitaire<0){throw new Exception("prixUnitaire de produit ne doit pas etre negatif!");}
         if($quantite<0){throw new Exception("quantite de produit ne doit pas etre negatif!");}
         if(empty($categorie)){throw new Exception("categorie de produit ne doit pas etre vide!");}
-        if(empty($marque)){throw new Exception("marque de produit ne doit pas etre vide!");}
+        // if(empty($marque)){throw new Exception("marque de produit ne doit pas etre vide!");}
         if($remise < 0 || $remise > $prixUnitaire){throw new Exception("remise de produit invalide!");}
         $name = $file["name"];
         $tmp = $file["tmp_name"];

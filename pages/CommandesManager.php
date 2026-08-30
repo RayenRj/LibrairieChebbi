@@ -52,6 +52,8 @@
     <link rel="stylesheet" href="../assets/css/commandeManager.css">
     <link rel="stylesheet" href="../assets/css/packManager.css">
     <link rel="stylesheet" href="../assets/css/bonLivraison.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
+
 </head>
 <body>
     <?php include("../includes/header.php"); ?>

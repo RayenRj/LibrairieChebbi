@@ -25,6 +25,9 @@
         public function ParascolairePage(){require(PATH . "Parascolaire.php");}
         public function callbackPage(){require(PATH . "googleCallback.php");}
         public function logInPage(){require(PATH . "google-login.php");}
+        public function testMail(){require(PATH . "testMail.php");}
+        public function verifyEmailPage(){require(PATH . "VerifyEmail.php");}
+
         
 
     }

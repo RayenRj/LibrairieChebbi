@@ -73,10 +73,10 @@ window.addEventListener("load",async function(){
                             </div>
                         </td>
                         <td class="prixUnitaire">
-                            <span class="prix-unitaire">${(parseFloat(result.data.prix) - parseFloat(result.data.remise)).toFixed(2)} dt</span>
+                            <span class="prix-unitaire">${(parseFloat(result.data.prix) - parseFloat(result.data.remise)).toFixed(3)} Dt</span>
                         </td>
                         <td>
-                            <span class="prix-totale">${(article.quantity * (result.data.prix - result.data.remise)).toFixed(2)}dt</span>
+                            <span class="prix-totale">${(article.quantity * (result.data.prix - result.data.remise)).toFixed(3)} Dt</span>
                         </td>
 
                         <td class="td-delete">
@@ -93,12 +93,12 @@ window.addEventListener("load",async function(){
     // let beforeLast_tr = `
     //                 <tr>
     //                     <td colspan="5"  class="total-payer">Total a payer</td>
-    //                     <td id="totalAmount">${totale.toFixed(2)}dt</td>
+    //                     <td id="totalAmount">${totale.toFixed(3)}dt</td>
     //                     <td></td>
     //                 </tr>
     let beforeLast_tr = `
                     <tr>
-                        <td colspan="5"  class="total-payer">Total a payer:  <span id="totalAmount">${totale.toFixed(2)} Dt</span></td>
+                        <td colspan="5"  class="total-payer">Total a payer:  <span id="totalAmount">${totale.toFixed(3)} Dt</span></td>
                         
                         <td></td>
                     </tr>
@@ -155,8 +155,8 @@ tbody.addEventListener("click",async function(event){
         let idProduit = quantity.dataset.idproduit
         quantity.value = parseInt(quantity.value) + 1
         let productList = getLocalStorageArticlesList()
-        totalAmount.innerHTML = ((quantity.value) * parseFloat(prixUnitaire.textContent)).toFixed(2) + " dt"
-        globalTotalAmount.innerHTML = ((parseFloat(globalTotalAmount.innerHTML) + parseFloat(prixUnitaire.textContent))).toFixed(2) + " dt"
+        totalAmount.innerHTML = ((quantity.value) * parseFloat(prixUnitaire.textContent)).toFixed(3) + " Dt"
+        globalTotalAmount.innerHTML = ((parseFloat(globalTotalAmount.innerHTML) + parseFloat(prixUnitaire.textContent))).toFixed(3) + " Dt"
         document.querySelector(".passerCommande").dataset.total = parseFloat(globalTotalAmount.innerHTML);
 
 
@@ -181,8 +181,8 @@ tbody.addEventListener("click",async function(event){
 
         if(quantity.value > 1){
             quantity.value = parseInt(quantity.value) - 1
-            totalAmount.innerHTML = ((quantity.value) * parseFloat(prixUnitaire.textContent)).toFixed(2) + " dt"
-            globalTotalAmount.innerHTML = (parseFloat(globalTotalAmount.innerHTML) - parseFloat(prixUnitaire.textContent)).toFixed(2) + " dt"
+            totalAmount.innerHTML = ((quantity.value) * parseFloat(prixUnitaire.textContent)).toFixed(3) + " Dt"
+            globalTotalAmount.innerHTML = (parseFloat(globalTotalAmount.innerHTML) - parseFloat(prixUnitaire.textContent)).toFixed(3) + " Dt"
             document.querySelector(".passerCommande").dataset.total = parseFloat(globalTotalAmount.innerHTML);
             let productList = getLocalStorageArticlesList()
             for(let i=0 ; i < productList.length ; i++){
@@ -201,7 +201,8 @@ tbody.addEventListener("click",async function(event){
         let element = event.target.classList.contains("delete") ? event.target : event.target.parentElement.classList.contains("delete") ?  event.target.parentElement : event.target.parentElement.parentElement;
         let globalTotalAmount = document.querySelector("#totalAmount");
         let totalAmount = parseFloat(element.parentElement.previousElementSibling.firstElementChild.textContent);
-        globalTotalAmount.innerHTML = (parseFloat(globalTotalAmount.innerHTML) - totalAmount) + " dt"
+        globalTotalAmount.innerHTML = (parseFloat(globalTotalAmount.innerHTML) - totalAmount).toFixed(3) + " Dt"
+        document.querySelector(".passerCommande").dataset.total = parseFloat(globalTotalAmount.innerHTML);
         event.preventDefault();
 
         cartCount.textContent = parseInt(cartCount.textContent) - 1

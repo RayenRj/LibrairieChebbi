@@ -16,12 +16,10 @@ const sectionsEtude = [
     { value: "4-primaire", label: "4ème année primaire" },
     { value: "5-primaire", label: "5ème année primaire" },
     { value: "6-primaire", label: "6ème année primaire" },
-
     // Collège
     { value: "7-base", label: "7ème année de base" },
     { value: "8-base", label: "8ème année de base" },
     { value: "9-base", label: "9ème année de base" },
-
     // Lycée - Tronc commun
     { value: "1-secondaire", label: "1ère année secondaire" },
 
@@ -206,21 +204,29 @@ window.addEventListener("load", async function(event){
 
     // chart 2 : donught chart
 
+    // appelle de l api
     let response2 = await fetch("/api/articles/ventes/categories");
     let resultat2 = await response2.json();
     let dataList = resultat2.data ?? [];
+
     
-    
+    // Data pour remplissaage
     const labels = ["Écriture",
                     "Papeterie",
                     "Classement",
                     "Géométrie",
                     "Coupe et collage",
                     "Dessin et arts",
-                    "Sacs et accessoires",
+                    "Sacs",
                     "Calcul et sciences",
                     "Numérique",
                     "Livres pédagogiques",
+                    "parascolaire",
+                    "jouet",
+                    "sac a dos",
+                    "sac a chariot",
+                    "panier",
+                    "trousse",
                     "Fournitures de bureau",
                     "Others"
                     ];
@@ -234,32 +240,52 @@ window.addEventListener("load", async function(event){
                     "calcul_sciences",
                     "numerique",
                     "livres_pedagogiques",
+                    "parascolaire",
+                    "jouet",
+                    "sac a dos",
+                    "sac a chariot",
+                    "panier",
+                    "trousse",
                     "fournitures_bureau",
                     "others"
                     ];
 
-
-    let chartValues = new Array(values.length).fill(1);
+    // tableau fih les valeur mta3 tous les categories
+    let chartValues = new Array(values.length).fill(0);
     for(let cat of dataList){
-        chartValues[values.indexOf(cat.categorie)] = parseInt(cat.nombreVente);
+        chartValues[values.indexOf(cat.categorie.toLowerCase())] = parseInt(cat.nombreVente);
     }
+
+    // ==================================================================================
+    // ==================================================================================
+    // ==================== remplissage la liste ba7dha chart UI ========================
+    // ==================================================================================
+    // ==================================================================================
     // remplissage la liste ba7dha chart UI
     let ul_Chart = this.document.querySelectorAll(".articleManager .top-chart .chartList");
     let html_content_1 = "";
     let html_content_2 = "";
-    for(let i =0 ; i<=5 ; i++){
-        html_content_1 += `      <li>
+    for(let i =0 ; i<9 ; i++){
+        html_content_1 += `     <li>
                                     <p><i class="fa-solid fa-circle"></i> ${labels[i]}</p>
-                                    <p>${chartValues[i]}%</p>
+                                    <p>${chartValues[i]}</p>
                                 </li>`;
-        html_content_2 += `      <li>
-                                    <p><i class="fa-solid fa-circle"></i> ${labels[6+i]}</p>
-                                    <p>${chartValues[i+6]}%</p>
-                                </li>`;
+        if(i<=8){
+            html_content_2 += `      <li>
+                                        <p><i class="fa-solid fa-circle"></i> ${labels[9+i]}</p>
+                                        <p>${chartValues[i+9]}</p>
+                                    </li>`;
+        }
     }
     ul_Chart[0].innerHTML = html_content_1;
     ul_Chart[1].innerHTML = html_content_2;
 
+
+    // =====================================================================================
+    // =====================================================================================
+    // ================================== Chart Creation ===================================
+    // =====================================================================================
+    // =====================================================================================
     let donughtChart = new Chart(secondeChart ,{
                                                     type: "doughnut" ,
                                                     data :{
@@ -379,7 +405,7 @@ resetButton.addEventListener("click",function(){
 
 // partie form : ajouter un article
 let addArticleForm = document.querySelector("#addArticleForm");
-
+console.log(addArticleForm)
 addArticleForm.addEventListener("submit",async function(event){
     event.preventDefault();
     const formData = new FormData(addArticleForm);
@@ -447,7 +473,7 @@ deleteArticleButtonList.forEach(article =>{
             method: "DELETE"
         });
         let result = await response.json();
-        console.log(result)
+
         if(result.success && result.data){window.location.reload()}
         else{alert(result.message)}
     })

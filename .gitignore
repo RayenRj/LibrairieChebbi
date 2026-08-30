@@ -4,6 +4,10 @@ node_modules/
 /vendor/
 composer.*
 readme.md
-
+*.log
 client_secret*.json
 .env
+.gitignore
+*.env
+
+*.txt

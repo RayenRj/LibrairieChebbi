@@ -1,0 +1,73 @@
+
+  :root{
+    --ink:#1a1a2e;
+    --error:#e5484d;
+    --error-bg:#fdecec;
+    --muted:#8a87a8;
+    --border:#e2e0f5;
+    --accent:#5b4bff;
+  }
+  *{box-sizing:border-box;}
+
+
+  /* ---- La card d'erreur ---- */
+  .error-card{
+    position:fixed;
+    top:28px;
+    left:50%;
+    transform:translateX(-50%) translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+    transition:all .25s cubic-bezier(.2,.9,.3,1.2);
+    background:#fff;
+    border:1px solid var(--border);
+    border-left:4px solid var(--error);
+    border-radius:12px;
+    padding:16px 18px;
+    box-shadow:0 20px 40px -12px rgba(26,26,46,.25);
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    width:320px;
+    max-width:88vw;
+    z-index:999;
+  }
+  .error-card.show{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+  .error-card .icon{
+    flex-shrink:0;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:var(--error-bg);
+    color:var(--error);
+    font-weight:700;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .error-card .text strong{
+    display:block;
+    font-size:14px;
+    margin-bottom:2px;
+  }
+  .error-card .text span{
+    font-size:12.5px;
+    color:var(--muted);
+    line-height:1.4;
+  }
+  .error-card .close{
+    margin-left:auto;
+    background:none;
+    border:none;
+    font-size:16px;
+    color:var(--muted);
+    cursor:pointer;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .error-card .close:hover{ color:var(--ink); }

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/assets/css/signup.css">
     <link rel="stylesheet" href="/assets/css/signin.css">
     <link rel="stylesheet" href="/assets/css/responsiveHeader.css">
+    <link rel="stylesheet" href="/assets/css/errorCardStyle.css">
     <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
 </head>
 <body>
@@ -28,15 +29,15 @@
             <div class="categories">
                 <button>📦 Categories ▾</button>
                 <ul class="dropdown-menu">
-                    <li><a href="/main">⭐ <span>main</span></a></li>
-                    <li><a href="/products">🛍️ <span>All Products</span></a></li>
-                    <li><a href="/packs">📦 <span>Nos Packs</span></a></li>
-                    <li><a href="/packs/livres">📚 <span>Livres</span></a></li>
+                    <li><a href="/main">⭐ <span>Page Accueil</span></a></li>
+                    <li><a href="/products">🛍️ <span>Tous Les Produits</span></a></li>
+                    <li><a href="/packs">📦 <span>Tous nos Packs</span></a></li>
+                    <li><a href="/packs/livres">📚 <span>Livres Pédagogiques</span></a></li>
                     <li><a href="/packs/livres/parascolaire">📚 <span>Parascolaires</span></a></li>
-                    <li><a href="/collections">🎒 <span>School Bags</span></a></li>
-                    <li><a href="/products">✏️ <span>Writing Tools</span></a></li>
-                    <li><a href="/products">📐 <span>Geometry Tools</span></a></li>
-                    <li><a href="/games">🧸 <span>jouets</span></a></li>
+                    <li><a href="/collections">🎒 <span>Les collections des Sac</span></a></li>
+                    <li><a href="/products">✏️ <span>Outils d'ecritures</span></a></li>
+                    <li><a href="/products">📐 <span>Outils Geometriques</span></a></li>
+                    <li><a href="/games">🧸 <span>Jouets</span></a></li>
                     <li><a href="/products">🔮 <span>Autres Accessories</span></a></li>
                 </ul>
             </div>
@@ -256,17 +257,17 @@
                         <input type="submit" value="Sign Up" id="signUpButton">
                     </div>
                     <p>Already have an account ? <a href="#" id="switchSignIn">Sign in</a></p>
-                    <div class="line">
+                    <!-- <div class="line">
                         <hr>
                         <span>or</span>
-                    </div>
+                    </div> -->
                     <!-- <div class="signup-google">
                         <a href="">
                             <img src="../assets/images/google.png" alt="">
                             Sign up With Google</a>
                     </div> -->
 
-
+                    <!--
                     <a href="">
                         <button class="buttonGoogle">
                             <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
@@ -278,7 +279,7 @@
                             Continue with Google
                         </button>
                     </a>
-                    
+-->
                 </form>
             </div>
         </div>
@@ -338,6 +339,14 @@
             </div>
         </div>
         
+    </div>
+    <div class="error-card" id="errorCard">
+      <div class="icon">!</div>
+      <div class="text">
+        <strong class="title">Informations incorrectes</strong>
+        <span class="errorMessage">Un message d'erreur</span>
+      </div>
+      <button class="close" onclick="hideError()">&times;</button>
     </div>
     <!--end of sign in part-->
     <script src="/assets/js/header_script.js"></script>

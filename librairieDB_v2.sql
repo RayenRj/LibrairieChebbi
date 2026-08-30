@@ -131,6 +131,11 @@ create table client(
 	password varchar(255) not null ,
     role varchar(50) check(role in("client","admin")) default 'client'
 );
+ALTER TABLE client
+ADD COLUMN email_verified BOOLEAN DEFAULT FALSE,
+ADD COLUMN verification_code VARCHAR(6),
+ADD COLUMN verification_expires_at DATETIME;
+
 -- ==========================================================
 -- TABLE COMMANDE
 -- ==========================================================
@@ -738,6 +743,46 @@ select * from produit p , collection c where p.id_produit = c.id_produit;
 
 -- find du données de teste 
 
+
+-- reglage ll tablle livre bch l insertion mta3 livre temchi s7i7a <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ALTER TABLE livre
+MODIFY COLUMN niveau_scolaire VARCHAR(255)
+CHECK (
+    niveau_scolaire IN (
+        '1-primaire',
+        '2-primaire',
+        '3-primaire',
+        '4-primaire',
+        '5-primaire',
+        '6-primaire',
+        '7-base',
+        '8-base',
+        '9-base',
+        '1-secondaire',
+        '2-lettres',
+        '2-economie',
+        '2-sciences',
+        '2-informatique',
+        '3-lettres',
+        '3-economie',
+        '3-sciences',
+        '3-math',
+        '3-technique',
+        '3-informatique',
+        '3-sport',
+        'bac-lettres',
+        'bac-economie',
+        'bac-sciences',
+        'bac-math',
+        'bac-technique',
+        'bac-informatique',
+        'bac-sport'
+    )
+);
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<
+select * from livre;
+delete from livre;
+
 show columns from sac;
 use librairieDB_v2;
 
@@ -773,4 +818,25 @@ select p.* , g.genre from produit p , games g where g.id_game = p.id_produit ;
 alter table collection 
 drop column marque;
 update client set role= "admin" where id_client = 23;
-select count(*) from games;
+select * from games;
+show tables;	
+select * from produit;
+use librairieDB_v2;
+show columns from client;
+select * from client;
+delete from client where email = "rjibi.rayen01@gmail.com";
+update client set email_verified = 0 where email = "rjibi.rayen01@gmail.com";
+update client set role = "admin" where email = "rjibi.rayen01@gmail.com";
+
+show columns from produit;
+select distinct(categorie) from produit;
+
+select categorie ,sum(quantite) as `nombreVente`
+                                        from pack p , ligne_commande lc
+                                        where id_pack = id_produit
+                                        group by p.categorie;
+select * from produit;
+use librairiedb_v2;
+select pa.* , pr.* from produit pr, pack pa where id_pack = id_produit;
+select * from produit;
+describe livre;

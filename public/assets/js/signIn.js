@@ -2,6 +2,22 @@ let signInForm = document.querySelector("#signInForm");
 let signIninput = document.querySelectorAll(".signin .input");
 let signInlabel = document.querySelectorAll(".signin .inputLabel");
 
+
+
+// =========================== ERROR CARD ==================================
+  var timeoutId;
+
+  function triggerError(){
+    const card = document.getElementById('errorCard');
+    clearTimeout(timeoutId);
+    card.classList.add('show');
+    timeoutId = setTimeout(hideError, 4000);
+  }
+
+  function hideError(){
+    document.getElementById('errorCard').classList.remove('show');
+  }
+// =========================================================================
 for(let i=0 ; i<signIninput.length; i++){
     let input = signIninput[i];
     input.addEventListener("blur",function(){
@@ -21,9 +37,7 @@ signInForm.addEventListener("submit",async function(event){
 
     event.preventDefault();
     const dataForm = new FormData(signInForm);
-    for(const[key,value] of dataForm.entries()){
-        console.log(key,value);
-    }
+
 
     const response = await fetch("/api/users/signIn", {
         method : "POST",
@@ -32,13 +46,22 @@ signInForm.addEventListener("submit",async function(event){
 
     const result = await response.json();
     if(result.success){
-        if(result.data == false){
-            alert("Adreese email ou mot de passe incorrect!");
-        }else{
-            window.location.reload();
-
-        }
+        if(result.data == null){window.location.href = result.redirect;}
+        else{window.location.reload();}
     }else{
-        alert("Adreese email ou mot de passe incorrect!");
+        // lahnee win famma mochkla <<<<<<<<<<<<<<<<<<<<<<<<<<<
+        document.querySelector(".errorMessage").innerHTML = result.message
+        signIninput.forEach(input=>{
+            input.style.borderColor="red";
+        })
+        signInlabel.forEach(label=>{
+            label.style.color="red";
+        })
+        triggerError();
     }
 })
+
+
+
+
+

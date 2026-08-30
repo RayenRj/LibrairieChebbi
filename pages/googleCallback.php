@@ -33,19 +33,16 @@ if($payload){
     $name = $payload["name"];
 
     if($service_client->isEmailTaken($email)===false){
-        $client = $service_client->createClient(explode(" ",$name)[0] ,explode(" ",$name)[1],"",$email,  "" );      
+        $client = $service_client->createClient(explode(" ",$name)[0] ,explode(" ",$name)[1],"",$email,  "","","" );      
     }
-
 
     $_SESSION["userId"] = $service_client->getClietIdByEmail($email);
     $_SESSION["googleID"] = $googleId;
     $_SESSION["clientEmail"] = $email;
-    $_SESSION["role"] = "client";
+    $_SESSION["role"] = $service_client->getClientRoleByEmail($email) ?: "client";
     $_SESSION["firstName"]= explode(" ",$name)[0];
     $_SESSION["lastName"] = explode(" ",$name)[1];
 
-
-    echo $_SESSION["clientEmail"] . " " . $_SESSION["firstName"] . " " . $_SESSION["lastName"];
     header("Location: /main");
 }else{
     exit("invalid ID Token");

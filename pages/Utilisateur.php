@@ -10,7 +10,7 @@
     $email = isset($_GET["email"]) ? $_GET["email"] : "";
     $tel = isset($_GET["tel"]) ? $_GET["tel"] : "";
 
-
+    
     $list_clients = $client_services->searchClient($idClient , $nom, $prenom, $email, $tel, $limit, $page );
     $nombre_totale_list_client = $client_services->nombreDeLigneSearchClient($idClient , $nom, $prenom, $email, $tel);
 
@@ -31,7 +31,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users</title>
+    <title>Clients | Librairie Chebbi</title>
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"

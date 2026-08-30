@@ -8,13 +8,14 @@
     $prixMin = isset($_GET["prixMin"]) ? floatval($_GET["prixMin"]) : 0;
     $id = isset($_GET["id"]) ? $_GET["id"] : "";
     $marque = isset($_GET["marque"]) ? $_GET["marque"] : "";
+    $codeBarre = isset($_GET["code_barre"]) ? $_GET["code_barre"] : "";
 
     $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
     $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 10;
 
 
-    $list_des_article_filtrée = $productService->rechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , "" , "" , $limit , $page);
-    $nombre_de_ligne_list_des_article_filtrée = $productService->nombreLigneRechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , "" , "" , $limit , $page);
+    $list_des_article_filtrée = $productService->rechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , "" , "" ,$codeBarre, $limit , $page);
+    $nombre_de_ligne_list_des_article_filtrée = $productService->nombreLigneRechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , "" , "" , $codeBarre ,$limit , $page);
 
     $nombre_page_totale = intval(ceil($nombre_de_ligne_list_des_article_filtrée / $limit));
     
@@ -40,13 +41,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promotions</title>
+    <title>Promotions | Librairie Chebbi</title>
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
     <link rel="stylesheet" href="../assets/css/commandeManager.css">
     <link rel="stylesheet" href="../assets/css/promotions.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
+
 </head>
 <body>
     <?php include("../includes/header.php"); ?>

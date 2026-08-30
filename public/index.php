@@ -46,6 +46,11 @@ error_reporting(E_ALL);
     $route->add("GET", "/packs/livres/parascolaire" , "PageController","ParascolairePage");
     $route->add("GET", "/google-callback" , "PageController","callbackPage");
     $route->add("GET", "/google-login" , "PageController","logInPage");
+    $route->add("GET", "/verify" , "PageController","testMail");
+    $route->add("GET", "/testMail" , "PageController","testMail");
+    $route->add("GET", "/verify-email", "PageController", "verifyEmailPage");
+
+
 
     //=========> Product Routes <=======
     $route->add("POST","/api/articles","ProductController","addProduct");
@@ -88,7 +93,8 @@ error_reporting(E_ALL);
     $route->add("GET","/api/users/logout", "ClientController" , "logOut");
     $route->add("GET","/api/users/user/{id}", "ClientController" , "getClientByIdentifier");
     $route->add("POST","/api/users/update", "ClientController" , "updateClient");
-
+    $route->add("POST","/api/users/resend-code","ClientController","resendVerificationCode");
+    $route->add("POST","/api/users/verify-email","ClientController","verifyEmail");
 
     //=========> commande Routes <=======
     $route->add("DELETE" , "/api/commandes/{id}", "CommandeController","deleteCommande");

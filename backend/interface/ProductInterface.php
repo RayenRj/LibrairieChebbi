@@ -76,6 +76,7 @@ interface IProductRepository
         float $prixMin,
         string $stock,
         string $trie,
+        string $codeBarre,
         int $limit,
         int $page
     );
@@ -88,6 +89,7 @@ interface IProductRepository
         float $prixMin,
         string $stock,
         string $trie,
+        string $codeBarre,
         int $limit,
         int $page
     );

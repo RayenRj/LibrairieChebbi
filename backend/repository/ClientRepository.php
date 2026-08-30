@@ -17,15 +17,36 @@
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+        public function findClientObjectById(int $id){
+            $query = "select * from client where id_client = ?;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            $client = new Client(
+                $data["nom"],
+                $data["prenom"],
+                $data["tel"],
+                $data["email"],
+                $data["password"],
+                $data["role"],
+                $data["addresse"],
+                $data["verification_code"],
+                $data["verification_expires_at"],
+                (bool) $data["email_verified"]
+            );
+
+            return $client;
+        }
+        
         public function deleteById(int $id) : bool{
             $query = "delete from client where id_client = ? ";
             $stmt = $this->db->prepare($query);
             return $stmt->execute([$id]);
         }
         public function createClient(Client $client): bool{
-            $query = "insert into client(nom,prenom,tel,email,password,role) values(?,?,?,?,?,?)";
+            $query = "INSERT INTO client ( nom, prenom, tel, email, password, role, addresse, verification_code, verification_expires_at, email_verified ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
             $stmt = $this->db->prepare($query);
-            return $stmt->execute([$client->getNom(), $client->getPrenom() , $client->getTel(), $client->getEmail(), $client->getPassword() , $client->getRole()]);
+            return $stmt->execute([ $client->getNom(), $client->getPrenom(), $client->getTel(), $client->getEmail(), $client->getPassword(), $client->getRole(), $client->getAdresse(), $client->getVerificationCode(), $client->getVerificationExpiresAt(), $client->getEmailVerified() ?: 0]);
         }   
         public function findAllClient(){
             $stmt = $this->db->prepare("select * from client;");
@@ -237,10 +258,57 @@
             $stmt->execute([$email]);
             return $stmt->fetch(PDO::FETCH_ASSOC)["id_client"] ?: null;
         }
+        public function getClientRoleByEmail(string $email){
+            $query = "select role from client where email = ? ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$email]);
+            return $stmt->fetch(PDO::FETCH_ASSOC)["role"] ?: null;
+        }
+
+
+
+    // partie OTP
+    public function verifyEmail(int $idClient): bool
+    {
+        $query = "
+            UPDATE client
+            SET
+                email_verified = 1,
+                verification_code = NULL,
+                verification_expires_at = NULL
+            WHERE id_client = ?
+        ";
+
+        $stmt = $this->db->prepare($query);
+
+        return $stmt->execute([$idClient]);
+    }
+
+public function updateVerificationCode(int $idClient,string $verificationCode,string $verificationExpiresAt): bool {
+    $query = "
+        UPDATE client
+        SET
+            verification_code = ?,
+            verification_expires_at = ?,
+            email_verified = 0
+        WHERE id_client = ?
+    ";
+
+    $stmt = $this->db->prepare($query);
+    return $stmt->execute([$verificationCode,$verificationExpiresAt,$idClient]
+    );
+}
+
+
+
+
+
+
+
+
 
 
     }
-
 
 
 ?>

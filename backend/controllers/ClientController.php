@@ -2,6 +2,7 @@
     // $base_url = "/librairie/LibrairieChebbi/";
     // include_once $base_url . "backend/services/ClientServices.php";
     include_once __DIR__ . "/../services/ClientServices.php";
+    require_once(__DIR__ . "/../config/mail.php");
     class ClientController {
         private ClientServices $clientServices;
         public function __construct(){
@@ -9,21 +10,60 @@
         }
 
         //done
-        public function signIn($request){
-            try{
+
+        public function signIn($request)
+        {
+            try {
+
                 $body = $request["body"];
-                $user = $this->clientServices->authenticate($body["email"], $body["password"]);
-                if($user){
-                    $_SESSION["userId"]=  $user["id_client"];
-                    $_SESSION["firstName"]= $user["prenom"];
-                    $_SESSION["lastName"]= $user["nom"];
-                    $_SESSION["role"] = $user["role"];
-                    $_SESSION["clientEmail"] = $body["email"];
+                $user = $this->clientServices->authenticate(
+                    $body["email"],
+                    $body["password"]
+                );
+
+                if (!$user) {
+                    throw new Exception(
+                        "Email ou mot de passe incorrect."
+                    );
                 }
+
+                // Vérifier si l'email est vérifié
+                if ((bool)$user["email_verified"] === false) {
+
+                    // On garde l'ID pour permettre la vérification
+                    $_SESSION["userId"] = $user["id_client"];
+                    $_SESSION["firstName"] = $user["prenom"];
+                    $_SESSION["lastName"] = $user["nom"];
+                    $_SESSION["clientEmail"] = $user["email"];
+                    $_SESSION["role"] ="client";
+
+                    $response = [
+                        "success" => true,
+                        "message" => "Veuillez vérifier votre adresse email avant de vous connecter.",
+                        "redirect" => "/verify-email",
+                        "data" => null,
+                        "error" => "EMAIL_NOT_VERIFIED"
+                    ];
+
+                    echo json_encode($response);
+                    return;
+                }
+
+                // ==========================================
+                // EMAIL VÉRIFIÉ → création de la session
+                // ==========================================
+
+                $_SESSION["userId"] = $user["id_client"];
+                $_SESSION["firstName"] = $user["prenom"];
+                $_SESSION["lastName"] = $user["nom"];
+                $_SESSION["clientEmail"] = $user["email"];
+                $_SESSION[" role"] = $user["role"];
+
                 $response = [
                     "success" => true,
-                    "message" => "Finding Client by Email",
-                    "numberOfLine" =>null,
+                    "message" => "Connexion réussie.",
+                    "redirect" => "/main",
+                    "numberOfLine" => null,
                     "data" => $user,
                     "error" => null
                 ];
@@ -31,7 +71,8 @@
                 echo json_encode($response);
                 return;
 
-            }catch(Exception $e){
+            } catch (Exception $e) {
+
                 $response = [
                     "success" => false,
                     "numberOfLine" => null,
@@ -39,10 +80,13 @@
                     "data" => null,
                     "error" => null
                 ];
+
                 echo json_encode($response);
                 return;
-            } 
+            }
         }
+
+
         public function logOut($request){
             try{
                 session_unset();
@@ -86,19 +130,43 @@
         public function SignUp($request){
             try{
                 $body = $request["body"];
-                $res =  $this->clientServices->createClient($body["lastName"],$body["firstName"],$body["tel"],$body["email"], $body["password"]);
-                $_SESSION["userId"] = $this->clientServices->lastInsertedId();
+                // Génération d'un code de vérification à 6 chiffres 
+                $verificationCode = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+                // Le code sera valide pendant 10 minutes 
+                $verificationExpiresAt = date('Y-m-d H:i:s', time() + 600);
+
+                $res =  $this->clientServices->createClient($body["lastName"],
+                                                            $body["firstName"],
+                                                            $body["tel"],
+                                                            $body["email"],
+                                                            $body["password"],
+                                                            $verificationCode,
+                                                            $verificationExpiresAt);
+
+                $userId = $this->clientServices->lastInsertedId();
+
+                $_SESSION["userId"] = $userId;
                 $_SESSION["firstName"] = $body["firstName"];
                 $_SESSION["lastName"] = $body["lastName"];
                 $_SESSION["clientEmail"] = $body["email"];
+                $_SESSION["role"] = "client";
 
-                $response = [
-                    "success" => true,
-                    "message" => "Client Created successfully",
-                    "redirect" => null,
-                    "data" => $res,
-                    "error" => null
-                ];
+                // TODO : envoyer le code par email
+                $emailSent = sendVerificationEmail($body["email"],$verificationCode);
+
+                if(!$emailSent){
+                    $this->clientServices->deleteClient($userId);
+                    session_unset();
+                    throw new Exception( "Le compte a été créé mais l'envoi de l'email a échoué." );
+                }
+
+
+
+                $response = [ "success" => true,
+                              "message" => "Un code de vérification a été envoyé à votre adresse email.", 
+                              "redirect" => "/verify-email", 
+                              "data" => $res, 
+                              "error" => null ];
                 echo json_encode($response);
                 return;
             }catch(Exception $e){
@@ -601,6 +669,112 @@
             }
         }
 
+
+
+        public function verifyEmail($request)
+        {
+            try {
+
+                $body = $request["body"];
+                if (!isset($body["verificationCode"])) {throw new Exception("Code de vérification manquant.");}
+                
+                $code = trim($body["verificationCode"]);
+
+                if (!preg_match('/^\d{6}$/', $code)) {
+                    throw new Exception(
+                        "Le code doit contenir exactement 6 chiffres."
+                    );
+                }
+
+                // Vérifier qu'un utilisateur est actuellement
+                // en attente de vérification
+                if (!isset($_SESSION["userId"])) {
+                    throw new Exception(
+                        "Aucune inscription en attente de vérification."
+                    );
+                }
+
+                $userId = $_SESSION["userId"];
+
+                $result = $this->clientServices->verifyEmail(
+                    $userId,
+                    $code
+                );
+
+                if (!$result) {
+                    throw new Exception(
+                        "Code de vérification incorrect ou expiré."
+                    );
+                }
+
+                // Maintenant seulement, le client est considéré comme connecté
+                $_SESSION["emailVerified"] = true;
+
+                $response = [
+                    "success" => true,
+                    "message" => "Votre adresse email a été vérifiée avec succès.",
+                    "redirect" => "/main",
+                    "data" => null,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+
+            } catch (Exception $e) {
+
+                $response = [
+                    "success" => false,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+            }
+        }
+
+
+        public function resendVerificationCode($request)
+        {
+            try {
+
+                // Vérifier qu'un utilisateur est en attente
+                // de vérification
+                if (!isset($_SESSION["userId"])) {
+                    throw new Exception(
+                        "Aucune inscription en attente de vérification."
+                    );
+                }
+
+                $userId = $_SESSION["userId"];
+
+                $this->clientServices->resendVerificationCode($userId);
+
+                $response = [
+                    "success" => true,
+                    "message" => "Un nouveau code a été envoyé à votre adresse email.",
+                    "data" => null,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+
+            } catch (Exception $e) {
+
+                $response = [
+                    "success" => false,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+            }
+        }
 
 
 

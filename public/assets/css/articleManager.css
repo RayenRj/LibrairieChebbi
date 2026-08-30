@@ -250,7 +250,22 @@ img{
 }
 .top-chart .right{
     width: 60%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    scrollbar-width: thin;
 }
+
+.right::-webkit-scrollbar-thumb {
+    background: #3B82F6;
+    border-radius: 10px;
+}
+.right::-webkit-scrollbar{
+    width: thin;
+}
+.right::-webkit-scrollbar-track{
+    background-color: transparent;
+}
+
 
 
 .top-chart .right > div{
@@ -275,8 +290,9 @@ img{
 .top-chart .right > div > div:last-child ul{
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
-    margin-top: 2em;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 1em;
     border: 1px solid #eee;
     border-radius: 0.5em;
 }
@@ -285,8 +301,9 @@ img{
 .top-chart .right > div > div:last-child ul li {
     border-bottom: 1px solid #eee;
     display: flex;
-    padding: 0.75em 1em;
+    padding: 0.4em 1em;
     justify-content: space-between;
+    font-size: 12px;
     min-width: 220px;
 }
 .top-chart .right > div > div:last-child ul:first-child li{
@@ -307,18 +324,46 @@ img{
 
 
 /* color adjustement */
+/* lista loulaa */
+.top-chart .right > div > div:last-child ul:first-child li:nth-of-type(1) p:first-of-type i{color:rgb(255, 99, 132);}
+.top-chart .right > div > div:last-child ul:first-child li:nth-of-type(2) p:first-of-type i{color: rgb(255, 159, 64);}
+.top-chart .right > div > div:last-child ul:first-child li:nth-of-type(3) p:first-of-type i{color: rgb(255, 205, 86);}
+.top-chart .right > div > div:last-child ul:first-child li:nth-of-type(4) p:first-of-type i{color: rgb(75, 192, 192);}
+.top-chart .right > div > div:last-child ul:first-child li:nth-of-type(5) p:first-of-type i{color: rgb(54, 162, 235);}
+.top-chart .right > div > div:last-child ul:first-child li:nth-of-type(6) p:first-of-type i{color: rgb(153, 102, 255);}
+.top-chart .right > div > div:last-child ul:first-child li:nth-of-type(7) p:first-of-type i{color: rgb(201, 203, 207);}
+.top-chart .right > div > div:last-child ul:first-child li:nth-of-type(8) p:first-of-type i{color: rgb(46, 204, 113);}
+.top-chart .right > div > div:last-child ul:first-child li:nth-of-type(9) p:first-of-type i{color: rgb(231, 76, 60);}
 
-.top-chart .right > div > div:last-child ul li:nth-of-type(1) p:first-of-type i{color: var(--blue);}
-.top-chart .right > div > div:last-child ul li:nth-of-type(2) p:first-of-type i{color: var(--green);}
-.top-chart .right > div > div:last-child ul li:nth-of-type(3) p:first-of-type i{color: purple;}
-.top-chart .right > div > div:last-child ul li:nth-of-type(4) p:first-of-type i{color: orange;}
-.top-chart .right > div > div:last-child ul li:nth-of-type(5) p:first-of-type i{color: gray;}
+/* lista thenya */
+.top-chart .right > div > div:last-child ul:last-child li:nth-of-type(1) p:first-of-type i{color:rgb(52, 152, 219);}
+.top-chart .right > div > div:last-child ul:last-child li:nth-of-type(2) p:first-of-type i{color: rgb(155, 89, 182);}
+.top-chart .right > div > div:last-child ul:last-child li:nth-of-type(3) p:first-of-type i{color: rgb(241, 196, 15);}
 
+/* couleurs différentes à partir de la 4ème */
+.top-chart .right > div > div:last-child ul:last-child li:nth-of-type(4) p:first-of-type i {
+    color: rgb(26, 188, 156);
+}
 
+.top-chart .right > div > div:last-child ul:last-child li:nth-of-type(5) p:first-of-type i {
+    color: rgb(22, 160, 133);
+}
 
+.top-chart .right > div > div:last-child ul:last-child li:nth-of-type(6) p:first-of-type i {
+    color: rgb(52, 73, 94);
+}
 
+.top-chart .right > div > div:last-child ul:last-child li:nth-of-type(7) p:first-of-type i {
+    color: rgb(243, 156, 18);
+}
 
+.top-chart .right > div > div:last-child ul:last-child li:nth-of-type(8) p:first-of-type i {
+    color: rgb(211, 84, 0);
+}
 
+.top-chart .right > div > div:last-child ul:last-child li:nth-of-type(9) p:first-of-type i {
+    color: rgb(127, 140, 141);
+}
 /* ========================================================================================== */
 /* ========================== Partie elli feha des filtres =================================== */
 /* ========================================================================================== */
@@ -694,7 +739,7 @@ div.inputDiv input{
         rgba(8, 161, 8, 0.18),
         rgba(8, 161, 8, 0.04)
     );
-    backdrop-filter: blur(15px);
+    --webkit-backdrop-filter: blur(15px);
     border: 2px solid rgba(8, 161, 8, 0.12);
     color: var(--green);
     border-color: rgba(8, 161, 8, 0.123);
@@ -706,7 +751,7 @@ div.inputDiv input{
         rgba(255, 221, 87, 0.22),
         rgba(255, 221, 87, 0.05)
     );
-    backdrop-filter: blur(15px);
+    --webkit-backdrop-filter: blur(15px);
     border: 2px solid rgba(255, 221, 87, 0.15);
     color: var(--yellow-dark);
     border-color: #f0c80033;
@@ -719,7 +764,7 @@ div.inputDiv input{
     rgba(255, 136, 0, 0.20),
     rgba(255, 136, 0, 0.05)
     );
-    backdrop-filter: blur(15px);
+    --webkit-backdrop-filter: blur(15px);
     border: 2px solid rgba(255, 136, 0, 0.15);
 }
 .cardContainer > div:last-child{
@@ -728,7 +773,7 @@ div.inputDiv input{
         rgba(255, 59, 59, 0.20),
         rgba(255, 59, 59, 0.05)
     );
-    backdrop-filter: blur(15px);
+    --webkit-backdrop-filter: blur(15px);
     border: 2px solid rgba(255, 59, 59, 0.15);
     color: var(--red);
     border-color: #ef444425;

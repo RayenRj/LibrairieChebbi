@@ -2,6 +2,7 @@
     
     require_once(__DIR__ . "/../repository/ClientRepository.php");
     require_once(__DIR__ . "/../models/Client.php");
+    require_once(__DIR__ . "/../config/mail.php");
     class ClientServices{
         private ClientRepository $clientRepo;
 
@@ -16,6 +17,8 @@
             if($id < 1){throw new Exception("L'id du client doit etres > 1");}
             return $this->clientRepo->findClientById($id);
         }
+
+
 
         //done :
         public function authenticate(string $email , string $password){
@@ -48,7 +51,7 @@
             return true;
         }
         //done
-        public function createClient(string $nom , string $prenom , string $tel, string $email , string $password){
+        public function createClient(string $nom , string $prenom , string $tel, string $email , string $password , string $verificationCode , string $verificationExpiresAt){
             $nom = trim($nom);
             $prenom = trim($prenom);
             $tel = trim($tel);
@@ -59,7 +62,10 @@
             // if(empty($password) || strlen($password) < 6){throw new Exception("password est invalide!");}
             if(empty($email) || !filter_var($email , FILTER_VALIDATE_EMAIL)){throw new Exception("Email est invalide!");}
             $password_hash = password_hash($password , PASSWORD_DEFAULT);
-            $client = new Client($nom , $prenom , $tel , $email , $password_hash , "client", "");
+
+
+            // email_verified = false au moment de l'inscription
+            $client = new Client($nom , $prenom , $tel , $email , $password_hash , "client", "" ,$verificationCode , $verificationExpiresAt,false);
             $result = $this->clientRepo->createClient($client);
             if(!$result){throw new Exception("L'insertion du client echoue !!");}
             return true;
@@ -127,6 +133,116 @@
         public function getClietIdByEmail($email){
             return $this->clientRepo->getClietIdByEmail($email);
         }
+        public function getClientRoleByEmail($email){
+            return $this->clientRepo->getClientRoleByEmail($email);
+        }
+
+        // partie Otp
+        public function verifyEmail(int $userId, string $verificationCode): bool
+        {
+            $verificationCode = trim($verificationCode);
+
+            if (!preg_match('/^\d{6}$/', $verificationCode)) {
+                throw new Exception("Code de vérification invalide.");
+            }
+
+            $client = $this->clientRepo->findClientObjectById($userId);
+
+            
+            if (!$client) {
+                throw new Exception("Client introuvable.");
+            }
+
+            // Déjà vérifié
+            if($client->getEmailVerified()) {
+                throw new Exception("Cette adresse email est déjà vérifiée.");
+            }
+
+            // Vérifier le code
+            if ($client->getVerificationCode() !== $verificationCode) {
+                throw new Exception("Code de vérification incorrect.");
+            }
+
+            // Vérifier l'expiration
+            $expiration = strtotime($client->getVerificationExpiresAt());
+
+            if($expiration === false || $expiration < time()){
+                throw new Exception("Le code de vérification a expiré.");
+            }
+
+            // Validation réussie
+            $result = $this->clientRepo->verifyEmail($userId);
+
+            if (!$result) {
+                throw new Exception(
+                    "Impossible de valider l'adresse email."
+                );
+            }
+
+            return true;
+        }
+
+
+
+    public function resendVerificationCode(int $userId): bool
+    {
+        // Récupérer le client
+        $client = $this->clientRepo->findClientById($userId);
+
+        if (!$client) {
+            throw new Exception("Client introuvable.");
+        }
+
+        // Si déjà vérifié, inutile de renvoyer un code
+        if ((bool)$client["email_verified"] === true) {
+            throw new Exception(
+                "Cette adresse email est déjà vérifiée."
+            );
+        }
+
+        // Générer un nouveau code
+        $verificationCode = str_pad(
+            random_int(0, 999999),
+            6,
+            '0',
+            STR_PAD_LEFT
+        );
+
+        // Valide pendant 10 minutes
+        $verificationExpiresAt = date(
+            'Y-m-d H:i:s',
+            time() + 600
+        );
+
+        // Enregistrer le nouveau code
+        $result = $this->clientRepo->updateVerificationCode(
+            $userId,
+            $verificationCode,
+            $verificationExpiresAt
+        );
+
+        if (!$result) {
+            throw new Exception(
+                "Impossible de générer un nouveau code."
+            );
+        }
+
+        // Envoyer le nouveau code
+        $emailSent = sendVerificationEmail(
+            $client["email"],
+            $verificationCode
+        );
+
+        if (!$emailSent) {
+            throw new Exception(
+                "Impossible d'envoyer le nouveau code par email."
+            );
+        }
+
+        return true;
+    }
+
+
 
     }
 ?>

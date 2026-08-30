@@ -8,6 +8,24 @@ let form = document.querySelector("#signUpForm");
 
 let signUpinput = document.querySelectorAll(".signup .input");
 let signUplabel = document.querySelectorAll(".signup .inputLabel");
+
+
+
+// =========================== ERROR CARD ==================================
+  var timeoutId;
+
+  function triggerError(){
+    const card = document.getElementById('errorCard');
+    clearTimeout(timeoutId);
+    card.classList.add('show');
+    timeoutId = setTimeout(hideError, 4000);
+  }
+
+  function hideError(){
+    document.getElementById('errorCard').classList.remove('show');
+  }
+
+// ====================================================================
 for(let i=0 ; i<signUpinput.length; i++){
     let input = signUpinput[i];
     input.addEventListener("blur",function(){
@@ -33,9 +51,17 @@ form.addEventListener("submit",async function(event){
     });
 
     const result = await response.json();
-    console.log(result);
     if(result.success){
-        window.location.reload();
+        window.location.href = result.redirect;
+    }else{
+        document.querySelector(".errorMessage").innerHTML = result.message
+        triggerError();
     }
 
 })
+
+
+
+
+
+

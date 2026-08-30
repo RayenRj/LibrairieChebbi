@@ -115,10 +115,10 @@
         public function rechercherArticle($request){
             try{
                 $query = $request["query"];
-                $result = $this->productServices->rechercherArticle($query["categorie"] ?? "",$query["libelle"] ?? "",$query["marque"] ?? "",$query["prixMax"] ?? 0,$query["prixMin"] ?? 0,$query["stock"] ?? "",$query["trie"] ?? "" ,$query["limit"] ?? 1 ,$query["page"] ?? 1);
+                $result = $this->productServices->rechercherArticle($query["categorie"] ?? "",$query["libelle"] ?? "",$query["marque"] ?? "",$query["prixMax"] ?? 0,$query["prixMin"] ?? 0,$query["stock"] ?? "",$query["trie"] ?? "", $query["code_barre"] ?? "" ,$query["limit"] ?? 1 ,$query["page"] ?? 1);
                 $response = [
                     "success" => true,
-                    "numberOfLine" => $this->productServices->nombreLigneRechercherArticle($query["categorie"] ?? "",$query["libelle"] ?? "",$query["marque"] ?? "",$query["prixMax"] ?? 999999,$query["prixMin"] ?? 0,$query["stock"] ?? "",$query["trie"] ?? "" ,$query["limit"] ?? 1 ,$query["page"] ?? 1),
+                    "numberOfLine" => $this->productServices->nombreLigneRechercherArticle($query["categorie"] ?? "",$query["libelle"] ?? "",$query["marque"] ?? "",$query["prixMax"] ?? 999999,$query["prixMin"] ?? 0,$query["stock"] ?? "",$query["trie"] ?? "" ,$query["code_barre"] ?? "",$query["limit"] ?? 1 ,$query["page"] ?? 1),
                     "message" => "getting all products successfully", 
                     "data" => $result,
                     "error" => null
@@ -276,7 +276,7 @@
                 $response = [
                     "success" => true,
                     "numberOfLine" => null,
-                    "message" => "Deleting product successfully", 
+                    "message" => "Nombre de vente pour chaque pack", 
                     "data" => $result,
                     "error" => null
                 ];

@@ -160,7 +160,7 @@
         // #######################
         // partie recherche : contient paginaation
         // #######################
-        public function rechercherArticle(string $categorie , string $libelle ,string $marque, float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
+        public function rechercherArticle(string $categorie , string $libelle ,string $marque, float $prixMax , float $prixMin , string $stock , string $trie ,string $codeBarre, int $limit , int $page ){
             $query = "SELECT p.id_produit , p.code_barre , p.date_ajout , p.nombre_rater , p.rating , p.libelle , (p.prix - p.remise) as prix_unitaire, p.quantite_stock , p.categorie , p.marque , p.image_url , p.remise , p.prix , p.description from {$this->tName} p  where 1=1 and id_produit not in (select distinct(id_pack) from pack) ";
             $param = [];
             $categorie = mb_strtolower(trim($categorie));
@@ -201,6 +201,12 @@
                 $param[] = "%$libelle%";
             }
 
+            if(!empty($codeBarre)){
+                $query .= "AND code_barre like ? ";
+                $param[] = "$codeBarre%";
+            }
+
+
 
             if ($prixMax > 0 && $prixMin >0){
                 $min =  min($prixMax , $prixMin);
@@ -227,20 +233,20 @@
             
             $trie= $trie_list[$trie] ?? "prix_unitaire";
 
-            $offset = ($page - 1) * $limit;
 
+            $offset = ($page - 1) * $limit;
             $query .= " GROUP BY p.id_produit ";
             $query .= " ORDER BY {$trie} DESC";
             $query .= " LIMIT $limit OFFSET $offset ;";
             
             $stmt = $this->db->prepare($query);
-            
+
             $stmt->execute($param);
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         // retourne le nombre totale de ligne de la recherche d'article
-        public function nombreLigneRechercherArticle(string $categorie , string $libelle,string $marque , float $prixMax , float $prixMin , string $stock , string $trie , int $limit , int $page ){
+        public function nombreLigneRechercherArticle(string $categorie , string $libelle,string $marque , float $prixMax , float $prixMin , string $stock , string $trie ,string $codeBarre, int $limit , int $page ){
             $query = "SELECT count(*) from produit p  where ";
             $param = [];
             $queryList = [" p.id_produit not in (select distinct(id_pack) from pack) "];
@@ -283,6 +289,10 @@
                 $queryList[] = "libelle LIKE ?";
                 $param[] = "%$libelle%";
             }
+            if(!empty($codeBarre)){
+                $queryList[] = "code_barre like ?";
+                $param[] = "$codeBarre%";
+            }
 
 
             if ($prixMax > 0 && $prixMin >0){
@@ -306,7 +316,7 @@
             else if($stock == "stock moyen"){$queryList[] ="p.quantite_stock between 6 and 19";}
             else if($stock == "stock faible"){$queryList[] ="p.quantite_stock between 1 and 5";}
             else if($stock == "repture de stock"){$queryList[] = "p.quantite_stock = 0";}
-            else if($stock == "disponible"){$queryList[] .= "p.quantite_stock > 0 ";}
+            else if($stock == "disponible"){$queryList[] = "p.quantite_stock > 0 ";}
 
             if(sizeof($queryList)<= 1){
                 $query = "select count(*) from produit where id_produit not in (select distinct(id_pack) from pack);";
@@ -442,10 +452,10 @@
 
 
        public function nombreDeVentePourChaquePack(){
-            $stmt = $this->db->prepare("select `type` , sum(quantite) as `nombreVente`
+            $stmt = $this->db->prepare("select categorie ,sum(quantite) as `nombreVente`
                                         from pack p , ligne_commande lc
                                         where id_pack = id_produit
-                                        group by p.`type`;");
+                                        group by p.`categorie`;");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?? null;
        }

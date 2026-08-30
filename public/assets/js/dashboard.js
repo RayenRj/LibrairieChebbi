@@ -11,11 +11,9 @@ window.addEventListener("load",async function name(params) {
   for(let i =0 ; i< 7 ; i++){
     let response = await fetch("/api/venteParJour/"+ i);
     let result = await response.json();
-    console.log(result)
     data.unshift(result.data)
   }
   
-  console.log(data)
   let chart = new Chart(chart1, {
     type: 'line',
     data: {
@@ -74,8 +72,9 @@ window.addEventListener("load",async function name(params) {
   let result2 = await response2.json()
   let data2 = result2.data;
   var html ="";
-  
-  if (data2!== null && data2.length!==0){
+  var listTemp = data2.map(row => row["categorie"])
+  console.log(listTemp)
+  if(data2!== null && data2.length!==0){
     // le cas ou il ya des vente
     let pourcentage =[];
     let somme= 0;
@@ -92,7 +91,7 @@ window.addEventListener("load",async function name(params) {
     for(let i =0 ; i<data2.length;i++){
       html += ` 
                                   <li>
-                                      <h5>${data2[i]["type"]}</h5>
+                                      <h5>${data2[i]["categorie"].toUpperCase()}</h5>
                                       <p>${pourcentageArray[i]["pourcentage"]}% (${data2[i]["nombreVente"]} ventes)</p>
                                   </li>`;      
     }
@@ -113,13 +112,12 @@ window.addEventListener("load",async function name(params) {
     }
   }
 
-  console.log("data2:" ,data2)
- legendVentePack.innerHTML = html;
+  legendVentePack.innerHTML = html;
 
   let doughnut = new Chart(document.querySelector("#pie-chart"),{
   type: 'doughnut',
   data: {
-    labels : data2.map(row => row["type"]) ,
+    labels : data2.map(row => row["categorie"]) ,
     datasets :[{
       data : data2.map(row=> row["nombreVente"]),
       backgroundColor: ['green','#3B82F6','#FFDD57',"purple"],

@@ -78,7 +78,7 @@
                 <div class="back">
                   <article>
                     <a href="/packs/pack?idPack=<?=$pack["id_pack"] ?>">
-                    <img src="/assets/images/Designes/packLivre3.png" alt="">
+                    <img src="<?= $pack["image_url"] ?>" alt="" class="packImage">
                     <h4><?= $pack["libelle"] ?></h4>
                     <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $pack["quantite_stock"] ?> Packs disponibles</p>
                     <div class="last">
