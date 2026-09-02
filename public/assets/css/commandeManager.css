@@ -703,9 +703,7 @@ img{
 
 
 
-@media (max-width:1000px) {
-    
-}
+
 @media (max-width:800px) {
     input{
         width: 100%;
@@ -878,10 +876,7 @@ img{
         cursor: pointer;
         transition: 0.1s all ease;
         height: 40px;
-        margin
+        
     }
 
-}
-@media (max-width:600px) {
-    
 }

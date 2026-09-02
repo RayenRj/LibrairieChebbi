@@ -9,9 +9,15 @@
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
-
-
+/* button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+} */
 :root{
     /* teb3a el pop up */
     --paper:#F6F1E7;
