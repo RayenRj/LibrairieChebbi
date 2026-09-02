@@ -57,7 +57,7 @@
                 $_SESSION["firstName"] = $user["prenom"];
                 $_SESSION["lastName"] = $user["nom"];
                 $_SESSION["clientEmail"] = $user["email"];
-                $_SESSION[" role"] = $user["role"];
+                $_SESSION["role"] = $user["role"];
 
                 $response = [
                     "success" => true,

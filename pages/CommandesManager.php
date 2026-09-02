@@ -208,8 +208,11 @@
                 <form id="commandeSearch">
                     <div class="top">
                         <div>
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" name="data" id="commandeSearch" placeholder="Rechercher une Commande...">
+                            <p>Informations de recherche</p>
+                            <div>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" name="data" id="commandeSearch" placeholder="Rechercher une Commande...">
+                            </div>
                         </div>
 
                         <div>
@@ -272,7 +275,7 @@
                 <div class="table-part">
                     <table>
                         <thead>
-                            <th>Commande ID</th>
+                            <th>Commande_ID</th>
                             <th>Clients</th>
                             <th>Email</th>
                             <th>Telephone</th>

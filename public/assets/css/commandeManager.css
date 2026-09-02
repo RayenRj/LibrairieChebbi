@@ -201,10 +201,12 @@ img{
     font-size: 14px;
     font-weight: 400;
     padding: 10px 15px 10px 32px;
+    margin-top: .5em;
+    max-height: 38px;
 }
 
 
-.commandeManagerBottomPart .top > div:first-child > i{
+.commandeManagerBottomPart .top div div > i{
     font-size: 13px;
     position: absolute;
     top: 50%;
@@ -691,4 +693,195 @@ img{
     height: 100%;
     z-index: 601;
     background-color: #0000002e;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width:1000px) {
+    
+}
+@media (max-width:800px) {
+    input{
+        width: 100%;
+    }
+    .commande-manager {
+        width: 100%;
+        max-width: 99dvw;
+        margin: 80px auto 1em auto;
+        display: block;
+        padding: 0em 1em;
+        max-width: 99dvw;
+        overflow-x: hidden;
+    }
+    .commande-manager .top-part {
+        display: block;
+        padding: 0.5em;
+        margin-bottom: 2em;
+    }
+    .commandeManagerBottomPart {
+        border-radius: 1em;
+        border: 2px solid #eee;
+        padding: 1em 0em 0em;
+        margin-bottom: 2em;
+        /* overflow-y: scroll; */
+    }
+    .commandeManagerBottomPart .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5em 1em;
+        margin-bottom: 2em;
+        gap: 1em;
+        flex-wrap: wrap;
+    }
+    .commandeManagerBottomPart .top > div{flex-grow: 1;}
+    .commandeManagerBottomPart .top > div > div select {
+        width: 100%;
+        padding: 0.7em;
+        font-size: 11px;
+        height: 35px;
+    }
+    .commandeManagerBottomPart .top > div > p {
+        font-size: 11px;
+        font-weight: 500;
+    }
+    .commandeManagerBottomPart .top > div:first-child input {
+        min-width: 250px;
+        font-size: 11px;
+        font-weight: 400;
+        padding: 5px 5px 5px 32px;
+        height: 35px;
+        flex-grow: 1em;
+        width: 100%;
+        
+    }
+    .commandeManagerBottomPart .top > div:last-child p {
+        opacity: 0;
+        display: none;
+    }
+    .commandeManagerBottomPart .table-part td {
+        padding: 0.35em;
+        text-align: center;
+    }
+    .commandeManagerBottomPart .table-part th {
+        padding: 0.75em;
+        font-size: 11px;
+    }
+    .table-part p {
+        font-size: 11px !important;
+    }
+    .commandeManagerBottomPart .table-part th:nth-child(3),
+    .commandeManagerBottomPart .table-part td:nth-child(3) {
+        display: none;
+    }
+
+    .commandeManagerBottomPart .table-part td:last-child ul li {
+        font-size: 11px;
+    }
+    .commandeManagerBottomPart .table-part td.statut > span {
+        padding: 0.25em 0.75em;
+        font-size: 9px;
+        font-weight: 600;
+    }
+    .commandeManagerBottomPart .table-part td:last-child ul {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.25em;
+    }
+    .commandeManagerBottomPart .table-part{
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: thin;
+    }
+
+
+    .commandeManagerBottomPart .table-part td{
+        min-width: 100px;
+    }
+    .commande-manager .commandeManagerBottomPart .bottom > p {
+        font-size: 9px;
+        font-weight: 400;
+    }
+    .commande-manager .commandeManagerBottomPart .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+        gap: 1em;
+    }
+    .commandeManagerBottomPart .pagination > a {
+        background-color: var(--gray-100);
+        padding: 0.5em 1em;
+        border-radius: 0.25em;
+        border: 2px solid #d3d3d35d;
+        text-align: center;
+        align-content: center;
+        font-weight: 600;
+        font-size: 9px;
+    }
+    #prev, #post {
+        background-color: white;
+        font-size: 9px !important;
+    }
+    .commandeManagerBottomPart .pagination {
+        width: fit-content;
+        display: flex;
+        gap: 0.25em;
+    }
+    .commandeManagerBottomPart .top > .lastDiv {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5em;
+    }
+    .commandeManagerBottomPart button[type="submit"] {
+        padding: 0.25em 1.5em;
+        font-size: 12px;
+        font-weight: 500;
+        appearance: none;
+        text-align: center;
+        cursor: pointer;
+        background-color: var(--blue);
+        color: white;
+        height: 35px;
+        width: 100%;
+        min-width: fit-content;
+        flex-grow: 1;
+        max-width: initial;
+    }
+    .commandeManagerBottomPart .top > div:last-child > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        flex-grow: 1;
+    }
+    .commandeManagerBottomPart button[type="reset"] {
+        border: 2px solid #eee;
+        outline: none;
+        background-color: white;
+        padding: 0.5em 1.5em;
+        border-radius: 0.5em;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.1s all ease;
+        height: 40px;
+        margin
+    }
+
+}
+@media (max-width:600px) {
+    
 }
