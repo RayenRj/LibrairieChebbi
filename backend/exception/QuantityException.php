@@ -1,7 +1,7 @@
 <?php
 class QuantityException extends Exception{
-    public function __construt(string $message=""){
-        parent::__construt($message);
+    public function construct(string $message=""){
+        parent::__construct($message);
     }
 }
 ?>

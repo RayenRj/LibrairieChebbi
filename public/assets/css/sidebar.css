@@ -212,3 +212,8 @@ aside ul a li {
 }
 
 
+@media (max-width:800px) {
+    aside{
+        display: none !important;
+    }
+}

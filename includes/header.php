@@ -64,7 +64,17 @@
         </div>
     </header>
 
-    <!-- responsive header -->
+    
+
+
+
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- ==================== RESPOSIVE HEADER =============================== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
   <header class="responsiveHeader">
     <div class="bars" id="barMenu">
       <i class="fa-solid fa-bars" ></i>
@@ -91,6 +101,9 @@
   </header>
 
   <div class="Listoverlay closeList"></div>
+
+
+
   <!-- partie eli feha el list responsive -->
   <div class="listMenu">
     <i class="fa-solid fa-x closeList close"></i>
@@ -208,6 +221,100 @@
         </li>
 
     </ul>
+    <hr <?= (!isset($_SESSION["userId"]) || !isset($_SESSION["role"]) || !($_SESSION["role"]=="admin")) ? "hidden" : "" ?> >
+            <ul class="adminListeResponsive" <?= (!isset($_SESSION["userId"]) || !isset($_SESSION["role"]) || !($_SESSION["role"]=="admin")) ? "hidden" : "" ?> >
+                <a href="/dashboard">
+                    <li>
+                      <div class="iconText">
+                        <div class="iconDiv">
+                          <i class="fa-solid fa-chart-column"></i>
+                        </div>
+                        <span>Dashboard</span>
+                      </div>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </li>
+                </a>
+                <a href="/dashboard/commandes">
+                    <li>
+                      <div class="iconText">
+                        <div class="iconDiv">
+                          <i class="fa-solid fa-cart-flatbed"></i>
+                        </div>
+                        <span>Commandes</span>
+                      </div>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </li>
+                </a>
+                <a href="/dashboard/packs">
+                    <li>
+                      <div class="iconText">
+                        <div class="iconDiv">
+                          <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <span>Packs Manager</span>
+                      </div>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </li>
+                </a>
+                <a href="/dashboard/articles">
+                    <li>
+                      <div class="iconText">
+                        <div class="iconDiv">
+                        <i class="fa-solid fa-cart-flatbed"></i>
+                        </div>
+                        <span>Articles Manager</span>
+                      </div>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </li>
+                </a>
+                <a href="/dashboard/promotions">
+                    <li>
+                        <div class="iconText">
+                          <div class="iconDiv">
+                          <i class="fa-solid fa-tag"></i>
+                          </div>
+                          <span>Promotions</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </li>
+                </a>
+                <a href="/dashboard/clients">
+                    <li>
+                        <div class="iconText">
+                          <div class="iconDiv">
+                          <i class="fa-solid fa-user"></i>
+                          </div>
+                          <span>Utilisateurs</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                          
+                    </li>
+                </a>
+                <a href="/dashboard/admins">
+                    <li>
+                        <div class="iconText">
+                          <div class="iconDiv">
+                          <i class="fa-solid fa-user-shield"></i>
+                          </div>
+                          <span>Admins</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </li>
+                </a>
+                <a href="/main" id="deconnexion">
+                    <li>
+                        <div class="iconText">
+                          <div class="iconDiv">
+                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                          </div>
+                          <span>Sortir du dashboard</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </li>
+                </a>
+
+
+            </ul>
     <hr>
     <div class="button-list">
         
