@@ -10,16 +10,55 @@ error_reporting(E_ALL);
     // include_once __DIR__ . "/../backend/controllers/StatistiqueController.php";
     include_once __DIR__ . "/../backend/controllers/PageController.php";
 
+    // instanciation du routeur
     $route = new Router();
     
-    // ici on va ajouter tous les api : 
-    // si l 'url = https://www.librairieChebbi.tn/api/book
-    // on va s'interresee a l'uri = /api/book => on va eliminer la partie qui fait reference au serveur d'hosting
-    
+    /**
+     * Summary of rateLimiter
+     * @param mixed $maxRate => el max rate eli ya3mlou el Ip @ 3al URI eli bch ta3teha
+     * @param mixed $refillTime => el refill time eli t9is bih wa9teh y3awed ynajem yodkhl bl ip Adresse
+     * @return void
+     */
+    function rateLimiter($maxRate = 200 , $refillTime = 60){
+        $ip = $_SERVER["REMOTE_ADDR"] ?? "unknown";
+        $ipHash = hash("sha256",$ip);
+        $folder = __DIR__ . "/../storage/rateLimiter/";
+        
+        if(!is_dir($folder)){
+            mkdir($folder , 0755 , true);
+        }
+            
+        $file = __DIR__ . "/../storage/rateLimiter/" . $ipHash . ".json";
+        $now = time();
 
-    // el forme : requet method | path patter | controller | action
-    // routes pour les page 
-    // $route->add("GET", "/api/");
+        if(file_exists($file)){
+            $data = json_decode(file_get_contents($file), true);
+            if(!is_array($data)){
+                $data = [];
+            }
+        }else{
+            $data= [];
+        }
+            // fitrage ll Time Stamps : kol timestamp tmathel request sarret bl ip hedhi
+        $data = array_filter($data,fn($TimeStampOfEveryRateWithThisIp)=> $TimeStampOfEveryRateWithThisIp > (time() - $refillTime));
+        if(count($data) > $maxRate){
+                http_response_code(429);
+                header("content-type: application/json");
+                header("retry-after: " . ((min($data) + $refillTime) - time()));
+                echo json_encode([
+                    "success"=> false,
+                    "message" => "Essayer de nouveau après : " . ((min($data) + $refillTime) - time())  . " Secondes"
+                ]);
+                exit;
+        }
+        $data[] = $now;
+        file_put_contents(
+                $file,
+                json_encode(array_values(($data))),
+                LOCK_EX
+        );
+    }
+
 
     //pages
     $route->add("GET", "/products" , "PageController","allProductPage");
@@ -108,6 +147,16 @@ error_reporting(E_ALL);
 
 
 
+
+
+    // adding the router ;
+    $uri = mb_strtolower($_SERVER["REQUEST_METHOD"]) . " " . mb_strtolower(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
+    $restricted_uri_array = ["post /api/users/createUser","post /api/users/signIn" , "post /api/users/verify-email",""];
+    if(in_array($uri,$restricted_uri_array)){
+        rateLimiter(15);
+    }else{
+        rateLimiter();
+    }
 
 
 

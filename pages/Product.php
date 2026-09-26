@@ -50,7 +50,6 @@
     <main class="product">
         <div class="path">
             <a href="/products">Acueil</a>
-            <i class="fa-solid fa-angle-right"></i>
             <!-- 
             <a href="">School Supplies</a> -->
             <i class="fa-solid fa-angle-right"></i>

@@ -266,7 +266,8 @@ input[type="number"]{
     color: white;
     height: 40px;
     width: 100%;
-    min-width: 150px;
+    min-width: 160px;
+
 
 }
 
@@ -411,4 +412,111 @@ input[type="number"]{
     background-color: var(--blue) !important;
     border-color: var(--blue) !important;
     color: white;
+}
+
+
+
+
+
+@media (max-width:800px){
+    .promotion-manager {
+        width: 99dvw;
+        margin: 80px auto 0px;
+        display: block;
+        padding: 0em 0.25em;
+        max-width: 100dvw;  
+        overflow-x: hidden;
+    }
+    table th{
+        font-size: 11px !important;
+    }
+    .table-part{
+        width: 100%;
+        overflow-x: scroll;
+        scrollbar-width: thin;
+    }
+    input[type="number"] {
+        height: 35px;
+        width: 40px;
+        min-width: initial;
+        padding: 0.5em .75em;
+        
+    }
+    .PromotionManagerBottomPart .table-part td input[type="number"] {
+        height: 35px;
+        width: 80px;
+    }
+    .promotion-manager .PromotionManagerBottomPart .bottom > p {
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .promotion-manager .pagination > a {
+        background-color: var(--gray-100);
+        padding: 0.5em 1em;
+        border-radius: 0.25em;
+        border: 2px solid #d3d3d35d;
+        text-align: center;
+        align-content: center;
+        font-weight: 600;
+        font-size: 9px;
+    }
+    #prev, #post {
+        background-color: white;
+        font-size: 9px !important;
+    }
+    .promotion-manager .pagination {
+        width: fit-content;
+        display: flex;
+        gap: 0.25em;
+    }
+    .PromotionManagerBottomPart .top {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.5em 1em;
+        margin-bottom: 1em;
+        gap: 0.5em;
+        width: 100%;
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+    .PromotionManagerBottomPart .top > div > div select{
+        flex-grow: 1;
+    }
+
+    .top input[type="number"]{
+        flex-grow: 1;
+        min-width: 150px;
+        height: 40px;
+        width: 100%;
+        
+    }
+    .top > div{
+        flex-grow: 1;
+    }
+    .top select{
+        width: 100%;
+    }
+    .lastDiv > div{
+        width: 100%;
+        flex-grow: 1;
+    }
+    .PromotionManagerBottomPart button[type="reset"]{
+        justify-content: center;
+    }
+
+
+    .promotion-manager .top-part {
+        display: block;
+        padding: 0.5em 1em 0em 1em;
+        margin-bottom: 2em;
+    }
+}
+
+
+@media(max-width:600px){
+    .PromotionManagerBottomPart .table-part td {
+        padding: 0.35em 0.65em;
+        text-align: center;
+    }
 }

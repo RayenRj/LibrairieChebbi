@@ -220,13 +220,20 @@
                             </td>
 
                             <td>
-                                <?php switch($row["type"]){
-                                    case "primaire" : echo "<span class='primaire' >primaire</span>";break;
-                                    case "secondaire" : echo "<span class='secondaire' >Secondaire</span>";break;
-                                    case "bac" : echo "<span class='bac' >Bac</span>";break;
-                                    case "college" : echo " <span class='collège' >Collège</span>";break;
-                                    default : break;
-                                }?>
+                                <?php
+                                    if ($row["type"] === "primaire") {
+                                        echo "<span class='primaire'>Primaire</span>";
+                                    } elseif ($row["type"] === "secondaire") {
+                                        echo "<span class='secondaire'>Secondaire</span>";
+                                    } elseif ($row["type"] === "bac") {
+                                        echo "<span class='bac'>Bac</span>";
+                                    } elseif ($row["type"] === "college") {
+                                        echo "<span class='collège'>Collège</span>";
+                                    } elseif ($row["type"] === "fourniture") {
+                                        echo "<span class='collège'>Fourniture</span>";
+                                    }
+                                ?>
+
                             </td>
                             <td>
                                 <p class="prix"><?= number_format($row["prix"] , 1)?> DT</p>

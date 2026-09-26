@@ -556,3 +556,194 @@ img{
     border-color: var(--blue) !important;
     color: white;
 }
+
+
+
+
+@media (max-width:800px) {
+    .pack-manager {
+        width: 98dvw;
+        margin: 80px auto 0px auto;
+        display: block;
+        padding: 0.25em 0.75em;
+    }
+    .packManagerBottomPart .top > main {
+        display: flex;
+        flex-grow: 1;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 0.75em;
+    }
+    .pack-manager .top-part button {
+        padding: 0.5em 1em;
+        border-radius: 0.5em;
+        outline: none;
+        border: none;
+        background-color: var(--blue);
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+        font-size: 11px;
+        min-width: fit-content;
+    }
+    .pack-manager .top-part {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0.25em 1em 1em;
+        margin-bottom: 1.5em;
+
+    }
+    .pack-manager h2{font-size: 18px;}
+    .pack-manager .top-part p {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--gray-500);
+    }
+    .packManagerBottomPart .top > main > div{
+        flex-grow: 1;
+    }
+    .packManagerBottomPart .top {
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+        align-items: center;
+        padding: 0.5em 2em;
+        margin-bottom: 1em;
+        flex-direction: column;
+        
+    }
+    .packManagerBottomPart .top main > div:first-child input {
+        background-color: white;
+        width: 100%;
+        height: 40px;
+    }
+
+    .packManagerBottomPart .top > .lastDiv{
+        width: 100%;
+    }
+    .packManagerBottomPart .top > .lastDiv > div{
+        flex-grow: 1;
+    }
+    .packManagerBottomPart button[type="reset"] {
+        justify-content: center;
+    }
+    .packManagerBottomPart .top main > div > div select{width: 100%;flex-grow: 1;}
+
+    .table-part {
+        max-width: 99dvw;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+    td{
+        min-width: 100px;
+        max-width: fit-content;
+    }
+    .packManagerBottomPart .table-part th {
+        padding: 0.5em;
+        text-align: center;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        font-size: 11px;
+    }
+    .packManagerBottomPart .table-part td {
+        padding: 0.25em;
+        text-align: center;
+    }
+    .packManagerBottomPart .table-part td:last-child ul {
+        gap: 0.2em;
+    }
+
+
+    .packManagerBottomPart .table-part td:nth-child(2) {
+        min-width: 175px;
+    }
+
+    .packManagerBottomPart .table-part td:nth-child(2) .text > p {
+        font-size: 10px;
+        color: var(--gray-600);
+    }
+    .packManagerBottomPart .table-part td:nth-child(2) .text h5{font-size: 12px !important;}
+    .packManagerBottomPart .table-part td:nth-child(3) > span {
+        padding: 0.25em 0.75em;
+        border-radius: 0.5em;
+        font-size: 10px;
+        font-weight: 500;
+    } 
+
+    .packManagerBottomPart .table-part td:first-child img {
+        aspect-ratio: 1 / 1;
+        width: 50px;
+        height: 50px;
+    }
+    .packManagerBottomPart .table-part td:last-child ul li {
+        padding: 0.25em 0.5em;
+        transition: 0.1s ease all;
+        font-size: 13px;
+    }
+
+
+    .packManagerBottomPart .pagination > a {
+        background-color: var(--gray-100);
+        padding: 0.5em 1em;
+        border-radius: 0.25em;
+        border: 2px solid #d3d3d35d;
+        text-align: center;
+        align-content: center;
+        font-weight: 600;
+        font-size: 9px;
+    }
+    #prev, #post {
+        background-color: white;
+        font-size: 9px !important;
+    }
+    .packManagerBottomPart .pagination {
+        width: fit-content;
+        display: flex;
+        gap: 0.25em;
+    }
+    .pack-manager .packManagerBottomPart .bottom > p{
+        font-size: 10px;
+        font-weight: 400;
+    }
+
+    .pack-manager .packManagerBottomPart .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5em 1em;
+        gap: 1em;
+    }
+
+
+    .four-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.65em;
+        margin-bottom: 2.5em;
+    }
+    .four-cards .card {
+        padding: 0.75em ;
+        /* border: 2px solid var(--border-gray); */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.08);
+        display: flex;
+        gap: 1em;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+    }
+
+    
+    .four-cards .card .text > p:first-child {
+        font-weight: 700;
+        font-size: 11px;
+        color: var(--gray-600);
+    }
+    .four-cards .card .text > p:last-child {
+        color: var(--gray-500);
+        font-weight: 500;
+        font-size: 10px;
+    }
+    .four-cards .card h3{font-size: 15px;}
+    .four-cards .card .text span{font-size: 10px;}
+}
