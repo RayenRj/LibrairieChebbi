@@ -1,8 +1,6 @@
 let deleteAdminButtonList = document.querySelectorAll(".deleteAdminButton") ?? [];
-console.log(deleteAdminButtonList)
 deleteAdminButtonList.forEach(button =>{
     button.addEventListener("click",async function(){
-        console.log("Hello")
         let idAdmin = button.dataset.idadmin;
         let response = await fetch(`/api/users/deletAdmin/${idAdmin}`,{
             method: "PATCH",

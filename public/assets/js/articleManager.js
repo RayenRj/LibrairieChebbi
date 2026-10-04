@@ -351,6 +351,7 @@ addArticleButton.addEventListener("click",function(event){
     articleContainer.style.height = (height - 80).toString() + "px" ;
     articleContainer.style.overflowY = "hidden";
 })
+
 closePopUp.addEventListener("click",function(event){
     event.preventDefault();
     popUpForm.setAttribute("hidden","");
@@ -422,15 +423,17 @@ addArticleForm.addEventListener("submit",async function(event){
     // }
 
 
+    let rates = [3,3.5,4,4.5,5];
+    formData.set("rating",rates[Math.round(Math.random() * 5)])
+    formData.set("nombre_rater",Math.max(Math.round(Math.random()*200),25))
 
-    let categorie = formData.get("categorie")
     let response = await fetch("/api/articles",{
         method: "POST", 
         body: formData
     });
     let result = await response.json();
     if(result.success == true){
-        alert("Product added successfully!");
+        setTimeout(() => showToast('addProduct'), 400);
         window.location.reload();
     }else{
         alert(result.message);

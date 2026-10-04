@@ -462,6 +462,7 @@ fieldset .heading .search input:focus{
     width: 100%;
     border: 2px solid var(--border-gray);
     border-radius: 0.5em;
+    min-width: fit-content;
 }
 
 #addPackTable{
@@ -469,7 +470,9 @@ fieldset .heading .search input:focus{
     width: 100%;
     border-radius: 0.35em;
     overflow: hidden;
+    
 }
+#addPackTable.firstOne{min-height: 675px;}
 #addPackTable thead{
     background-color: var(--gray-200);
     padding: auto 1em;
@@ -503,21 +506,28 @@ fieldset .heading .search input:focus{
 }
 
 /* awel td */
-#addPackTable tbody tr td:first-child img{width: 60px;}
+#addPackTable tbody tr td:first-child img{width: 60px;height: 60px;aspect-ratio: 1/1;object-fit: coverf;}
 
 #addPackTable tbody tr td:first-child > .text{
     display: flex;
     flex-direction: column;
     gap: 0.1em;
     align-items: flex-start;
+    text-align: left;
 }
 
-#addPackTable tbody tr td:first-child > .text h4{font-size: 13px;}
+#addPackTable tbody tr td:first-child > .text h4{
+    font-size: 13px;
+    max-height: 40px;
+    overflow-y: hidden;
+}
 #addPackTable tbody tr td:first-child > .text p{
     font-size: 10px;
     margin-top: -3px;
     color: var(--gray-600);
     text-align: left;
+    max-height: 32px;
+    overflow-y: hidden;
 }
 
 #addPackTable tbody tr td > input[type="number"]{
@@ -563,6 +573,7 @@ fieldset .heading .search input:focus{
     margin: 1em 0em;
     width: 100%;
     justify-content: flex-end;
+    padding-right: 0.85em;
 }
 .bottom .pagination{
     width: fit-content;
@@ -738,16 +749,14 @@ div.inputDiv input{
         position: relative;
         z-index: 11;
         background-color: white;
-        width: fit-content;
-        padding: 1em 1.5em;
+        padding: 1em;
         border-radius: 1em;
         margin: 2em auto;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
         width: 100%;
-        max-width: 80dvw;
+        max-width: 90dvw;
         min-width: unset;
-        overflow-x: scroll;
-        scrollbar-width: thin;
+
     }
 
 
@@ -759,6 +768,86 @@ div.inputDiv input{
         flex-direction: column;
     }
 
+    fieldset:last-of-type {
+        all: unset;
+        border: 2px solid var(--border-gray);
+        border-radius: 0.25em;
+        padding: 0em;
+        padding-top: 1.5em;
+        margin-bottom: 1em;
+        max-width: 100%;
+        width: unset;
+        display: block;
+        overflow: hidden;
+    }
 
+
+    .tableContainer {
+    /* background-color: rebeccapurple; */
+    width: 100%;
+    border: 0px solid var(--border-gray);
+    border-radius: 0em;
+    min-width: unset;
+    overflow-x: scroll;
+    scrollbar-width: thin;
+}
+
+    .popUpContainer fieldset:last-of-type .top{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 0.5em;
+        margin-bottom: 1em;
+        gap: 0.65em;
+    }
     
+    .popUpContainer fieldset:last-of-type .top > div{
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 150px;
+    }
+    .popUpContainer fieldset:last-of-type .top > div select{
+        width: 100%;
+    }
+
+    fieldset .heading h3{
+        padding-left: 0.85em;
+    }
+
+    #addPackTable thead th {
+        padding: 0.5em;
+        font-weight: 600;
+        font-size: 12px;
+        text-align: center;
+    }
+
+
+    fieldset {
+    border: 2px solid var(--border-gray);
+    border-radius: 0.25em;
+    padding: 0.8em;
+    margin-bottom: 1em;
+}
+    .popUpHead h2{
+        padding: 0.5em 0em 0em 1em;
+    }
+
+
+    .popUpContainer .popUpCard .popUpHead > div{
+        border: 1.5px solid #eee;
+        border-radius: 50%;
+        height: 25px;
+        width: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0s ease all;
+        background-color: var(--red);
+        color: white;
+        border-color: var(--red);
+        transform: translateX(-5px);
+    }
 }

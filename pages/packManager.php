@@ -9,18 +9,18 @@
     $niveau = $_GET["niveau"] ?? "";
     $statut = $_GET["statut"] ?? "";
     $nom_pack = $_GET["nom"] ?? "" ;
-    $type = $_GET["type"] ?? "fourniture" ;
+    $type = $_GET["type"] ?? "" ;
     $anneeScolaire = $_GET["anneeScolaire"] ?? "" ;
     $list_of_packs_filtred= $packService->recherchePack($nom_pack , $niveau , $statut,$type, $anneeScolaire , $limit , $page);
-    $nombre_row_totale= $packService->nbreRowRecherchePack($nom_pack , $niveau , $statut);
+    $nombre_row_totale= $packService->nbreRowRecherchePack($nom_pack , $niveau , $statut , $type , $anneeScolaire);
     $nombre_totale_page = ceil($nombre_row_totale / $limit);
     function calculDePourcentage($currentMonthValue , $lastMonthValue){
         $x = $currentMonthValue - $lastMonthValue;
         if($lastMonthValue==0){return 100;} 
         return ($x * 100)/$lastMonthValue;
     }
-
-
+    // echo $nombre_row_totale;
+    // exit;
     $query_array= [];
     foreach($_GET as $key=>$val){
         if($key !== "page")
@@ -33,6 +33,7 @@
     if(!isset($_SESSION["role"]) || $_SESSION["role"]!="admin"):
         header("Location: /main");
     else:
+
 
 ?>
 
@@ -150,6 +151,17 @@
                             </div>
                             
                             <div>
+                                <p>Type</p>
+                                <div>
+                                    <select name="type" id="">
+                                        <option value="" selected>Tous les Types</option>
+                                        <option value="livre" >Pack de Livres</option>
+                                        <option value="fourniture" >Pack de fourniture</option>
+                                    </select>
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                            </div>
+                            <div>
                                 <p>Niveau scolaire</p>
                                 <div>
                                     <select name="niveau" id="">
@@ -221,22 +233,22 @@
 
                             <td>
                                 <?php
-                                    if ($row["type"] === "primaire") {
+                                    if ($row["categorie"] === "primaire") {
                                         echo "<span class='primaire'>Primaire</span>";
-                                    } elseif ($row["type"] === "secondaire") {
+                                    } elseif ($row["categorie"] === "secondaire") {
                                         echo "<span class='secondaire'>Secondaire</span>";
-                                    } elseif ($row["type"] === "bac") {
+                                    } elseif ($row["categorie"] === "bac") {
                                         echo "<span class='bac'>Bac</span>";
-                                    } elseif ($row["type"] === "college") {
+                                    } elseif ($row["categorie"] === "college") {
                                         echo "<span class='collège'>Collège</span>";
-                                    } elseif ($row["type"] === "fourniture") {
+                                    } elseif ($row["categorie"] === "fourniture") {
                                         echo "<span class='collège'>Fourniture</span>";
                                     }
                                 ?>
 
                             </td>
                             <td>
-                                <p class="prix"><?= number_format($row["prix"] , 1)?> DT</p>
+                                <p class="prix"><?= number_format($row["prix"] , 3)?> DT</p>
                             </td>
                             <td><?= $row["nbreArticleTotal"] ?> produits</td>
                             <td>
@@ -253,8 +265,8 @@
                             <td>
                                 <ul>
                                     <li data-idPack="<?= $row["id_produit"]?>" class="showLink"><a href="/packs/pack?idPack=<?= $row["id_produit"]?>" ><i class="fa-regular fa-eye"></i></a></li>
-                                    <li><a href="" data-idPack="<?= $row["id_produit"]?>"><i class="fa-regular fa-pen-to-square"></i></a></li>
-                                    <li><a href="" data-idPack="<?= $row["id_produit"]?>"><i class="fa-regular fa-trash-can"></i></a></li>
+                                    <li data-idPack="<?= $row["id_produit"]?>" class="editPack"><a href="" ><i class="fa-regular fa-pen-to-square"></i></a></li>
+                                    <li data-idPack="<?= $row["id_produit"]?>" class="deletePack"><a href="" data-idPack="<?= $row["id_produit"]?>"><i class="fa-regular fa-trash-can"></i></a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -495,7 +507,7 @@
                     </div>
                     <div class="tableContainer">
                         
-                        <table id="addPackTable">
+                        <table id="addPackTable" class="firstOne">
                             <thead>
                                 <th>Article</th>
                                 <th>Catégorie</th>
@@ -599,6 +611,9 @@
     </div>
 
 
+    <!-- partie success card pop up -->
+    <div id="toasts" aria-live="polite"></div>
+    <script src="/assets/js/successCard.js"></script>
     <script src="../assets/js/packManager.js"></script>
 </body>
 </html>

@@ -53,8 +53,8 @@
         public  function setMarque(string $marque):void{$this->marque = $marque;}
         public  function setCodeABarre(string $code):void{$this->code_a_barre = $code;}
         public  function setDescription(string $description){$this->description =$description;}
-        public  function setNumberOfStars(float $numberOfStars){$this->numberOfStars =numberOfStars;}
-        public  function setReview(int $review){$this->review =review;}
+        public  function setNumberOfStars(float $numberOfStars){$this->numberOfStars =$numberOfStars;}
+        public  function setReview(int $review){$this->review =$review;}
     }
 
 ?>

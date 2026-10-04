@@ -93,7 +93,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?= $pack["prix"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?=floatval($pack["prix"]) - floatval($pack["remise"]) ?> "><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -125,7 +125,7 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?= $pack["prix"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>                        </div>
+                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?=floatval($pack["prix"]) - floatval($pack["remise"]) ?> "><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>                        </div>
                     </article>
                 <?php endforeach; ?>
 
@@ -158,7 +158,13 @@
                         </div>
                         <div class="button-pack">
                             <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?= $pack["prix"] ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a  href="" 
+                                class="add-to-cart addToCartBtn" 
+                                data-idpack="<?= $pack["id_produit"] ?>" 
+                                data-idproduit ="<?= $pack["id_produit"] ?>" 
+                                data-name="<?= $pack["libelle"] ?>" 
+                                data-price="<?=floatval($pack["prix"]) - floatval($pack["remise"]) ?> "
+                            ><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -189,8 +195,14 @@
                             <p class="price"><?= $pack["prix"] ?> Dt</p>
                         </div>
                         <div class="button-pack">
-                            <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>">Voir Details</a>
-                            <a href="" class="add-to-cart addToCartBtn" data-idpack="<?= $pack["id_produit"] ?>" data-idproduit ="<?= $pack["id_produit"] ?>" data-name="<?= $pack["libelle"] ?>" data-price="<?= $pack["prix"] - $pack["remise"]  ?>"><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
+                            <a href="/packs/pack?idPack=<?= $pack["id_produit"] ?>" >Voir Details</a>
+                            <a  href="" 
+                                class="add-to-cart addToCartBtn" 
+                                data-idpack="<?= $pack["id_produit"] ?>" 
+                                data-idproduit ="<?= $pack["id_produit"] ?>" 
+                                data-name="<?= $pack["libelle"] ?>" 
+                                data-price="<?=floatval($pack["prix"]) - floatval($pack["remise"]) ?> " 
+                            ><i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier</a>
                         </div>
                     </article>
                 <?php endforeach; ?>

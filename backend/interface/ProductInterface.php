@@ -41,7 +41,9 @@ interface IProductRepository
         $genre,
         $collection ,
         $typeCollection,
-        $matiere
+        $matiere,
+        $rating ,
+        $nombreRaters
     );
 
     public function modifierProduit(

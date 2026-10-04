@@ -189,7 +189,8 @@
 }
 
 .card-list .card-link .rating-container .img-rating{
-    width: 40%;
+    width: 45%;
+    min-width: 79px;
 }
 
 section.bottom{

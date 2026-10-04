@@ -59,7 +59,98 @@
                 $response = [
                     "success" => false,
                     "numberOfLine" => null,
-                    "message" =>$e->getMessage() . " . image type : " . $file["packImage"]["type"], 
+                    "message" =>$e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }  
+        }
+        public function editPack($request){
+            try{
+                $id = $request["params"][0];
+                $body = $request["body"];
+                $file = $request["file"];
+                $data = json_decode($body["articleList"],true);
+                $result = $this->packServices->updatePack(  $id,
+                                                            $data,
+                                                            floatval($body["prix"]),
+                                                            $body["type"],
+                                                            $body["categorie"] ?? null ,
+                                                            $body["libelle"],
+                                                            $body["quantite_stock"],
+                                                            $file,
+                                                            floatval($body["remise"]) ?? 0,
+                                                            $body["description"],
+                                                            $body["anneeScolaire"] ?? null
+                                                            );
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Pack updated successfully", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" =>$e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }  
+        }
+
+
+        public function getPackById($request){
+            try{
+                $id = $request["params"][0];
+                $result = $this->packServices->getPackById($id);
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Getting pack data By ID", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" =>$e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }  
+        }
+        public function getPackProduct($request){
+            try{
+                $id = $request["params"][0];
+                $result = $this->packServices->getPackArticles($id);
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Getting pack articles By ID", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" =>$e->getMessage(), 
                     "data" => null,
                     "error" => null
                 ];

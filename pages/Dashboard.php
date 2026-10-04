@@ -291,6 +291,9 @@
         </section>
     </div>
 
+    <!-- partie success card pop up -->
+    <div id="toasts" aria-live="polite"></div>
+    <script src="/assets/js/successCard.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../assets/js/dashboard.js"></script>

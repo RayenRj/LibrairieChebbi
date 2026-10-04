@@ -87,10 +87,10 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre, $anneescolaire , $genre , $collection , $typeCollection,$matiere){
-            $query = "INSERT INTO produit (libelle , prix,quantite_stock,categorie, marque , remise, description, image_url , code_barre ) values (?,?,?,?,?,?,?,?,?) ;";
+        public function createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre, $anneescolaire , $genre , $collection , $typeCollection,$matiere ,$rating , $nombreRaters){
+            $query = "INSERT INTO produit (libelle , prix,quantite_stock,categorie, marque , remise, description, image_url , code_barre , rating , nombre_rater ) values (?,?,?,?,?,?,?,?,?,?,?) ;";
             $stmt = $this->db->prepare($query);
-            $result = $stmt->execute([$libelle , $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre]);
+            $result = $stmt->execute([$libelle , $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre , $rating , $nombreRaters]);
             $lastInsertedId = $this->db->lastInsertId();
             if($categorie=="livres_pedagogiques"){ // reglage livres pedagogiques
                 $query= "INSERT into livre(id_produit, niveau_scolaire,matiere) values(?,?,?)";

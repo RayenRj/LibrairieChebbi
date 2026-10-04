@@ -38,6 +38,7 @@ trashLink.forEach(link => {
             })
             const result = await response.json();
             if(result.success && result.data){
+                setTimeout(() => showToast('deleteCommande'), 400);
                 window.location.reload();
             }else{
                 alert(result.message);
@@ -266,7 +267,8 @@ showCommandeButton.forEach(button=>{
         // //fill data
         // // fill top part 
         var statut ="";
-        if(commande["statut"] == "confirmée" || commande["statut"] == "attente") statut = `<p class="statutExpediee statutCommande">En attente</p>`
+        if(commande["statut"] == "attente") statut = `<p class="statutExpediee statutCommande">En attente</p>`
+        if(commande["statut"] == "confirmée") statut = `<p class="statutConfirmee statutCommande">Confirmée</p>`
         if(commande["statut"] == "annulée") statut = `<p class="statutAnnulee statutCommande">Annulée</p>`;
         if(commande["statut"] == "livrée") statut = `<p class="statutLivree statutCommande">Livrée</p>`;
 

@@ -11,7 +11,7 @@
     $pack = new Pack(
         $product_coordonee["id_produit"],
         $product_coordonee["libelle"],
-        $product_coordonee["type"],
+        $product_coordonee["type"] ?? "",
         $pack_article,
         $product_coordonee["prix"],
         $product_coordonee["image_url"],

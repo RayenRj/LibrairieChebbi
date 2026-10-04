@@ -29,10 +29,10 @@
             if($limit < 1){throw new Exception("la limit doit etre > 1");}
             return $this->packRepo->recherchePack($nom, $niveau , $statut, $type,$anneeScolaire , $limit, $pagination);
         }
-        public function nbreRowRecherchePack(string $nom, string $niveau , string $statut){
+        public function nbreRowRecherchePack(string $nom, string $niveau , string $statut,string $type,string $anneeScolaire ){
             if(!in_array($niveau , ["primaire", "college","secondaire","bac" ,""])){throw new Exception("Le niveau scolaire de cette pack est invalide!");}
             if(!in_array($statut,["actif", "rupture",""])){throw new Exception("La statut de cette pack est invalide");}
-            return $this->packRepo->nbreRowRecherchePack($nom, $niveau , $statut);
+            return $this->packRepo->nbreRowRecherchePack($nom, $niveau , $statut , $type , $anneeScolaire);
         }
         //done
         public function getPackArticles(int $idPack){
@@ -68,20 +68,20 @@
         /**
          * @param data => array de type : [product => quantite]
          */
-        public function updatePack(int $idPack,array $data){
-            if($idPack < 1){throw new IdentifiantInvalideException("L'identifiant du pack est invalide !");}
-            if(empty($data)){throw new EmptyDataArray("L'array du data du update est vide");}
-            if(isset($data["libelle"])){$libelle = $data["libelle"];}else{$libelle = "";}
-            if(isset($data["niveau"])){$niveau = $data["niveau"];}else{$niveau = "";}
-            if(isset($data["prx"])){$prx = $data["prx"];}else{$prx = 0;}
-            if(isset($data["quantite"])){$quantite = $data["quantite"];}else{$quantite = -1;}
-            if(isset($data["products"])){$products = $data["products"];}else{$products = [];}
-            foreach($data as $product => $quantite){
-                if($quantite < 0){throw new QuantityException("Quantité doit etres >= 0");}
-                if($product["quantite_stock"] < $quantite){throw new QuantityException("Cette quantité est supérieur a la quantite du produit dans le stock!");}
-            }
-            return $this->packRepo->modifyPackById($idPack , $libelle , $niveau , $prx , $quantite , $products);
-        }
+        // public function updatePack($id,$data, float $prix , string $niveau , string $type ,string $libelle,int $quantite , $file ,float $remise ,string $description ,?string $anneeScolaire){
+        //     if($idPack < 1){throw new IdentifiantInvalideException("L'identifiant du pack est invalide !");}
+        //     if(empty($data)){throw new EmptyDataArray("L'array du data du update est vide");}
+        //     if(isset($data["libelle"])){$libelle = $data["libelle"];}else{$libelle = "";}
+        //     if(isset($data["niveau"])){$niveau = $data["niveau"];}else{$niveau = "";}
+        //     if(isset($data["prx"])){$prx = $data["prx"];}else{$prx = 0;}
+        //     if(isset($data["quantite"])){$quantite = $data["quantite"];}else{$quantite = -1;}
+        //     if(isset($data["products"])){$products = $data["products"];}else{$products = [];}
+        //     foreach($data as $product => $quantite){
+        //         if($quantite < 0){throw new QuantityException("Quantité doit etres >= 0");}
+        //         if($product["quantite_stock"] < $quantite){throw new QuantityException("Cette quantité est supérieur a la quantite du produit dans le stock!");}
+        //     }
+        //     return $this->packRepo->updatePack($id,$data,  $prix ,  $niveau ,  $type , $libelle, $quantite , $file , $remise , $description , $anneeScolaire);
+        // }
         //done
         public function deleteUnArticleDuPack(int $idPack , int $idArticle){
             if($idPack < 1){throw new IdentifiantInvalideException("L'identifiant du pack est invalide !");}
@@ -152,6 +152,34 @@
             if(!move_uploaded_file($image["tmp_name"],$destination)){throw new Exception("Failed to save the image!!");}
             $image_url = "/assets/images/uploadedImg/packImg/" . $newName;
             return $this->packRepo->createNewPack($data , $prix , $niveau , $type , $libelle, $quantite, $image_url , $remise , $description , $anneeScolaire);
+        }
+
+
+        public function updatePack($id,$data, float $prix , ?string $niveau , ?string $type ,string $libelle,int $quantite , $file ,float $remise ,string $description ,?string $anneeScolaire){
+            if(empty($data)){throw new EmptyDataArray("L'array du donnée est vide!");}
+            if($prix < 0){throw new Exception("prix doit etre positif !");}
+            $niveau = mb_strtolower($niveau);
+            // if(!in_array( $niveau, ["primaire", "college","secondaire","bac","livre"])){throw new Exception("le niveau est invalide!!!");}
+            if(!in_array( $niveau, ["fourniture","livre"])){throw new Exception("le niveau est invalide!!!");}
+            //file handling 
+            if(!isset($file["packImage"])){throw new Exception("La pack doit contenir une image");}
+            $image = $file["packImage"];
+            if($image["size"]==0){
+                $image_url="";
+            }else{
+                if ($image["error"] !== UPLOAD_ERR_OK) {throw new Exception("Erreur upload : " . $_FILES["image"]["error"]);}
+                if(!in_array($image["type"], ["image/jpeg","image/png","image/webp"])){throw new Exception("Ce Type d'image ". $image["type"] ." n'est pas autorisee !");}
+                if($image["size"] > 5 * 1024 * 1024){throw new Exception("Image size too large > 5mb");}
+                $ext = pathinfo($image["name"] , PATHINFO_EXTENSION);
+                $newName = bin2hex(random_bytes(16)) . "." . $ext;
+                $uploadDir = __DIR__ . "/../../public/assets/images/uploadedImg/packImg/";
+                
+                if(!is_dir($uploadDir)){mkdir($uploadDir , 0777,true);}
+                $destination = $uploadDir . $newName;
+                if(!move_uploaded_file($image["tmp_name"],$destination)){throw new Exception("Failed to save the image!!");}
+                $image_url = "/assets/images/uploadedImg/packImg/" . $newName;
+            }
+            return $this->packRepo->updatePack($id,$data , $prix , $niveau , $type , $libelle, $quantite, $image_url , $remise , $description , $anneeScolaire);
         }
 
 

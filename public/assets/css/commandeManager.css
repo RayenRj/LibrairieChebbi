@@ -667,19 +667,23 @@ img{
 /* ######################### */
 /* ######################### */
 
-.commandeContainer .statutLivree
+.commandeContainer .statutConfirmee
 {
     background-color: var(--green-glass) !important;
-    color: var(--green);
+    color: var(--green) !important;
 }
 
 .commandeContainer .statutAnnulee{
     background-color: var(--red-glass);
     color: var(--red) !important;  
 }
-.commandeContainer .statutExpediee{
+.commandeContainer .statutLivree{
     background-color: var(--blue-glass);
-    color: var(--blue) !important;
+    color: var(--blue) !important;  
+}
+.commandeContainer .statutExpediee{
+    background-color: var(--yellow-glass);
+    color: var(--yellow-dark) !important;
 }
 
 
@@ -879,6 +883,95 @@ img{
         
     }
 
-    
+    .commandeContainer {
+        width: 80%;
+        max-width: 700px;
+        background-color: var(--gray-50);
+        display: none;
+        flex-direction: column;
+        gap: 1em;
+        border-radius: 1em;
+        height: fit-content;
+        padding: 2.5em 2em;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        position: absolute;
+        left: 50%;
+        z-index: 602;
+        transform: translateX(-50%);
+    }
 
+
+    .articleContainer li ul {
+        padding: 0.5em;
+        gap: 0.65em;
+    }
+
+}
+
+
+
+@media (max-width:600px) {
+
+    .commandeContainer {
+        width: 90dvw;
+        padding: 1.5em 0.75em 1.5em 1.25em!important;
+    }
+    .text p {
+        font-size: 10px !important;
+        max-height: 18px;
+        max-width: 200px;
+        overflow: hidden;
+    }
+    .text h5{
+        max-height: 30px;
+        overflow-y: hidden;
+    }
+    .articleContainer li ul li:first-of-type {
+        flex-basis: 200px;
+        display: flex;
+        gap: 1em;
+        align-items: center;
+    }
+    .articleContainer li ul li {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .commandeContainer .topPart > div:first-child p {
+        color: var(--gray-500);
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 1.25;
+    }
+
+    .commandeContainer .topPart {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 0.5em;
+    }
+    .commandeContainer .statutCommande {
+        font-size: 10px !important;
+        padding: 0 0.75em;
+        min-width: 68px;
+    }
+    .commandeContainer .topPart > div:last-child span {
+    font-weight: bold;
+    color: black;
+    font-size: 14px;
+    width: 100%;
+    min-width: fit-content;
+}
+    .topPart h4{
+        font-size: 15px;
+    }
+    .commandeContainer .topPart > div:first-child > div {
+        display: flex;
+        gap: 0.5em;
+        margin-bottom: 0.15em;
+    }
+
+    .commandeContainer .topPart > div:last-child p {
+    min-width: 120px;
+    }
 }

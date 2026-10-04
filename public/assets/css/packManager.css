@@ -589,9 +589,10 @@ img{
     .pack-manager .top-part {
         display: flex;
         align-items: center;
-        justify-content: space-around;
-        padding: 0.25em 1em 1em;
+        justify-content: space-between;
+        padding: 0.25em 0.5em 1em;
         margin-bottom: 1.5em;
+        gap: 0.5em;
 
     }
     .pack-manager h2{font-size: 18px;}

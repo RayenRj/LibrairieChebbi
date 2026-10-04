@@ -840,3 +840,14 @@ use librairiedb_v2;
 select pa.* , pr.* from produit pr, pack pa where id_pack = id_produit;
 select * from produit;
 describe livre;
+show columns from packarticle;
+
+select * from pack;
+ select p.* , pa.* , (select count(*) from packarticle par where p.id_produit = par.id_pack ) as item_number
+                        from produit p , pack pa
+                        where pa.id_pack = 41 and pa.id_pack = p.id_produit;
+                        
+                        
+select * from produit where id_produit = 41;
+select * from pack;
+select * from produit p , pack pa where id_produit = 326 ;

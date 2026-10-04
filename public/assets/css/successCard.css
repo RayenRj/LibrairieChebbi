@@ -1,0 +1,38 @@
+/* ===== Librairie Chebbi toast – copy from here ===== */
+:root{--y:#F4C430;--wy:#FFD95A;--cream:#FFF9E8;--navy:#263238;--gray:#6B7280;--green-color:#22C55E;--lg:#F5F7FA}
+#toasts{position:fixed;top:24px;right:24px;display:flex;flex-direction:column;gap:12px;z-index:9999;width:min(400px,calc(100vw - 32px))}
+.ct{position:relative;background:#fff;border-radius:20px;overflow:hidden;font-family:'Nunito Sans',system-ui,sans-serif;
+  box-shadow:0 18px 44px rgba(38,50,56,.16),0 2px 8px rgba(38,50,56,.06);opacity:0;transform:translateX(120%) scale(.96);
+  animation:ct-in .46s cubic-bezier(.22,.8,.3,1) forwards}
+.ct::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--y)}
+.ct.out{animation:ct-out .28s ease-in forwards}
+@keyframes ct-in{to{opacity:1;transform:none}}
+@keyframes ct-out{from{opacity:1;transform:none}to{opacity:0;transform:translateX(60%) scale(.97)}}
+.ct-body{display:flex;gap:14px;padding:20px 20px 18px;background:radial-gradient(circle at 0 0,var(--cream),#fff 55%)}
+.ct-ic{position:relative;width:48px;height:48px;flex-shrink:0}
+.ct-ok{width:48px;height:48px;border-radius:50%;background:var(--green-color);display:grid;place-items:center;box-shadow:0 0 0 5px rgba(34,197,94,.14)}
+.ct-ok path{stroke:#fff;stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:26;stroke-dashoffset:26;animation:ct-draw .35s .22s ease-out forwards}
+@keyframes ct-draw{to{stroke-dashoffset:0}}
+.ct-deco{position:absolute;right:-8px;bottom:-6px;width:26px;height:26px;border-radius:8px;background:var(--wy);display:grid;place-items:center;font-size:13px;transform:rotate(8deg);animation:ct-bounce .5s .3s ease-out}
+@keyframes ct-bounce{0%{transform:rotate(8deg) scale(.6)}60%{transform:rotate(8deg) scale(1.12)}100%{transform:rotate(8deg) scale(1)}}
+.ct-txt{flex:1;min-width:0;padding-right:18px}
+.ct-txt h2{font-family:'Fraunces',serif;font-size:18px;color:var(--navy);margin:2px 0 3px}
+.ct-txt p{margin:0 0 12px;color:var(--gray);font-size:13.5px}
+.ct-item{display:flex;align-items:center;gap:10px;background:var(--lg);border-radius:12px;padding:9px 11px}
+.ct-item .bk{width:34px;height:34px;border-radius:9px;background:#fff;border:1px solid #e8ebf0;display:grid;place-items:center;font-size:17px}
+.ct-item b{display:block;font-size:13px;color:var(--navy)}
+.ct-item span{font-size:12px;color:var(--gray)}
+.ct-x{position:absolute;top:12px;right:12px;width:26px;height:26px;border:0;border-radius:8px;background:transparent;color:var(--gray);font-size:20px;line-height:1;cursor:pointer}
+.ct-x:hover{background:var(--lg);color:var(--navy)}
+.ct-x:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.ct-bar{height:4px;background:var(--cream)}
+.ct-bar i{display:block;height:100%;background:var(--y);transform-origin:left;animation:ct-shrink linear forwards}
+@keyframes ct-shrink{to{transform:scaleX(0)}}
+@media(prefers-reduced-motion:reduce){.ct,.ct.out{animation-duration:.01s}.ct-ok path{animation:none;stroke-dashoffset:0}.ct-deco{animation:none}}
+/* ===== end toast CSS ===== */
+
+/* demo page only */
+.demo{max-width:560px;margin:0 auto}
+.demo h1{font-family:'Fraunces',serif;font-size:24px;margin:0 0 6px}
+.demo p{color:var(--gray);margin:0 0 20px}
+.demo button{background:var(--y);border:0;border-radius:10px;padding:10px 14px;margin:0 8px 8px 0;font:700 14px 'Nunito Sans',sans-serif;color:var(--navy);cursor:pointer}

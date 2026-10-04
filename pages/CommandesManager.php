@@ -468,7 +468,7 @@
 
     </div>
 
-        <div class="commandeContainerOverlay" hidden></div>
+    <div class="commandeContainerOverlay" hidden></div>
         
         <div class="commandeContainer" >
             <div class="topPart"></div>
@@ -480,7 +480,8 @@
 
             <div class="bottomPart"></div>
         </div>
-  
+    <div id="toasts" aria-live="polite"></div>
+
     <script src="/assets/js/commandeManager.js"></script>
 </body>
 </html>

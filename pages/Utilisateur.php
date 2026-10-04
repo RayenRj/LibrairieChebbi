@@ -145,6 +145,8 @@
             </div>
         </div>
     </div>
+    <div id="toasts" aria-live="polite"></div>
+
     <script src="/assets/js/user.js"></script>
 </body>
 </html>

@@ -304,6 +304,7 @@ article:hover {
 .packs-container main article .image img{
     height: 100%;   
     width: 100%;
+    aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 20px;
     border: none;

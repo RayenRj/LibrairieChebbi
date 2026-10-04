@@ -53,7 +53,9 @@
                                                                 $body["genre"] ?? null,
                                                                 $body["collection"] ?? null,
                                                                 $body["typeCollection"] ?? null,
-                                                                $body["matiere"] ?? null);
+                                                                $body["matiere"] ?? null,
+                                                                $body["rating"],
+                                                                $body["nombre_rater"]);
                 $response = [
                     "success" => true,
                     "numberOfLine" => null,

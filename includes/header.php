@@ -7,6 +7,8 @@
     <title>Librairie Chebbi</title>
     <link rel="icon" type="image/png" href="/assets/images/logo/logo1.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- <link rel="stylesheet" href="/assets/css/successCard.css"> -->
+    <link rel="stylesheet" href="/assets/css/successCard.css">
     <link rel="stylesheet" href="/assets/css/header.css">
     <link rel="stylesheet" href="/assets/css/signup.css">
     <link rel="stylesheet" href="/assets/css/signin.css">
@@ -38,7 +40,7 @@
                     <li><a href="/products">✏️ <span>Outils d'ecritures</span></a></li>
                     <li><a href="/products">📐 <span>Outils Geometriques</span></a></li>
                     <li><a href="/games">🧸 <span>Jouets</span></a></li>
-                    <li><a href="/products">🔮 <span>Autres Accessories</span></a></li>
+                    <li><a href="/products?categorie=others">🔮 <span>Autres Accessories</span></a></li>
                 </ul>
             </div>
             <div class="search">
@@ -209,7 +211,7 @@
           </a>
         </li>
         <li>
-          <a href="/products?categorie=autres">
+          <a href="/products?categorie=others">
             <div class="iconText">
               <div class="iconDiv">
                 <i class="fa-solid fa-star"></i>
@@ -455,10 +457,12 @@
       </div>
       <button class="close" onclick="hideError()">&times;</button>
     </div>
+
     <!--end of sign in part-->
     <script src="/assets/js/header_script.js"></script>
     <script src="/assets/js/signUp.js"></script>
     <script src="/assets/js/signIn.js"></script>
+    <script src="/assets/js/successCard.js"></script>
 
 </body>
 </html>

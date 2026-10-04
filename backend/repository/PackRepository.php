@@ -41,7 +41,7 @@
 
         // recherche + pagination
         public function recherchePack(string $nom, string $niveau , string $statut ,string $type , string $anneeScolaire, int $limit , int $pagination){
-            $query =    "select pr.id_produit , pr.libelle , p.type , pr.prix , (select count(*) from packArticle pa where pa.id_pack = p.id_pack) as nbreArticleTotal , pr.quantite_stock , pr.image_url , pr.description
+            $query =    "select pr.* , p.* , (select count(*) from packArticle pa where pa.id_pack = p.id_pack) as nbreArticleTotal
                         from produit pr , pack p 
                         where pr.id_produit = p.id_pack ";
             $statut = mb_strtolower($statut);
@@ -64,8 +64,12 @@
                 }
             }
             if(!empty($anneeScolaire)){
-                $query .= " AND pr.libelle like ? ";
-                $param[] = "%$nom%";
+                $query .= " AND pr.annee_scolaire like ? ";
+                $param[] = "%$anneeScolaire%";
+            }
+            if(!empty($type)){
+                $query .= " AND p.type like ? ";
+                $param[] = "%$type%";
             }
             $pagination = max($pagination , 1);
             $limit = max($limit , 1);
@@ -74,21 +78,36 @@
 
             $stmt = $this->db->prepare($query);
             $stmt->execute($param);
+
+            // echo $query;
+            // echo "<br>";
+            // print_r($param);
+            // exit;
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        public function nbreRowRecherchePack(string $nom, string $niveau , string $statut){
+        public function nbreRowRecherchePack(string $nom, string $niveau , string $statut,string $type,string $anneeScolaire){
             $query =    "select count(*) from produit pr , pack p  where pr.id_produit = p.id_pack ";
             $statut = mb_strtolower($statut);
             $niveau = mb_strtolower($niveau);
             $allNiveau = ["primaire", "college","secondaire","bac"];
             $param=[];
+
             if (in_array($niveau, $allNiveau)){
-                $query .= " AND p.type = ? ";
+                $query .= " AND p.categorie = ? ";
                 $param[] = $niveau;
             }
             if(!empty($nom)){
                 $query .= " AND pr.libelle like ? ";
                 $param[] = "%$nom%";
+            }
+
+            if(!empty($anneeScolaire)){
+                $query .= " AND pr.annee_scolaire like ? ";
+                $param[] = "%$anneeScolaire%";
+            }
+            if(!empty($type)){
+                $query .= " AND p.type like ? ";
+                $param[] = "%$type%";
             }
             if(in_array($statut, ["actif", "rupture"])){
                 if ($statut == "actif"){
@@ -109,7 +128,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
         }
         public function findPackById(int $id){
-            $query =  " select p.id_produit , p.code_barre , p.libelle, p.prix , p.quantite_stock , pa.type , image_url , p.remise , p.description 
+            $query =  " select p.* , pa.* , (select count(*) from packarticle par where p.id_produit = par.id_pack ) as item_number
                         from produit p , pack pa
                         where pa.id_pack = ? and pa.id_pack = p.id_produit";
             $stmt = $this->db->prepare($query);
@@ -255,9 +274,68 @@
                 return $e->getMessage();
             }
         }
+        public function updatePack(int $id , $data, float $prix , ?string $niveau , ?string $type ,string $libelle,int $quantite ,string $image_url ,float $remise ,string $description , ?string $anneeScolaire = null) : bool{
+            $this->db->beginTransaction();
+            try{
+                // first query=> table product
+                if(empty($image_url)){
+                    $query ="update produit set libelle = ? , prix = ? , quantite_stock = ? , categorie= ? , remise = ? ,description = ? where id_produit = ? ;";
+                    $stmt = $this->db->prepare($query);
+                    $result = $stmt->execute([$libelle , $prix , $quantite,"pack" , $remise , $description, $id]);
+                    if(!$result){throw new Exception("SQL Insertion Error");}
+                }else{
+                    $query ="update produit set libelle = ?, 
+                                                prix = ? , 
+                                                quantite_stock = ? , 
+                                                image_url= ?,
+                                                categorie= ? , 
+                                                remise = ? ,
+                                                description = ? where id_produit = ?";
+                    $stmt = $this->db->prepare($query);
+                    $result = $stmt->execute([$libelle , $prix , $quantite ,$image_url,"pack",$remise , $description, $id]);
+                    if(!$result){throw new Exception("SQL Insertion Error");}
+                }
+                $packId =$id;
+
+                if($niveau == "livre"){
+                    $aux = null;
+                }else{
+                    $aux = $niveau;
+                }
+                $query3 = "update pack pack set type = ? ,categorie = ?,annee_scolaire = ? where id_pack= ? ;";
+                $stmt3 = $this->db->prepare($query3);
+                $result=$stmt3->execute([$type,$aux,$anneeScolaire , $packId]);
+                if(!$result){throw new Exception("SQL Insertion Error");}
+
+                $query4 = "delete from packArticle where id_pack = ? ";
+                $stmt4 = $this->db->prepare($query4);
+                $result = $stmt4->execute([$packId]);
+                if(!$result){throw new Exception("Error while Deleting pack articles.");}
+
+                $query2 = "insert into packArticle(id_pack ,id_produit , quantite) values ";
+                $param=[];
+                $str_array=[];
+                foreach($data as $index => $product){
+                        $str_array[] = "(?,?,?)";
+                        $param[] = $packId;
+                    foreach($product as $key => $value){
+                        $param[] = $value;
+                    }
+                }
+                $query2 .= implode(",",$str_array) ;
+                $stmt2 = $this->db->prepare($query2);
+                $result = $stmt2->execute($param); // line 236
+                if(!$result){throw new Exception("SQL Insertion Error");}
+                $this->db->commit();
+                return true;
+            }catch(Exception $e){
+                $this->db->rollBack();
+                return $e->getMessage();
+            }
+        }
         // Get Pack Articles
         public function getPackArticles(int $idPack){
-            $query = "select libelle , marque , prix , categorie , quantite , image_url from packArticle pa , produit pr WHERE pa.id_produit = pr.id_produit AND id_pack = ? ;";
+            $query = "select pr.* , quantite from packArticle pa , produit pr WHERE pa.id_produit = pr.id_produit AND id_pack = ? ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$idPack]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
@@ -283,7 +361,7 @@
         }
         //chercher pack par id
         public function getPackByType(string $type){
-            $query = "SELECT id_produit , type , image_url , prix , libelle from produit p , pack pa where id_produit = id_pack and pa.categorie = ? ;";
+            $query = "SELECT p.* , pa.* from produit p , pack pa where id_produit = id_pack and pa.categorie = ? ;";
             $stmt= $this->db->prepare($query);
             $stmt->execute([$type]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

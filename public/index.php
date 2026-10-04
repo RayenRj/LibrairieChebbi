@@ -24,9 +24,7 @@ error_reporting(E_ALL);
         $ipHash = hash("sha256",$ip);
         $folder = __DIR__ . "/../storage/rateLimiter/";
         
-        if(!is_dir($folder)){
-            mkdir($folder , 0755 , true);
-        }
+        if(!is_dir($folder)){mkdir($folder , 0755 , true);}
             
         $file = __DIR__ . "/../storage/rateLimiter/" . $ipHash . ".json";
         $now = time();
@@ -43,12 +41,16 @@ error_reporting(E_ALL);
         $data = array_filter($data,fn($TimeStampOfEveryRateWithThisIp)=> $TimeStampOfEveryRateWithThisIp > (time() - $refillTime));
         if(count($data) > $maxRate){
                 http_response_code(429);
-                header("content-type: application/json");
-                header("retry-after: " . ((min($data) + $refillTime) - time()));
-                echo json_encode([
-                    "success"=> false,
-                    "message" => "Essayer de nouveau après : " . ((min($data) + $refillTime) - time())  . " Secondes"
-                ]);
+                // header("content-type: application/json");
+                // header("retry-after: " . ((min($data) + $refillTime) - time()));
+                // echo json_encode([
+                //     "success"=> false,
+                //     "message" => "Essayer de nouveau après : " . ((min($data) + $refillTime) - time())  . " Secondes"
+                // ]);
+                // exit;
+                $retryAfter= ((min($data) + $refillTime) - time());
+                $_SERVER["rateLimitTime"] = $retryAfter;
+                header("Location: /ratelimitpassed?retry=" . $retryAfter);
                 exit;
         }
         $data[] = $now;
@@ -61,6 +63,37 @@ error_reporting(E_ALL);
 
 
     //pages
+        $uriList = [
+    "/products",
+    "/dashboard",
+    "/contactus",
+    "/games",
+    "/main",
+    "/",
+    "/packs",
+    "/products/product",
+    "/dashboard/commandes",
+    "/dashboard/promotions",
+    "/dashboard/admins",
+    "/dashboard/clients",
+    "/dashboard/articles",
+    "/dashboard/packs",
+    "/panier",
+    "/commande",
+    "/collections",
+    "/test",
+    "/packs/pack",
+    "/client",
+    "/packs/livres",
+    "/packs/livres/parascolaire",
+    "/google-callback",
+    "/google-login",
+    "/verify",
+    "/testMail",
+    "/verify-email",
+    "/ratelimitpassed",
+    "/error"
+];
     $route->add("GET", "/products" , "PageController","allProductPage");
     $route->add("GET", "/dashboard" , "PageController","dashboardPage");
     $route->add("GET", "/contactus" , "PageController","contactUsPage");
@@ -88,6 +121,8 @@ error_reporting(E_ALL);
     $route->add("GET", "/verify" , "PageController","testMail");
     $route->add("GET", "/testMail" , "PageController","testMail");
     $route->add("GET", "/verify-email", "PageController", "verifyEmailPage");
+    $route->add("GET", "/ratelimitpassed", "PageController", "rateLimiterPage");
+    $route->add("GET", "/error", "PageController", "erorPage");
 
 
 
@@ -119,6 +154,9 @@ error_reporting(E_ALL);
     //=========> Pack Routes <======
     $route->add("DELETE" , "/api/packs/{id}", "PackController","deletePack");
     $route->add("POST" , "/api/packs/createPack", "PackController","savePack");
+    $route->add("POST" , "/api/packs/edit/{id}", "PackController","editPack");
+    $route->add("GET","/api/packs/{id}","PackController","getPackById");
+    $route->add("GET","/api/packs/{id}/products","PackController","getPackProduct");
 
     //=========> User Routes <======
     
@@ -144,18 +182,49 @@ error_reporting(E_ALL);
     $route->add("PATCH" , "/api/commandes/livre/{id}", "CommandeController","livreeCommande");
     $route->add("GET" , "/api/commandes/{id}", "CommandeController","getCommandeById");
     $route->add("GET" , "/api/commandes/{id}/articles", "CommandeController","getCommandeArticles");
-
+    
 
 
 
 
     // adding the router ;
-    $uri = mb_strtolower($_SERVER["REQUEST_METHOD"]) . " " . mb_strtolower(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
-    $restricted_uri_array = ["post /api/users/createUser","post /api/users/signIn" , "post /api/users/verify-email",""];
+    // setting defaut Limit for every uri
+    $method = mb_strtolower($_SERVER["REQUEST_METHOD"]);
+    $url_uri = mb_strtolower(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
+    $uri = $method . " " . $url_uri;
+
+
+    // if(!in_array($url_uri , $uriList)){
+    //     if(str_starts_with($url_uri , "/api/")){
+    //         http_response_code(404);
+    //         header("Content-Type: application/json");
+    //         echo json_encode([
+    //             "success" => false,
+    //             "data"=>null,
+    //             "message"=>"API route not found",
+    //             "redirect" => "/error"
+    //         ]);
+    //         exit;
+    //     }else{
+    //         header("Location: /error");
+    //         exit;
+    //     }
+    // }
+    if(!in_array($url_uri , $uriList) && !str_starts_with($url_uri,"/api/")){
+        header("Location: /error");
+        exit;
+
+    }
+
+    
+    
+    $restricted_uri_array = ["post /api/users/createuser","post /api/users/signin" , "post /api/users/verify-email",""];
     if(in_array($uri,$restricted_uri_array)){
-        rateLimiter(15);
+        rateLimiter(20);
+    }else if($uri == "get /ratelimitpassed"){
+        rateLimiter(100,30);
     }else{
-        rateLimiter();
+        rateLimiter(50,60);
     }
 
 

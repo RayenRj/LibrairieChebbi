@@ -16,7 +16,10 @@
         $product_coordonee["marque"],
         $product_coordonee["description"],
         $product_coordonee["review"] ?? 154,
-        $product_coordonee["number_of_stars"] ?? 3
+        $product_coordonee["number_of_stars"] ?? 3,
+        $product_coordonee["rating"],
+        $product_coordonee["nombre_rater"],
+        $product_coordonee["rating"]
     );
 
     $list_all_product = $product_service->getAllProduct(8,1);
@@ -77,8 +80,8 @@
                 <?php endif; ?>
                 <h2 class="product-title"><?= $product->getLibelle() ?></h2>
                 <div class="review">
-                    <img src="/assets/images/rating/5.png" alt="" id="rating">
-                    <p class="n-review">(24 Reviews)</p>
+                    <img src="/assets/images/rating/<?= $product->getNumberOfStars() ?>.png" alt="" id="rating">
+                    <p class="n-review">(<?= $product->getReview() ?> Reviews)</p>
                 </div>
                 <div class="prix">
                     <?php if($product->getRemise() > 0): ?>
@@ -150,8 +153,15 @@
                                         <p class="badge">S<?= $product["libelle"] ?></p>
                                         <h2 class="card-title"><?= $product["prix"] ?> <span>dt</span></h2>
                                         <div class="rating-container">
-                                            <img src="../assets/images/rating/4.5.png" alt="" class="img-rating">
-                                            <div class="number">(18)</div>
+                                            <?php 
+                                                $rating = floatval($product["rating"]);
+                                                $int_before = intval(round($rating));
+                                                $int_after = intval(ceil($rating));
+                                                if($rating< $int_after && $rating > $int_before){$rating = $int_before + 0.5;}
+                                                else{$rating = intval($rating);}
+                                            ?>
+                                            <img src="../assets/images/rating/<?= $rating ?>.png" alt="" class="img-rating">
+                                            <div class="number">(<?= $product["nombre_rater"] ?>)</div>
                                         </div>
                                     </a>
                                 </li>

@@ -10,7 +10,7 @@ let tbody = document.querySelector("#articleSelectionnéeTBody");
 let packManagerContainerBody = document.querySelector(".pack-manager");
 var limit = 8;
 let tablePart = document.querySelector(".table-part")
-
+let deleteButtons = document.querySelectorAll(".deletePack");
 const sectionsEtude = [
     // Primaire
     { value: "1-primaire", label: "1ère année primaire" },
@@ -53,6 +53,10 @@ const sectionsEtude = [
     { value: "bac-sport", label: "Bac Sport" }
 ];
 
+
+document.getElementById("categorie").addEventListener("change", function(){
+    console.log(document.getElementById("categorie").value)
+})
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -79,7 +83,18 @@ function reglageHeightOverlay(){
 
 let firstTablePopUpCard = document.querySelector("#firstTablePopUpCard")
 addPackButton.addEventListener("click",async function(){
+    addPackForm.querySelector("input[name='libelle']").value ="";
+    addPackForm.querySelector("input[name='prix']").value="";
+    addPackForm.querySelector("input[name='quantite_stock']").value="";
+    addPackForm.querySelector("input[name='remise']").value="";
+    addPackForm.querySelector("textarea[name='description']").value="";
+    addPackForm.querySelector(".custum-file-upload").value="";
+    addPackForm.querySelector("select#categorie").value="";
+    document.querySelector(".anneeScolaireDiv select").value="";
+    document.querySelector(".last input[type='submit']").value = "Ajouter Pack";
+    tbody.innerHTML ="";
     addPackForm.removeAttribute("hidden");
+
     remplirTableDataFromDB(1,limit);
 })
 
@@ -209,16 +224,29 @@ formAddPack.addEventListener("submit",async function(event){
     
     for(let[key,val] of formData){if(val==""){formData.delete(key)}}
 
-    console.log(typeof(formData.get("articleList")))
-    let response = await fetch("/api/packs/createPack",{
-        method:"POST", 
-        body:formData
-    })
-
+    // hne bch tsir log checkpoint bch na3rfou si c'est du edit ou insert
+    for(let [key,value] of formData.entries()){
+        console.log(`${key} : ${value}`);
+    }
+    var response;
+    if(formAddPack.classList.contains("edit")){
+        response = await fetch(`/api/packs/edit/${formAddPack.dataset.idpack}`,{
+            method:"POST",
+            body:formData
+        })
+    }else{
+        response = await fetch("/api/packs/createPack",{
+            method:"POST",
+            body:formData
+        })
+    }
+    
+    
     let result = await response.json();
+    // console.log(result)
     if(result.success && result.data){
-        window.location.reload();
         alert(result.message);
+        window.location.reload();
     }else{
         alert(result.message)
     }
@@ -349,9 +377,17 @@ async function remplirTableDataFromDB(current_page, limit){
     }
     //partie pagination
     let paginationContainer = document.querySelector(".popUpContainer .bottom .pagination");
-    html =`<a href="" id="prev"><i class="fa-solid fa-angle-left"></i></a>`;
-    for(let i = 1; i<= nombre_page_totale ; i++){ html += `<a href="" class="${i==current_page ? "pagination-selected" : ""}">${i}</a>`;}
-    html += `<a href="" id="post"><i class="fa-solid fa-angle-right"></i></a>`;
+    let selectedPageNumber = document.querySelector(".pagination-selected").innerText;
+    current_page= parseInt(current_page);
+
+    let before = Math.max(current_page - 1 , 1);
+    let after = Math.min(nombre_page_totale , current_page +1);
+    html =`<a href="" id="prev" value=${before}><i  value=${before} class="fa-solid fa-angle-left"></i></a>`;
+    // reglage ll pagination
+    for(let i = Math.max(1,parseInt(current_page)-2); i<= current_page ; i++){ html += `<a href="" class="${i==current_page ? "pagination-selected" : ""}">${i}</a>`;}
+    for(let i = parseInt(current_page) +1 ; i<= Math.min(current_page +2 , nombre_page_totale) ; i++){ html += `<a href="" class="${i==current_page ? "pagination-selected" : ""}">${i}</a>`;}
+
+    html += `<a href="" id="post" value="${after}"><i value="${after}" class="fa-solid fa-angle-right"></i></a>`;
     paginationContainer.innerHTML = html;
 
     // partie nzidou fl href ll lienet
@@ -359,7 +395,7 @@ async function remplirTableDataFromDB(current_page, limit){
     for(let link of liste_pagination_links){
         link.addEventListener("click",function(event){
             event.preventDefault();
-            page = event.target.innerText;
+            page = event.target.getAttribute("value") ?? event.target.innerText;
             remplirTableDataFromDB(page , limit)
         })
     }
@@ -387,7 +423,6 @@ buttonRechercher.addEventListener("click",function(event){
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 tablePart.addEventListener("click",function(event){
-    console.log(event.target)
     if(event.target.classList.contains("showLink")){
         event.preventDefault()
         let idPack = event.target.dataset.idpack;
@@ -431,4 +466,140 @@ selectItem.addEventListener("change",function(){
         document.querySelector(".anneeScolaireDiv").style.display="none";
     }
 
+})
+
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+///////// Reglage ll partie edit pack ///////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+let editPackButton = document.querySelectorAll(".editPack")
+
+editPackButton.forEach(button=>{
+    // reglage bch tab9a dima hidden doub mayet7alli el edit pop up page
+    document.querySelector(".anneeScolaireDiv").style.display = "hidden";
+    document.querySelector(".last input[type='submit']").value = "Update Pack";
+    button.addEventListener("click", async function(event){
+        event.preventDefault();
+        // idPack = id de pack dans la table produit et pas dans la table pack;
+        let packId = button.dataset.idpack;
+        let response = await fetch("/api/packs/"+packId , {
+            method:"GET"
+        });
+        let result = await response.json();
+        if(!result.success){alert(result.message);return;}
+        let pack = result.data;
+
+        let libelle = addPackForm.querySelector("input[name='libelle']");
+        let prix = addPackForm.querySelector("input[name='prix']");
+        let quantity = addPackForm.querySelector("input[name='quantite_stock']");
+        let remise = addPackForm.querySelector("input[name='remise']");
+        let description = addPackForm.querySelector("textarea[name='description']");
+        let image = addPackForm.querySelector(".custum-file-upload");
+        let categorieSelect = addPackForm.querySelector("select#categorie");
+        let anneeScolaire = document.querySelector(".anneeScolaireDiv select");
+        
+        // type : ffourniture + (collegue , lycee , primaire)
+
+        console.log(pack)
+        libelle.value = pack.libelle;
+        prix.value = pack.prix;
+        quantity.value = pack.quantite_stock;
+        remise.value = pack.remise;
+        
+        description.value = pack.description;
+        image.style.backgroundImage = `url(${pack.image_url})`;
+        if(pack.type=="livre" && pack.annee_scolaire != null){
+            categorieSelect.value = pack.type;
+            document.querySelector(".anneeScolaireDiv").style.display = "flex";
+            anneeScolaire.value = pack.annee_scolaire
+        }else{
+            categorieSelect.value = pack.categorie;
+            document.querySelector(".anneeScolaireDiv").style.display = "hidden";
+        }
+        // typeDePack.value = pack.type;
+        // typeDePack.value = 
+
+        // reglage de l'image
+        image.style.backgroundImage = `url(${pack.image_url})`;
+        image.style.backgroundSize = `contain`;
+        image.style.backgroundRepeat = `no-repeat`;
+        image.style.backgroundPosition = `center`;
+        document.querySelector(".custum-file-upload .icon").style.opacity="0";
+        document.querySelector(".custum-file-upload .text").style.opacity="0";
+
+
+        let productRequest = await fetch(`/api/packs/${packId}/products`);
+        let productResponse = await productRequest.json();
+        let productList = productResponse.data;
+
+
+
+        let html = "";
+
+        tbody.innerHTML = "";
+        for(let i = 0 ; i<productList.length; i++){
+            let product = productList[i];
+            html += `
+                <tr class="articleSelectionner" data-idproduit="${product.id_produit}" data-quantity="${product.quantite}">
+                    <td>
+                        <img src="${product.image_url}" alt="">
+                        <div class="text">
+                            <h4>${product.libelle}</h4>
+                            <p>${product.description}</p>
+                        </div>
+                    </td>
+                    <td>${product.categorie}</td>
+                    <td>${product.marque}</td>
+                    <td>${(product.prix)} DT</td>
+                    <td>${(product.quantite_stock)}</td>
+                    <td>${product.quantite}</td>
+                    <td>
+                        <button class="deleteProduct" type="button" data-idproduit="${product.id_produit}">Supprimée</button>
+                    </td>
+                </tr>`;
+            }
+
+        tbody.innerHTML += html;
+        addPackForm.dataset.idpack = packId;
+        addPackForm.classList.add("edit")
+        addPackForm.removeAttribute("hidden");
+        remplirTableDataFromDB(1,limit);
+        })
+})
+
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+// delete pack / supprimer pack / deleteButton / delete button
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+deleteButtons.forEach(button =>{
+    button.addEventListener("click",async (event)=>{
+    event.preventDefault();
+    let idPack = button.dataset.idpack;
+    
+    let response = await fetch(`/api/packs/${idPack}`,{
+        method:"DELETE"
+    });
+
+    let result = await response.json();
+
+    if(result.success){
+        alert("Pack Deleted Successfully !!!!");
+        window.location.reload();
+    }else{
+        alert(result.message)
+    }
+
+
+    // successMessage(message);
+})
 })
