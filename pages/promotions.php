@@ -228,6 +228,7 @@
             </div>
         </section>
     </div>
+    <div id="toasts" aria-live="polite"></div>
 
     <script src="/assets/js/promotions.js"></script>
 </body>

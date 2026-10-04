@@ -23,6 +23,17 @@ const mois = [
             "Décembre"
         ];
 
+// reglage ll toast
+document.addEventListener('DOMContentLoaded', () => {
+    const toast = sessionStorage.getItem('showToast');
+
+    if (toast) {
+        sessionStorage.removeItem('showToast');
+        showToast(toast);
+    }
+});
+
+// fin de reglage ll toast
 
 
 trashLink.forEach(link => {
@@ -38,7 +49,7 @@ trashLink.forEach(link => {
             })
             const result = await response.json();
             if(result.success && result.data){
-                setTimeout(() => showToast('deleteCommande'), 400);
+                sessionStorage.setItem('showToast', 'deleteCommande');
                 window.location.reload();
             }else{
                 alert(result.message);
@@ -60,6 +71,7 @@ checkLink.forEach(link => {
 
         const result = await response.json();
         if(result.success && result.data){
+            sessionStorage.setItem('showToast', 'commandeConfirmee');
             window.location.reload();
         }else{
             alert(result.message);
@@ -99,6 +111,7 @@ livreeLink.forEach(button => {
         let response = await result.json();
 
         if(response.success && response.data){
+            sessionStorage.setItem('showToast', 'commandeLivree');
             window.location.reload();
         }else{
             alert(response.message);
@@ -118,7 +131,10 @@ annuleeButton.forEach(button => {
                 body:{}
             });
             let response = await result.json();
-            if(response.success && response.data){window.location.reload();}
+            if(response.success && response.data){
+                sessionStorage.setItem('showToast', 'commandeAnnulee');
+                window.location.reload();
+            }
             else{alert(response.message);}
         }
     })

@@ -233,7 +233,9 @@ img{
 
 .popUpContainer .popUpCard .double > div > div > input ,
 .popUpContainer .popUpCard .single > div > input ,
-.popUpContainer .popUpCard .double > div > div > select{
+.popUpContainer .popUpCard .double > div > div > select,
+.critere ,
+.infoSupInput{
     width: 100%;
     height: 40px;
     border: 2px solid #eee;
@@ -307,6 +309,27 @@ img{
 }
 
 
+.trashInfoSupp{
+    width: 40px;
+    height: 40px;
+    color: var(--red);
+    text-align: center;
+    font-size: 1.2em;
+    border: 2px solid #eee;
+    border-radius: 0.35em;
+    cursor: pointer;
+
+
+}
+.trashInfoSupp:hover{
+    background-color: var(--red-glass);
+}
+.infoSupInput,
+.critere{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 13px;
+}
 
 /* buttns in the bottom */
 

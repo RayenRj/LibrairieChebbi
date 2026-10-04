@@ -57,6 +57,20 @@ const sectionsEtude = [
 document.getElementById("categorie").addEventListener("change", function(){
     console.log(document.getElementById("categorie").value)
 })
+
+
+// reglage ll toast
+document.addEventListener('DOMContentLoaded', () => {
+    const toast = sessionStorage.getItem('showToast');
+
+    if (toast) {
+        sessionStorage.removeItem('showToast');
+        showToast(toast);
+    }
+});
+// fin de reglage ll toast
+
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -245,7 +259,12 @@ formAddPack.addEventListener("submit",async function(event){
     let result = await response.json();
     // console.log(result)
     if(result.success && result.data){
-        alert(result.message);
+        if(formAddPack.classList.contains("edit")){
+            sessionStorage.setItem('showToast', 'updatePack');
+        }else{
+            sessionStorage.setItem('showToast', 'addPack');
+            
+        }
         window.location.reload();
     }else{
         alert(result.message)
@@ -593,7 +612,7 @@ deleteButtons.forEach(button =>{
     let result = await response.json();
 
     if(result.success){
-        alert("Pack Deleted Successfully !!!!");
+        sessionStorage.setItem('showToast', 'deletePack');
         window.location.reload();
     }else{
         alert(result.message)

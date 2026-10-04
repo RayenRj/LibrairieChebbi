@@ -1,4 +1,17 @@
 let deleteAdminButtonList = document.querySelectorAll(".deleteAdminButton") ?? [];
+
+
+// reglage ll toast
+document.addEventListener('DOMContentLoaded', () => {
+    const toast = sessionStorage.getItem('showToast');
+
+    if (toast) {
+        sessionStorage.removeItem('showToast');
+        showToast(toast);
+    }
+});
+// fin de reglage ll toast
+
 deleteAdminButtonList.forEach(button =>{
     button.addEventListener("click",async function(){
         let idAdmin = button.dataset.idadmin;
@@ -7,7 +20,10 @@ deleteAdminButtonList.forEach(button =>{
             body:{}
         }) 
         let result = await response.json();
-        if(result.success && result.data){window.location.reload();}
+        if(result.success && result.data){
+            sessionStorage.setItem('showToast', 'adminDeleted');
+            window.location.reload();
+        }
         else{alert(response.message);}  
     })
 })

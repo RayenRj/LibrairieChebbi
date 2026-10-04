@@ -596,7 +596,7 @@
                         <label for="">Remise (%)</label>
                         <div>
                             <input type="number" name="remise" id="" placeholder="Entrer la remise en pourcentage">
-                            <i class="fa-solid fa-percent"></i>
+                            <i class="fa-solid fa-minus"></i>
                             <span>DT</span>
                         </div>
                     </div>
@@ -622,6 +622,18 @@
 
                     </div>
 
+
+
+                    <div class="information_supplimentaire single">
+                        <label for="">
+                            Informations Supplémentaires
+                        </label>
+                        <div>
+                            <table id="infoSupplementaire">
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
                     <!-- Buttonss -->
                     <div class="last">
                         <input type="reset" id="resetButton" value="Reset">

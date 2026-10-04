@@ -227,7 +227,8 @@ img{
     display: flex;
     flex-grow: 1;
     justify-content: flex-start;
-    gap: 2em;
+    gap: 1.5em;
+    /* flex-wrap: wrap; */
 }
 
 

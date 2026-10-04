@@ -136,9 +136,100 @@ const collectionsParascolaires = [
     "Autre"
 ];
 
+const criteres = [
+    { value: "", text: "-- Choisir un critére --" },
+    { value: "marque", text: "Marque" },
+    { value: "couleur", text: "Couleur" },
+    { value: "matiere", text: "Matière" },
+    { value: "format", text: "Format" },
+    { value: "taille", text: "Taille" },
+    { value: "genre", text: "Genre" },
+    { value: "age", text: "Âge recommandé" },
+    { value: "poids", text: "Poids" },
+    { value: "dimensions", text: "Dimensions" },
+    { value: "nombre_pieces", text: "Nombre de pièces" },
+    { value: "capacite", text: "Capacité" },
+    { value: "pages", text: "Nombre de pages" },
+    { value: "langue", text: "Langue" },
+    { value: "auteur", text: "Auteur" },
+    { value: "editeur", text: "Éditeur" },
+    { value: "niveau_scolaire", text: "Niveau scolaire" },
+    { value: "type_pointe", text: "Type de pointe" },
+    { value: "epaisseur", text: "Épaisseur" },
+    { value: "matiere_couverture", text: "Matière de couverture" },
+    { value: "compartiments", text: "Nombre de compartiments" },
+    { value: "roulettes", text: "Roulettes" }
+];
+
+// remplissage ll informations supplementaire fl pop up
+let info_supp_table = document.querySelector("table#infoSupplementaire tbody");
+
+function remplirTableRowInfoSupp(){
+    let liste_critere = "";
+    liste_critere += `<select class="critere">`;
+    for(let i =0 ; i<criteres.length ; i++){
+        liste_critere += `<option value="${criteres[i]['value']}">${criteres[i]["text"]}</option>`
+    }
+    liste_critere += "</select>";
+    
+    let tr_to_add =  `
+        <tr>
+            <td>
+                ${liste_critere}
+            </td>
+            <td>
+                <input type="text" name="" id="" class="infoSupInput">
+            </td>
+            <td class="trashInfoSupp">
+                <i class="fa-solid fa-trash-can"></i>
+            </td>
+            
+        </tr>
+    `;
+    return tr_to_add;
+}
 
 
 
+info_supp_table.innerHTML += remplirTableRowInfoSupp();
+info_supp_table.querySelector(".trashInfoSupp").addEventListener("click",function(event){
+    event.preventDefault();
+    if(info_supp_table.querySelectorAll("tr").length==1){return;}
+    event.target.closest("tr").remove();
+})
+
+info_supp_table.addEventListener("change",function(event){
+    let target = event.target;
+
+    if(target.tagName == "SELECT"){
+        const lastRow = info_supp_table.querySelector("tr:last-of-type")
+        if(target.closest("tr") == lastRow){
+            info_supp_table.insertAdjacentHTML(
+                "beforeend",
+                remplirTableRowInfoSupp()
+            )
+            info_supp_table.querySelector("tr:last-of-type .trashInfoSupp").addEventListener("click",function(event){
+                event.preventDefault();
+                if(info_supp_table.querySelectorAll("tr").length==1){return;}
+                event.target.closest("tr").remove();
+            })
+        }
+    }
+})
+
+
+
+
+// reglage ll toast
+document.addEventListener('DOMContentLoaded', () => {
+    const toast = sessionStorage.getItem('showToast');
+
+    if (toast) {
+        sessionStorage.removeItem('showToast');
+        showToast(toast);
+    }
+});
+// fin de reglage ll toast
 
 let date= new Date();
 let dateList= [];
@@ -404,9 +495,8 @@ resetButton.addEventListener("click",function(){
     container.style.backgroundPosition= "";
 })
 
-// partie form : ajouter un article
+// partie form : ajouter un article / add article / submit form
 let addArticleForm = document.querySelector("#addArticleForm");
-console.log(addArticleForm)
 addArticleForm.addEventListener("submit",async function(event){
     event.preventDefault();
     const formData = new FormData(addArticleForm);
@@ -418,22 +508,34 @@ addArticleForm.addEventListener("submit",async function(event){
     //         formData.delete(key)
     //     }
     // }
-    // for(let [key,val] of formData.entries()){
-    //     console.log(key ,val)
-    // }
 
 
+    // rates alea
     let rates = [3,3.5,4,4.5,5];
     formData.set("rating",rates[Math.round(Math.random() * 5)])
     formData.set("nombre_rater",Math.max(Math.round(Math.random()*200),25))
+    // end of rates
+
+    let infoSuppRatesTableRow = info_supp_table.querySelectorAll("tr");
+    console.log(infoSuppRatesTableRow)
+    infoSuppRatesTableRow.forEach(row => {
+        let critereNom = row.querySelector("select").value
+        let critereValue = row.querySelector("input").value
+        if(!(critereNom == "" ||critereValue == "")){
+            formData.set(critereNom , critereValue);
+        }
+    })
+
 
     let response = await fetch("/api/articles",{
         method: "POST", 
         body: formData
     });
     let result = await response.json();
+
+
     if(result.success == true){
-        setTimeout(() => showToast('addProduct'), 400);
+        sessionStorage.setItem('showToast', 'addProduct');
         window.location.reload();
     }else{
         alert(result.message);
@@ -477,7 +579,10 @@ deleteArticleButtonList.forEach(article =>{
         });
         let result = await response.json();
 
-        if(result.success && result.data){window.location.reload()}
+        if(result.success && result.data){
+            sessionStorage.setItem('showToast', 'deleteProduct');
+            window.location.reload()
+        }
         else{alert(result.message)}
     })
 })

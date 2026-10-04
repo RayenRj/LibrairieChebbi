@@ -1,6 +1,18 @@
 let addAdminList = document.querySelectorAll(".addAdmin");
 let deleteClient = document.querySelectorAll(".deleteClient");
 
+// reglage ll toast
+document.addEventListener('DOMContentLoaded', () => {
+    const toast = sessionStorage.getItem('showToast');
+
+    if (toast) {
+        sessionStorage.removeItem('showToast');
+        showToast(toast);
+    }
+});
+// fin de reglage ll toast
+
+
 addAdminList.forEach(button =>{
     button.addEventListener("click", async function(event){
         event.preventDefault();
@@ -11,8 +23,10 @@ addAdminList.forEach(button =>{
                 body: {}
             });
             let result = await response.json();
-            if(!(result.success && result.data)){
-                alert(result.message);
+            if((result.success && result.data)){
+                showToast("adminAdded");
+            }else{
+                alert(result.message)
             }
         }
     })
@@ -30,6 +44,7 @@ deleteClient.forEach(button =>{
             });
             let result = await response.json();
             if(result.success && result.data){
+                sessionStorage.setItem('showToast', 'clientDeleted');
                 window.location.reload()
             }else{
                 alert(result.message);

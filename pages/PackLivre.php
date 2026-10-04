@@ -67,6 +67,15 @@
       </div>
     </div>
 
+    <?php if(empty($pack_list)): ?>
+              <div class="emptyContainer">
+                  <img src="/assets/images/noproduct.png" alt="">
+                  <h2>Aucun produit trouvé</h2>
+                  <p>Désolé, aucun produit ne correspond à votre recherche ou à votre sélection pour le moment</p>
+                  <a href="/main" class="button"><i class="fa-solid fa-magnifying-glass"></i>Voir tous les produit</a>
+              </div>
+
+    <?php else: ?>
     <div class="article-list">
       <?php foreach($pack_list as $pack): ?>
         <div class="box">
@@ -90,10 +99,11 @@
               </div>
           </div>
         </div>
-      <?php endforeach; ?>
-
-      
-    </div>
+        <?php endforeach; ?>
+        
+        
+      </div>
+      <?php endif; ?>
   </section>
 
     
@@ -118,22 +128,31 @@
       </form>
     </div>
 
-    <div class="article-list">
-      <?php foreach($liste_livre as $parascolaire): ?>
-        <article>
-          <a href="/products/product?idproduit=<?= $parascolaire["id_produit"] ?>">
-            <img src="<?= $parascolaire["image_url"] ?>" alt="">
-            <h4><?= $parascolaire["libelle"] ?></h4>
-            <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $parascolaire["quantite_stock"] ?> Packs disponibles</p>
-            <div class="last">
-              <p class="prix"><?= number_format($parascolaire["prix"], 3 , "," ," ") ?> DT</p>
-              <button type="button" data-idproduit="<?= $parascolaire["id_produit"] ?>"  class="addToCartBtn" data-name="<?= $parascolaire["libelle"] ?>" data-price="<?= $parascolaire["prix"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
-            </div>
-          </a>
-        </article>
-      <?php endforeach; ?>
-      
-    </div>
+    <?php if(empty($liste_livre)) : ?>
+              <div class="emptyContainer">
+                  <img src="/assets/images/noproduct.png" alt="">
+                  <h2>Aucun produit trouvé</h2>
+                  <p>Désolé, aucun produit ne correspond à votre recherche ou à votre sélection pour le moment</p>
+                  <a href="/main" class="button"><i class="fa-solid fa-magnifying-glass"></i>Voir tous les produit</a>
+              </div>
+
+    <?php else: ?>
+      <div class="article-list">
+        <?php foreach($liste_livre as $parascolaire): ?>
+          <article>
+            <a href="/products/product?idproduit=<?= $parascolaire["id_produit"] ?>">
+              <img src="<?= $parascolaire["image_url"] ?>" alt="">
+              <h4><?= $parascolaire["libelle"] ?></h4>
+              <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $parascolaire["quantite_stock"] ?> Packs disponibles</p>
+              <div class="last">
+                <p class="prix"><?= number_format($parascolaire["prix"], 3 , "," ," ") ?> DT</p>
+                <button type="button" data-idproduit="<?= $parascolaire["id_produit"] ?>"  class="addToCartBtn" data-name="<?= $parascolaire["libelle"] ?>" data-price="<?= $parascolaire["prix"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
+              </div>
+            </a>
+          </article>
+        <?php endforeach; ?>
+      </div>
+      <?php endif; ?>
     <!-- partie eli feha pagination -->
                 <div class="bottom">
                     <div class="pagination">
@@ -174,6 +193,7 @@
                         <?php endif; ?>
 
                     </div>
+                </div>
     </section>
 
 

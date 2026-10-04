@@ -232,19 +232,20 @@ facePart.forEach(face=>{
 
 
 // awl bouton fl page packs/livres
-let buttonSubmit1 = document.querySelector(".submitButtonTop")
-buttonSubmit1.addEventListener("click",function(event){
-    event.preventDefault();
-    let selectVal = document.querySelector(".anneeScolaire").value
-    let url = new URLSearchParams(window.location.search);
-    if(selectVal == "" ){
-        url.delete("anneeScolaire");
-    }else{
-        url.set("anneeScolaire",selectVal);
-    }
-    window.location.search= url.toString();
-})
-
+let buttonSubmit1 = document.querySelector(".submitButtonTop");
+if(buttonSubmit1){
+    buttonSubmit1.addEventListener("click",function(event){
+        event.preventDefault();
+        let selectVal = document.querySelector(".anneeScolaire").value
+        let url = new URLSearchParams(window.location.search);
+        if(selectVal == "" ){
+            url.delete("anneeScolaire");
+        }else{
+            url.set("anneeScolaire",selectVal);
+        }
+        window.location.search= url.toString();
+    })
+}    
 
 
 
@@ -253,9 +254,8 @@ buttonSubmit1.addEventListener("click",function(event){
 let urlSearch = new URLSearchParams(window.location.search);
 let anneeScolaire = urlSearch.get("anneeScolaire") ?? "";
 let niveau = urlSearch.get("niveau") ?? "";
-console.log(document.querySelectorAll(".anneeScolaire")[1].value)
-console.log(niveau)
 document.querySelectorAll(".anneeScolaire")[0].value = anneeScolaire;
-document.querySelectorAll(".anneeScolaire")[1].value = niveau;
-console.log(document.querySelectorAll(".anneeScolaire")[1].value)
+if(document.querySelectorAll(".anneeScolaire")[1]){
+    document.querySelectorAll(".anneeScolaire")[1].value = niveau;
+}
 // fin de cette partie -----------------------------------------------------

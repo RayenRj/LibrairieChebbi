@@ -1,6 +1,18 @@
 let confirmerButton = document.querySelectorAll(".confirmerButton");
 let promotionForm = document.querySelector("#promotionForm");
 
+
+// reglage ll toast
+document.addEventListener('DOMContentLoaded', () => {
+    const toast = sessionStorage.getItem('showToast');
+
+    if (toast) {
+        sessionStorage.removeItem('showToast');
+        showToast(toast);
+    }
+});
+// fin de reglage ll toast
+
 confirmerButton.forEach(button=>{
     button.addEventListener("click",async function(event){
         event.preventDefault();
@@ -17,7 +29,10 @@ confirmerButton.forEach(button=>{
             })
 
             let result = await response.json();
-            if(result.success && result.data){window.location.reload()}
+            if(result.success && result.data){
+                sessionStorage.setItem('showToast', 'promotionAdded');
+                window.location.reload()
+            }
             else{alert(result.message)}
 
         }

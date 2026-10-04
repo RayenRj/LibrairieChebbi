@@ -39,7 +39,7 @@
 
     <div class="games">
         <div class="links">
-            <a href="main.php">Acceuil</a>
+            <a href="/main">Acceuil</a>
             <i class="fa-solid fa-angle-right"></i>
             <a href="#">Jouer</a>
 

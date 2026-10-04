@@ -72,27 +72,33 @@
       </form>
     </div>
 
-    <div class="article-list">
-      <?php foreach($liste_parascolaire as $parascolaire): ?>
-        <article>
-          <a href="/products/product?idproduit=<?= $parascolaire["id_produit"] ?>">
-            <img src="<?= $parascolaire["image_url"] ?>" alt="">
-            <h4><?= $parascolaire["libelle"] ?></h4>
-            <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $parascolaire["quantite_stock"] ?> Packs disponibles</p>
-            <div class="last">
-              <p class="prix"><?= number_format($parascolaire["prix"], 3 , "," ," ") ?> DT</p>
-              <button type="button" data-idproduit="<?= $parascolaire["id_produit"] ?>" class="addToCartBtn" data-name="<?= $parascolaire["libelle"] ?>" data-price="<?= $parascolaire["prix"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
+    <!-- if empty liste des parascolaire -->
+    <?php if(empty($liste_parascolaire)): ?>
+                <div class="emptyContainer">
+                    <img src="/assets/images/noproduct.png" alt="">
+                    <h2>Aucun produit trouvé</h2>
+                    <p>Désolé, aucun produit ne correspond à votre recherche ou à votre sélection pour le moment</p>
+                    <a href="/main" class="button"><i class="fa-solid fa-magnifying-glass"></i>Voir tous les produit</a>
+                </div>
+
+    <?php else:?>
+    <!-- if the list is not empty -->
+            <div class="article-list">
+              <?php foreach($liste_parascolaire as $parascolaire): ?>
+                <article>
+                  <a href="/products/product?idproduit=<?= $parascolaire["id_produit"] ?>">
+                    <img src="<?= $parascolaire["image_url"] ?>" alt="">
+                    <h4><?= $parascolaire["libelle"] ?></h4>
+                    <p class="nombreDisponible"><i class="fa-solid fa-bag-shopping"></i> <?= $parascolaire["quantite_stock"] ?> Packs disponibles</p>
+                    <div class="last">
+                      <p class="prix"><?= number_format($parascolaire["prix"], 3 , "," ," ") ?> DT</p>
+                      <button type="button" data-idproduit="<?= $parascolaire["id_produit"] ?>" class="addToCartBtn" data-name="<?= $parascolaire["libelle"] ?>" data-price="<?= $parascolaire["prix"] ?>"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                  </a>
+                </article>
+              <?php endforeach; ?>
+              
             </div>
-          </a>
-        </article>
-      <?php endforeach; ?>
-      
-    </div>
-
-    
-
-
-
     <!-- partie eli feha pagination -->
                 <div class="bottom">
                     <div class="pagination">
@@ -135,10 +141,10 @@
                     </div>
                 </div>
 
+    <?php endif; ?>
   </section>
 
-
-
+<section id="lastSection"></section>
 
   <?php include(__DIR__ . "/../includes/footer.php"); ?>
   <div id="toast-region"></div>

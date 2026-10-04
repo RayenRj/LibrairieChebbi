@@ -509,13 +509,13 @@ use function PHPSTORM_META\type;
                             <?php if($product["remise"] > 0): ?>
                             <div class="priceDiscount">
                                 <p class="prixPartieDiscount">
-                                    <?= $product["prix"] - $product["remise"] ?> Dt
+                                    <?= number_format($product["prix"] - $product["remise"] , 3) ?> Dt
                                 </p>
-                                <p class="prixOriginal"><?= $product["prix"] ?> Dt</p>
+                                <p class="prixOriginal"><?= number_format($product["prix"],3) ?> Dt</p>
                             </div>
                             <?php else: ?>
                             <p class="price">
-                                <?= $product["prix"] ?> Dt
+                                <?= number_format($product["prix"],3) ?> Dt
                             </p>
                             <?php endif; ?>
                         </a>
