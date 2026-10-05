@@ -1146,3 +1146,9 @@ td.libelle p{
 .ListTwo table td:first-child , .ListOne table td:nth-child(2){
     text-align: left;
 }
+
+.information_supplimentaire div table,
+.infoSupplementaire div
+.information_supplimentaire{
+    width: 100%;
+}

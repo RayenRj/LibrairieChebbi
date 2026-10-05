@@ -29,6 +29,7 @@
         public function verifyEmailPage(){require(PATH . "VerifyEmail.php");}
         public function rateLimiterPage(){require(PATH . "rateLimiterPage.php");}
         public function erorPage(){require(PATH . "errorPage.php");}
+        public function messageBox(){require(PATH . "MessageBox.php");}
 
         
 

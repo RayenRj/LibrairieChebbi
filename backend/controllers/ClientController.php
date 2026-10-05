@@ -775,6 +775,119 @@
                 return;
             }
         }
+        public function sendMessage($request)
+        {
+            try {
+                $body = $request["body"];
+                $result = $this->clientServices->sendMessage(
+                    $body["firstName"] ?? null,
+                    $body["lastName"] ?? null,
+                    $body["email"] ?? null,
+                    $body["tel"] ?? null ,
+                    $body["content"] ?? null
+                );
+
+                $response = [
+                    "success" => true,
+                    "message" => "Message envoyer Avec succées",
+                    "data" => null,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+
+            } catch (Exception $e) {
+
+                $response = [
+                    "success" => false,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+            }
+        }
+        public function setMessageLu($request)
+        {
+            try {
+                $messageId = $request["params"][0];
+                $result = $this->clientServices->setMessageLu(
+                    $messageId
+                );
+
+                $response = [
+                    "success" => true,
+                    "message" => "Message changéee Avec succées",
+                    "data" => $result,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+
+            } catch (Exception $e) {
+
+                $response = [
+                    "success" => false,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+            }
+        }
+        public function getMessageList($request)
+        {
+            try {
+                $body = $request["body"];
+                $result = $this->clientServices->getMessageList(
+                    $body["firstName"] ?? "",
+                    $body["lastName"] ?? "",
+                    $body["email"] ?? "",
+                    $body["tel"] ?? "",
+                    $body["statut"] ?? "",
+                    $body["page"] ?? 1,
+                    $body["limit"] ?? 8,
+                );
+
+
+
+                $length = $this->clientServices->getMessageListLength(
+                    $body["firstName"] ?? "",
+                    $body["lastName"] ?? "",
+                    $body["email"] ?? "",
+                    $body["tel"] ?? "",
+                    $body["statut"] ?? "",
+                );
+                $response = [
+                    "success" => true,
+                    "message" => "Message changéee Avec succées",
+                    "length" => $length,
+                    "data" => $result,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+
+            } catch (Exception $e) {
+
+                $response = [
+                    "success" => false,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+            }
+        }
 
 
 

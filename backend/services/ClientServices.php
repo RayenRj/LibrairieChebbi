@@ -242,6 +242,20 @@
         return true;
     }
 
+    public function sendMessage(?string $firstName , ?string $lastName , ?string $email  , ?string $tel , ?string $content) : bool{
+        return $this->clientRepo->sendMessage($firstName , $lastName , $email , $tel , $content);
+    }
+    public function getMessageList(?string $nom, ?string $prenom , ?string $email , ?string $tel , ?string $status  , $page = 1 , $limit = 8){
+        $offset = ($page - 1) * $limit;    
+        return $this->clientRepo->getMessageList($nom , $prenom , $email , $tel ,$status, $offset , $limit);
+    }
+    public function getMessageListLength(?string $nom, ?string $prenom , ?string $email , ?string $tel , ?string $status){  
+        return $this->clientRepo->getMessageListLength($nom , $prenom , $email , $tel ,$status);
+    }
+
+    public function setMessageLu($messageId){
+        return $this->clientRepo->setMessageLu($messageId);
+    }
 
 
     }

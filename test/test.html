@@ -1,118 +1,205 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Librairie Chebbi – Toast</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+<title>Messages clients</title>
 <style>
-/* ===== Librairie Chebbi toast – copy from here ===== */
-:root{--y:#F4C430;--wy:#FFD95A;--cream:#FFF9E8;--navy:#263238;--gray:#6B7280;--green:#22C55E;--lg:#F5F7FA}
-#toasts{position:fixed;top:24px;right:24px;display:flex;flex-direction:column;gap:12px;z-index:9999;width:min(400px,calc(100vw - 32px))}
-.ct{position:relative;background:#fff;border-radius:20px;overflow:hidden;font-family:'Nunito Sans',system-ui,sans-serif;
-  box-shadow:0 18px 44px rgba(38,50,56,.16),0 2px 8px rgba(38,50,56,.06);opacity:0;transform:translateX(120%) scale(.96);
-  animation:ct-in .46s cubic-bezier(.22,.8,.3,1) forwards}
-.ct::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--y)}
-.ct.out{animation:ct-out .28s ease-in forwards}
-@keyframes ct-in{to{opacity:1;transform:none}}
-@keyframes ct-out{from{opacity:1;transform:none}to{opacity:0;transform:translateX(60%) scale(.97)}}
-.ct-body{display:flex;gap:14px;padding:20px 20px 18px;background:radial-gradient(circle at 0 0,var(--cream),#fff 55%)}
-.ct-ic{position:relative;width:48px;height:48px;flex-shrink:0}
-.ct-ok{width:48px;height:48px;border-radius:50%;background:var(--green);display:grid;place-items:center;box-shadow:0 0 0 5px rgba(34,197,94,.14)}
-.ct-ok path{stroke:#fff;stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:26;stroke-dashoffset:26;animation:ct-draw .35s .22s ease-out forwards}
-@keyframes ct-draw{to{stroke-dashoffset:0}}
-.ct-deco{position:absolute;right:-8px;bottom:-6px;width:26px;height:26px;border-radius:8px;background:var(--wy);display:grid;place-items:center;font-size:13px;transform:rotate(8deg);animation:ct-bounce .5s .3s ease-out}
-@keyframes ct-bounce{0%{transform:rotate(8deg) scale(.6)}60%{transform:rotate(8deg) scale(1.12)}100%{transform:rotate(8deg) scale(1)}}
-.ct-txt{flex:1;min-width:0;padding-right:18px}
-.ct-txt h2{font-family:'Fraunces',serif;font-size:18px;color:var(--navy);margin:2px 0 3px}
-.ct-txt p{margin:0 0 12px;color:var(--gray);font-size:13.5px}
-.ct-item{display:flex;align-items:center;gap:10px;background:var(--lg);border-radius:12px;padding:9px 11px}
-.ct-item .bk{width:34px;height:34px;border-radius:9px;background:#fff;border:1px solid #e8ebf0;display:grid;place-items:center;font-size:17px}
-.ct-item b{display:block;font-size:13px;color:var(--navy)}
-.ct-item span{font-size:12px;color:var(--gray)}
-.ct-x{position:absolute;top:12px;right:12px;width:26px;height:26px;border:0;border-radius:8px;background:transparent;color:var(--gray);font-size:20px;line-height:1;cursor:pointer}
-.ct-x:hover{background:var(--lg);color:var(--navy)}
-.ct-x:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
-.ct-bar{height:4px;background:var(--cream)}
-.ct-bar i{display:block;height:100%;background:var(--y);transform-origin:left;animation:ct-shrink linear forwards}
-@keyframes ct-shrink{to{transform:scaleX(0)}}
-@media(prefers-reduced-motion:reduce){.ct,.ct.out{animation-duration:.01s}.ct-ok path{animation:none;stroke-dashoffset:0}.ct-deco{animation:none}}
-/* ===== end toast CSS ===== */
+:root{
+  --bg:#f3f5f9; --card:#fff; --primary:#fbbf24; --primary-d:#f59e0b;
+  --text:#111c3d; --muted:#6b7280; --border:#e5e7eb;
+  --unread-bg:#fffbeb; --unread-bd:#fde68a; --green-bg:#dcfce7; --green:#15803d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);padding:24px}
+button,input,select{font:inherit;color:inherit}
+.page{max-width:1500px;margin:auto;background:#f8f9fc;border-radius:20px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
 
-/* demo page only */
-body{margin:0;font-family:'Nunito Sans',system-ui,sans-serif;background:var(--lg);color:var(--navy);padding:48px 24px}
-.demo{max-width:560px;margin:0 auto}
-.demo h1{font-family:'Fraunces',serif;font-size:24px;margin:0 0 6px}
-.demo p{color:var(--gray);margin:0 0 20px}
-.demo button{background:var(--y);border:0;border-radius:10px;padding:10px 14px;margin:0 8px 8px 0;font:700 14px 'Nunito Sans',sans-serif;color:var(--navy);cursor:pointer}
+/* Header */
+.header{display:flex;align-items:center;gap:16px}
+.header .icon{width:56px;height:56px;border-radius:50%;background:var(--primary);display:grid;place-items:center;font-size:24px}
+.header h1{font-size:30px;line-height:1.1}
+.header p{color:var(--muted);margin-top:4px}
+.counter{margin-left:auto;background:#eef1f7;border-radius:14px;padding:14px 18px;font-weight:700}
+.counter small{display:block;color:#dc2626;font-weight:500;font-size:13px;margin-top:2px}
+.counter small::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#ef4444;margin-right:6px}
+
+/* Filters */
+.filters{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px;background:#eef1f7;border:1px solid var(--border);border-radius:14px;padding:16px;margin:22px 0}
+.filters label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500}
+.filters input,.filters select{height:38px;padding:0 12px;background:#fff;border:1px solid var(--border);border-radius:10px;min-width:150px}
+.filters .search{flex:1;min-width:240px}
+.filters .search input{width:100%;height:40px}
+.btn{height:38px;padding:0 18px;border-radius:10px;border:1px solid var(--border);background:#fff;cursor:pointer;font-weight:500}
+.btn.primary{background:var(--primary);border-color:var(--primary);font-weight:600}
+.btn:hover{filter:brightness(.97)}
+
+/* Layout */
+.count{font-size:13px;color:var(--muted);margin-bottom:14px}
+.layout{display:grid;grid-template-columns:1fr 480px;gap:22px;align-items:start}
+
+/* Message cards */
+.list{display:flex;flex-direction:column;gap:12px}
+.msg{position:relative;display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px 16px 38px}
+.msg.unread{background:var(--unread-bg);border-color:var(--unread-bd)}
+.msg.unread::before{content:"";position:absolute;left:14px;top:22px;width:10px;height:10px;border-radius:50%;background:var(--primary-d)}
+.msg.active{outline:2px solid var(--primary)}
+.avatar{flex:none;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:17px}
+.body{flex:1;min-width:0}
+.body h3{font-size:15px}
+.msg.read .body h3{font-weight:600}
+.contact{font-size:13px;color:var(--muted);margin:2px 0 6px}
+.excerpt{font-size:14px;line-height:1.45}
+.msg.read .excerpt{color:#4b5563}
+.side{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:130px}
+.meta{display:flex;gap:18px;align-items:center;font-size:13px;color:var(--muted)}
+.badge{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
+.badge.new{background:#fde68a;color:#92400e}
+.badge.lu{background:var(--green-bg);color:var(--green)}
+.view{margin-top:auto;background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer}
+.view:hover{background:#f9fafb}
+
+/* Detail panel */
+.panel{position:sticky;top:20px;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 8px 24px rgba(17,28,61,.08);padding:22px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.panel-head h2{font-size:20px}
+.close{background:none;border:0;font-size:22px;cursor:pointer;color:var(--muted)}
+.person{display:flex;gap:16px;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.person .avatar{width:58px;height:58px}
+.person h3{font-size:17px;margin-bottom:6px}
+.person p{font-size:14px;color:#4b5563;line-height:1.7}
+.sent{margin:18px 0 14px;font-size:14px;color:#4b5563}
+.content{background:#f8f9fc;border:1px solid var(--border);border-radius:10px;padding:20px;line-height:1.7;font-size:15px;min-height:160px}
+.panel-foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;background:var(--unread-bg);border-radius:10px;padding:14px}
+.panel-foot .btn{height:40px}
+.panel-foot.is-read{background:#f0fdf4}
+
+/* Pagination */
+.pagination{display:flex;align-items:center;gap:8px;margin-top:20px}
+.pagination button{min-width:36px;height:36px;border:1px solid var(--border);background:#fff;border-radius:8px;cursor:pointer}
+.pagination button.current{background:var(--primary);border-color:var(--primary);font-weight:700}
+.pagination select{margin-left:auto;height:36px;padding:0 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:13px}
+
+/* Colors for avatars */
+.c1{background:#fcd34d;color:#92400e}.c2{background:#dbeafe;color:#1d4ed8}.c3{background:#ede9fe;color:#6d28d9}
+.c4{background:#fecaca;color:#b91c1c}.c5{background:#bbf7d0;color:#047857}.c6{background:#e9d5ff;color:#7e22ce}
+
+@media (max-width:1100px){.layout{grid-template-columns:1fr}.panel{position:static}}
+@media (max-width:600px){.msg{flex-wrap:wrap}.side{align-items:flex-start;width:100%}}
 </style>
 </head>
 <body>
-<div class="demo">
-  <h1>Notifications admin</h1>
-  <p>Cliquez pour tester chaque action.</p>
-  <button data-a="addProduct">Ajouter produit</button>
-  <button data-a="addPack">Ajouter pack</button>
-  <button data-a="updateProduct">Modifier produit</button>
-  <button data-a="deleteProduct">Supprimer produit</button>
-  <button data-a="addOrder">Créer commande</button>
-  <button data-a="updateOrder">Modifier commande</button>
+<div class="page">
+
+  <header class="header">
+    <div class="icon">💬</div>
+    <div>
+      <h1>Messages clients</h1>
+      <p>Consultez les demandes et messages envoyés par vos clients</p>
+    </div>
+    <div class="counter">24 messages<small>5 non lus</small></div>
+  </header>
+
+  <form class="filters" onsubmit="return false">
+    <label class="search"><span style="visibility:hidden">.</span><input type="search" placeholder="🔍  Nom, email ou téléphone…"></label>
+    <label>Nom<input type="text" placeholder="Nom client"></label>
+    <label>Email<input type="email" placeholder="Email"></label>
+    <label>Téléphone<input type="tel" placeholder="Téléphone"></label>
+    <label>Statut
+      <select><option>Tous</option><option>Non lus</option><option>Lus</option></select>
+    </label>
+    <button class="btn" type="reset">⟳ Réinitialiser</button>
+    <button class="btn primary" type="submit">Filtrer</button>
+  </form>
+
+  <p class="count">1–10 sur 24 messages</p>
+
+  <div class="layout">
+    <section class="list" id="list"></section>
+
+    <aside class="panel" id="panel">
+      <div class="panel-head"><h2>Message client</h2><button class="close" aria-label="Fermer">✕</button></div>
+      <div class="person">
+        <div class="avatar" id="p-avatar"></div>
+        <div><h3 id="p-name"></h3><p>✉ <span id="p-email"></span><br>📞 <span id="p-phone"></span></p></div>
+      </div>
+      <p class="sent">📅 <span id="p-date"></span></p>
+      <div class="content" id="p-text"></div>
+      <div class="panel-foot" id="p-foot">
+        <span class="badge" id="p-badge"></span>
+        <button class="btn primary" id="p-btn">✓ Marquer comme lu</button>
+      </div>
+    </aside>
+  </div>
+
+  <nav class="pagination">
+    <button>‹</button><button class="current">1</button><button>2</button><button>3</button>
+    <button>4</button><button>5</button><span>…</span><button>12</button><button>›</button>
+    <select><option>10 messages par page</option><option>25 messages par page</option></select>
+  </nav>
 </div>
 
-<div id="toasts" aria-live="polite"></div>
-
 <script>
-/* ===== Librairie Chebbi toast – JS ===== */
-const TOAST_PRESETS = {
-  addProduct:    {title:'Produit ajouté !',     text:'Le produit a été ajouté avec succès.',     icon:'📦', label:'Nouveau produit',   sub:'Article ajouté au stock', deco:'✏️'},
-  addPack:       {title:'Pack ajouté !',        text:'Le pack scolaire a été ajouté avec succès.', icon:'🎒', label:'Nouveau pack',      sub:'Pack disponible à la vente', deco:'📚'},
-  updateProduct: {title:'Produit modifié !',    text:'Les modifications ont été enregistrées.',  icon:'📖', label:'Produit mis à jour', sub:'Fiche produit à jour', deco:'🖊️'},
-  deleteProduct: {title:'Produit supprimé !',   text:'Le produit a été supprimé avec succès.',   icon:'📦', label:'Produit retiré',    sub:'Article retiré du stock', deco:'✏️'},
-  addOrder:      {title:'Commande créée !',     text:'La commande a été créée avec succès.',     icon:'🧾', label:'Nouvelle commande', sub:'Commande enregistrée', deco:'📚'},
-  updateOrder:   {title:'Commande modifiée !',  text:'La commande a été mise à jour.',           icon:'🧾', label:'Commande mise à jour', sub:'Statut enregistré', deco:'🖊️'}
-};
+const messages = [
+  {n:"Ahmed Ben Ali", i:"AB", c:"c1", e:"ahmed@gmail.com", t:"22 123 456", d:"05 Oct. 13:02", full:"05 octobre 2026 à 13:02", unread:true,
+   m:"Bonjour,\n\nJe voudrais savoir si le pack scolaire de 5ème année est encore disponible ? Et est-ce possible de venir le récupérer directement à la librairie ?\n\nMerci d'avance."},
+  {n:"Mariem Trabelsi", i:"MT", c:"c2", e:"mariem@gmail.com", t:"55 456 789", d:"05 Oct. 11:47", full:"05 octobre 2026 à 11:47", m:"Est-ce que vous faites la livraison à domicile ?"},
+  {n:"Yassine K.", i:"YK", c:"c3", e:"yassine@gmail.com", t:"98 321 654", d:"04 Oct. 18:21", full:"04 octobre 2026 à 18:21", m:"Je cherche un cartable pour un enfant de 8 ans. Avez-vous des modèles disponibles ?"},
+  {n:"Safa Lazreg", i:"SL", c:"c4", e:"safa@gmail.com", t:"50 987 654", d:"04 Oct. 16:03", full:"04 octobre 2026 à 16:03", unread:true, m:"Bonjour, est-ce que vous avez les cahiers d'activités pour le niveau 3ème ?\nMerci d'avance."},
+  {n:"Karim Ben Ammar", i:"KB", c:"c5", e:"karim@gmail.com", t:"27 654 321", d:"03 Oct. 12:45", full:"03 octobre 2026 à 12:45", m:"Je voudrais connaître le prix du sac à dos avec roulettes bleu."},
+  {n:"Dhouha Lajmi", i:"DL", c:"c6", e:"dhouha@gmail.com", t:"52 111 222", d:"02 Oct. 17:30", full:"02 octobre 2026 à 17:30", m:"Est-ce que vous acceptez les paiements par carte bancaire ?"}
+];
 
-function showToast(key, overrides, duration = 4000){
-  const c = Object.assign({}, TOAST_PRESETS[key] || TOAST_PRESETS.addProduct, overrides);
-  const el = document.createElement('div');
-  el.className = 'ct';
-  el.setAttribute('role', 'status');
-  el.innerHTML = `
-    <div class="ct-body">
-      <div class="ct-ic">
-        <div class="ct-ok"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <div class="ct-deco"></div>
-      </div>
-      <div class="ct-txt">
-        <h2></h2><p></p>
-        <div class="ct-item"><div class="bk"></div><div><b></b><span></span></div></div>
-      </div>
-      <button class="ct-x" aria-label="Fermer">×</button>
-    </div>
-    <div class="ct-bar"><i style="animation-duration:${duration}ms"></i></div>`;
-  // textContent = safe against HTML injection
-  el.querySelector('h2').textContent = c.title;
-  el.querySelector('p').textContent = c.text;
-  el.querySelector('.bk').textContent = c.icon;
-  el.querySelector('.ct-deco').textContent = c.deco;
-  el.querySelector('.ct-item b').textContent = c.label;
-  el.querySelector('.ct-item span').textContent = c.sub;
+const list = document.getElementById("list");
+let current = 0;
 
-  let timer;
-  const close = () => {
-    clearTimeout(timer);
-    if (el.classList.contains('out')) return;
-    el.classList.add('out');
-    setTimeout(() => el.remove(), 300);
-  };
-  el.querySelector('.ct-x').addEventListener('click', close);
-  timer = setTimeout(close, duration);
-  document.getElementById('toasts').appendChild(el);
+function renderList(){
+  list.innerHTML = messages.map((x,k)=>`
+    <article class="msg ${x.unread?'unread':'read'} ${k===current?'active':''}">
+      <div class="avatar ${x.c}">${x.i}</div>
+      <div class="body">
+        <h3>${x.n}</h3>
+        <p class="contact">${x.e} · ${x.t}</p>
+        <p class="excerpt">${x.m.replace(/\n+/g,' ')}</p>
+      </div>
+      <div class="side">
+        <div class="meta">
+          <span class="badge ${x.unread?'new':'lu'}">${x.unread?'Nouveau':'Lu'}</span>
+          <span>${x.d}</span>
+        </div>
+        <button class="view" data-k="${k}">👁 Voir le message</button>
+      </div>
+    </article>`).join("");
 }
 
-/* demo wiring */
-document.querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', () => showToast(b.dataset.a)));
-setTimeout(() => showToast('addProduct'), 400);
+function renderPanel(){
+  const x = messages[current];
+  document.getElementById("p-avatar").className = "avatar " + x.c;
+  document.getElementById("p-avatar").textContent = x.i;
+  document.getElementById("p-name").textContent = x.n;
+  document.getElementById("p-email").textContent = x.e;
+  document.getElementById("p-phone").textContent = x.t;
+  document.getElementById("p-date").textContent = "Envoyé le " + x.full;
+  document.getElementById("p-text").innerText = x.m;
+  const b = document.getElementById("p-badge");
+  b.className = "badge " + (x.unread ? "new" : "lu");
+  b.textContent = x.unread ? "Nouveau" : "Lu";
+  document.getElementById("p-btn").style.display = x.unread ? "" : "none";
+  document.getElementById("p-foot").classList.toggle("is-read", !x.unread);
+}
+
+list.addEventListener("click", e=>{
+  const btn = e.target.closest(".view");
+  if(!btn) return;
+  current = +btn.dataset.k;
+  renderList(); renderPanel();
+});
+document.getElementById("p-btn").addEventListener("click", ()=>{
+  messages[current].unread = false;
+  renderList(); renderPanel();
+});
+
+renderList(); renderPanel();
 </script>
 </body>
 </html>

@@ -301,6 +301,99 @@ public function updateVerificationCode(int $idClient,string $verificationCode,st
 
 
 
+    public function sendMessage(?string $firstName , ?string $lastName , ?string $email  , ?string $tel , ?string $content) : bool{
+        $query = "insert into table message(id_message,first_name,last_name,email,tel,content,date_envoie , statut) values(?,?,?,?,?,?,? ,?); ";
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute([$firstName , $lastName , $email , $tel , $content , date('Y-m-d H:i:s') ,"non lu"]);
+    }
+
+    public function getMessageList(?string $nom, ?string $prenom , ?string $email , ?string $tel , ?string $status , $offset , $limit){
+        $query = "select * from message where 1=1";
+        $params=[];
+        $queryList = [];
+        if(!empty($nom) && !empty($prenom)){
+            $queryList[] = "((first_name like ? and last_name like ?) OR (first_name like ? and last_name like ?))";
+            $params[] = "%$nom%";
+            $params[] = "%$prenom%";
+            $params[] = "%$prenom%";
+            $params[] = "%$nom%";
+        }else if(!empty($nom)){
+            $queryList[] = "(first_name like ? or last_name like ? )";
+            $params[] = "%$nom%";
+            $params[] = "%$nom%";
+        }else if(!empty($prenom)){
+            $queryList[] = "(first_name like ? or last_name like ? )";
+            $params[] = "%$prenom%";
+            $params[] = "%$prenom%";
+        }
+        if(!empty($email)){
+            $queryList[] = "email like ? ";
+            $params[] = "%$email%";
+        }
+        if(!empty($tel)){
+            $queryList[] = "tel like ?";
+            $params[] = "%$tel%";
+        }
+        if(!empty($status)){
+            $queryList[] = "statut = ?";
+            $params[] = $status;
+        }
+
+        if(!empty($queryList)){
+            $query .= " AND " . implode(" AND " , $queryList) ;
+        }
+        $query .= " LIMIT $limit OFFSET $offset  ; ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+    public function getMessageListLength(?string $nom, ?string $prenom , ?string $email , ?string $tel , ?string $status){
+        $query = "select count(*) from message where 1=1";
+        $params=[];
+        $queryList = [];
+        if(!empty($nom) && !empty($prenom)){
+            $queryList[] = "((first_name like ? and last_name like ?) OR (first_name like ? and last_name like ?))";
+            $params[] = "%$nom%";
+            $params[] = "%$prenom%";
+            $params[] = "%$prenom%";
+            $params[] = "%$nom%";
+        }else if(!empty($nom)){
+            $queryList[] = "(first_name like ? or last_name like ? )";
+            $params[] = "%$nom%";
+            $params[] = "%$nom%";
+        }else if(!empty($prenom)){
+            $queryList[] = "(first_name like ? or last_name like ? )";
+            $params[] = "%$prenom%";
+            $params[] = "%$prenom%";
+        }
+        if(!empty($email)){
+            $queryList[] = "email like ? ";
+            $params[] = "%$email%";
+        }
+        if(!empty($tel)){
+            $queryList[] = "tel like ?";
+            $params[] = "%$tel%";
+        }
+        if(!empty($status)){
+            $queryList[] = "statut = ?";
+            $params[] = $status;
+        }
+
+        if(!empty($queryList)){
+            $query .= " AND " . implode(" AND " , $queryList) ;
+        }
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_NUM)[0] ?: 0;
+
+    }
+
+    public function setMessageLu($messageId){
+        $query = "update message set statut = 'lu' where id_message = ? ;";
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute([$messageId]);
+    }
 
 
 

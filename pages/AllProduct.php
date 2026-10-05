@@ -511,7 +511,7 @@ use function PHPSTORM_META\type;
                                 <p class="prixPartieDiscount">
                                     <?= number_format($product["prix"] - $product["remise"] , 3) ?> Dt
                                 </p>
-                                <p class="prixOriginal"><?= number_format($product["prix"],3) ?> Dt</p>
+                                <p class="prixOriginal"><?= number_format($product["prix"],2) ?> Dt</p>
                             </div>
                             <?php else: ?>
                             <p class="price">

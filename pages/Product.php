@@ -15,14 +15,39 @@
         floatval($product_coordonee["remise"]),
         $product_coordonee["marque"],
         $product_coordonee["description"],
-        $product_coordonee["review"] ?? 154,
-        $product_coordonee["number_of_stars"] ?? 3,
-        $product_coordonee["rating"],
         $product_coordonee["nombre_rater"],
-        $product_coordonee["rating"]
+        $product_coordonee["rating"],
+        $product_coordonee["information_supplementaire"]
     );
 
+    $featureIcons = [
+        "marque"              => "fa-solid fa-tag",
+        "couleur"             => "fa-solid fa-palette",
+        "matiere"             => "fa-solid fa-layer-group",
+        "format"              => "fa-solid fa-file-lines",
+        "taille"              => "fa-solid fa-ruler",
+        "genre"               => "fa-solid fa-venus-mars",
+        "age"                 => "fa-solid fa-child",
+        "poids"               => "fa-solid fa-weight-hanging",
+        "dimensions"          => "fa-solid fa-up-right-and-down-left-from-center",
+        "nombre_pieces"       => "fa-solid fa-puzzle-piece",
+        "capacite"            => "fa-solid fa-box-open",
+        "pages"               => "fa-solid fa-book-open",
+        "langue"              => "fa-solid fa-language",
+        "auteur"              => "fa-solid fa-user-pen",
+        "editeur"             => "fa-solid fa-building",
+        "niveau_scolaire"     => "fa-solid fa-graduation-cap",
+        "type_pointe"         => "fa-solid fa-pen",
+        "epaisseur"           => "fa-solid fa-ruler-vertical",
+        "matiere_couverture"  => "fa-solid fa-book",
+        "compartiments"       => "fa-solid fa-table-cells-large",
+        "roulettes"           => "fa-solid fa-wheelchair"
+    ];
+    
     $list_all_product = $product_service->getAllProduct(8,1);
+
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -104,22 +129,16 @@
                         <i class="fa-solid fa-clipboard-list"></i>
                         Categorie: <?= $product->getCategorie() ?>
                     </li>
-                    <li>
-                        <i class="fa-solid fa-tag"></i>
-                        Brand: <?= $product->getMarque() ?>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-expand"></i>
-                        Size: A5
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-file"></i>
-                        Page: 120 Lined pages
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-book"></i>
-                        Cover: Durable Plastic cover
-                    </li>
+                    <?php if(!empty($product->getInformationSupplementaireArray())): ?>
+                    <?php foreach ($product->getInformationSupplementaireArray() as $feature):
+                        $icon = $featureIcons[$feature[0]] ?? "fa-solid fa-circle-info";
+                    ?>
+                        <li>
+                            <i class="<?= $icon ?>"></i>
+                            <?= htmlspecialchars($feature[0]) . " : " . htmlspecialchars($feature[1]) ?>
+                        </li>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
                 <div class="article-buttons">
                     <form action="">

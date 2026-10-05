@@ -92,7 +92,11 @@ error_reporting(E_ALL);
     "/testMail",
     "/verify-email",
     "/ratelimitpassed",
-    "/error"
+    "/error",
+    "/dashboard/messages",
+    "/api/users/message/send",
+    "/api/users/message/lu",
+    "/api/users/messages"
 ];
     $route->add("GET", "/products" , "PageController","allProductPage");
     $route->add("GET", "/dashboard" , "PageController","dashboardPage");
@@ -123,6 +127,7 @@ error_reporting(E_ALL);
     $route->add("GET", "/verify-email", "PageController", "verifyEmailPage");
     $route->add("GET", "/ratelimitpassed", "PageController", "rateLimiterPage");
     $route->add("GET", "/error", "PageController", "erorPage");
+    $route->add("GET", "/dashboard/messages", "PageController", "messageBox");
 
 
 
@@ -172,6 +177,9 @@ error_reporting(E_ALL);
     $route->add("POST","/api/users/update", "ClientController" , "updateClient");
     $route->add("POST","/api/users/resend-code","ClientController","resendVerificationCode");
     $route->add("POST","/api/users/verify-email","ClientController","verifyEmail");
+    $route->add("POST","/api/users/message/send","ClientController","sendMessage");
+    $route->add("POST","/api/users/message/lu","ClientController","setMessageLu");
+    $route->add("POST","/api/users/messages","ClientController","getMessageList");
 
     //=========> commande Routes <=======
     $route->add("DELETE" , "/api/commandes/{id}", "CommandeController","deleteCommande");

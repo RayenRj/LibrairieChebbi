@@ -61,6 +61,12 @@
                         <p>Admins</p>
                     </li>
                 </a>
+                <a href="/dashboard/messages">
+                    <li>
+                        <i class="fa-solid fa-message"></i>
+                        <p>Messages</p>
+                    </li>
+                </a>
                 <a href="/main" id="deconnexion">
                     <li>
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>

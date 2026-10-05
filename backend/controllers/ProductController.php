@@ -55,7 +55,8 @@
                                                                 $body["typeCollection"] ?? null,
                                                                 $body["matiere"] ?? null,
                                                                 $body["rating"],
-                                                                $body["nombre_rater"]);
+                                                                $body["nombre_rater"],
+                                                                json_decode($body["information_supplementaire"]) ?? null);
                 $response = [
                     "success" => true,
                     "numberOfLine" => null,

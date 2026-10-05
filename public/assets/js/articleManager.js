@@ -500,14 +500,6 @@ let addArticleForm = document.querySelector("#addArticleForm");
 addArticleForm.addEventListener("submit",async function(event){
     event.preventDefault();
     const formData = new FormData(addArticleForm);
-    // for(let [key,val] of formData.entries()){
-    //     console.log(key, val)
-    // }
-    // for(let [key,val] of formData.entries()){
-    //     if(val.trim() == ""){
-    //         formData.delete(key)
-    //     }
-    // }
 
 
     // rates alea
@@ -518,15 +510,16 @@ addArticleForm.addEventListener("submit",async function(event){
 
     let infoSuppRatesTableRow = info_supp_table.querySelectorAll("tr");
     console.log(infoSuppRatesTableRow)
+    let data_array = [];
     infoSuppRatesTableRow.forEach(row => {
         let critereNom = row.querySelector("select").value
         let critereValue = row.querySelector("input").value
         if(!(critereNom == "" ||critereValue == "")){
-            formData.set(critereNom , critereValue);
+            data_array.push({'critereNom' : critereNom , 'critereValue' : critereValue});
         }
     })
 
-
+    formData.set("information_supplementaire" , JSON.stringify(data_array));
     let response = await fetch("/api/articles",{
         method: "POST", 
         body: formData

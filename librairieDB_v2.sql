@@ -178,6 +178,20 @@ create table userLogin(
 );
 
 -- ==========================================================
+-- TABLE USER LOGIN
+-- ==========================================================
+create table message(
+	id_message int primary key auto_increment,
+    first_name varchar(255),
+	last_name varchar(255),
+    email varchar(255),
+    tel varchar(255),
+    content varchar(255),
+    date_envoie datetime,
+    statut varchar(255) check(statut in ("lu" , "non lu"))
+);
+
+-- ==========================================================
 -- TABLE Games LOGIN
 -- ==========================================================
 create table games(
@@ -780,74 +794,7 @@ CHECK (
     )
 );
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<
-select * from livre;
-delete from livre;
+-- ################# IMPORTANT ###################
 
-show columns from sac;
-use librairieDB_v2;
-
-select * from pack pa , ligne_commande lc , commande c where lc.id_commande = c.id_commande and lc.id_produit = pa.id_pack;
-
-select * from produit;
-select * from commande;
-select * from games;
-select count(*) from games;	
-show tables;
 use librairiedb_v2;
-select * from produit where categorie="autres";	
-
-
-select * from commande where id_commande = 6;
-select * from ligne_commande where id_commande=6;
-select * from collection;
-select prix * 4 from produit where id_produit=17;
-
-show tables;
-select * from pack;
-select * from client;	
-select count(*) from games g , produit p where p.id_produit = g.id_game;
-show columns from games;
-select * from client where id_client = 21;
-
-
-
-select p.* , g.genre from produit p , games g where g.id_game = p.id_produit ;
-
-
--- remove niveau scolaire marque , couleur roulettes nombre_compartiments 
-alter table collection 
-drop column marque;
-update client set role= "admin" where id_client = 23;
-select * from games;
-show tables;	
-select * from produit;
-use librairieDB_v2;
-show columns from client;
-select * from client;
-delete from client where email = "rjibi.rayen01@gmail.com";
-update client set email_verified = 0 where email = "rjibi.rayen01@gmail.com";
-update client set role = "admin" where email = "rjibi.rayen01@gmail.com";
-
-show columns from produit;
-select distinct(categorie) from produit;
-
-select categorie ,sum(quantite) as `nombreVente`
-                                        from pack p , ligne_commande lc
-                                        where id_pack = id_produit
-                                        group by p.categorie;
-select * from produit;
-use librairiedb_v2;
-select pa.* , pr.* from produit pr, pack pa where id_pack = id_produit;
-select * from produit;
-describe livre;
-show columns from packarticle;
-
-select * from pack;
- select p.* , pa.* , (select count(*) from packarticle par where p.id_produit = par.id_pack ) as item_number
-                        from produit p , pack pa
-                        where pa.id_pack = 41 and pa.id_pack = p.id_produit;
-                        
-                        
-select * from produit where id_produit = 41;
-select * from pack;
-select * from produit p , pack pa where id_produit = 326 ;
+select * from message;

@@ -14,7 +14,20 @@
         private string $description;
         private float $numberOfStars;
         private int $review;
-        public function __construct(string $idProd , string $lib, int $stock , float $prx , string $cat , string $code, string $img  , float $remise , string $marque , string $description , int $review , int $stars){
+        private  ?array $informationSuppplementaire;
+        public function __construct(string $idProd , 
+                                    string $lib, 
+                                    int $stock , 
+                                    float $prx , 
+                                    string $cat , 
+                                    string $code, 
+                                    string $img  , 
+                                    float $remise , 
+                                    string $marque , 
+                                    string $description , 
+                                    string $review , 
+                                    string $stars , 
+                                    ?string $informationSuppplementaire){
             $this->idProduit = $idProd;
             $this->libelle = $lib;
             $this->stock = $stock;
@@ -25,8 +38,19 @@
             $this->code_a_barre = $code;
             $this->imageUrl = $img;
             $this->description = $description;
-            $this->numberOfStars = $stars ;
-            $this->review = $review;
+            $this->numberOfStars = floatval($stars) ;
+            $this->review = intval($review);
+            if($informationSuppplementaire != null && $informationSuppplementaire != ""){
+                $this->informationSuppplementaire = array_map(
+                function($element){
+                    return explode(":",$element,2);
+                },
+                explode("#",$informationSuppplementaire)
+            );
+            }else{
+                $this->informationSuppplementaire = null;
+            }
+            
         }
 
         // getter
@@ -42,6 +66,7 @@
         public  function getDescription():string{return $this->description;}
         public  function getNumberOfStars():float{return $this->numberOfStars;}
         public  function getReview():int{return $this->review;}
+        public function getInformationSupplementaireArray(){return $this->informationSuppplementaire;}
         //setter
         public  function setId(string $id):void{$this->idProduit = $id;}
         public  function setLibelle(string $lib):void{$this->libelle = $lib;}
@@ -55,6 +80,19 @@
         public  function setDescription(string $description){$this->description =$description;}
         public  function setNumberOfStars(float $numberOfStars){$this->numberOfStars =$numberOfStars;}
         public  function setReview(int $review){$this->review =$review;}
+        public function setInformationSupplementaire(?string $informationSuppplementaire){
+            if($informationSuppplementaire != null && $informationSuppplementaire != ""){
+                $this->informationSuppplementaire = array_map(
+                function($element){
+                    return explode(":",$element,2);
+                },
+                explode("#",$informationSuppplementaire)
+                );
+            }else{
+                $this->informationSuppplementaire = null;
+            }
+
+        }
     }
 
 ?>
