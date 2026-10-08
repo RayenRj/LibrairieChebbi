@@ -2,6 +2,20 @@
 const chart1 = document.getElementById('evolution_vente');
 const days = ["Dimanche","Lundi" , "Mardi","Mercredi","Jeudi","Vendredi" , "Samedi"]
 let legendVentePack = document.querySelector(".legend");
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toast = sessionStorage.getItem('showToast');
+
+    if(toast) {
+        sessionStorage.removeItem('showToast');
+        showToast(toast);
+    }
+});
+
+
+
 window.addEventListener("load",async function name(params) {
 
 
@@ -73,7 +87,6 @@ window.addEventListener("load",async function name(params) {
   let data2 = result2.data;
   var html ="";
   var listTemp = data2.map(row => row["categorie"])
-  console.log(listTemp)
   if(data2!== null && data2.length!==0){
     // le cas ou il ya des vente
     let pourcentage =[];
@@ -153,3 +166,26 @@ window.addEventListener("load",async function name(params) {
 
   // donut chart
 
+  ///////////////////////////////////////
+  ///////////////////////////////////////
+  ///////////////////////////////////////
+  ///////// Repture de stock supprimer /////
+  ///////////////////////////////////////
+  ///////////////////////////////////////
+  ///////////////////////////////////////
+let supprimerReptureStockButton = document.querySelectorAll(".buttons .supprimerProduit");
+
+supprimerReptureStockButton.forEach(button =>{
+  button.addEventListener("click",async function(event){
+    event.preventDefault();
+    let idproduit = button.dataset.idproduit;
+    let apiCall = await fetch("/api/articles/" + idproduit,{method:"DELETE"});
+    let apiResponse = await apiCall.json();
+    if(apiResponse.success){
+      sessionStorage.setItem('showToast', 'deleteProduct');
+      window.location.reload();
+    }else{
+      alert(apiResponse.message);
+    }
+  })
+})

@@ -148,6 +148,9 @@
     margin: 16px 0 18px;
     width: fit-content;
     font-size: 0.95rem;
+    max-height: 46px;
+    height: 46px;
+    overflow: hidden;
     /* padding: 8px 16px; */
     /* background-color: #DDE4FF; */
     /* border-radius: 50px; */
@@ -281,6 +284,7 @@ section.bottom{
         font-weight: 600;
         margin: 16px 0 18px;
         width: fit-content;
+        max-height: 47px;
         font-size: 0.95rem;
         max-height: 46px;
         height: 46px;
@@ -288,5 +292,11 @@ section.bottom{
         /* padding: 8px 16px; */
         /* background-color: #DDE4FF; */
         /* border-radius: 50px; */
+    }
+    section.bottom > h3 {
+        font-size: 1.15em !important;
+    }
+    section.bottom{
+        padding: 2em 0.5em !important;
     }
 }

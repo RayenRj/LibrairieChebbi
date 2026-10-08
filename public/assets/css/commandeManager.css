@@ -183,8 +183,8 @@ img{
 
 .commandeManagerBottomPart .top{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-end;
     padding: 0.5em 2em;
     margin-bottom: 2em;
     gap: 1em;
@@ -201,7 +201,7 @@ img{
     outline: none;
     font-size: 14px;
     font-weight: 400;
-    padding: 10px 15px 10px 32px;
+    padding: 10px 32px 10px 15px;
     margin-top: .5em;
     max-height: 38px;
 }
@@ -212,8 +212,9 @@ img{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 13px;
+    right: 13px;
     color: var(--gray-700);
+    width: fit-content;
 }
 
 .commandeManagerBottomPart .top > div > p{
@@ -550,6 +551,11 @@ img{
 .commandeContainer::-webkit-scrollbar{
     appearance: none;
 }
+    .commandeManagerBottomPart .table-part{
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: thin;
+    }
 
 .commandeContainer{
     width: 70%;
@@ -768,6 +774,7 @@ img{
         opacity: 0;
         display: none;
     }
+
     .commandeManagerBottomPart .table-part td {
         padding: 0.35em;
         text-align: center;

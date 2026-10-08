@@ -36,6 +36,52 @@
             }
         }
         //done
+        public function modifyProduct($request){
+            try{
+                $image = $request["file"]["image"];
+                $body = $request["body"];
+                $id = $request["params"][0];
+                $result = $this->productServices->modifyProduct($id,
+                                                                $body["libelle"] ,
+                                                                floatval($body["prix"]), 
+                                                                intval($body["quantity"]),
+                                                                $body["categorie"], 
+                                                                $body["marque"], 
+                                                                floatval($body["remise"]) ?? 0 , 
+                                                                $body["description"],
+                                                                $image,
+                                                                $body["codeBarre"],
+                                                                $body["anneeScolaire"] ?? null,
+                                                                $body["genre"] ?? null,
+                                                                $body["collection"] ?? null,
+                                                                $body["typeCollection"] ?? null,
+                                                                $body["matiere"] ?? null,
+                                                                $body["rating"],
+                                                                $body["nombre_rater"],
+                                                                json_decode($body["information_supplementaire"]) ?? null);
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Article Added successfully", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }
+
+        }
+        //done
         public function addProduct($request){
             try{
                 $image = $request["file"]["image"];
@@ -323,6 +369,55 @@
                 return;
             }
         }
+        public function numberOfProductEachCategorie($request){
+            try{
+                $result = $this->productServices->numberOfProductEachCategorie();
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Searching", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
+        public function numberOfProductEachMarque($request){
+            try{
+                $result = $this->productServices->numberOfProductEachMarque();
+                $response = [
+                    "success" => true,
+                    "numberOfLine" => null,
+                    "message" => "Searching", 
+                    "data" => $result,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }catch(Exception $e){
+                $response = [
+                    "success" => false,
+                    "numberOfLine" => null,
+                    "message" => $e->getMessage(), 
+                    "data" => null,
+                    "error" => null
+                ];
+                echo json_encode($response);
+                return;
+            }
+        }
+
 
 
 }

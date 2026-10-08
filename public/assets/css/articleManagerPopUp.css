@@ -216,12 +216,14 @@ img{
 }
 
 .popUpContainer .popUpCard .double > div > div ,
-.popUpContainer .popUpCard .single > div{
+.popUpContainer .popUpCard .single > div,
+.singleGenre div{
     position: relative;
 }
 
 .popUpContainer .popUpCard .double > div > div > i,
-.popUpContainer .popUpCard .single > div > i{
+.popUpContainer .popUpCard .single > div > i,
+.singleGenre i{
     position: absolute;
     top: 50%;
     left: 10px;

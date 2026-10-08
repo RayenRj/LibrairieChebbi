@@ -70,7 +70,58 @@
             $query = "select * from {$this->tName} where id_produit = ?";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+            $product = $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+            if(strtolower($product["categorie"])=="jouet"){
+                $query = "select * from games where id_game = ? ;";
+                $stmt = $this->db->prepare($query);
+                $stmt->execute([$product["id_produit"]]);
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($data != null && $data!= false){
+                    foreach($data as $key => $element){
+                        $product[$key] = $element;
+                    }
+                }
+            }
+
+        
+            if(strtolower($product["categorie"])=="livres_pedagogiques"){
+                $query = "select * from livre where id_produit = ? ";
+                $stmt = $this->db->prepare($query);
+                $stmt->execute([$product["id_produit"]]);
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($data != null && $data!= false){
+                    foreach($data as $key => $element){
+                        $product[$key] = $element;
+                    }
+                }
+            }
+            if(strtolower($product["categorie"])=="parascolaire"){
+                $query = "select l.* , p.* from livre l , parascolaire p where p.id_produit = l.id_produit and l.id_produit = ? ";
+                $stmt = $this->db->prepare($query);
+                $stmt->execute([$product["id_produit"]]);
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if($data != null && $data!= false){
+                    foreach($data as $key => $element){
+                        $product[$key] = $element;
+                    }
+                }
+
+            }
+            if(in_array(strtolower($product["categorie"]),["Sacs à dos","Sacs à chariot","Trousses","Paniers","Chariots","panier","sac a dos","trousse"])){
+                $query = "select * from collection where id_produit = ? ";
+                $stmt = $this->db->prepare($query);
+                $stmt->execute([$product["id_produit"]]);
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($data != null && $data!= false){
+                    foreach($data as $key => $element){
+                        $product[$key] = $element;
+                    }
+                }
+
+            }
+
+            return $product;
         }
 
         public function ajouterProduit(Product $produit){
@@ -87,6 +138,62 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
+        public function modifyProduct($id,$libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre, $anneescolaire , $genre , $collection , $typeCollection,$matiere ,$rating , $nombreRaters , $informationSupplementaire){
+            if(!empty($image_url)){
+                $query = "update produit set libelle = ? , prix = ?,quantite_stock = ? ,categorie = ?, marque = ? , remise = ? , description = ? , image_url = ? , code_barre = ? , rating = ? , nombre_rater = ? , information_supplementaire = ? where id_produit = ? ;";
+                $stmt = $this->db->prepare($query);
+                $info = [];
+                
+                foreach($informationSupplementaire as $key_gen => $object){
+                    $info[] = $object->critereNom . ":" . $object->critereValue;
+                }
+    
+    
+    
+                $result = $stmt->execute([$libelle , $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre , $rating , $nombreRaters, implode("#",$info) , $id]);
+                
+                }else{
+                    $query = "update produit set libelle = ? , prix = ?,quantite_stock = ? ,categorie = ?, marque = ? , remise = ? , description = ? , code_barre = ? , rating = ? , nombre_rater = ? , information_supplementaire = ? where id_produit = ? ;";
+                    $stmt = $this->db->prepare($query);
+                    $info = [];
+                    
+                    foreach($informationSupplementaire as $key_gen => $object){
+                        $info[] = $object->critereNom . ":" . $object->critereValue;
+                    }
+        
+        
+        
+                    $result = $stmt->execute([$libelle , $prixUnitaire, $quantite , $categorie, $marque, $remise , $description , $codeBarre , $rating , $nombreRaters, implode("#",$info) , $id]);
+                    
+            }
+
+
+
+
+            $lastInsertedId = $id;
+
+            if($categorie=="livres_pedagogiques"){ // reglage livres pedagogiques
+                $query= "update livre set id_produit = ? , niveau_scolaire = ? ,matiere = ? where id_produit = ? ;";
+                $stmt = $this->db->prepare($query);
+                $result = $result && $stmt->execute([$lastInsertedId, $anneescolaire , $matiere , $id]);
+            }else if($categorie == "parascolaire"){ // reglage parascoalaire
+                $query= "update livre set id_produit = ?, niveau_scolaire = ?,matiere = ? where id_produit = ?";
+                $stmt = $this->db->prepare($query);
+                $result = $result && $stmt->execute([$lastInsertedId, $anneescolaire , $matiere , $id]);
+                $query2 = "update parascolaire set collection = ? where id_produit= ? ;";
+                $stmt2 = $this->db->prepare($query2);
+                $result = $result && $stmt2->execute([$collection , $id]);
+            }else if($categorie == "jouet"){ // reglage jouet
+                $query = "update games set genre = ? where id_game = ? ;";
+                $stmt = $this->db->prepare($query);
+                $result = $result && $stmt->execute([$genre , $id]);
+            }else if(in_array($categorie , ["panier","trousse","sac a chariot","sac a dos"])){ // regalge collection
+                $query = "update collection set genre= ? , type = ? where id_produit = ? ;";
+                $stmt = $this->db->prepare($query);
+                $result = $result && $stmt->execute([$genre , $categorie, $id] );
+            }
+            return $result;
+        }
         public function createNewProduct($libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre, $anneescolaire , $genre , $collection , $typeCollection,$matiere ,$rating , $nombreRaters , $informationSupplementaire){
             $query = "INSERT INTO produit (libelle , prix,quantite_stock,categorie, marque , remise, description, image_url , code_barre , rating , nombre_rater , information_supplementaire ) values (?,?,?,?,?,?,?,?,?,?,? , ?) ;";
             $stmt = $this->db->prepare($query);
@@ -97,13 +204,21 @@
             }
 
 
-
             $result = $stmt->execute([$libelle , $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $image_url , $codeBarre , $rating , $nombreRaters, implode("#",$info)]);
+
             $lastInsertedId = $this->db->lastInsertId();
+            // above is working
+                // $query = "select * from livre where id_produit  = ?";
+                // $stmt = $this->db->prepare($query);
+                // $stmt->execute([$lastInsertedId]);
+                // $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                // var_dump($data);
+                // exit;
             if($categorie=="livres_pedagogiques"){ // reglage livres pedagogiques
                 $query= "INSERT into livre(id_produit, niveau_scolaire,matiere) values(?,?,?)";
                 $stmt = $this->db->prepare($query);
                 $result = $result && $stmt->execute([$lastInsertedId, $anneescolaire , $matiere]);
+
             }else if($categorie == "parascolaire"){ // reglage parascoalaire
                 $query= "INSERT into livre(id_produit, niveau_scolaire,matiere) values(?,?,?)";
                 $stmt = $this->db->prepare($query);
@@ -183,7 +298,7 @@
                 $query .= "AND categorie in ($placeholders) " ;
                 foreach($categorie as $cat){$param[] = $cat;}
             }else{
-                if ($categorie !== ""){
+                if($categorie !== ""){
                     $query .= "AND categorie = ? ";
                     $param[] = $categorie;
                 }
@@ -243,7 +358,7 @@
 
 
             $offset = ($page - 1) * $limit;
-            $query .= " GROUP BY p.id_produit ";
+            // $query .= " GROUP BY p.id_produit ";
             $query .= " ORDER BY {$trie} DESC";
             $query .= " LIMIT $limit OFFSET $offset ;";
             
@@ -712,6 +827,54 @@
         $stmt->execute($param);
         return $stmt->fetch(PDO::FETCH_NUM)[0] ?: 0;
 
+    }
+
+
+    public function produitSimilaire(string $idproduit,?string $categorie , ?string $marque , int $nombreArticle=12){
+        $articles = [];
+        $query = "select * from produit where categorie = ? and id_produit <> ? ;";
+        $query1 = "select * from produit where marque = ? and id_produit <> ? ;" ;
+        $query3 = "select * from produit where categorie <> ? and marque <> ? and id_produit <> ? ;";
+
+        $stmt = $this->db->prepare($query);
+        $stmt1 = $this->db->prepare($query1);
+        $stmt3 = $this->db->prepare($query3);
+
+        $stmt->execute([$categorie,$idproduit]);
+        $stmt1->execute([$marque,$idproduit]);
+        $stmt3->execute([$categorie,$marque,$idproduit]);
+
+        $res1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $res2 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+        $res3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+
+
+        for($i=0; $i< min(count($res1), 5) ;$i++){
+            $articles[] = $res1[$i];
+        }
+        for($i= min(5 , count($articles)); $i< min(count($res2), 10) ;$i++){
+            $articles[] = $res2[$i];
+        }
+        for($i= min(10 , count($articles)); $i< max(count($res2), $nombreArticle) ;$i++){
+            $articles[] = $res3[$i];
+        }
+
+        return $articles;
+        
+    }
+
+
+    public function numberOfProductEachCategorie(){
+        $query = "SELECT count(*) as productNumber , categorie from produit group by categorie ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function numberOfProductEachMarque(){
+        $query = "SELECT count(*) as 'productNumber' , marque from produit group by marque ;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 } 
 ?>

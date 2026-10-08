@@ -2,9 +2,19 @@
     require_once(__DIR__ . "/../backend/services/ProductServices.php");
     $product_service = new ProductServices();
 
-    $list_all_product = $product_service->getAllProduct(9,1);
+    $length = 60;
+    $randIntListLength = 15;
+    $products = $product_service->getAllProduct(60,1);
+    $list_all_product= [];
 
-
+    $list=[];
+    for($i=0; $i<$randIntListLength ; $i++){
+        do{
+        $number = rand(0,$length -1);
+        }while(array_search($number, $list));
+        $list[] = $number;
+        $list_all_product[] = $products[$number];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +48,7 @@
             <p>livres, sacs , fournitures scolaires , cadeaux et plus encore... au meilleur prix !</p>
             <div class="button">
                 <a href="/products">Shop Now</a>
-                <a href="">Decouvrir les catégories</a>
+                <a href="/packs">Decouvrir les Packs</a>
             </div>
         </div>
 
@@ -367,8 +377,8 @@
 
     <?php include("../includes/footer.php") ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-    <script src="../assets/js/slider.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+<script src="../assets/js/slider.js"></script>
 <script src="/assets/js/popUpAddToCart.js"></script>
 </body>
 </html>

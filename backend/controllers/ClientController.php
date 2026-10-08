@@ -780,8 +780,8 @@
             try {
                 $body = $request["body"];
                 $result = $this->clientServices->sendMessage(
-                    $body["firstName"] ?? null,
-                    $body["lastName"] ?? null,
+                    $body["first_name"] ?? null,
+                    $body["last_name"] ?? null,
                     $body["email"] ?? null,
                     $body["tel"] ?? null ,
                     $body["content"] ?? null
@@ -888,6 +888,37 @@
                 return;
             }
         }
+        public function getMessageById($request)
+        {
+            try {
+                $id = $request["params"][0];
+                $result = $this->clientServices->getMessageByID($id);
+
+
+                $response = [
+                    "success" => true,
+                    "message" => "Getting message data",
+                    "data" => $result,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+
+            } catch (Exception $e) {
+
+                $response = [
+                    "success" => false,
+                    "message" => $e->getMessage(),
+                    "data" => null,
+                    "error" => null
+                ];
+
+                echo json_encode($response);
+                return;
+            }
+        }
+
 
 
 

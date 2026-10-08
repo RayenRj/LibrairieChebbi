@@ -256,6 +256,15 @@
     public function setMessageLu($messageId){
         return $this->clientRepo->setMessageLu($messageId);
     }
+    public function getMessageByID($messageId){
+        return $this->clientRepo->getMessageByID($messageId);
+    }
+    public function nombreMessageNonLus(){
+        return $this->clientRepo->nombreMessageNonLus();
+    }
+
+
+
 
 
     }

@@ -12,7 +12,7 @@ let buttonFiltrer = document.querySelector("#buttonFiltrer")
 let searchForm = document.querySelector("#searchBar")
 let selectTrie = document.querySelector("#trie")
 let emptyPartButton = document.querySelector(".emptyContainer button")
-
+let filterCategorie = document.querySelector(".category ul")
 
 
 selectTrie.addEventListener("change",()=>{
@@ -20,14 +20,12 @@ selectTrie.addEventListener("change",()=>{
     if(window.location.search.indexOf("trie") === -1){
         window.location.search =  `${window.location.search}&trie=${value}`;
     }else{
-        console.log(`window.location.search.slice(0,window.location.search.indexOf("&trie="))}&trie=${value}`)
         window.location.search =  `${window.location.search.slice(0,window.location.search.indexOf("&trie="))}&trie=${value}`;
     }
 })
 
 searchForm.addEventListener("submit",function(event){
     event.preventDefault();
-    console.log("submitted");
     let searchBar = document.querySelector("#searchBar #search");
     window.location.href=`/products?libelle=${searchBar.value.toLowerCase()}`
 })
@@ -233,3 +231,81 @@ if(emptyPartButton){
         window.location.search = "";
     })
 }
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+///////////// category ////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+    // Data pour remplissaage
+//     const labels = ["Écriture",
+//                     "Papeterie",
+//                     "Classement",
+//                     "Géométrie",
+//                     "Coupe et collage",
+//                     "Dessin et arts",
+//                     "Sacs",
+//                     "Calcul et sciences",
+//                     "Numérique",
+//                     "Livres pédagogiques",
+//                     "parascolaire",
+//                     "jouet",
+//                     "sac a dos",
+//                     "sac a chariot",
+//                     "panier",
+//                     "trousse",
+//                     "Fournitures de bureau",
+//                     "Others"
+//                     ];
+//     const values = ["ecriture",
+//                     "papeterie",
+//                     "classement",
+//                     "geometrie",
+//                     "coupe_collage",
+//                     "dessin_arts",
+//                     "sac",
+//                     "calcul_sciences",
+//                     "numerique",
+//                     "livres_pedagogiques",
+//                     "parascolaire",
+//                     "jouet",
+//                     "sac a dos",
+//                     "sac a chariot",
+//                     "panier",
+//                     "trousse",
+//                     "fournitures_bureau",
+//                     "others"
+//                     ];
+// async function remplirCategorieList(){    
+//     let html = "";
+//     for(let i= 0 ; i<labels.length ; i++){
+//         let callApi = await fetch("/api/articles/cateogire/" + values[i]);
+//         let apiRespones = await callApi.json();
+//         let data = apiRespones.data
+//         html += `
+//                                 <li>
+//                                     <div> 
+//                                         <div class="content">
+//                                             <label class="checkBoxLabel">
+//                                                 <input type="checkbox" checked value="${values[i]}">
+//                                                 <div class="transition"></div>
+//                                             </label>
+//                                         </div>
+//                                         ${labels[i]}
+//                                     </div>
+//                                     <span class="number-product">${data}</span>
+//                                 </li>
+//         `;
+//     }
+//     filterCategorie.innerHTML += html;
+// }
+
+// remplirCategorieList();

@@ -330,6 +330,50 @@
     background: #e9d5ff;
     color: #7e22ce;
 }
+.pageMessageBox .c7 {
+    background: #fbcfe8;
+    color: #be185d;
+}
+
+.pageMessageBox .c8 {
+    background: #cffafe;
+    color: #0e7490;
+}
+
+.pageMessageBox .c9 {
+    background: #fed7aa;
+    color: #c2410c;
+}
+
+.pageMessageBox .c10 {
+    background: #d9f99d;
+    color: #3f6212;
+}
+
+.pageMessageBox .c11 {
+    background: #a7f3d0;
+    color: #065f46;
+}
+
+.pageMessageBox .c12 {
+    background: #bfdbfe;
+    color: #1e40af;
+}
+
+.pageMessageBox .c13 {
+    background: #ddd6fe;
+    color: #5b21b6;
+}
+
+.pageMessageBox .c14 {
+    background: #fde68a;
+    color: #a16207;
+}
+
+.pageMessageBox .c15 {
+    background: #fecdd3;
+    color: #9f1239;
+}
 
 /* Responsive */
 
@@ -345,16 +389,63 @@
 
 @media (max-width:800px) {
     .pageMessageBox {
-        max-width: 100dvw;
+        max-width: 97.5dvw;
         width: 100%;
         margin: auto;
         background: #f8f9fc;
         border-radius: 20px;
-        padding: 24px;
+        padding: 1em;
         margin-left: auto;
         margin-right: auto;
         margin-top: 80px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+        overflow-x: hidden;
+    }
+    .pageMessageBox .messageBoxHeader h1 {
+        font-size: 1.15em;
+    }
+    .pageMessageBox .counter {
+        padding: 0.5em 1em;
+        font-weight: 700;
+        font-size: 12px;
+        min-width: 120px;
+        width: fit-content;
+        text-align: center;
+    }
+    .pageMessageBox .messageBoxHeader p {
+        font-size: 12px;
+    }
+    .pageMessageBox .counter small {
+        font-size: 11px;
+    }
+    .pageMessageBox .messageBoxHeader .icon {
+        width: 40px;
+        height: 40px;
+        min-width: 35px;
+        min-height: 35px;
+        border-radius: 50%;
+        background: var(--primary);
+        display: grid;
+        place-items: center;
+        font-size: 1em;
+    }
+    .pageMessageBox .view {
+        display: none;
+    }
+
+    .pageMessageBox .msg {
+        padding: 1.5em;
+    }
+    .pageMessageBox .contact {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 2px 0 6px;
+    }
+
+    .pageMessageBox .excerpt {
+        font-size: 14px;
+        line-height: 1.45;
+        color: #1e1e1e !important;
     }
 }
 
@@ -362,9 +453,18 @@
     .pageMessageBox .msg {
         flex-wrap: wrap;
     }
+    .pageMessageBox .messageBoxHeader h1 {font-size: 1em;}
+    .pageMessageBox .messageBoxHeader p {
+        font-size: 10px;
+        line-height: 1.05;
+    }
 
     .pageMessageBox .side {
         align-items: flex-start;
         width: 100%;
     }
+    .pageMessageBox .btn {
+        font-size: 13px;
+    }
+    .pageMessageBox .pagination select {display: none;}
 }

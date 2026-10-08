@@ -85,7 +85,6 @@ CREATE TABLE livre (
 -- ==========================================================
 CREATE TABLE parascolaire (
     id_produit INT PRIMARY KEY,
-    type_parascolaire VARCHAR(100),
     collection VARCHAR(100),
     CONSTRAINT fk_parascolaire_livre
         FOREIGN KEY (id_produit)
@@ -93,7 +92,7 @@ CREATE TABLE parascolaire (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
-
+alter table parascolaire drop column type_parascolaire;
 -- ==========================================================
 -- TABLE PACK : pack est un produit
 -- ==========================================================
@@ -175,20 +174,6 @@ create table userLogin(
     loginAt datetime not null default current_timestamp,
     primary key(id),
     foreign key(id_client) references client(id_client)
-);
-
--- ==========================================================
--- TABLE USER LOGIN
--- ==========================================================
-create table message(
-	id_message int primary key auto_increment,
-    first_name varchar(255),
-	last_name varchar(255),
-    email varchar(255),
-    tel varchar(255),
-    content varchar(255),
-    date_envoie datetime,
-    statut varchar(255) check(statut in ("lu" , "non lu"))
 );
 
 -- ==========================================================
@@ -794,7 +779,77 @@ CHECK (
     )
 );
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<
--- ################# IMPORTANT ###################
+select * from livre;
+delete from livre;
 
+show columns from sac;
+use librairieDB_v2;
+
+select * from pack pa , ligne_commande lc , commande c where lc.id_commande = c.id_commande and lc.id_produit = pa.id_pack;
+
+select * from produit;
+select * from commande;
+select * from games;
+select count(*) from games;	
+show tables;
 use librairiedb_v2;
-select * from message;
+select * from produit where categorie="autres";	
+
+
+select * from commande where id_commande = 6;
+select * from ligne_commande where id_commande=6;
+select * from collection;
+select prix * 4 from produit where id_produit=17;
+
+show tables;
+select * from pack;
+select * from client;	
+select count(*) from games g , produit p where p.id_produit = g.id_game;
+show columns from games;
+select * from client where id_client = 21;
+
+
+
+select p.* , g.genre from produit p , games g where g.id_game = p.id_produit ;
+
+
+-- remove niveau scolaire marque , couleur roulettes nombre_compartiments 
+alter table collection 
+drop column marque;
+update client set role= "admin" where id_client = 23;
+select * from games;
+show tables;	
+select * from produit;
+use librairieDB_v2;
+show columns from client;
+select * from client;
+delete from client where email = "rjibi.rayen01@gmail.com";
+update client set email_verified = 0 where email = "rjibi.rayen01@gmail.com";
+update client set role = "admin" where email = "rjibi.rayen01@gmail.com";
+
+show columns from parascolaire;
+select distinct(categorie) from produit;
+
+
+                                        from pack p , ligne_commande lc
+                                        where id_pack = id_produit
+                                        group by p.categorie;
+select * from produit;
+use librairiedb_v2;
+
+
+select distinct(categorie) from produit;
+select p.* ,g.* from produit p , games g where id_game = id_produit ;
+
+select * from produit where categorie = "parascolaire";
+
+show tables;
+select * from games;
+select l.* , p.* from livre l , parascolaire p where p.id_produit = l.id_produit;
+select * from parascolaire;
+
+select l.* , p.* from livre l , produit p where p.id_produit = l.id_produit;
+select * from produit where categorie = "livre_pedagogiques";
+select distinct(categorie) from produit;
+
+show columns from parascolaire;

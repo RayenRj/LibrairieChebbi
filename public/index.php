@@ -96,7 +96,8 @@ error_reporting(E_ALL);
     "/dashboard/messages",
     "/api/users/message/send",
     "/api/users/message/lu",
-    "/api/users/messages"
+    "/api/users/messages",
+    "/api/client/message/"
 ];
     $route->add("GET", "/products" , "PageController","allProductPage");
     $route->add("GET", "/dashboard" , "PageController","dashboardPage");
@@ -134,7 +135,7 @@ error_reporting(E_ALL);
     //=========> Product Routes <=======
     $route->add("POST","/api/articles","ProductController","addProduct");
     $route->add("DELETE","/api/articles/{id}","ProductController","deleteProduct");
-    $route->add("PATCH","/api/articles/{id}","ProductController","modifyProduct");
+    $route->add("POST","/api/articles/edit/{id}","ProductController","modifyProduct");
     $route->add("GET", "/api/articles" , "ProductController" , "getAllProduct");
     $route->add("GET", "/api/articles/search" , "ProductController" , "rechercherArticle");
     $route->add("POST", "/api/articles/vente" , "ProductController" , "nombreDeVenteParMois");
@@ -143,6 +144,8 @@ error_reporting(E_ALL);
     $route->add("PATCH","/api/articles/remise/{id}","ProductController","addRemise");
     $route->add("GET","/api/venteParJour/{id}","ProductController","nombreDeVenteParJour");
     $route->add("GET","/api/venteParCategorie","ProductController","nombreDeVentePourChaqueCategorie");
+    $route->add("GET","/api/articles/cateogire","ProductController","numberOfProductEachCategorie");
+    $route->add("GET","/api/articles/marque","ProductController","numberOfProductEachMarque");
 
     // $route->add("GET","/api/articles/collection","ProductController","");
     // $route->add("GET","/api/articles/game","ProductController","");
@@ -180,6 +183,8 @@ error_reporting(E_ALL);
     $route->add("POST","/api/users/message/send","ClientController","sendMessage");
     $route->add("POST","/api/users/message/lu","ClientController","setMessageLu");
     $route->add("POST","/api/users/messages","ClientController","getMessageList");
+    $route->add("GET","/api/client/message/{id}","ClientController","getMessageById");
+    $route->add("POST","/api/client/messages/marquerlu/{id}","ClientController","setMessageLu");
 
     //=========> commande Routes <=======
     $route->add("DELETE" , "/api/commandes/{id}", "CommandeController","deleteCommande");
@@ -230,7 +235,7 @@ error_reporting(E_ALL);
     if(in_array($uri,$restricted_uri_array)){
         rateLimiter(20);
     }else if($uri == "get /ratelimitpassed"){
-        rateLimiter(100,30);
+        rateLimiter(200,30);
     }else{
         rateLimiter(50,60);
     }

@@ -89,7 +89,6 @@ SignInButtonRes.addEventListener("click",(event)=>{
     SignInCard.removeAttribute("hidden");
     body.style.maxHeight= "100vdh";
     body.style.overflow="hidden";
-    console.log("clicked");
 
 })
 
@@ -98,7 +97,6 @@ SignUpButtonRes.addEventListener("click",(event)=>{
     SignUpCard.removeAttribute("hidden");
     body.style.maxHeight= "100vdh";
     body.style.overflow="hidden";
-    console.log("clicked")
     
 
 })
@@ -130,7 +128,6 @@ let switchSignIn = document.querySelector("#switchSignIn");
 switchSignUp.addEventListener("click", (event)=>{
     SignInCard.setAttribute("hidden","");
     SignUpCard.removeAttribute("hidden");
-    console.log(window.scrollY);
     SignUpCard.style.top = window.scrollY + "px";
     body.style.overflow = "hidden";
     body.style.maxHeight = "100dvh";
@@ -141,7 +138,6 @@ switchSignIn.addEventListener("click", (event)=>{
     SignUpCard.setAttribute("hidden","");
     SignInCard.removeAttribute("hidden");
     SignInCard.style.top = window.scrollY + "px";
-    console.log(window.scrollY);
 })
 
 

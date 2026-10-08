@@ -36,7 +36,7 @@ addToCart.addEventListener("click",function(event){
     let quantity = parseInt(document.querySelector("#quantity").value);
     let idpack = addToCart.dataset.idpack;
     let table = JSON.parse(localStorage.getItem("cartTable")) ?? [];
-    if(table !== []){
+    if(table.length > 0){
         for(let i =0; i<table.length ; i++){
             let product = table[i]
             if(product.idproduit == idpack){
@@ -52,8 +52,7 @@ addToCart.addEventListener("click",function(event){
     }
     table.push(pack);
     localStorage.setItem("cartTable", JSON.stringify(table));
-    console.log(cartCount.textContent)
     cartCount.textContent = parseInt(cartCount.textContent) + 1 ;
-    responsiveCartCount.textContent = parseFloat(responsiveCartCount.textContent) + 1
+    responsiveCartCount.textContent = parseInt(responsiveCartCount.textContent) + 1
 
 })

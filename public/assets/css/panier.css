@@ -184,6 +184,7 @@ main.article-existe{
     margin-top: 5em;
     margin-bottom: 6em;
     padding: auto;
+    min-height: 60dvh;
 }
 
 main.article-existe table{
@@ -207,14 +208,16 @@ th, td {
 
 .img{
     height: 100px;
-    object-fit: contain;
+    width: 100px;
+    min-width: 70px;
+    min-height: 70px;
+    object-fit: cover;
 }
 .description{
     max-width: 300px;
     color: black;
     font-size: 14px;
 }
-
 
 
 

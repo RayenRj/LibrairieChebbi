@@ -82,5 +82,4 @@ try {
     if(result.success){window.location.href = "/products";}
 }catch (error) {
     // message.textContent = "Une erreur est survenue.";
-    console.log("Une erreur est survenue.")
 }});

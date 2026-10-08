@@ -79,10 +79,7 @@
             $stmt = $this->db->prepare($query);
             $stmt->execute($param);
 
-            // echo $query;
-            // echo "<br>";
-            // print_r($param);
-            // exit;
+
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         public function nbreRowRecherchePack(string $nom, string $niveau , string $statut,string $type,string $anneeScolaire){
@@ -279,6 +276,7 @@
             try{
                 // first query=> table product
                 if(empty($image_url)){
+                    
                     $query ="update produit set libelle = ? , prix = ? , quantite_stock = ? , categorie= ? , remise = ? ,description = ? where id_produit = ? ;";
                     $stmt = $this->db->prepare($query);
                     $result = $stmt->execute([$libelle , $prix , $quantite,"pack" , $remise , $description, $id]);
@@ -295,22 +293,25 @@
                     $result = $stmt->execute([$libelle , $prix , $quantite ,$image_url,"pack",$remise , $description, $id]);
                     if(!$result){throw new Exception("SQL Insertion Error");}
                 }
-                $packId =$id;
 
+                $packId = $id;
                 if($niveau == "livre"){
                     $aux = null;
                 }else{
                     $aux = $niveau;
                 }
-                $query3 = "update pack pack set type = ? ,categorie = ?,annee_scolaire = ? where id_pack= ? ;";
+
+                $query3 = "update pack set type = ? ,categorie = ?,annee_scolaire = ? where id_pack= ? ;";
                 $stmt3 = $this->db->prepare($query3);
-                $result=$stmt3->execute([$type,$aux,$anneeScolaire , $packId]);
+                $result=$stmt3->execute([$aux,$type,$anneeScolaire , $packId]);
                 if(!$result){throw new Exception("SQL Insertion Error");}
 
-                $query4 = "delete from packArticle where id_pack = ? ";
+
+                $query4 = "delete from packArticle where id_pack = ? ;";
                 $stmt4 = $this->db->prepare($query4);
                 $result = $stmt4->execute([$packId]);
                 if(!$result){throw new Exception("Error while Deleting pack articles.");}
+
 
                 $query2 = "insert into packArticle(id_pack ,id_produit , quantite) values ";
                 $param=[];
@@ -330,7 +331,7 @@
                 return true;
             }catch(Exception $e){
                 $this->db->rollBack();
-                return $e->getMessage();
+                return false;
             }
         }
         // Get Pack Articles

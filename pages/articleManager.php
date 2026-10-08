@@ -167,19 +167,6 @@
                                 <p>Catégories</p>
                                 <div>
                                     <select id="categorie" name="categorie">
-                                        <option value="">-- Sélectionnez une catégorie --</option>
-                                        <option value="ecriture">Écriture</option>
-                                        <option value="papeterie">Papeterie</option>
-                                        <option value="classement">Classement</option>
-                                        <option value="geometrie">Géométrie</option>
-                                        <option value="coupe_collage">Coupe et collage</option>
-                                        <option value="dessin_arts">Dessin et arts</option>
-                                        <option value="sacs_accessoires">Sacs et accessoires</option>
-                                        <option value="calcul_sciences">Calcul et sciences</option>
-                                        <option value="numerique">Numérique</option>
-                                        <option value="livres_pedagogiques">Livres pédagogiques</option>
-                                        <option value="fournitures_bureau">Fournitures de bureau</option>
-                                        <option value="others">Others</option>
                                     </select>
                                     <i class="fa-solid fa-caret-down"></i>
                                 </div>
@@ -280,8 +267,9 @@
                             <td><p><?= $row["remise"] ?></p></td>
                             <td>
                                 <ul>
-                                    <a href="/products/product?idproduit=<?= $row["id_produit"] ?>"><li><i class="fa-solid fa-eye"></i></li></a>
-                                    <a class="deleteArticleButton" data-idproduit="<?= $row["id_produit"] ?>"><li><i class="fa-solid fa-trash-can"></i></li></a>
+                                    <a href="/products/product?idproduit=<?= $row["id_produit"] ?>" title="voir le produit"><li><i class="fa-solid fa-eye"></i></li></a>
+                                    <a class="editArticleButton" title="modifier le produit"  data-idproduit="<?= $row["id_produit"] ?>"><li><i class="fa-solid fa-pen-to-square"></i></li></a>
+                                    <a class="deleteArticleButton" data-idproduit="<?= $row["id_produit"] ?>" title="Supprimer le produit"><li><i class="fa-solid fa-trash-can"></i></li></a>
                                 </ul>
                             </td>
                         </tr>
@@ -570,12 +558,15 @@
                     </div>
                         <div class="singleGenre">
                             <label for="">Dediée pour</label>
-                            <select name="genre" id="genre">
-                                <option value="" selected>-- Choisir le genre --</option>
-                                <option value="mixte">Mixte</option>
-                                <option value="garcon">Garçon</option>
-                                <option value="fille">Fille</option>
-                            </select>
+                            <div>
+                                <select name="genre" id="genre">
+                                    <option value="" selected>-- Choisir le genre --</option>
+                                    <option value="mixte">Mixte</option>
+                                    <option value="garcon">Garçon</option>
+                                    <option value="fille">Fille</option>
+                                </select>
+                                <i class="fa-solid fa-venus-mars"></i>
+                            </div>
                         </div>
                     
                     <div class="singleAnneeParascolaireLivre">

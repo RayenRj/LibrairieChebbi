@@ -16,15 +16,15 @@
     <main class="contact">
         <div class="first-part">
             <h2>Send a Message</h2>
-            <form action="">
+            <form id="formToSend">
                 <div class="double">
                     <div>
-                        <label for="">Nom</label>
-                        <input type="text" name="firstName" id="" placeholder="Entrer votre nom">
+                        <label for="firstName">Nom</label>
+                        <input type="text" name="first_name" id="firstName" placeholder="Entrer votre nom">
                     </div>
                     <div>
                         <label for="">Prénom</label>
-                        <input type="text" name="lastName" id="" placeholder="Entrer votre prénom">
+                        <input type="text" name="last_name" id="" placeholder="Entrer votre prénom">
                     </div>
                 </div>
                 <div class="double">
@@ -34,12 +34,12 @@
                     </div>
                     <div>
                         <label for="">Mobile</label>
-                        <input type="tel" name="lastName" id="" placeholder="+216 0000 0000">
+                        <input type="tel" name="tel" id="" placeholder="+216 0000 0000">
                     </div>
                 </div>
                 <div class="message">
                     <label for="">Message</label>
-                    <textarea name="" cols="30" rows="10" id="" placeholder="Write your message here ..."></textarea>
+                    <textarea name="content" cols="30" rows="10" id="" placeholder="Write your message here ..."></textarea>
                 </div>
                 <div class="buttons">
                     <button type="submit">
@@ -111,5 +111,7 @@
         </form>
     </div>
 
+
+<script src="../assets/js/contactUs.js"></script>
 </body>
 </html>

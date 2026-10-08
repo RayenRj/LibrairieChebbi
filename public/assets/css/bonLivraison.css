@@ -188,6 +188,10 @@ p{font-size: 13px;}
         -webkit-print-color-adjust: exact;
     }
 
+    .top-part{
+        display: none !important;
+    }
+
 }
 
 

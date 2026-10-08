@@ -1,7 +1,74 @@
 
 let firstChart = document.querySelector("#chart1");
 let secondeChart = document.querySelector("#chart2");
-let categorieSelect = document.querySelector(".selectCategoriePopUp")
+let categorieSelect = document.querySelector(".selectCategoriePopUp");
+
+
+
+
+
+    // Data pour remplissaage
+    const labels = ["Écriture",
+                    "Papeterie",
+                    "Classement",
+                    "Géométrie",
+                    "Coupe et collage",
+                    "Dessin et arts",
+                    "Sacs",
+                    "Calcul et sciences",
+                    "Numérique",
+                    "Livres pédagogiques",
+                    "parascolaire",
+                    "jouet",
+                    "sac a dos",
+                    "sac a chariot",
+                    "panier",
+                    "trousse",
+                    "Fournitures de bureau",
+                    "Others"
+                    ];
+    const values = ["ecriture",
+                    "papeterie",
+                    "classement",
+                    "geometrie",
+                    "coupe_collage",
+                    "dessin_arts",
+                    "sac",
+                    "calcul_sciences",
+                    "numerique",
+                    "livres_pedagogiques",
+                    "parascolaire",
+                    "jouet",
+                    "sac a dos",
+                    "sac a chariot",
+                    "panier",
+                    "trousse",
+                    "fournitures_bureau",
+                    "others"
+                    ];
+
+
+
+
+
+
+// remplissage select categorie fl filtrage
+let baliseSelect = document.querySelector("#categorie");
+let html_select=`<option value="">-- Sélectionnez une catégorie --</option>`;
+for(let i =0 ; i<labels.length ; i++){
+    html_select+=`<option value="${values[i]}">${labels[i]}</option>`
+}
+baliseSelect.innerHTML = html_select;
+// fin de remplissage select
+
+
+
+
+
+
+
+
+
 const months = [
   "Janvier", "Février", "Mars", "Avril",
   "Mai", "Juin", "Juillet", "Août",
@@ -509,7 +576,6 @@ addArticleForm.addEventListener("submit",async function(event){
     // end of rates
 
     let infoSuppRatesTableRow = info_supp_table.querySelectorAll("tr");
-    console.log(infoSuppRatesTableRow)
     let data_array = [];
     infoSuppRatesTableRow.forEach(row => {
         let critereNom = row.querySelector("select").value
@@ -519,16 +585,35 @@ addArticleForm.addEventListener("submit",async function(event){
         }
     })
 
+
+
     formData.set("information_supplementaire" , JSON.stringify(data_array));
-    let response = await fetch("/api/articles",{
-        method: "POST", 
-        body: formData
-    });
+    var response;
+    if(document.querySelector(".popUpCard.edit")){
+        let idproduit = Number(document.querySelector(".popUpCard.edit").dataset.idproduit);
+        response = await fetch("/api/articles/edit/" + idproduit,{
+            method: "POST", 
+            body: formData
+        });
+
+    }else{
+        response = await fetch("/api/articles",{
+            method: "POST", 
+            body: formData
+        });
+    }
+
     let result = await response.json();
 
 
     if(result.success == true){
-        sessionStorage.setItem('showToast', 'addProduct');
+        if(document.querySelector(".popUpCard.edit")){
+            sessionStorage.setItem('showToast', 'updateProduct');
+            
+        }else{
+            sessionStorage.setItem('showToast', 'addProduct');
+
+        }
         window.location.reload();
     }else{
         alert(result.message);
@@ -713,3 +798,169 @@ matieres.forEach(matiere => {
 
     matiereSelect.appendChild(option);
 });
+
+
+
+
+// modifier edit 
+let editArticleButton = document.querySelectorAll(".editArticleButton")
+
+editArticleButton.forEach(button =>{
+    button.addEventListener("click", async function(event) {
+        event.preventDefault();
+        document.querySelector(".popUpCard").classList.add("edit");
+        if(document.querySelector(".popUpHead h2")){
+            document.querySelector(".popUpHead h2").innerHTML="Modifier Un Article";
+        }
+        let idArticle = button.dataset.idproduit;
+        document.querySelector(".popUpCard").dataset.idproduit= idArticle;
+        let apiCall = await fetch("/api/products/" + idArticle);
+        let apiResponse = await apiCall.json();
+        if(apiResponse.success == false){alert(apiResponse.message)}
+
+        let product = apiResponse.data;
+
+        popUpForm.removeAttribute("hidden");
+        var height = popUpForm.getBoundingClientRect().height;
+        articleContainer.style.height = (height - 80).toString() + "px" ;
+        articleContainer.style.overflowY = "hidden";
+        window.scrollTo(0,0)
+
+        let codeBarre = popUpForm.querySelector("input[name='codeBarre']");
+        let libelle = popUpForm.querySelector("input[name='libelle']");
+        let prix = popUpForm.querySelector("input[name='prix']");
+        let quantite = popUpForm.querySelector("input[name='quantity']");
+        let categorie = popUpForm.querySelector("#categorie");
+        let marque = popUpForm.querySelector("#marque");
+        let remise = popUpForm.querySelector("input[name='remise']");
+        let description = popUpForm.querySelector("textarea");
+        let anneescolaire = popUpForm.querySelector("#anneeScolaire");
+        let matiere = popUpForm.querySelector("#matiere");
+        let genre = popUpForm.querySelector("#genre");
+        let fileImage = popUpForm.querySelector(".custum-file-upload");
+        let metaData = popUpForm.querySelector("#infoSupplementaire tbody")
+        let collection = popUpForm.querySelector("#collection_parascolaire")
+
+
+
+        document.querySelector(".last input[type='submit']").value = "Update Article"
+        codeBarre.value = product.code_barre;
+        libelle.value = product.libelle;
+        description.value = product.description;
+        quantite.value = product.quantite_stock;
+        prix.value = product.prix;
+        categorie.value = product.categorie.toLowerCase();
+        marque.value = product.marque.toLowerCase();
+        remise.value = product.remise ?? 0;
+        fileImage.style.backgroundImage = `url(${product.image_url})`
+        fileImage.style.backgroundSize= "contain";
+        fileImage.style.backgroundRepeat = "no-repeat";
+        fileImage.style.backgroundPosition= "center";
+        document.querySelector(".custum-file-upload .icon").style.opacity="0";
+        document.querySelector(".custum-file-upload .text").style.opacity="0";
+
+        switch(product.categorie.toLowerCase()){
+            case "jouet" : 
+            case "trousses":
+            case "trousse":
+            case "trousse":
+            case "sac a dos":
+            case "paniers":
+            case "chariot":
+            case "sacs à dos":
+            case "sacs à chariot" :
+                marque.value= "";
+                document.querySelector(".marqueDiv").style.display = "none";
+                document.querySelector(".singleGenre").style.display = "flex";
+                genre.value = product.genre;    
+                break;
+            case "parascolaire":
+                marque.value= "";
+                document.querySelector(".marqueDiv").style.display = "none";
+                document.querySelector(".singleAnneeParascolaireLivre").style.display = "flex";
+                document.querySelector(".singleCollectionParascolaire").style.display = "flex";
+                document.querySelector(".singleMatiere").style.display = "flex";
+                matiere.value = product.matiere;
+                anneescolaire.value = product.niveau_scolaire;
+                collection.value = product.collection;
+
+            break;
+            case "livres_pedagogiques":
+                marque.value= "";
+                document.querySelector(".marqueDiv").style.display = "none";
+                document.querySelector(".singleAnneeParascolaireLivre").style.display = "flex";
+                document.querySelector(".singleMatiere").style.display = "flex";
+                matiere.value = product.matiere;
+                anneescolaire.value = product.niveau_scolaire;
+
+                break;
+            default : break;
+        }
+
+
+
+        if(product.information_supplementaire != null){
+            product.information_supplementaire = product.information_supplementaire.split("#").map(function(element){
+                return element.split(":");
+            });
+        }
+
+
+        let html = ""
+        if(product.information_supplementaire != null && product.information_supplementaire[0] != ""){
+
+         
+            for(let tableElement of product.information_supplementaire){
+                let liste_critere = "";
+                liste_critere += `<select class="critere">`;
+                for(let i =0 ; i<criteres.length ; i++){
+                    liste_critere += `<option value="${criteres[i]['value']}" ${criteres[i]['value']== tableElement[0] ? "selected" : ""}>${criteres[i]["text"]}</option>`
+                }
+                liste_critere += "</select>";
+                html += `
+                            <tr>
+                                <td>
+                                    ${liste_critere}
+                                </td>
+                                <td>
+                                    <input type="text" name="" id="" class="infoSupInput" value="${tableElement[1]}">
+                                </td>
+                                <td class="trashInfoSupp">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </td>
+                                
+                            </tr>
+                `;
+            }
+        }
+            let liste_critere = "";
+            liste_critere += `<select class="critere">`;
+            for(let i =0 ; i<criteres.length ; i++){
+                liste_critere += `<option value="${criteres[i]['value']}" >${criteres[i]["text"]}</option>`
+            }
+            liste_critere += "</select>";
+            html += `
+                        <tr>
+                            <td>
+                                ${liste_critere}
+                            </td>
+                            <td>
+                                <input type="text" name="" id="" class="infoSupInput" value="">
+                            </td>
+                            <td class="trashInfoSupp">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </td>
+                            
+                        </tr>
+            `;
+        metaData.innerHTML = html;
+        metaData.querySelectorAll(".trashInfoSupp").forEach(button=>{
+            button.addEventListener("click",function(event){
+                event.preventDefault();
+                if(info_supp_table.querySelectorAll("tr").length==1){return;}
+                event.target.closest("tr").remove();
+            })
+        })
+        
+    })
+})

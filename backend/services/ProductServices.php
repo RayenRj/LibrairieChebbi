@@ -41,6 +41,35 @@ class ProductServices{
         return $this->productRepo->nombreLigneRechercherArticle($categorie , $libelle,$marque, $prixMax,$prixMin , $stock , $trie ,$codeBarre, $limit,$page);
     }
     //done
+    public function modifyProduct($id ,string $libelle,float $prixUnitaire,int $quantite ,string $categorie,string $marque,float $remise ,string $description, $file ,?string $codeBarre, ?string $anneescolaire , ?string $genre , ?string $collection , ?string $typeCollection , ?string $matiere, $rating , $nombreRaters , $informationSupplementaire) : bool{
+        if(empty($libelle)){throw new Exception("Libelle de produit ne doit pas etre vide!");}
+        if($prixUnitaire<0){throw new Exception("prixUnitaire de produit ne doit pas etre negatif!");}
+        if($quantite<0){throw new Exception("quantite de produit ne doit pas etre negatif!");}
+        if(empty($categorie)){throw new Exception("categorie de produit ne doit pas etre vide!");}
+        // if(empty($marque)){throw new Exception("marque de produit ne doit pas etre vide!");}
+        if($remise < 0 || $remise > $prixUnitaire){throw new Exception("remise de produit invalide!");}
+        if($file["size"]==0){$destDB = "";}
+        else{ 
+            $name = $file["name"];
+            $tmp = $file["tmp_name"];
+            $type = $file["type"];
+            $allowedType = ["image/jpeg", "image/png", "image/webp"];
+            if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
+                throw new Exception("Erreur upload : " . $_FILES["image"]["error"]);
+            }
+            if(!in_array($type , $allowedType)){throw new Exception("This file Type in not supported!");}
+            if($file["size"] > 4 * 1024 * 1024 ){throw new Exception("the File uploaded is too large(>4mb)");}
+            $extension = pathinfo($name , PATHINFO_EXTENSION);
+            // generate unique name
+            $newName = bin2hex(random_bytes(16)) . "." . $extension;
+            $upload_dir = __DIR__ . "/../../public/assets/images/uploadedImg/articles/";
+            if(!is_dir($upload_dir)){mkdir($upload_dir , 0077 , true);}
+            $dest = $upload_dir . $newName;
+            $destDB = "/assets/images/uploadedImg/articles/" . $newName; 
+            if(!move_uploaded_file($tmp , $dest)){throw new Exception("Image Upload Failed!");}
+        }
+        return $this->productRepo->modifyProduct($id,$libelle, $prixUnitaire, $quantite , $categorie, $marque, $remise , $description, $destDB, $codeBarre,$anneescolaire , $genre, $collection , $typeCollection , $matiere ,$rating, $nombreRaters , $informationSupplementaire);
+    }
     public function createProduct(string $libelle,float $prixUnitaire,int $quantite ,string $categorie,string $marque,float $remise ,string $description, $file ,?string $codeBarre, ?string $anneescolaire , ?string $genre , ?string $collection , ?string $typeCollection , ?string $matiere, $rating , $nombreRaters , $informationSupplementaire) : bool{
         if(empty($libelle)){throw new Exception("Libelle de produit ne doit pas etre vide!");}
         if($prixUnitaire<0){throw new Exception("prixUnitaire de produit ne doit pas etre negatif!");}
@@ -237,7 +266,22 @@ class ProductServices{
         if(!in_array($type, ["","sac a dos","panier","trousse","sac a chariot","chariot"])){throw new Exception("Le type est invalide !");}
         return $this->productRepo->numberOfRowGetAllCollection($type,$genre);
     }
+
+
+    public function produitSimilaire(string $idproduit,?string $categorie , ?string $marque , int $nombreArticle=12){
+        return $this->productRepo->produitSimilaire($idproduit,$categorie, $marque , $nombreArticle);
+    }
+
+
+    public function numberOfProductEachCategorie(){
+        return $this->productRepo->numberOfProductEachCategorie();
+    }
+    public function numberOfProductEachMarque(){
+        return $this->productRepo->numberOfProductEachMarque();
+    }
+
 }
+
 
 
 

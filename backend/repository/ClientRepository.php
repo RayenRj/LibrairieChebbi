@@ -302,7 +302,7 @@ public function updateVerificationCode(int $idClient,string $verificationCode,st
 
 
     public function sendMessage(?string $firstName , ?string $lastName , ?string $email  , ?string $tel , ?string $content) : bool{
-        $query = "insert into table message(id_message,first_name,last_name,email,tel,content,date_envoie , statut) values(?,?,?,?,?,?,? ,?); ";
+        $query = "insert into message(first_name,last_name,email,tel,content,date_envoie , statut) values(?,?,?,?,?,?,?); ";
         $stmt = $this->db->prepare($query);
         return $stmt->execute([$firstName , $lastName , $email , $tel , $content , date('Y-m-d H:i:s') ,"non lu"]);
     }
@@ -342,7 +342,7 @@ public function updateVerificationCode(int $idClient,string $verificationCode,st
         if(!empty($queryList)){
             $query .= " AND " . implode(" AND " , $queryList) ;
         }
-        $query .= " LIMIT $limit OFFSET $offset  ; ";
+        $query .= " ORDER BY date_envoie DESC LIMIT $limit OFFSET $offset ; ";
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -393,6 +393,18 @@ public function updateVerificationCode(int $idClient,string $verificationCode,st
         $query = "update message set statut = 'lu' where id_message = ? ;";
         $stmt = $this->db->prepare($query);
         return $stmt->execute([$messageId]);
+    }
+    public function getMessageByID($messageId){
+        $query = "select * from message where id_message = ? ;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$messageId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function nombreMessageNonLus(){
+        $query = "select count(*) from message where statut = 'non lu' ;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([]);
+        return $stmt->fetch(PDO::FETCH_NUM)[0] ?: 0;
     }
 
 

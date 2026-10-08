@@ -303,6 +303,17 @@
                         <i class="fa-solid fa-angle-right"></i>
                     </li>
                 </a>
+                <a href="/dashboard/messages">
+                    <li>
+                        <div class="iconText">
+                          <div class="iconDiv">
+                          <i class="fa-solid fa-comment-dots"></i>
+                          </div>
+                          <span>Messages</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </li>
+                </a>
                 <a href="/main" id="deconnexion">
                     <li>
                         <div class="iconText">

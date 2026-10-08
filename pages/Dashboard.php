@@ -278,8 +278,8 @@
                                 <span class="zero ">0</span>
                             </div>
                             <div class="buttons">
-                                <a href="">Reapprovisionner</a>
-                                <a href="">Supprimer</a>
+                                <a href="/dashboard/articles?libelle=<?= $product["libelle"] ?>&stock=repture%20de%20stock#formFiltrage" class="reapprovisionner" data-idproduit="<?= $product["id_produit"] ?>">Reapprovisionner</a>
+                                <a href="" class="supprimerProduit" data-idproduit="<?= $product["id_produit"] ?>">Supprimer</a>
                             </div>
                         </li>
                         <?php endforeach ?>

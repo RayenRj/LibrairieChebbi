@@ -86,7 +86,7 @@
                                                             $body["anneeScolaire"] ?? null
                                                             );
                 $response = [
-                    "success" => true,
+                    "success" => $result,
                     "numberOfLine" => null,
                     "message" => "Pack updated successfully", 
                     "data" => $result,

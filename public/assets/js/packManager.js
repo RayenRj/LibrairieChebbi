@@ -248,6 +248,7 @@ formAddPack.addEventListener("submit",async function(event){
             method:"POST",
             body:formData
         })
+
     }else{
         response = await fetch("/api/packs/createPack",{
             method:"POST",
@@ -257,7 +258,6 @@ formAddPack.addEventListener("submit",async function(event){
     
     
     let result = await response.json();
-    // console.log(result)
     if(result.success && result.data){
         if(formAddPack.classList.contains("edit")){
             sessionStorage.setItem('showToast', 'updatePack');
@@ -491,7 +491,7 @@ selectItem.addEventListener("change",function(){
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-///////// Reglage ll partie edit pack ///////////////
+///////// Reglage ll partie edit pack editpack editPack modifier ///////////////
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 

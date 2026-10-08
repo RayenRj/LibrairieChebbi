@@ -15,7 +15,7 @@ use function PHPSTORM_META\type;
     $marque = isset($_GET["marque"]) ? $_GET["marque"] : "";
     $stock = isset($_GET["stock"]) ? $_GET["stock"] : "";
     $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
-    $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 15;
+    $limit = isset($_GET["limit"]) ? intval($_GET["limit"]) : 20;
     $codeBarre = isset($_GET["code_barre"]) ? $_GET["code_barre"] : "";
     $liste_des_produit= $product_services->rechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie ,$codeBarre, $limit , $page);
     $nombre_de_produit = $product_services->nombreLigneRechercherArticle($categorie , $libelle ,$marque, $prixMax , $prixMin , $stock , $trie, $codeBarre , $limit , $page);
@@ -29,10 +29,10 @@ use function PHPSTORM_META\type;
         }
     } 
     $query_string = implode("&", $query_array) ?? "";
-
-    $list_of_categories= $product_services->getAllCategorie();
-    $list_of_ = $product_services->getAllMarque();
-
+    $other = "";
+    $other_marque = "";
+    $list_of_categories= $product_services->numberOfProductEachCategorie();
+    $list_of_marque = $product_services->numberOfProductEachMarque();
 ?>
 
 
@@ -80,150 +80,49 @@ use function PHPSTORM_META\type;
                     </div>
                     <div class="list-categorie list">
                         <ul>
-                            <li>
-                                <div> 
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="ecriture">
-                                            <div class="transition"></div>
-                                        </label>
+                            
+                            <?php foreach($list_of_categories as $categorie): ?>
+                                <?php 
+                                if($categorie["categorie"]=="") : continue; endif;
+                                if($categorie["categorie"] == "others"): 
+                                        $other = <<<HTML
+                                                <li>
+                                                    <div> 
+                                                        <div class='content'>
+                                                            <label class='checkBoxLabel'>
+                                                                <input type='checkbox' checked value='others'>
+                                                                <div class='transition'></div>
+                                                            </label>
+                                                        </div>
+                                                        others
+                                                    </div>
+                                                    <span class='number-product'> {$categorie['productNumber']}</span>
+                                                </li>
+                                        
+                                        HTML;
+                                    
+                                    
+                                ?>
+
+                                <?php else:?>
+                                <li>
+                                    <div> 
+                                        <div class="content">
+                                            <label class="checkBoxLabel">
+                                                <input type="checkbox" checked value="<?= $categorie["categorie"] ?>">
+                                                <div class="transition"></div>
+                                            </label>
+                                        </div>
+                                        <?= $categorie["categorie"] ?>
                                     </div>
-                                    Écriture
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="papeterie">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Papeterie
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="classement">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Classement
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="geometrie">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Géométrie
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="coupe et collage">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Coupe et collage
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="dessin et arts">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Dessin et arts
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="Sac">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Sacs et accessoires
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="calcul et sciences"> 
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Calcul et sciences
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="numerique">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Numérique
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="livres pedagogiques"> 
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Livres pédagogiques
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="fournitures de bureau">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Fournitures de bureau
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="autres">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Others
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
+                                    <span class="number-product"><?= $categorie["productNumber"] ?></span>
+                                </li>
+                                <?php endif; ?>
+                                
+                            <?php endforeach; ?>
+                            <?= $other; ?>
+
+
                         </ul>
                     </div>
 
@@ -269,162 +168,47 @@ use function PHPSTORM_META\type;
                     </div>
                     <div class="list-marque list">
                         <ul>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="bic">
-                                            <div class="transition"></div>
-                                        </label>
+                            <?php foreach($list_of_marque as $marque): ?>
+                                <?php 
+                                if($marque["marque"]=="") : continue; endif;
+                                if($marque["marque"] == "other"): 
+                                        $other_marque = <<<HTML
+                                                <li>
+                                                    <div> 
+                                                        <div class='content'>
+                                                            <label class='checkBoxLabel'>
+                                                                <input type='checkbox' checked value='other'>
+                                                                <div class='transition'></div>
+                                                            </label>
+                                                        </div>
+                                                        others
+                                                    </div>
+                                                    <span class='number-product'> {$marque['productNumber']}</span>
+                                                </li>
+                                        
+                                        HTML;
+                                    
+                                    
+                                ?>
+
+                                <?php else:?>
+                                <li>
+                                    <div> 
+                                        <div class="content">
+                                            <label class="checkBoxLabel">
+                                                <input type="checkbox" checked value="<?= $marque["marque"] ?>">
+                                                <div class="transition"></div>
+                                            </label>
+                                        </div>
+                                        <?= $marque["marque"] ?>
                                     </div>
-                                    BIC
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="maped">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Maped
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="stabilo">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Stabilo
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="faber-castell">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Faber-Castell
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="staedtler">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Staedtler
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="pilot">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Pilot
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="pelikan">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Pelikan
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="carioca">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Carioca
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="schneider">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Schneider
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="milan">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Milan
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="jovi">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Jovi
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="canson">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    Canson
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="content">
-                                        <label class="checkBoxLabel">
-                                            <input id="ch1" type="checkbox" checked value="autres">
-                                            <div class="transition"></div>
-                                        </label>
-                                    </div>
-                                    other
-                                </div>
-                                <span class="number-product">35</span>
-                            </li>
+                                    <span class="number-product"><?= $marque["productNumber"] ?></span>
+                                </li>
+                                <?php endif; ?>
+                                
+                            <?php endforeach; ?>
+                            <?= $other_marque; ?>
+
                         </ul>
                     </div>
                 </div>

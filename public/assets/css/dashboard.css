@@ -623,6 +623,26 @@ img{
 } */
 
 
+@media (max-width:1850px) {
+    .top-chart {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em;
+    }
+    .top-chart .right {
+        border-radius: 1em;
+        width: 100%;
+        border: 2px solid #eee;
+    }
+    .top-chart .left {
+        border: 2px solid #eee;
+        border-radius: 1em;
+        padding: 2em;
+        width: 100%;
+    }
+
+}
+
 @media (max-width:1000px){
    .dashboard {
         width: calc(100% - 270px);

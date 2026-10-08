@@ -47,7 +47,8 @@
     $list_all_product = $product_service->getAllProduct(8,1);
 
 
-    
+    $list_articles_similaire = $product_service->produitSimilaire($product_coordonee["id_produit"],$product_coordonee["categorie"], $product_coordonee["marque"], 15);
+
 ?>
 
 <!DOCTYPE html>
@@ -158,19 +159,19 @@
 
     
         <section class="bottom">
-            <h3>You may also like</h3>
+            <h3>Articles qui semblent similaires </h3>
             <div class="slider">
                 <div class="container-slider swiper">
                     <div class="card-wrapper ">
                         
                         <ul class="card-list swiper-wrapper">
-                            <?php foreach($list_all_product as $product): ?>
+                            <?php foreach($list_articles_similaire as $product): ?>
 
                                 <li class="card-item swiper-slide">
-                                    <a href="" class="card-link ">
+                                    <a href="/products/product?idproduit=<?= $product["id_produit"] ?>" class="card-link ">
                                         <img class="card-image" src="<?= $product["image_url"] ?>" alt="">
                                         <p class="badge">S<?= $product["libelle"] ?></p>
-                                        <h2 class="card-title"><?= $product["prix"] ?> <span>dt</span></h2>
+                                        <h2 class="card-title"><?= $product["prix"] ?> <span>dt</span> </h2>
                                         <div class="rating-container">
                                             <?php 
                                                 $rating = floatval($product["rating"]);

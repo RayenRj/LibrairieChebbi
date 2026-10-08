@@ -417,19 +417,9 @@ hr{
   }
 }
 
-@media (max-width: 1200px) { 
-  header{
-    justify-content: space-around;
-    padding: 0.5em 1em;
-  }
-    header .left-part .search .input-container{
-      width: 250px;
-    }
 
-
-}
 /* Laptop */
-@media (max-width: 1000px) { 
+@media (max-width: 1400px) { 
   header .part-two ul{
     list-style-type: none;
     width: 100%;
@@ -444,7 +434,7 @@ hr{
   text-decoration: none;
   color: black;
   display: inline-block;
-  padding: 0.65em 1em;
+  padding: 0.65em 1.55em;
   width: fit-content;
   text-align: center;
   
@@ -514,6 +504,18 @@ header .left-part{
 
 }
 
+@media (max-width: 1200px) { 
+  header{
+    justify-content: space-around;
+    padding: 0.5em 1em;
+  }
+    header .left-part .search .input-container{
+      width: 250px;
+    }
+
+
+}
+
 
 /* test button google*/
 a{text-decoration: none;}
@@ -548,7 +550,7 @@ button.buttonGoogle:hover {
 }
 
 /* responsive */
-@media(max-width:800px){
+@media(max-width:1190px){
   header{
     display: none;
   }
@@ -565,11 +567,10 @@ button.buttonGoogle:hover {
 
 }
 
-@media(min-width:800px){
+@media(min-width:1190px){
   header{
     display: flex;
   }
-
   header.responsiveHeader{
     display: none;
   }

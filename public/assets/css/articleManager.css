@@ -253,6 +253,7 @@ img{
     overflow-y: hidden;
     overflow-x: auto;
     scrollbar-width: thin;
+
 }
 
 .right::-webkit-scrollbar-thumb {
@@ -382,8 +383,9 @@ img{
 .articleManagerBottomPart .top > div{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
     padding: 0.5em 2em;
     margin-top: 1.5em;
     margin-bottom: 1em;
@@ -420,6 +422,7 @@ div.inputDiv input{
     font-size: 13px;
     height: 40px;
     outline: none;
+    width: 100%;
 }
 
 .articleManagerBottomPart .top > div .inputDiv > i{
@@ -535,7 +538,7 @@ div.inputDiv input{
 
 
 /* reglage partie tableau */
-
+.articleManagerBottomPart .table-part{min-height: 45dvh;}
 .articleManagerBottomPart .table-part table{
     border-collapse: collapse;
     width: 100%;
@@ -589,10 +592,13 @@ div.inputDiv input{
     text-align:  center;
 }
 
-.articleManagerBottomPart .table-part td:last-child ul a{border-radius: 0.5em;}
+.articleManagerBottomPart .table-part td:last-child ul a{border-radius: 0.5em;cursor: pointer;}
 
-.articleManagerBottomPart .table-part td:last-child ul a:nth-of-type(2){
+.articleManagerBottomPart .table-part td:last-child ul a:nth-of-type(3){
     color: var(--red);  
+}
+.articleManagerBottomPart .table-part td:last-child ul a:nth-of-type(2){
+    color: var(--blue);
 }
 .articleManagerBottomPart .table-part td:last-child ul a:nth-of-type(1){
     color: var(--blue);
@@ -848,13 +854,61 @@ td.libelle p{
 }
 
 
+.articleManagerBottomPart .top > div > div{
+    flex-grow: 1;
+}
 
 
+@media (max-width:1650px) {
+    .top-chart {
+        display: flex;
+        gap: 1em;
+        margin-bottom: 3em;
+        flex-direction: column;
+    }
+    .top-chart .left {
+        width: 100%;
+        gap: 1.5em;
+        height: fit-content;
+        margin: 0.2em auto;
+    }
+
+    .top-chart .right {
+        width: 100%;
+        margin: 0.2em auto;
+        height: unset;
+    }
+
+    .top-chart .right > div > div:first-child {
+        height: 100%;
+        width: 50%;
+        min-width: 300px;
+        max-width: 300px;
+        padding: 1em;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .top-chart .right > div {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        gap: 1.5em;
+        justify-content: center ;
+        margin-top: 3em;
+    }
+}
 
 
-
-
-
+@media (max-width:1250px) {
+    .articleManager {
+        width: calc(100% - 225px);
+        margin: 65px 0px 0em 225px;
+        display: block;
+        padding: 0em 2em;
+    }
+}
 
 
 @media (max-width:800px) {
@@ -862,7 +916,7 @@ td.libelle p{
         width: 98dvw;
         max-width: 100dvw;
         overflow-x: hidden;
-        margin: 80px auto 0px;
+        margin: 65px auto 0px !important;
         display: block;
         padding: 0em 0.25em;
     }
